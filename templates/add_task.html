@@ -1,0 +1,55 @@
+<h2>Add Task</h2>
+
+<form onsubmit="addTask()" class="add-task">
+    <div class="leftside-add-task">
+        <div>
+            <span class="input-description">Title</span>
+            <input required type="text" placeholder="Enter a title">
+        </div>
+
+        <div>
+            <span class="input-description">Description</span>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Enter a description"></textarea>
+        </div>
+
+        <div>
+            <span class="input-description">Assigned to</span>
+            <select name="" id="">
+                <option value="#">Test</option>
+                <option value="#">Test</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="parting-line-add-task"></div>
+
+    <div class="rightside-add-task">
+        <div>
+            <span class="input-description">Due date</span>
+            <input required type="date" placeholder="dd/mm/yyyy">
+        </div>
+
+        <div>
+            <span class="input-description">Prio</span>
+            <div>
+                <button>Urgent <img src="#" alt="#"></button>
+                <button>Medium <img src="#" alt="#"></button>
+                <button>Low <img src="#" alt="#"></button>
+            </div>
+        </div>
+
+        <div>
+            <span class="input-description">Category</span>
+            <select required name="" id="">
+                <option value="">Technical Task</option>
+                <option value="">User Story</option>
+            </select>
+        </div>
+
+        <div>
+            <span class="input-description">Subtasks</span>
+            <input type="text" placeholder="Add new subtask">
+        </div>
+
+    </div>
+</form>
