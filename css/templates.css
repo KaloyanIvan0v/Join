@@ -19,6 +19,11 @@ body{
     box-shadow: 5px 0 8px #888888;
 }
 
+.headerImages{
+    display: flex;
+    align-items: center;
+}
+
 .sidebar{
     position: fixed;
     top: 0;
@@ -58,4 +63,8 @@ body{
 .privacyLegalLinks{
     position: fixed;
     bottom: 64px;
+}
+
+.dNone{
+    display: none;
 }
