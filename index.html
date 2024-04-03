@@ -3,15 +3,21 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join</title>
-    <link rel="icon" type="image/x-icon" href="img/Logo.png">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <title>Document</title>
+    <script src="../js/storage.js"></script>
+    <script src="../js/login.js"></script>
 </head>
 
-<body>
-    <img class="logoMain" src="img/Logo.png" alt="">
+<body onload="initLogin()">
+
+    <form onsubmit="login(); return false;">
+        <input required type="email" id="email">
+        <input required type="password" id="password">
+        <button id="registerBtn">Registrieren</button>
+    </form>
+
 
 </body>
 
