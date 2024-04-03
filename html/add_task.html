@@ -1,54 +1,78 @@
-<h2>Add Task</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
 
-<form onsubmit="addTask()" class="add-task-informations">
-    <div class="leftside-add-task">
-        <div>
-            <span class="input-description">Title</span>
-            <input class="width-440" required type="text" placeholder="Enter a title">
-        </div>
+    <link rel="stylesheet" href="/css/add_task.css">
+</head>
 
-        <div>
-            <span class="input-description">Description</span>
-            <textarea class="width-440" name="" id="" cols="30" rows="10" placeholder="Enter a description"></textarea>
-        </div>
+<body>
+    <h2>Add Task</h2>
 
-        <div>
-            <span class="input-description">Assigned to</span>
-            <select class="width-440" name="" id="">
-                <option value="#">Test</option>
-                <option value="#">Test</option>
-            </select>
-        </div>
-    </div>
+    <form onsubmit="addTask()" class="add-task-informations">
+        <div class="leftside-add-task">
 
-    <div class="parting-line-add-task"></div>
+            <div class="description-input d-flex-column-center">
+                <div class="input-description">
+                    <span>Title</span>
+                </div>
+                <input class="input-field" required type="text" placeholder="Enter a title">
+                <div class="required-field-title">
+                    <span></span>
+                </div>
+            </div>
 
-    <div class="rightside-add-task">
-        <div>
-            <span class="input-description">Due date</span>
-            <input required type="date" placeholder="dd/mm/yyyy">
-        </div>
+            <div class="description-textarea d-flex-column-center">
+                <div class="input-description">
+                    <span>Description</span>
+                </div>
+                <textarea name="" id="" cols="30" rows="10" placeholder="Enter a description"></textarea>
+                <div class="required-field-description">
+                    <span></span>
+                </div>
+            </div>
 
-        <div>
-            <span class="input-description">Prio</span>
-            <div>
-                <button>Urgent <img src="#" alt="#"></button>
-                <button>Medium <img src="#" alt="#"></button>
-                <button>Low <img src="#" alt="#"></button>
+            <div class="assigned-to d-flex-column-center">
+                <span class="input-description">Assigned to</span>
+                <select class="input-field" name="" id="">
+                    <option value="#">Test</option>
+                    <option value="#">Test</option>
+                </select>
             </div>
         </div>
 
-        <div>
-            <span class="input-description">Category</span>
-            <select required name="" id="">
-                <option value="">Technical Task</option>
-                <option value="">User Story</option>
-            </select>
-        </div>
+        <div class="parting-line-add-task"></div>
 
-        <div>
-            <span class="input-description">Subtasks</span>
-            <input type="text" placeholder="Add new subtask">
+        <div class="rightside-add-task">
+            <div>
+                <span class="input-description">Due date</span>
+                <input required type="date" placeholder="dd/mm/yyyy">
+            </div>
+
+            <div>
+                <span class="input-description">Prio</span>
+                <div>
+                    <button>Urgent <img src="#" alt="#"></button>
+                    <button>Medium <img src="#" alt="#"></button>
+                    <button>Low <img src="#" alt="#"></button>
+                </div>
+            </div>
+
+            <div>
+                <span class="input-description">Category</span>
+                <select required name="" id="">
+                    <option value="">Technical Task</option>
+                    <option value="">User Story</option>
+                </select>
+            </div>
+
+            <div>
+                <span class="input-description">Subtasks</span>
+                <input type="text" placeholder="Add new subtask">
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</body>
+</html>

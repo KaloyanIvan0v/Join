@@ -53,9 +53,12 @@ body{
 
 .icon{
     margin-right: 10px;
+<<<<<<< HEAD
+=======
 }
 
 .privacyLegalLinks{
     position: fixed;
     bottom: 64px;
+>>>>>>> ea4f036ec83bad0f80024a33dafa83ce05571b90
 }
