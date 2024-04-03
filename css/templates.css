@@ -3,10 +3,6 @@ body{
     font-family: 'Inter';
 }
 
-p{
-    color: #CDCDCD;
-}
-
 .header{
     position: fixed;
     top: 0;
