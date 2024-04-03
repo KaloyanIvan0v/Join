@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    font-family: 'Inter';
 }
 
 p{
@@ -56,4 +57,9 @@ p{
 
 .icon{
     margin-right: 10px;
+}
+
+.privacyLegalLinks{
+    position: fixed;
+    bottom: 64px;
 }
