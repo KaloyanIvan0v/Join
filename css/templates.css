@@ -2,6 +2,10 @@ body{
     margin: 0;
 }
 
+p{
+    color: #CDCDCD;
+}
+
 .header{
     position: fixed;
     top: 0;
@@ -27,18 +31,30 @@ body{
     background-color: #2a3647;
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.sidebarLogo{
+    margin-top: 64px;
+    margin-left: 66px;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 66px;
+    margin-top: 114px; 
 }
 
 .menuLinks{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 232px;
     height: 46px;
+    margin-bottom: 15px;
 }
 
-.vector{
+.icon{
     margin-right: 10px;
 }
 
