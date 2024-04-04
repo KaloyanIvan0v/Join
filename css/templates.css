@@ -71,16 +71,22 @@ span.absolute:hover{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 66px;
     margin-top: 114px; 
 }
 
 .menuLinks{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 46px;
+    width: 166px;
     margin-bottom: 15px;
+    padding-left: 66px;
+}
+
+.menuLinks:hover{
+    background-color: #2a3d59;
+    cursor: pointer;
 }
 
 .icon{
@@ -90,6 +96,20 @@ span.absolute:hover{
 .privacyLegalLinks{
     position: fixed;
     bottom: 64px;
+    margin-left: 66px;
+}
+
+p.privacyLegalLink{
+    color: #A8A8A8;
+}
+
+p.privacyLegalLink:hover{
+    color: #29ABE2;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
 }
 
 .dNone{
