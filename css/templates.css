@@ -112,6 +112,10 @@ a{
     text-decoration: none;
 }
 
+span.join{
+    color: #29abe2;
+}
+
 .dNone{
     display: none;
 }
