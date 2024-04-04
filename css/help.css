@@ -14,3 +14,23 @@
     border-radius: 50%;
     background-color: #e2e6ec;
 }
+
+h1{
+    font-size: 61px;
+}
+
+h3{
+    font-size: 27px;
+}
+
+td.first{
+    padding-right: 35px;
+}
+
+span.join{
+    color: #29abe2;
+}
+
+b{
+    font-size: 27px;
+}
