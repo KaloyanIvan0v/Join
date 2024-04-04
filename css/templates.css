@@ -30,6 +30,13 @@ body{
     height: 56px;
 }
 
+.relative:hover{
+    position: relative;
+    width: 56px;
+    height: 56px;
+    background-color: #FDFDFD;
+}
+
 span.absolute{
     position: absolute;
     top: 16px;
