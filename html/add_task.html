@@ -6,9 +6,14 @@
     <title>Add Task</title>
 
     <link rel="stylesheet" href="/css/add_task.css">
+    <link rel="stylesheet" href="/css/templates.css">
+    <script src="/js/w3include.js"></script>
 </head>
 
-<body>
+<body onload="includeHTML()">
+    <div w3-include-html="/templates/header.html" class="header"></div>
+    <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
+
     <h2>Add Task</h2>
 
     <form onsubmit="addTask()" class="add-task-informations">
@@ -16,7 +21,10 @@
 
             <div class="description-input d-flex-column-center">
                 <div class="input-description">
-                    <span>Title</span>
+                    <div class="d-flex">
+                        <span>Title</span>
+                        <span class="color-FF8190">*</span>
+                    </div>
                 </div>
                 <input class="input-field" required type="text" placeholder="Enter a title">
                 <div class="required-field-title">
@@ -36,7 +44,7 @@
 
             <div class="assigned-to d-flex-column-center">
                 <span class="input-description">Assigned to</span>
-                <select class="input-field" name="" id="">
+                <select class="input-field option-value-disabled" name="" id="">
                     <option value="#">Test</option>
                     <option value="#">Test</option>
                 </select>
@@ -46,33 +54,76 @@
         <div class="parting-line-add-task"></div>
 
         <div class="rightside-add-task">
-            <div>
-                <span class="input-description">Due date</span>
-                <input required type="date" placeholder="dd/mm/yyyy">
-            </div>
 
-            <div>
-                <span class="input-description">Prio</span>
-                <div>
-                    <button>Urgent <img src="#" alt="#"></button>
-                    <button>Medium <img src="#" alt="#"></button>
-                    <button>Low <img src="#" alt="#"></button>
+            <div class="description-input d-flex-column-center">
+                <div class="input-description">
+                    <div class="d-flex">
+                        <span>Due date</span>
+                        <span class="color-FF8190">*</span>
+                    </div>
+                </div>
+                <input required class="input-field option-value-disabled" type="date" placeholder="dd/mm/yyyy">
+                <div class="required-field-title">
+                    <span></span>
                 </div>
             </div>
 
-            <div>
-                <span class="input-description">Category</span>
-                <select required name="" id="">
+            <div class="position-prio">
+                <div class="input-description">
+                    <span>Prio</span>
+                </div>
+                <div class="priority-selection">
+                    <div class="selection-field">
+                        <span>Urgent</span>
+                        <img src="../img/Capa 1.png">
+                    </div>
+
+                    <div class="selection-field">
+                        <span>Medium</span>
+                        <img src="../img/Capa 2 (1).png">
+                    </div>
+
+                    <div class="selection-field">
+                        <span>Low</span>
+                        <img src="../img/Capa 2.png">
+                    </div>
+                </div>
+            </div>
+
+            <div class="description-category position-category d-flex-column-center">
+                <div class="d-flex input-description">
+                    <span>Category</span>
+                    <span class="color-FF8190">*</span>
+                </div>
+                <select class="input-field option-value-disabled" required name="" id="">
+                    <option class="option-value-disabled" value="" disabled selected>Select task category</option>
                     <option value="">Technical Task</option>
                     <option value="">User Story</option>
                 </select>
             </div>
 
-            <div>
+            <div class="description-category position-subtasks d-flex-column-center">
                 <span class="input-description">Subtasks</span>
-                <input type="text" placeholder="Add new subtask">
+                <input class="input-field" type="text" placeholder="Add new subtask">
             </div>
         </div>
     </form>
+
+    <div class="required-field-notice">
+        <span class="color-FF8190">*</span>
+        <span>This field is required</span>
+    </div>
+
+    <div class="buttons-clear-create">
+        <div class="container-clear">
+            <span>Clear</span>
+            <img src="#" alt="">
+        </div>
+
+        <div class="container-create">
+            <span>Create Task</span>
+            <img src="#" alt="">
+        </div>
+    </div>
 </body>
 </html>

@@ -52,7 +52,6 @@ h2 {
 
 ::placeholder {
     padding: 12px 21px;
-    /* width: 408px; */
     height: 24px;
     font-family: Inter;
     font-weight: 400;
@@ -85,12 +84,17 @@ textarea {
     padding: 0;
     border-width: 1px;
     border-radius: 10px;
-    /* padding: 12px 21px; */
     height: 48px;
 }
 
 .description-input {
     height: 96px;
+    width: 100%;
+}
+
+.description-category {
+    height: 80px;
+    width: 100%;
 }
 
 .description-textarea {
@@ -123,5 +127,117 @@ textarea {
 .d-flex-column-center {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.position-prio {
+    position: absolute;
+    top: 120px;
+    width: 100%;
+    height: 56px;
+    gap: 16px;
+}
+
+.position-category {
+    position: absolute;
+    top: 232px;
+}
+
+.position-subtasks {
+    position: absolute;
+    top: 336px;
+}
+
+.option-value * {
+    padding: 24px;
+}
+
+.priority-selection {
+    height: 56px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selection-field {
+    width: 136px;
+    height: 56px;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.selection-field:hover {
+    cursor: pointer;
+}
+
+.option-value-disabled {
+    padding: 12px 21px;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.required-field-notice {
+    display: flex;
+    position: absolute;
+    top: 926px;
+    left: 328px;
+    width: 170px;
+    height: 27px;
+}
+
+.color-FF8190 {
+    color: #FF8190;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.buttons-clear-create {
+    position: absolute;
+    top: 889px;
+    left: 995.25px;
+    display: flex;
+    gap: 16px;
+    width: 309px;
+    height: 56px;
+    font-size: 21px;
+    line-height: 25.2px;
+    font-family: inter;
+}
+
+.container-clear {
+    width: 110px;
+    height: 100%;
+    border: 1px solid;
+    border-radius: 10px;
+    display: flex;
+    gap: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+}
+
+.container-create {
+    width: 183px;
+    height: 100%;
+    border: 1px solid;
+    border-radius: 10px;
+    display: flex;
+    gap: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2A3647;
+    color: white;
+    font-weight: 700;
 }
