@@ -15,6 +15,7 @@ async function loadUsers() {
 async function register() {
   registerBtn.disabled = true;
   users.push({
+    name: name.value,
     email: email.value,
     password: password.value,
   });

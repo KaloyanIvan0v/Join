@@ -7,18 +7,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join Register</title>
   <link rel="icon" type="image/x-icon" href="../img/logo.png">
-</head>
-
-<body onload="init()">
-
-  <form onsubmit="register(); return false;">
-    <input required type="email" id="email">
-    <input required type="password" id="password">
-    <button id="registerBtn">Registrieren</button>
-  </form>
-
+  <link rel="stylesheet" type="text/css" href="../css/register.css">
   <script src="../js/storage.js"></script>
   <script src="../js/register.js"></script>
+</head>
+
+<body onload="initRegister()">
+
+  <div id="id-sign-up-box" class="sign-up-box">
+    <div class="sign-up-header">
+      <div id="id-register-arrow-back" class="register-arrow-back">
+        <img src="../img/arrow-left-line.svg" alt="">
+      </div>
+      <div>Sign up</div>
+    </div>
+    <div class="sign-up-input">
+      <form onsubmit="register(); return false;">
+        <input required type="text" id="name">
+        <input required type="email" id="email">
+        <input required type="password" id="password">
+        <input required type="password" id="password-confirm">
+        <div>
+          <img id="id-checkbox-sign-up" class="checkbox-sign-up" src="../img/Check button.svg" alt="">
+          <div>I accept the</div>
+          <a href="#">Privacy policy</a>
+        </div>
+        <button id="registerBtn">Registrieren</button>
+      </form>
+    </div>
+    <div></div>
+  </div>
+
+
 </body>
 
 </html>

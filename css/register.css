@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sign-up-input form {
+  display: flex;
+  flex-direction: column;
+}
