@@ -18,6 +18,10 @@ body{
     padding-bottom: 20px;
     box-shadow: 5px 0 8px #888888;
 }
+#helpImage:hover{
+    width: 24px;
+    height: 24px;
+}
 
 .headerImages{
     display: flex;
@@ -28,13 +32,11 @@ body{
     position: relative;
     width: 56px;
     height: 56px;
+    border-radius: 50%;
 }
 
 .relative:hover{
-    position: relative;
-    width: 56px;
-    height: 56px;
-    background-color: #FDFDFD;
+    background-color: #e2e6ec;
 }
 
 span.absolute{
