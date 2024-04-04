@@ -15,12 +15,21 @@ async function loadUsers() {
 async function register() {
   registerBtn.disabled = true;
   users.push({
-    name: name.value,
+    name: names.value,
     email: email.value,
     password: password.value,
   });
   await setItem("users", JSON.stringify(users));
   resetForm();
+}
+
+function getInputValues() {
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  let passwordConfirm = document.getElementById("password-confirm").value;
+  let inputData = [name, email, password, passwordConfirm];
+  return inputData;
 }
 
 function resetForm() {
