@@ -3,7 +3,14 @@
     margin-left: 328px;
     margin-right: 98px;
 }
-.helpSectionHead{
-    display: flex;
-    justify-content: space-between;
+.helpSectionBackImage{
+    position: fixed;
+    top: 225px;
+    right: 96px;
+}
+
+.helpSectionBackImage:hover{
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #e2e6ec;
 }
