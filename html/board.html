@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Board</title>
+
+    <link rel="stylesheet" href="/css/templates.css">
+    <script src="/js/storage.js"></script>
+    <script src="/js/board.js"></script>
+    <script src="/js/w3include.js"></script>
+</head>
+<body onload="init_board()">
+    <div w3-include-html="/templates/header.html" class="header"></div>
+    <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
+
+    <div class="tasks-categories">
+        <div class="category-todo" id="categoryToDo"></div>
+        <div class="category-in-progress" id="categorInProgress"></div>
+        <div class="category-await-feedback" id="categorAwaitFeedback"></div>
+        <div class="category-Done" id="categorDone"></div>
+    </div>
+</body>
+</html>
