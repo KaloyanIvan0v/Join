@@ -7,17 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Login</title>
     <link rel="icon" type="image/x-icon" href="img/logo.png">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <script src="../js/storage.js"></script>
     <script src="../js/login.js"></script>
+
 </head>
 
 <body onload="initLogin()">
 
-    <form onsubmit="login(); return false;">
-        <input required type="email" id="email">
-        <input required type="password" id="password">
-        <button id="registerBtn">Login</button>
-    </form>
+    <div id="id-sign-up-box" class="sign-up-box">
+        <div class="sign-up-header">
+            <div id="id-register-arrow-back" class="register-arrow-back">
+                <img src="../img/arrow-left-line.svg" alt="">
+            </div>
+            <div class="sign-up-text">Log in</div>
+        </div>
+        <div id="id-under-line-title" class="under-line-title"></div>
+        <div class="sign-up-input">
+            <form onsubmit="login(); return false;">
+                <input required type="email" id="email">
+                <input required type="password" id="password">
+                <div>
+                    <img id="id-checkbox-sign-up" class="checkbox-sign-up" src="../img/Check button.svg" alt="">
+                    <div>I accept the</div>
+                    <a href="#">Privacy policy</a>
+                </div>
+                <button id="registerBtn">Log in</button>
+            </form>
+        </div>
+    </div>
 
 </body>
 

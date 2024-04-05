@@ -1,5 +1,4 @@
 let users = [];
-let a = ["a", "b", "c", "d", "e", "k"];
 async function initRegister() {
   await loadUsers();
 }
@@ -23,6 +22,7 @@ async function register() {
   });
   await setItem("users", JSON.stringify(users));
   resetForm();
+  window.location.href = "../index.html?Deine Registrierung war erfolgreich";
 }
 
 function resetForm() {
