@@ -30,4 +30,9 @@ h2{
 
 h3{
     font-size: 27px;
+    margin-bottom: 0px;
+}
+
+p{
+    margin-top: 5px;
 }
