@@ -1,3 +1,7 @@
+body{
+    font-family: inter;
+}
+
 .legalNoticeContent{
     margin-top: 206px;
     margin-left: 328px;
@@ -18,6 +22,10 @@
 
 h1{
     font-size: 61px;
+}
+
+h2{
+    font-size: 32px;
 }
 
 h3{
