@@ -1,9 +1,13 @@
 let tasks = [];
 let loggedInUser = [];
 
-function setLoggedInUser(user) {}
+function setLoggedInUser(user) {
+  saveToLocalStorage("loggedInUser", user);
+}
 
-function getLoggedInUser() {}
+function getLoggedInUser() {
+  return getFromLocalStorage("loggedInUser");
+}
 
 function saveToLocalStorage(key, value) {
   value = JSON.stringify(value);
