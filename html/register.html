@@ -8,6 +8,7 @@
   <title>Join Register</title>
   <link rel="icon" type="image/x-icon" href="../img/logoDark.png">
   <link rel="stylesheet" type="text/css" href="../css/register.css">
+  <link rel="stylesheet" type="text/css" href="../style.css">
   <script src="../script.js"></script>
   <script src="../js/storage.js"></script>
   <script src="../js/register.js"></script>
@@ -25,17 +26,29 @@
     <div id="id-under-line-title" class="under-line-title"></div>
     <div class="sign-up-input">
       <form onsubmit="register(); return false;">
-        <input required type="text" id="names">
-        <input required type="email" id="email">
-        <input required type="password" id="password">
-        <input required type="password" id="password-confirm">
+        <div class="form-input">
+          <input required type="text" id="names">
+          <img src="../img/person.svg" alt="">
+        </div>
+        <div class="form-input">
+          <input required type="email" id="email">
+          <img src="../img/mail.svg" alt="">
+        </div>
+        <div class="form-input">
+          <input required type="password" id="password">
+          <img src="../img/lock.svg" alt="">
+        </div>
+        <div class="form-input">
+          <input required type="password" id="password-confirm">
+          <img src="../img/lock.svg" alt="">
+        </div>
         <div id="id-input-feedback" class="input-feedback"></div>
-        <div>
+        <div div="id-accept-policy" class="accept-policy">
           <img id="id-checkbox-sign-up" class="checkbox-sign-up" src="../img/Check button.svg" alt="">
           <div>I accept the</div>
           <a href="#">Privacy policy</a>
         </div>
-        <button id="registerBtn">Sign up</button>
+        <button id="registerBtn" class="register-btn">Sign up</button>
       </form>
     </div>
   </div>
