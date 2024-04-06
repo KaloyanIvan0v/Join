@@ -12,11 +12,7 @@ async function loadUsers() {
   }
 }
 
-function login() {
-
-}
-
-
+function login() {}
 
 function resetForm() {
   const registerBtn = document.getElementById("registerBtn");
