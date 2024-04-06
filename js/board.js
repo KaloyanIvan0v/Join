@@ -22,8 +22,12 @@ function loadNewTasks(tasksBoard) {
 
 function returnHtmlShowToDos(singleTask) {
     return `
-    <div>
-        <span>${singleTask['title']}</span
-        <span>Hallo</span
+    <div class="taskCard">
+        <span>${singleTask['title']}</span>
+        <span>${singleTask['description']}</span>
+        <span>${singleTask['assignedTo']}</span>
+        <span>${singleTask['dueDate']}</span>
+        <span>${singleTask['category']}</span>
+        <span>${singleTask['subTasks']}</span>
     </div>`
 }

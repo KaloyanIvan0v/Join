@@ -17,6 +17,18 @@ h2 {
     font-family: inter;
 }
 
+.highlight-color-medium {
+    background-color: #FFA800;
+}
+
+.highlight-color-urgent {
+    background-color: #FF3D00;
+}
+
+.highlight-color-low {
+    background-color: #7AE229;
+}
+
 .add-task-informations {
     display: flex;
 }

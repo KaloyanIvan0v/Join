@@ -6,6 +6,7 @@
     <title>Join Board</title>
 
     <link rel="stylesheet" href="/css/templates.css">
+    <link rel="stylesheet" href="/css/board.css">
     <script src="/js/storage.js"></script>
     <script src="/js/board.js"></script>
     <script src="/js/w3include.js"></script>
@@ -14,11 +15,43 @@
     <div w3-include-html="/templates/header.html" class="header"></div>
     <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
 
-    <div class="tasks-categories">
-        <div class="category-todo" id="categoryToDo"></div>
-        <div class="category-in-progress" id="categorInProgress"></div>
-        <div class="category-await-feedback" id="categorAwaitFeedback"></div>
-        <div class="category-Done" id="categorDone"></div>
+    <div class="headline-area-board">
+        <div class="headline-search-add">
+            <h2>Board</h2>
+
+            <div class="find-add-board">
+                <input type="text" placeholder="Find Task">
+                <button>Add Task +</button>
+            </div>
+        </div>
+
+        <div class="subline-board">
+            <div class="subline-field">
+                <span>To do</span>
+                <button>+</button>
+            </div>        
+            
+            <div class="subline-field">
+                <span>In progress</span>
+                <button>+</button>
+            </div>
+            
+            <div class="subline-field">
+                <span>Await Feedback</span>
+                <button>+</button>
+            </div>
+        
+            <div class="subline-field">
+                <span>Done</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="board-distribution">
+        <div class="task-area" id="categoryToDo"></div>
+        <div class="task-area" id="categoryInProgress"></div>
+        <div class="task-area" id="categoryAwaitFeedback"></div>
+        <div class="task-area" id="categoryDone"></div>
     </div>
 </body>
 </html>
