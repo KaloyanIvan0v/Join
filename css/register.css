@@ -15,6 +15,7 @@ a {
 .sign-up-input form {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
 .sign-up-box {
@@ -47,4 +48,10 @@ a {
 .sign-up-input input {
   width: 422px;
   height: 48px;
+}
+
+.input-feedback {
+  width: 422px;
+  height: 14px;
+  background-color: lightslategrey;
 }
