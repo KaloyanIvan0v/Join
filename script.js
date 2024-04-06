@@ -17,7 +17,9 @@ function saveToLocalStorage(key, value) {
 function getFromLocalStorage(key) {
   value = localStorage.getItem(key);
   valueAsJSON = JSON.parse(value);
-  return valueAsJSON;
+  if(valueAsJSON) {
+    return valueAsJSON;
+  }
 }
 
 async function loadUsers() {

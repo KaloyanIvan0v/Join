@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/add_task.css">
     <link rel="stylesheet" href="/css/templates.css">
 
+    <script src="/script.js"></script>
     <script src="/js/w3include.js"></script>
     <script src="/js/storage.js"></script>
     <script src="/js/add_task.js"></script>
@@ -66,7 +67,7 @@
                         <span class="color-FF8190">*</span>
                     </div>
                 </div>
-                <input required class="input-field option-value-disabled" id="dueDate" type="date" placeholder="dd/mm/yyyy">
+                <input class="input-field option-value-disabled" id="dueDate" type="date" placeholder="dd/mm/yyyy">
                 <div class="required-field-title">
                     <span></span>
                 </div>
@@ -100,7 +101,7 @@
                     <span>Category</span>
                     <span class="color-FF8190">*</span>
                 </div>
-                <select class="input-field option-value-disabled" required id="category">
+                <select class="input-field option-value-disabled" id="category">
                     <option class="option-value-disabled" value="" disabled selected>Select task category</option>
                     <option value="">Technical Task</option>
                     <option value="">User Story</option>
@@ -120,7 +121,7 @@
 
     <div class="buttons-clear-create">
         <div class="container-clear">
-            <div>Clear</div>
+            <button class="container-create font-size-21">Clear</button>
             <img src="#" alt="">
         </div>
 

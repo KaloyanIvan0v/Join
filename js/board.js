@@ -1,21 +1,19 @@
+let tasks = [];
+
 function init_board() {
     includeHTML();
-    getFromLocalStorage();
+    loadNewTasks();
 }
 
-function getFromLocalStorage() {
-    let tasksAsText = localStorage.getItem('tasks');
-    let tasksBoard = JSON.parse(tasksAsText);
-
-    loadNewTasks(tasksBoard);
-}
-
-function loadNewTasks(tasksBoard) {
+function loadNewTasks() {
+    // getFromLocalStorage('tasks');
+    // valueAsJSON = tasks;
+    tasks = getFromLocalStorage('tasks')
     let toDoField = document.getElementById('categoryToDo');
 
     toDoField.innerHTML = '';
-    for(i = 0; i < tasksBoard.length; i++) {
-        let singleTask = tasksBoard[i];
+    for(i = 0; i < tasks.length; i++) {
+        let singleTask = tasks[i];
         toDoField.innerHTML += returnHtmlShowToDos(singleTask); 
     }
 }
@@ -29,5 +27,16 @@ function returnHtmlShowToDos(singleTask) {
         <span>${singleTask['dueDate']}</span>
         <span>${singleTask['category']}</span>
         <span>${singleTask['subTasks']}</span>
+        <span>${singleTask['prio']}</span>
     </div>`
 }
+
+//Hallo Koloyab, ich habe deine Funktion noch erweitert und gesagt, dass nur der valueASJSON übergeben wird, wenn er auch existiert. Grüße, Christopher
+
+function getFromLocalStorage(key) {
+    value = localStorage.getItem(key);
+    valueAsJSON = JSON.parse(value);
+    if(valueAsJSON) {
+      return valueAsJSON;
+    }
+  }
