@@ -19,3 +19,11 @@ function getFromLocalStorage(key) {
   valueAsJSON = JSON.parse(value);
   return valueAsJSON;
 }
+
+async function loadUsers() {
+  try {
+    users = JSON.parse(await getItem("users"));
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
+}

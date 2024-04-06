@@ -3,14 +3,6 @@ async function initRegister() {
   await loadUsers();
 }
 
-async function loadUsers() {
-  try {
-    users = JSON.parse(await getItem("users"));
-  } catch (e) {
-    console.error("Loading error:", e);
-  }
-}
-
 async function register() {
   let inputEmail = email.value;
   if (userExist(inputEmail)) {
