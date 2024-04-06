@@ -1,4 +1,5 @@
 let users = [];
+let checkBoxState = false;
 async function initRegister() {
   await loadUsers();
 }
@@ -50,5 +51,16 @@ function passwordMatch(password, passwordConfirm) {
     return true;
   } else {
     return false;
+  }
+}
+
+function toggleCheckbox() {
+  let checkBox = document.getElementById("id-checkbox-sign-up");
+  if (checkBoxState == false) {
+    checkBoxState = true;
+    checkBox.src = "../img/box-checked.png";
+  } else {
+    checkBoxState = false;
+    checkBox.src = "../img/box-unchecked.png";
   }
 }

@@ -13,22 +13,38 @@ a {
   cursor: pointer;
 }
 
+.sign-up-input {
+  max-width: 422px;
+  width: 100%;
+}
+
 .sign-up-input form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 24px;
+  width: 100%;
 }
 
 .sign-up-box {
+  padding-top: 48px;
+  padding-right: 88px;
+  padding-bottom: 48px;
+  padding-left: 88px;
   height: 630px;
   width: 598px;
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  transition: all 0.7s ease-in-out;
+}
+
+.inner-sign-up-box {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: solid 1px rgba(0, 0, 0, 0.1);
-  background-color: rgb(255, 255, 255);
-  border-radius: 30px;
 }
 
 .sign-up-header {
@@ -47,17 +63,25 @@ a {
   background-color: rgb(40, 171, 226);
   border-radius: 3px;
   margin-bottom: 32px;
+  margin-top: 16px;
 }
 
 .sign-up-input input {
-  width: 422px;
+  width: 100%;
   height: 48px;
   border: none;
   margin-left: 10px;
+  font-size: 20px;
+}
+
+.sign-up-input input::placeholder {
+  color: rgb(209, 209, 209);
+  font-size: 20px;
 }
 
 .input-feedback {
-  width: 422px;
+  width: 100%;
+  max-width: 422px;
   height: 14px;
   background-color: lightslategrey;
 }
@@ -72,7 +96,16 @@ a {
 
 .accept-policy {
   display: flex;
+  align-items: center;
   gap: 8px;
+}
+
+.accept-policy a {
+  color: rgb(42, 171, 226);
+}
+
+.accept-policy a:hover {
+  text-decoration: underline;
 }
 
 .form-input {
@@ -81,8 +114,25 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .form-input img {
   margin-right: 10px;
+}
+
+.register-arrow-back {
+  position: relative;
+  top: 55px;
+  left: 0px;
+}
+
+.checkbox-sign-up {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.checkbox-sign-up:hover {
+  transform: scale(0.95);
 }

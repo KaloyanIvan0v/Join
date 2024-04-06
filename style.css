@@ -1,6 +1,7 @@
 @font-face {
   font-family: "inter";
   src: url("fonts/inter/Inter-VariableFont_slnt,wght.ttf");
+  /* font-weight: 100; */
 }
 
 body {
@@ -14,7 +15,7 @@ h2 {
   left: 328px;
   font-size: 61px;
   font-weight: 700;
-  font-family: inter;
+  font-family: "inter";
 }
 
 button {
@@ -25,4 +26,8 @@ button {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+input:focus {
+  outline: none;
 }
