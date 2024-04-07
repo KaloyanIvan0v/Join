@@ -24,10 +24,10 @@ function chooseCategoryColor(i) {
     } else {
         categoryField.classList.add('bg-color-user-story');
     }
-    whichPriorityBoard(i);
+    whichPriorityTaskCard(i);
 }
 
-function whichPriorityBoard(i) {
+function whichPriorityTaskCard(i) {
     let prioField = document.getElementById(`prioField${i}`);
     let singleTaskPrio = tasks[i]['prio'];
 
@@ -36,28 +36,35 @@ function whichPriorityBoard(i) {
     if(singleTaskPrio == 'low') {
         prioField.innerHTML = '<img src="' + '../img/Capa 2.png' + '" alt="Bildbeschreibung">'
     } else if(singleTaskPrio == 'medium') {
-        prioField.innerHTML = '<img src="' + '../img/Capa 2 (1).png' + '" alt="Bildbeschreibung">'
+        prioField.innerHTML = '<img src="' + '../img/Priority symbols.png' + '" alt="Bildbeschreibung">'
     } else {
         prioField.innerHTML = '<img src="' + '../img/Capa 1.png' + '" alt="Bildbeschreibung">'
     }
 }
 
+function showCurrentTask(i) {
+    let backgroundDialog = document.getElementById('backgroundDialog');
+    let dialogField = document.getElementById('dialog');
+    let currentTask = tasks[i];
+    backgroundDialog.classList.toggle('background-dialog');
+
+    dialogField.innerHTML = '';
+    dialogField.innerHTML = returnHtmlCurrentTask(currentTask);
+}
+
 function returnHtmlShowToDos(singleTask, i) {
     return `
-    <div class="task-card">
+    <div class="task-card" onclick="showCurrentTask(${i})">
         <div class="task-card-category">
             <span id="categoryField${i}" class="which-category">
                 ${singleTask['category']}
             </span>
         </div>
         
-        <div class="y">
-            <div class="">
+        <div class="header-area-card">
+            <div class="ft-weight-700">
                 ${singleTask['title']}
             </div>
-        </div>
-
-        <div class="">
             <div class="">
                 ${singleTask['description']}
             </div>
@@ -65,6 +72,7 @@ function returnHtmlShowToDos(singleTask, i) {
 
         <div class="">
             <div class="">
+                <span><i>Subtasks Field & loadbar</i></span>
                 ${singleTask['subTasks']}
             </div>
         </div>
@@ -76,5 +84,17 @@ function returnHtmlShowToDos(singleTask, i) {
             <div id="prioField${i}" class="prio-field">
                 ${singleTask['prio']}
             </div>
+        </div>`
+}
+
+function returnHtmlCurrentTask(currentTask) {
+    return `
+  
+        <div class="head-big-task">
+            <span>${currentTask['category']}</span>
+            <a href="#">X</a>
+        </div>
+        <div>
+            <span>${currentTask['title']}</span>
         </div>`
 }

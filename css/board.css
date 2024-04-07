@@ -47,18 +47,23 @@
 
 .task-area {
     width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .task-card {
+    width: 100%;
     padding: 16px;
-    display: flex;
-    flex-direction: column;
     border: 1px solid;
     border-radius: 24px;
     font-family: Inter;
     font-size: 16px;
     line-height: 19.2px;
     font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .bg-color-technical-task {
@@ -83,4 +88,38 @@
 .last-section-card {
     display: flex;
     justify-content: space-between;
+}
+
+.header-area-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ft-weight-700 {
+    font-weight: 700;
+}
+
+.background-dialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog {
+    background-color: #FFFFFF;
+    z-index: 2;
+    width: 525px;
+}
+
+.head-big-task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
