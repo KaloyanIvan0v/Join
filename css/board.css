@@ -45,12 +45,42 @@
     border: 1px solid;
 }
 
-.taskCard {
+.task-area {
     width: 220px;
-    height: 231px;
+}
+
+.task-card {
     padding: 16px;
     display: flex;
     flex-direction: column;
     border: 1px solid;
     border-radius: 24px;
+    font-family: Inter;
+    font-size: 16px;
+    line-height: 19.2px;
+    font-weight: 400;
+}
+
+.bg-color-technical-task {
+    background-color: #0038FF;
+}
+
+.bg-color-user-story {
+    background-color: #1FD7C1;
+}
+
+.which-category {
+    padding: 4px 16px;
+    gap: 10px;
+    border-radius: 8px;
+}
+
+.task-card-assigned {
+    display: flex;
+    justify-content: space-between;
+}
+
+.last-section-card {
+    display: flex;
+    justify-content: space-between;
 }

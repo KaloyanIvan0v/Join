@@ -1,8 +1,6 @@
-
 let currentPrio = ['medium'];
 
 function addTask() {
-    tasks = getFromLocalStorage('tasks');
     let createBtn = document.getElementById('createBtn');
     let title = document.getElementById('title');
     let description = document.getElementById('description');
@@ -12,6 +10,9 @@ function addTask() {
     let subTasks = document.getElementById('subTasks');
 
     createBtn.disabled = true;
+
+    // let tasks = getItemTasks('tasks');
+    let tasks = getFromLocalStorage('tasks') || [];
 
     let task = {
         "title": title.value,
@@ -24,7 +25,7 @@ function addTask() {
         };
 
     tasks.push(task);
-    // tasksToLocalStorage();
+    // setItem('tasks', tasks);
     saveToLocalStorage('tasks', tasks);
     resetInputFields();
     window.location.href = "board.html";
@@ -61,16 +62,4 @@ function resetInputFields() {
     dueDate.value = '';
     category.value = '';
     subTasks.value = '';
-}
-
-function tasksToLocalStorage() {
-    let tasksAsText = JSON.stringify(tasks);
-    localStorage.setItem('tasks', tasksAsText);
-}
-
-function fromLocalStorage() {
-    let tasksAsText = localStorage.getItem('tasks');
-    if(tasksAsText) {
-    tasks = JSON.parse(tasksAsText);
-    }
 }
