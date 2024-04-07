@@ -8,7 +8,7 @@ async function initRegister() {
 
 async function register() {
   let inputEmail = email.value;
-  if (!userExist(inputEmail) && passwordMatch()) {
+  if (!userExist(inputEmail) && passwordMatch() && checkBoxState) {
     console.log("user will be created", inputEmail);
     registerNewUser();
   } else {
@@ -21,6 +21,8 @@ function handleLoginFeedbackMsg(inputEmail) {
     SetLoginFeedbackMsg("User already exists!", 3000);
   } else if (!passwordMatch()) {
     SetLoginFeedbackMsg("Ups! your password don’t match", 3000);
+  } else if (!checkBoxState) {
+    SetLoginFeedbackMsg("please accept the policy", 3000);
   }
 }
 
@@ -76,8 +78,8 @@ function userExist(user) {
 }
 
 function passwordMatch() {
-  let password = document.getElementById("password").value;
-  let passwordConfirm = document.getElementById("password-confirm").value;
+  let password = document.getElementById("password0").value;
+  let passwordConfirm = document.getElementById("password1").value;
   if (password == passwordConfirm) {
     return true;
   } else {

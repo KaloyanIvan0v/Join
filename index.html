@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Login</title>
-    <link rel="icon" type="image/x-icon" href="img/logo.png">
+    <link rel="icon" type="image/x-icon" href="img/logoDark.png">
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="../script.js"></script>
@@ -16,31 +16,39 @@
 </head>
 
 <body onload="initLogin()">
-    <div id="id-to-signup" class="to-signup">
-        <div>Not a Join User?</div>
-        <div>
-            <a href="html/register.html">Sign up</a>
-        </div>
-    </div>
-    <div id="id-login-box" class="login-box">
-        <div class="sign-up-header">
-            <div class="sign-up-text">Log in</div>
-        </div>
-        <div id="id-under-line-title" class="under-line-title"></div>
-        <div class="sign-up-input">
-            <form onsubmit="login(); return false;">
-                <input required type="email" id="email">
-                <input required type="password" id="password">
-                <div>
-                    <img id="id-checkbox-sign-up" class="checkbox-sign-up" src="../img/Check button.svg" alt="">
-                    <div>I accept the</div>
-                    <a href="#">Privacy policy</a>
-                </div>
-                <button id="registerBtn">Log in</button>
-            </form>
-        </div>
-    </div>
+    <div id="id-log-in-box" class="log-in-box">
+        <div class="inner-log-in-box">
+            <div class="log-in-header">
+                <div class="log-in-text">Log in</div>
+            </div>
+            <div id="id-under-line-title" class="under-line-title"></div>
+            <div class="log-in-input">
+                <form onsubmit="login(); return false;">
+                    <div class="form-input">
+                        <input placeholder="Email" required type="email" id="email">
+                        <img src="../img/mail.svg" alt="">
+                    </div>
+                    <div class="form-input">
+                        <input placeholder="Password" required type="password" id="password0">
+                        <img id="password0-img" src="../img/lock.svg" alt=""
+                            onclick="togglePswVisibility(`password0-img`)">
+                    </div>
+                    <div id="id-input-feedback" class="input-feedback"></div>
+                    <div div="id-accept-policy" class="accept-policy">
+                        <img onclick="toggleCheckbox()" id="id-checkbox-log-in" class="checkbox-log-in"
+                            src="../img/box-unchecked.png" alt="">
+                        <div>Remember me</div>
 
+                    </div>
+                    <div class="login-guest-login-div">
+                        <button id="loginBtn" class="log-in-btn">Log in</button>
+                        <div id="id-guest-log-in-btn" class="guest-log-in-btn" onclick="guestLogIn()">Guest Log
+                            in</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
