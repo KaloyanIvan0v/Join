@@ -22,7 +22,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
   width: 100%;
 }
 
@@ -80,10 +79,13 @@ a {
 }
 
 .input-feedback {
+  font-size: 13px;
   width: 100%;
   max-width: 422px;
   height: 14px;
-  background-color: lightslategrey;
+  color: rgb(255, 129, 144);
+  margin-top: -16px;
+  margin-bottom: 16px;
 }
 
 .register-btn {
@@ -98,6 +100,7 @@ a {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 32px;
 }
 
 .accept-policy a {
@@ -115,6 +118,7 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-bottom: 24px;
 }
 
 .form-input img {

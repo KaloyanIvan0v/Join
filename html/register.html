@@ -38,11 +38,12 @@
           </div>
           <div class="form-input">
             <input placeholder="Password" required type="password" id="password">
-            <img src="../img/lock.svg" alt="">
+            <img id="password-img" src="../img/lock.svg" alt="" onclick="togglePswVisibility(`password-img`)">
           </div>
           <div class="form-input">
             <input placeholder="Confirm Password" required type="password" id="password-confirm">
-            <img src="../img/lock.svg" alt="">
+            <img id="password-confirm-img" src="../img/lock.svg" alt=""
+              onclick="togglePswVisibility(`password-confirm-img`)">
           </div>
           <div id="id-input-feedback" class="input-feedback"></div>
           <div div="id-accept-policy" class="accept-policy">
