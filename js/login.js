@@ -68,7 +68,8 @@ function getUserIndex(user) {
 }
 
 function guestLogIn() {
-  console.log("guest login");
+  logInUser = { name: "Guest", email: "guest@info.com", password: "guest" };
+  window.location.href = "../html/summery.html";
 }
 
 function resetForm() {

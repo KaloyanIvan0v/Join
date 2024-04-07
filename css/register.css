@@ -140,3 +140,14 @@ a {
 .checkbox-sign-up:hover {
   transform: scale(0.95);
 }
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 40px;
+  gap: 16px;
+  color: rgb(168, 168, 168);
+  font-size: 16px;
+}

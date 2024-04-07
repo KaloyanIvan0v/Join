@@ -9,7 +9,6 @@ async function initRegister() {
 async function register() {
   let inputEmail = email.value;
   if (!userExist(inputEmail) && passwordMatch() && checkBoxState) {
-    console.log("user will be created", inputEmail);
     registerNewUser();
   } else {
     handleLoginFeedbackMsg(inputEmail);
@@ -51,7 +50,7 @@ async function registerNewUser() {
   users.push({
     name: names.value,
     email: email.value,
-    password: password.value,
+    password: password0.value,
   });
   await setItem("users", JSON.stringify(users));
   resetForm();
@@ -63,7 +62,7 @@ function resetForm() {
   names.value = "";
   email.value = "";
   password0.value = "";
-  document.getElementById("password-confirm").value = "";
+  password1.value = "";
   registerBtn.disabled = true;
 }
 
