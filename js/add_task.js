@@ -65,14 +65,6 @@ function resetInputFields() {
 }
 
 function addNewSubTask() {
-    let addIcon = document.getElementById('addIcon');
-    addIcon.innerHTML = '';
-    addIcon.classList.add('d-flex');
-    addIcon.innerHTML = 
-    `<span>x </span>
-    <span> || </span>
-    <img src="/img/add.png">`;
-
     let newTaskField = document.getElementById('newSubTaskField');
     let singleNewTask = document.getElementById('subTasks');
     let newTasks = getFromLocalStorage('subTasks') || [];
@@ -93,4 +85,13 @@ function returnHtmlNewSubtasks(newSubTask) {
     <ul>
         <li>${newSubTask}</li>
     </ul>`
+}
+
+function changeIconsSubtask() {
+    let onclickElementsSubtasks = document.getElementById('onclickElementsSubtasks');
+    let activeInputSubtask = document.getElementById('activeInputSubtask');
+    let addIconSubtasks = document.getElementById('addIconSubtasks');
+
+    addIconSubtasks.innerHTML = '';
+    activeInputSubtask.classList.remove('vs-hidden');
 }

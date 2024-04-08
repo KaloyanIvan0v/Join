@@ -113,12 +113,21 @@
 
             <div class="description-category position-subtasks d-flex-column-center">
                 <span class="input-description">Subtasks</span>
-                <div class="input-add-task">
-                    <input class="input-field input-add-task" id="subTasks" type="text" placeholder="Add new subtask">
-                    <div onclick="addNewSubTask()" class="add-icon" id="addIcon">
-                        <img src="/img/add.png">
+                <div id="onclickElementsSubtasks" class="input-field new-subtask">
+                    <input onclick="changeIconsSubtask()" class="input-new-subtask" type="text" id="subTasks" placeholder="Add new subtask">
+                    <a id="addIconSubtasks" onclick="addNewSubTask()" class="icon-subtask-field"><img src="/img/add.png"></a>
+                    <div id="activeInputSubtask" class="vs-hidden active-input-subtasks">
+                        <a href="#"><img src="/img/close.png"></a>
+                        <span class="height-24"> |</span>
+                        <a href="#"> CheckUp Icon</a>
                     </div>
                 </div>
+                <!-- <div class="input-add-task"> -->
+                    <!-- <input class="input-field input-add-task" id="subTasks" type="text" placeholder="Add new subtask">
+                    <div onclick="addNewSubTask()" class="add-icon" id="addIcon">
+                        <img src="/img/add.png">
+                    </div> -->
+                <!-- </div> -->
                 <div id="newSubTaskField"></div>
             </div>
         </div>
