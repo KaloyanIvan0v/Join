@@ -4,6 +4,14 @@ checkBoxState = false;
 async function initLogin() {
   await loadUsers();
   setPwdInputEventListeners();
+  setTimeout(() => {
+    startScreen();
+  }, 375);
+}
+
+function startScreen() {
+  document.querySelector(".moving-img").classList.add("move");
+  document.querySelector(".opacity-layer").classList.add("hidden");
 }
 
 function login() {
