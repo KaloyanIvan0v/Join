@@ -250,9 +250,17 @@ footer {
   background-color: rgb(246, 247, 248);
   opacity: 1;
   pointer-events: none;
-  transition: opacity 1s; /* Opacity transition with a duration of 1 second */
+  transition: opacity 2s; /* Opacity transition with a duration of 1 second */
 }
 
 .opacity-layer.hidden {
   opacity: 0; /* When the hidden class is added, set opacity to 0 */
+}
+
+@media (max-height: 900px) {
+  .header-right {
+    position: absolute;
+    top: 27px;
+    right: 30px;
+  }
 }

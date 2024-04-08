@@ -1,6 +1,7 @@
 let users = [];
-pswVisibility = false;
-checkBoxState = false;
+let pswVisibility = false;
+let checkBoxState = false;
+
 async function initLogin() {
   await loadUsers();
   setPwdInputEventListeners();
@@ -16,16 +17,21 @@ function startScreen() {
 
 function login() {
   let user = email.value;
-  if (userExist(user) && passwordIsIncorrect(user) && checkBoxState == true) {
+  if (userExist(user) && passwordIsCorrect(user)) {
+    setLoggedIn(user);
     window.location.href = "../html/summery.html";
   } else {
     if (!userExist(user)) {
       SetLoginFeedbackMsg("user does not exist!", 3000);
-    } else if (!passwordIsIncorrect(user)) {
+    } else if (!passwordIsCorrect(user)) {
       SetLoginFeedbackMsg("password is incorrect!", 3000);
     } else {
     }
   }
+}
+
+function setLoggedIn(user) {
+  loggedInUser = users[getUserIndex(user)];
 }
 
 function SetLoginFeedbackMsg(errMsg, duration) {
@@ -56,7 +62,7 @@ function userExist(user) {
   return false;
 }
 
-function passwordIsIncorrect(user) {
+function passwordIsCorrect(user) {
   let userPsw = users[getUserIndex(user)].password;
   let inputPsw = document.getElementById("password0").value;
   if (userPsw == inputPsw) {
