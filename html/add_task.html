@@ -84,17 +84,18 @@
                 <div class="priority-selection">
                     <div id="urgentPrio" onclick="whichPriority('urgent')"  class="selection-field">
                         <span>Urgent</span>
-                        <img src="../img/Capa 1.png">
+                        <img src="../img/prio_urgent.png">
                     </div>
 
                     <div id="mediumPrio" onclick="whichPriority('medium')" class="selection-field highlight-color-medium">
                         <span>Medium</span>
-                        <img src="../img/Capa 2 (1).png">
+                        <img id="mediumWhite" src="/img/prio_medium_white.png">
+                        <img id="mediumOrange" class="vs-hidden" src="/img/prio_medium_orange.png">
                     </div>
 
                     <div id="lowPrio" onclick="whichPriority('low')" class="selection-field">
                         <span>Low</span>
-                        <img src="../img/Capa 2.png">
+                        <img id="imgPrioMedium" src="../img/prio_low.png">
                     </div>
                 </div>
             </div>
@@ -122,12 +123,6 @@
                         <a href="#"> CheckUp Icon</a>
                     </div>
                 </div>
-                <!-- <div class="input-add-task"> -->
-                    <!-- <input class="input-field input-add-task" id="subTasks" type="text" placeholder="Add new subtask">
-                    <div onclick="addNewSubTask()" class="add-icon" id="addIcon">
-                        <img src="/img/add.png">
-                    </div> -->
-                <!-- </div> -->
                 <div id="newSubTaskField"></div>
             </div>
         </div>

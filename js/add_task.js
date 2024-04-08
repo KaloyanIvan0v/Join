@@ -10,7 +10,6 @@ function addTask() {
     let subTasks = document.getElementById('subTasks');
 
     // createBtn.disabled = true;
-
     // let tasks = getItemTasks('tasks');
     let tasks = getFromLocalStorage('tasks') || [];
 
@@ -37,6 +36,7 @@ function whichPriority(level) {
     let low = document.getElementById('lowPrio');
 
     if(level == 'urgent') {
+        colorIcon();
         low.classList.remove('highlight-color-low');
         medium.classList.remove('highlight-color-medium');
         urgent.classList.add('highlight-color-urgent');
@@ -52,6 +52,14 @@ function whichPriority(level) {
         low.classList.remove('highlight-color-low');
         currentPrio = 'medium';
     }
+}
+
+function colorIcon() {
+    let mediumOrange = document.getElementById('mediumOrange');
+    let mediumWhite = document.getElementById('mediumWhite');
+
+    mediumWhite.classList.add('vs-hidden');
+    mediumOrange.classList.remove('vs-hidden');
 }
 
 function resetInputFields() {
