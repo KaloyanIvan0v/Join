@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Add Task</title>
 
+    <link rel="icon" type="image/x-icon" href="/img/logoDark.png">
+
     <link rel="stylesheet" href="/css/add_task.css">
     <link rel="stylesheet" href="/css/templates.css">
+    <link rel="stylesheet" href="/fonts/Inter/Inter-VariableFont_slnt,wght.ttf">
 
     <script src="/script.js"></script>
     <script src="/js/w3include.js"></script>
@@ -31,7 +34,7 @@
                         <span class="color-FF8190">*</span>
                     </div>
                 </div>
-                <input class="input-field" id="title" required type="text" placeholder="Enter a title">
+                <input class="input-field" id="title" type="text" placeholder="Enter a title">
                 <div class="required-field-title">
                     <span></span>
                 </div>
@@ -41,7 +44,7 @@
                 <div class="input-description">
                     <span>Description</span>
                 </div>
-                <textarea id="description" cols="30" rows="10" placeholder="Enter a description"></textarea>
+                <textarea id="description" placeholder="Enter a description"></textarea>
                 <div class="required-field-description">
                     <span></span>
                 </div>
@@ -110,7 +113,13 @@
 
             <div class="description-category position-subtasks d-flex-column-center">
                 <span class="input-description">Subtasks</span>
-                <input class="input-field" id="subTasks" type="text" placeholder="Add new subtask">
+                <div class="input-add-task">
+                    <input class="input-field input-add-task" id="subTasks" type="text" placeholder="Add new subtask">
+                    <div onclick="addNewSubTask()" class="add-icon" id="addIcon">
+                        <img src="/img/add.png">
+                    </div>
+                </div>
+                <div id="newSubTaskField"></div>
             </div>
         </div>
         
@@ -119,7 +128,7 @@
         <span>This field is required</span>
     </div>
 
-    <div class="buttons-clear-create">
+    <div onclick="resetInputFields()" class="buttons-clear-create">
         <div class="container-clear">
             <button class="container-create font-size-21">Clear</button>
             <img src="#" alt="">
