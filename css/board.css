@@ -32,12 +32,36 @@ input:focus {
 }
 
 .input-find-task {
+    width: 280px;
     border: 1px solid #A8A8A8;
     border-radius: 10px;
     padding: 8px 16px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+.add-task-headline {
+    border-radius: 10px;
+    background-color: #2A3647;
+    color: white;
+    font-weight: 700;
+    border-style: none;
+    padding: 8px 16px;
+    font-size: 21px;
+    line-height: 25.2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.hover:hover {
+    cursor: pointer;
+}
+
+.add_button_headline {
+    width: 18.67px;
+    height: 18.67px;
 }
 
 .headline-search-add {

@@ -32,9 +32,12 @@
             <div class="find-add-board">
                 <form class="input-find-task">
                     <input type="text" placeholder="Find Task">
-                    <button>Test</button>
+                    <img onclick="searchTask()" src="/img/line_with_searchicon.png">
                 </form>
-                <a class="add-task-headline">Add Task +</a>
+                <div class="add-task-headline hover">
+                    <a>Add Task</a>
+                    <img class="add_button_headline hover" src="/img/add_white.png">
+                </div>
             </div>
         </div>
 
@@ -48,12 +51,16 @@
             
             <div class="subline-field">
                 <span>In progress</span>
-                <a>+</a>
+                <a class="add-task-board" onclick="addTask()">
+                    <img class="plus-board" src="/img/plus_board.png">
+                </a>
             </div>
             
             <div class="subline-field">
                 <span>Await Feedback</span>
-                <a>+</a>
+                <a class="add-task-board" onclick="addTask()">
+                    <img class="plus-board" src="/img/plus_board.png">
+                </a>
             </div>
         
             <div class="subline-field">

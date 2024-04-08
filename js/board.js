@@ -52,6 +52,10 @@ function showCurrentTask(i) {
     dialogField.innerHTML = returnHtmlCurrentTask(currentTask);
 }
 
+// function searchTask() {
+
+// }
+
 function returnHtmlShowToDos(singleTask, i) {
     return `
     <div class="task-card" onclick="showCurrentTask(${i})">
