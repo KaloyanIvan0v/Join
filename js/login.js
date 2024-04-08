@@ -18,7 +18,8 @@ function startScreen() {
 function login() {
   let user = email.value;
   if (userExist(user) && passwordIsCorrect(user)) {
-    setLoggedIn(user);
+    setLoggedInUser(users[getUserIndex(user)]);
+    resetForm();
     window.location.href = "../html/summery.html";
   } else {
     if (!userExist(user)) {
@@ -28,10 +29,6 @@ function login() {
     } else {
     }
   }
-}
-
-function setLoggedIn(user) {
-  loggedInUser = users[getUserIndex(user)];
 }
 
 function SetLoginFeedbackMsg(errMsg, duration) {
@@ -87,11 +84,10 @@ function guestLogIn() {
 }
 
 function resetForm() {
-  const registerBtn = document.getElementById("registerBtn");
+  const loginBtn = document.getElementById("loginBtn");
   email.value = "";
-  password.value = "";
-  document.getElementById("password-confirm").value = "";
-  registerBtn.disabled = true;
+  password0.value = "";
+  loginBtn.disabled = true;
 }
 
 function toggleCheckbox() {

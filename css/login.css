@@ -46,11 +46,15 @@ a {
   padding-bottom: 48px;
   padding-left: 88px;
   height: 493px;
-  width: 652px;
+  width: 98%;
+  max-width: 652px;
   border: solid 1px rgba(0, 0, 0, 0.1);
   background-color: rgb(255, 255, 255);
   border-radius: 30px;
   transition: all 0.7s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .inner-log-in-box {
@@ -112,8 +116,8 @@ a {
 }
 
 .accept-policy {
-  padding-left: 39px;
-  width: 100%;
+  padding-left: 8%;
+  width: 91%;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -257,10 +261,33 @@ footer {
   opacity: 0; /* When the hidden class is added, set opacity to 0 */
 }
 
+@media (max-width: 1200px) {
+  .log-in-box {
+    padding-top: 28px;
+    padding-right: 48px;
+    padding-bottom: 28px;
+    padding-left: 48px;
+  }
+
+  .moving-img.move {
+    width: 50px;
+    height: 61px;
+    top: calc(40px);
+    left: calc(37px);
+  }
+}
+
 @media (max-height: 900px) {
   .header-right {
     position: absolute;
     top: 27px;
     right: 30px;
+  }
+}
+
+@media (max-width: 770px) {
+  .log-in-box {
+    padding: 0px;
+    width: 98%;
   }
 }
