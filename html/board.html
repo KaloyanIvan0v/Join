@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Board</title>
 
+    <link rel="icon" type="image/x-icon" href="/img/logoDark.png">
+
     <link rel="stylesheet" href="/css/templates.css">
     <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" href="/fonts/Inter/Inter-VariableFont_slnt,wght.ttf">
 
     <script src="/js/add_task.js"></script>
     <script src="/js/storage.js"></script>
@@ -27,25 +30,30 @@
             <h2>Board</h2>
 
             <div class="find-add-board">
-                <input type="text" placeholder="Find Task">
-                <button>Add Task +</button>
+                <div class="input-find-task">
+                    <input type="text" placeholder="Find Task">
+                    <img src="" alt="">
+                </div>
+                <a class="add-task-headline">Add Task +</a>
             </div>
         </div>
 
         <div class="subline-board">
             <div class="subline-field">
                 <span>To do</span>
-                <button>+</button>
+                <a class="add-task-board" onclick="addTask()">
+                    <img class="plus-board" src="/img/plus_board.png">
+                </a>
             </div>        
             
             <div class="subline-field">
                 <span>In progress</span>
-                <button>+</button>
+                <a>+</a>
             </div>
             
             <div class="subline-field">
                 <span>Await Feedback</span>
-                <button>+</button>
+                <a>+</a>
             </div>
         
             <div class="subline-field">

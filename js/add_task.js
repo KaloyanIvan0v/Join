@@ -9,7 +9,7 @@ function addTask() {
     let category = document.getElementById('category');
     let subTasks = document.getElementById('subTasks');
 
-    createBtn.disabled = true;
+    // createBtn.disabled = true;
 
     // let tasks = getItemTasks('tasks');
     let tasks = getFromLocalStorage('tasks') || [];
@@ -55,11 +55,42 @@ function whichPriority(level) {
 }
 
 function resetInputFields() {
-    createBtn.disabled = false;
+    // createBtn.disabled = false;
     title.value = '';
     description.value = '';
     assignedTo.value = '';
     dueDate.value = '';
     category.value = '';
     subTasks.value = '';
+}
+
+function addNewSubTask() {
+    let addIcon = document.getElementById('addIcon');
+    addIcon.innerHTML = '';
+    addIcon.classList.add('d-flex');
+    addIcon.innerHTML = 
+    `<span>x </span>
+    <span> || </span>
+    <img src="/img/add.png">`;
+
+    let newTaskField = document.getElementById('newSubTaskField');
+    let singleNewTask = document.getElementById('subTasks');
+    let newTasks = getFromLocalStorage('subTasks') || [];
+
+    newTasks.push(singleNewTask.value);
+    saveToLocalStorage('subTasks', newTasks);
+    singleNewTask.value = '';
+    newTaskField.innerHTML = '';
+
+    for(i = 0; i < newTasks.length; i++) {
+        newSubTask = newTasks[i];
+        newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
+    }
+}
+
+function returnHtmlNewSubtasks(newSubTask) {
+    return `
+    <ul>
+        <li>${newSubTask}</li>
+    </ul>`
 }
