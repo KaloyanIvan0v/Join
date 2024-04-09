@@ -75,9 +75,9 @@ input:focus {
     height: 73px;
 }
 
-h2 {
+/* h2 {
     font-size: 61px;
-}
+} */
 
 .subline-board {
     width: 1208px;
@@ -128,7 +128,6 @@ h2 {
     padding: 16px;
     border: 1px solid;
     border-radius: 24px;
-    font-family: Inter;
     font-size: 16px;
     line-height: 19.2px;
     font-weight: 400;
@@ -194,22 +193,3 @@ h2 {
     justify-content: space-between;
     align-items: center;
 }
-
-/* form {
-    display:flex;
-    flex-direction:row;
-    
-    border:1px solid grey;
-  
-    padding:1px;
-  } */
-  
-  /* remove the input focus blue box, it will be in the wrong place. */
-  /* input:focus {
-    outline: none;
-  } */
-  
-  /* Add the focus effect to the form so it contains the button */
-  /* form:focus-within { 
-    outline: 1px solid blue 
-  } */
