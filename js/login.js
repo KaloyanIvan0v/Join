@@ -8,6 +8,7 @@ async function initLogin() {
   setTimeout(() => {
     startScreen();
   }, 375);
+  handleMsgBox();
 }
 
 function startScreen() {
@@ -134,4 +135,23 @@ function togglePswVisibility(id) {
     pswVisibility = false;
     document.getElementById("password0").type = "password"; // Changed the id construction
   }
+}
+
+function handleMsgBox() {
+  let msgBox = document.getElementById("id-msg-box");
+  const urlParams = new URLSearchParams(window.location.search);
+  const msg = urlParams.get("msg");
+  if (msg) {
+    msgBox.innerHTML = msg;
+    handleMsgBoxMovement(3000, msgBox);
+  } else {
+  }
+}
+
+function handleMsgBoxMovement(duration) {
+  let msgBox = document.getElementById("id-msg-box");
+  msgBox.classList.add("msg-show");
+  setTimeout(() => {
+    msgBox.classList.remove("msg-show");
+  }, duration);
 }

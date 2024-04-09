@@ -47,6 +47,7 @@ function removeFeddbackMsg(divId) {
 async function registerNewUser() {
   const registerBtn = document.getElementById("registerBtn");
   registerBtn.disabled = true;
+  registerBtn.style.backgroundColor = "lightgrey";
   users.push({
     name: names.value,
     email: email.value,
@@ -54,7 +55,7 @@ async function registerNewUser() {
   });
   await setItem("users", JSON.stringify(users));
   resetForm();
-  window.location.href = "../index.html?Deine Registrierung war erfolgreich";
+  window.location.href = "../index.html?msg=You Signed Up successfully";
 }
 
 function resetForm() {
@@ -63,7 +64,6 @@ function resetForm() {
   email.value = "";
   password0.value = "";
   password1.value = "";
-  registerBtn.disabled = true;
 }
 
 function userExist(user) {
@@ -136,3 +136,5 @@ function togglePswVisibility(id) {
     document.getElementById("password" + index).type = "password"; // Changed the id construction
   }
 }
+
+function signUpSuccessful() {}

@@ -5,6 +5,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 a {
@@ -259,6 +260,46 @@ footer {
 
 .opacity-layer.hidden {
   opacity: 0; /* When the hidden class is added, set opacity to 0 */
+}
+
+.msg-box {
+  position: absolute;
+  top: 150px;
+  right: calc(0px - 312px);
+  width: 312px;
+  height: 74px;
+  background-color: rgb(43, 54, 71);
+  color: white;
+  border-radius: 20px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  font-size: 20px;
+  transition: all 0.7s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.msg-show {
+  position: absolute;
+  top: 150px;
+  right: calc(0px - 0px);
+  width: 312px;
+  height: 74px;
+  background-color: rgb(43, 54, 71);
+  color: white;
+  border-radius: 20px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  font-size: 20px;
+  transition: all 0.7s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hide {
+  display: none;
 }
 
 @media (max-width: 1200px) {
