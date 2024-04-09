@@ -46,6 +46,9 @@ h1{
     height: 168px;
     background-color: #ffffff;
     border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .summeryDone{
