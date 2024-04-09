@@ -8,6 +8,7 @@ body{
     top: 0;
     right: 0;
     left: 0;
+    z-index: 3;
     background-color: #ffffff;
     display: flex;
     justify-content: space-between;
@@ -57,6 +58,7 @@ span.absolute:hover{
     top: 0;
     left: 0;
     bottom: 0;
+    z-index: 5;
     width: 232px;
     background-color: #2a3647;
     display: flex;
