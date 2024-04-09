@@ -35,19 +35,24 @@ function whichPriority(level) {
     let medium = document.getElementById('mediumPrio');
     let urgent = document.getElementById('urgentPrio');
     let low = document.getElementById('lowPrio');
+    // let imgLow = document.getElementById('imgLow');
+    // let imgMedium = document.getElementById('imgMedium');
+    // let imgUrgent = document.getElementById('imgUrgent');
 
     if(level == 'urgent') {
-        colorIcon();
+        changeIcon('urgent');
         low.classList.remove('highlight-color-low');
         medium.classList.remove('highlight-color-medium');
         urgent.classList.add('highlight-color-urgent');
         currentPrio = 'urgent';
     } else if (level == 'low') {
+        changeIcon('low');
         urgent.classList.remove('highlight-color-urgent');
         medium.classList.remove('highlight-color-medium');
         low.classList.add('highlight-color-low');
         currentPrio = 'low';
     } else {
+        changeIcon('medium');
         urgent.classList.remove('highlight-color-urgent');
         medium.classList.add('highlight-color-medium');
         low.classList.remove('highlight-color-low');
@@ -55,13 +60,17 @@ function whichPriority(level) {
     }
 }
 
-function colorIcon() {
-    let mediumOrange = document.getElementById('mediumOrange');
-    let mediumWhite = document.getElementById('mediumWhite');
-
-    mediumWhite.classList.add('vs-hidden');
-    mediumOrange.classList.remove('vs-hidden');
+function changeIcon(level) {
+    let imgLow = document.getElementById('imgLow');
+    let imgMedium = document.getElementById('imgMedium');
+    let imgUrgent = document.getElementById('imgUrgent');
+    if (level == 'low' && imgLow.src.includes('prio_low.png')) {
+        imgLow.src = '/img/prio_medium_orange.png';
+    } else {
+        imgLow.src = '/img/prio_low.png';
+    }
 }
+
 
 function resetInputFields() {
     // createBtn.disabled = false;
