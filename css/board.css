@@ -53,6 +53,12 @@ input:focus {
     display: flex;
     align-items: center;
     gap: 4px;
+    height: 32px;
+}
+
+.headline-board {
+    font-size: 61px;
+    font-weight: 700;
 }
 
 .hover:hover {
