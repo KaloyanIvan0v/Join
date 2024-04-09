@@ -3,6 +3,7 @@ let currentPrio = ['medium'];
 function addTask() {
     let createBtn = document.getElementById('createBtn');
     let title = document.getElementById('title');
+    console.log(title.value);
     let description = document.getElementById('description');
     let assignedTo = document.getElementById('assignedTo');
     let dueDate = document.getElementById('dueDate');
@@ -20,9 +21,9 @@ function addTask() {
         "dueDate": dueDate.value,
         "prio": currentPrio,
         "category": category.value,
-        "subTasks": subTasks.value,
+        "subTasks": subTasks.value, 
         };
-
+ 
     tasks.push(task);
     // setItem('tasks', tasks);
     saveToLocalStorage('tasks', tasks);
@@ -86,6 +87,7 @@ function addNewSubTask() {
         newSubTask = newTasks[i];
         newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
     }
+    changeIconsSubtask();
 }
 
 function returnHtmlNewSubtasks(newSubTask) {
@@ -100,6 +102,6 @@ function changeIconsSubtask() {
     let activeInputSubtask = document.getElementById('activeInputSubtask');
     let addIconSubtasks = document.getElementById('addIconSubtasks');
 
-    addIconSubtasks.innerHTML = '';
-    activeInputSubtask.classList.remove('vs-hidden');
+    addIconSubtasks.classList.toggle('vs-hidden');
+    activeInputSubtask.classList.toggle('vs-hidden');
 }

@@ -34,11 +34,11 @@ function whichPriorityTaskCard(i) {
     prioField.innerHTML = '';
 
     if(singleTaskPrio == 'low') {
-        prioField.innerHTML = '<img src="' + '../img/Capa 2.png' + '" alt="Bildbeschreibung">'
+        prioField.innerHTML = '<img src="' + '../img/prio_low.png' + '" alt="Bildbeschreibung">'
     } else if(singleTaskPrio == 'medium') {
-        prioField.innerHTML = '<img src="' + '../img/Priority symbols.png' + '" alt="Bildbeschreibung">'
+        prioField.innerHTML = '<img src="' + '../img/prio_medium_orange.png' + '" alt="Bildbeschreibung">'
     } else {
-        prioField.innerHTML = '<img src="' + '../img/Capa 1.png' + '" alt="Bildbeschreibung">'
+        prioField.innerHTML = '<img src="' + '../img/prio_urgent.png' + '" alt="Bildbeschreibung">'
     }
 }
 

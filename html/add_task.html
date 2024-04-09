@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="/css/templates.css">
     <link rel="stylesheet" href="/fonts/Inter/Inter-VariableFont_slnt,wght.ttf">
 
-    <script src="/script.js"></script>
     <script src="/js/w3include.js"></script>
-    <script src="/js/storage.js"></script>
+    <script src="/script.js"></script>
     <script src="/js/add_task.js"></script>
+    <script src="/js/storage.js"></script>
     <script src="/js/board.js"></script>
+
 </head>
 
 <body onload="includeHTML()">
@@ -53,6 +54,7 @@
             <div class="assigned-to d-flex-column-center">
                 <span class="input-description">Assigned to</span>
                 <select class="input-field option-value-disabled" id="assignedTo">
+                    <option class="option-value-disabled" value="" disabled selected>Select contacts to assign</option>
                     <option value="Test">Test</option>
                     <option value="Test2">Test2</option>
                 </select>
@@ -120,7 +122,7 @@
                     <div id="activeInputSubtask" class="vs-hidden active-input-subtasks">
                         <a href="#"><img src="/img/close.png"></a>
                         <span class="height-24"> |</span>
-                        <a href="#"> CheckUp Icon</a>
+                        <a onclick="addNewSubTask()"> CheckUp Icon</a>
                     </div>
                 </div>
                 <div id="newSubTaskField"></div>
@@ -132,9 +134,9 @@
         <span>This field is required</span>
     </div>
 
-    <div onclick="resetInputFields()" class="buttons-clear-create">
+    <div class="buttons-clear-create">
         <div class="container-clear">
-            <button class="container-create font-size-21">Clear</button>
+            <button onclick="resetInputFields()" class="container-create font-size-21">Clear</button>
             <img src="#" alt="">
         </div>
 
