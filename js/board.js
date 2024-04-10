@@ -3,9 +3,9 @@ function init_board() {
     loadNewTasks();
 }
 
-function loadNewTasks() {
-    // let tasks = getItems('tasks');
-    tasks = getFromLocalStorage('tasks') || [];
+async function loadNewTasks() {
+    // tasks = getFromLocalStorage('tasks') || [];
+    tasks = JSON.parse(await getItem('tasks'));
     let toDoField = document.getElementById('categoryToDo');
 
     toDoField.innerHTML = '';

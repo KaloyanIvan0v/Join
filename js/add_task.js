@@ -1,5 +1,14 @@
 let currentPrio = ['medium'];
 
+function init() {
+    includeHTML();
+    loadTasks();
+}
+
+async function loadTasks() {
+    tasks = JSON.parse(await getItem('tasks'))
+}
+
 async function addTask() {
     let createBtn = document.getElementById('createBtn');
     let title = document.getElementById('title');
@@ -10,7 +19,7 @@ async function addTask() {
     let subTasks = document.getElementById('subTasks');
 
     // let tasks = await getItem('tasks') || [];
-    let tasks = getFromLocalStorage('tasks') || [];
+    // let tasks = getFromLocalStorage('tasks') || [];
 
     let task = {
         "title": title.value,
@@ -23,10 +32,10 @@ async function addTask() {
         }
  
     tasks.push(task);
-    // setItem('tasks', tasks);
-    saveToLocalStorage('tasks', tasks);
+    await setItem('tasks', tasks);
+    // saveToLocalStorage('tasks', tasks);
     resetInputFields();
-    window.location.href = "board.html";
+    // window.location.href = "board.html";
 }
 
 function whichPriority(level) {
