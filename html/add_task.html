@@ -134,14 +134,28 @@
         <span>This field is required</span>
     </div>
 
-    <div class="buttons-clear-create">
-        <div class="container-clear">
-            <button onclick="resetInputFields(); return false" class="container-create font-size-21">Clear</button>
+    <!-- <div class="buttons-clear-create">
+        <div class="container-clear bg-color-clear">
+            <button onclick="resetInputFields(); return false" class="container-create color-clear">Clear</button>
+            <img src="/img/iconoir_cancel.png">
         </div>
 
-        <div class="container-create">
-            <button id="createBtn" class="container-create font-size-21">Create Task</button>
+        <div class="container-create bg-color-create">
+            <button id="createBtn" class="container-create color-create">Create Task</button>
         </div>
+    </div> -->
+
+    <div class="buttons-clear-create">
+        <button class="btn-add-task" onclick="resetInputFields(); return false">
+            <span class="typography-clear">Clear</span>
+            <img src="/img/iconoir_cancel.png">
+        </button>
+
+        <button class="btn-add-task bg-color-create" id="createBtn">
+            <span class="typography-create">Create Task</span>
+            <img src="/img/check.png">
+        </button>
+    </div>
     </form>
 </body>
 </html>

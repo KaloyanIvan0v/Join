@@ -273,48 +273,36 @@ h2 {
     left: 995.25px;
     display: flex;
     gap: 16px;
-    width: 309px;
-    height: 56px;
+}
+
+.btn-add-task {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+}
+
+.bg-color-create {
+    background-color: #2A3647;
+    color: #FFFFFF;
+}
+
+.typography-clear {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.typography-create {
     font-size: 21px;
     line-height: 25.2px;
-    font-family: inter;
+    font-weight: 700;
 }
 
 .container-create:hover {
     cursor: pointer;
-}
-
-.font-size-21 {
-    font-size: 21px;
-}
-
-.container-clear {
-    width: 110px;
-    height: 100%;
-    border: 1px solid;
-    border-radius: 10px;
-    display: flex;
-    gap: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 400;
-}
-
-.container-create {
-    width: 183px;
-    height: 100%;
-    /* border: 1px solid; */
-    border-radius: 10px;
-    display: flex;
-    gap: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #2A3647;
-    color: white;
-    font-weight: 700;
-    border-style: none;
 }
 
 .new-subtask {
