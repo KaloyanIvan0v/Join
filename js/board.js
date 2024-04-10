@@ -1,10 +1,11 @@
-async function init_board() {
-    await includeHTML();
+function init_board() {
+    includeHTML();
     loadNewTasks();
 }
 
 function loadNewTasks() {
-    tasks = getFromLocalStorage('tasks') || [];
+    let tasks = getItems('tasks');
+    // tasks = getFromLocalStorage('tasks') || [];
     let toDoField = document.getElementById('categoryToDo');
 
     toDoField.innerHTML = '';

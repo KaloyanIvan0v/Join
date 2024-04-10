@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="/css/templates.css">
 
     <script src="/js/w3include.js"></script>
-    <script src="/script.js"></script>
-    <script src="/js/add_task.js"></script>
     <script src="/js/storage.js"></script>
+    <script src="/js/add_task.js"></script>
+    <script src="/script.js"></script>
     <script src="/js/board.js"></script>
 
 </head>
@@ -136,8 +136,7 @@
 
     <div class="buttons-clear-create">
         <div class="container-clear">
-            <button onclick="resetInputFields()" class="container-create font-size-21">Clear</button>
-            <img src="#" alt="">
+            <button onclick="resetInputFields(); return false" class="container-create font-size-21">Clear</button>
         </div>
 
         <div class="container-create">

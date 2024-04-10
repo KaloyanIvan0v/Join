@@ -1,18 +1,16 @@
 let currentPrio = ['medium'];
 
-function addTask() {
+async function addTask() {
     let createBtn = document.getElementById('createBtn');
     let title = document.getElementById('title');
-    console.log(title.value);
     let description = document.getElementById('description');
     let assignedTo = document.getElementById('assignedTo');
     let dueDate = document.getElementById('dueDate');
     let category = document.getElementById('category');
     let subTasks = document.getElementById('subTasks');
 
-    // createBtn.disabled = true;
-    // let tasks = getItemTasks('tasks');
-    let tasks = getFromLocalStorage('tasks') || [];
+    let tasks = await getItem('tasks') || [];
+    // let tasks = getFromLocalStorage('tasks') || [];
 
     let task = {
         "title": title.value,
@@ -22,13 +20,13 @@ function addTask() {
         "prio": currentPrio,
         "category": category.value,
         "subTasks": subTasks.value, 
-        };
+        }
  
     tasks.push(task);
-    // setItem('tasks', tasks);
-    saveToLocalStorage('tasks', tasks);
+    setItem('tasks', tasks);
+    // saveToLocalStorage('tasks', tasks);
     resetInputFields();
-    window.location.href = "board.html";
+    // window.location.href = "board.html";
 }
 
 function whichPriority(level) {
