@@ -1,4 +1,4 @@
-let tasks = [];
+// let tasks = [];
 let loggedInUser = [];
 
 function setLoggedInUser(user) {

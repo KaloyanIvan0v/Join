@@ -205,6 +205,11 @@ h2 {
     top: 336px;
 }
 
+.size-check {
+    width: 14px;
+    height: 14px;
+}
+
 .option-value * {
     padding: 24px;
 }
@@ -337,6 +342,7 @@ h2 {
     justify-content: center;
     align-items: center;
     padding: 12px 16px;
+    gap: 4px;
 }
 
 .height-24 {

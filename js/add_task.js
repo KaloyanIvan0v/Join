@@ -1,4 +1,6 @@
 let currentPrio = ['medium'];
+let tasks = [];
+let checkChangeIcons = false;
 
 function init() {
     includeHTML();
@@ -18,9 +20,6 @@ async function addTask() {
     let category = document.getElementById('category');
     let subTasks = document.getElementById('subTasks');
 
-    // let tasks = await getItem('tasks') || [];
-    // let tasks = getFromLocalStorage('tasks') || [];
-
     let task = {
         "title": title.value,
         "description": description.value,
@@ -33,9 +32,8 @@ async function addTask() {
  
     tasks.push(task);
     await setItem('tasks', tasks);
-    // saveToLocalStorage('tasks', tasks);
     resetInputFields();
-    // window.location.href = "board.html";
+    window.location.href = "board.html";
 }
 
 function whichPriority(level) {
@@ -89,21 +87,33 @@ function resetInputFields() {
     subTasks.value = '';
 }
 
+function resetAddNewSubtask() {
+    subTasks.value = '';
+    checkChangeIcons = false;
+    changeIconsSubtask();
+    checkChangeIcons = false;
+}
+
 function addNewSubTask() {
+    let subTask = [];
     let newTaskField = document.getElementById('newSubTaskField');
     let singleNewTask = document.getElementById('subTasks');
-    let newTasks = getFromLocalStorage('subTasks') || [];
+    let singleNewTaskValue = singleNewTask.value;
+    // let newTasks = getFromLocalStorage('subTasks') || [];
+    if(singleNewTaskValue.length >= 3){
+        subTask.push(singleNewTaskValue);
+    // saveToLocalStorage('subTasks', newTasks);
+        singleNewTask.value = '';
+        newTaskField.innerHTML = '';
 
-    newTasks.push(singleNewTask.value);
-    saveToLocalStorage('subTasks', newTasks);
-    singleNewTask.value = '';
-    newTaskField.innerHTML = '';
-
-    for(i = 0; i < newTasks.length; i++) {
-        newSubTask = newTasks[i];
-        newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
+        for(i = 0; i < subTask.length; i++) {
+            let newSubTask = subTask[i];
+            newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
+        }
+        checkChangeIcons = false;
+        changeIconsSubtask();
+        checkChangeIcons = false;
     }
-    changeIconsSubtask();
 }
 
 function returnHtmlNewSubtasks(newSubTask) {
@@ -114,10 +124,12 @@ function returnHtmlNewSubtasks(newSubTask) {
 }
 
 function changeIconsSubtask() {
-    let onclickElementsSubtasks = document.getElementById('onclickElementsSubtasks');
     let activeInputSubtask = document.getElementById('activeInputSubtask');
     let addIconSubtasks = document.getElementById('addIconSubtasks');
 
-    addIconSubtasks.classList.toggle('vs-hidden');
-    activeInputSubtask.classList.toggle('vs-hidden');
+    if(checkChangeIcons == false) {
+        checkChangeIcons = true;
+        addIconSubtasks.classList.toggle('vs-hidden');
+        activeInputSubtask.classList.toggle('vs-hidden');
+    }
 }
