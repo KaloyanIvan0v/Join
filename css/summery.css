@@ -5,6 +5,11 @@ body, html{
     overflow: hidden;
 }
 
+h4{
+    font-size: 47px;
+    margin: 0;
+}
+
 .shadow{
     box-shadow: 0px 0px 5px #0000001A;
 }
@@ -131,4 +136,17 @@ h1{
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.greetings{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 80px;
+}
+
+.name{
+    margin: 0;
+    font-size: 64px;
+    color: #29ABE2;
 }
