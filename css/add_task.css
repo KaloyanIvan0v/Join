@@ -3,6 +3,7 @@ body {
     font-family: 'Inter';
     font-weight: 400;
     margin: 0;
+    background-color: #F6F7F8;
 }
 
 input[type=text] {
@@ -27,6 +28,7 @@ textarea {
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     font-size: 20px;
+    /* background-color: #F6F7F8; */
 }
 
 h2 {
@@ -137,8 +139,6 @@ h2 {
 }
 
 .input-field {
-    padding: 0;
-    border-width: 1px;
     border-radius: 10px;
     height: 48px;
     border: 1px solid #D1D1D1;
@@ -215,10 +215,8 @@ h2 {
 }
 
 .priority-selection {
-    height: 56px;
-    width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 16px;
     align-items: center;
 }
 
@@ -228,13 +226,14 @@ h2 {
 
 .selection-field {
     width: 136px;
-    height: 56px;
+    padding: 16px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    border: 1px solid #D1D1D1;
     border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .selection-field:hover {
@@ -331,6 +330,8 @@ h2 {
     display: flex;
     align-items: center;
     padding: 12px 16px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
 }
 
 .icon-subtask-field:hover {
@@ -348,3 +349,7 @@ h2 {
 .height-24 {
     height: 24px;
 }
+
+/* .select-wrapper {
+    width: 440px;
+} */

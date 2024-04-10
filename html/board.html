@@ -34,38 +34,42 @@
                     <input type="text" placeholder="Find Task">
                     <img onclick="searchTask()" src="/img/line_with_searchicon.png">
                 </form>
-                <div class="add-task-headline hover">
-                    <a>Add Task</a>
-                    <img class="add_button_headline hover" src="/img/add_white.png">
-                </div>
+                <button class="btn-add-task hover">
+                    <span class="typography-create">Add Task</span>
+                    <div class="plus-icon">
+                        <img src="/img/add_white.png">
+                    </div>
+                </button>
             </div>
         </div>
 
         <div class="subline-board">
-            <div class="subline-field">
-                <span>To do</span>
+
+            <div class="subline-field" onclick="addTaskTemplate('toDo')">
+                <span class="subline-field-description">To do</span>
                 <a class="add-task-board">
-                    <img class="plus-board" src="/img/plus_board_blue.png">
+                    <img class="plus-board" src="/img/Group 11.png">
                 </a>
             </div>        
             
-            <div class="subline-field">
-                <span>In progress</span>
-                <a class="add-task-board" onclick="addTask()">
-                    <img class="plus-board" src="/img/plus_board_blue.png">
+            <div class="subline-field" onclick="addTaskTemplate('inProgress')">
+                <span class="subline-field-description">In progress</span>
+                <a class="add-task-board">
+                    <img class="plus-board" src="/img/plus_icon_board.png">
                 </a>
             </div>
             
-            <div class="subline-field">
-                <span>Await Feedback</span>
-                <a class="add-task-board" onclick="addTask()">
+            <div class="subline-field" onclick="addTaskTemplate('awaitFeedback')">
+                <span class="subline-field-description">Await Feedback</span>
+                <a class="add-task-board">
                     <img class="plus-board" src="/img/plus_icon_board.png">
                 </a>
             </div>
         
             <div class="subline-field">
-                <span>Done</span>
+                <span class="subline-field-description">Done</span>
             </div>
+
         </div>
     </div>
 

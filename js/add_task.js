@@ -1,5 +1,6 @@
 let currentPrio = ['medium'];
 let tasks = [];
+let subTasks = [];
 let checkChangeIcons = false;
 
 function init() {
@@ -8,17 +9,18 @@ function init() {
 }
 
 async function loadTasks() {
-    tasks = JSON.parse(await getItem('tasks'))
+    tasks = JSON.parse(await getItem('tasks'));
+    subTasks = JSON.parse(await getItem('subTasks'));
 }
 
 async function addTask() {
-    let createBtn = document.getElementById('createBtn');
+    // let createBtn = document.getElementById('createBtn');
     let title = document.getElementById('title');
     let description = document.getElementById('description');
     let assignedTo = document.getElementById('assignedTo');
     let dueDate = document.getElementById('dueDate');
     let category = document.getElementById('category');
-    let subTasks = document.getElementById('subTasks');
+    // let subTasks = document.getElementById('subTasks');
 
     let task = {
         "title": title.value,
@@ -27,9 +29,10 @@ async function addTask() {
         "dueDate": dueDate.value,
         "prio": currentPrio,
         "category": category.value,
-        "subTasks": subTasks.value, 
+        "subTasks": subTasks,
         }
- 
+    
+    
     tasks.push(task);
     await setItem('tasks', tasks);
     resetInputFields();
@@ -76,9 +79,7 @@ function changeIcon(level) {
     }
 }
 
-
 function resetInputFields() {
-    // createBtn.disabled = false;
     title.value = '';
     description.value = '';
     assignedTo.value = '';
@@ -94,20 +95,19 @@ function resetAddNewSubtask() {
     checkChangeIcons = false;
 }
 
-function addNewSubTask() {
-    let subTask = [];
+async function addNewSubTask() {
     let newTaskField = document.getElementById('newSubTaskField');
     let singleNewTask = document.getElementById('subTasks');
     let singleNewTaskValue = singleNewTask.value;
-    // let newTasks = getFromLocalStorage('subTasks') || [];
+
     if(singleNewTaskValue.length >= 3){
-        subTask.push(singleNewTaskValue);
-    // saveToLocalStorage('subTasks', newTasks);
+        subTasks.push(singleNewTaskValue);
+        await setItem('subTasks', subTasks);
         singleNewTask.value = '';
         newTaskField.innerHTML = '';
 
-        for(i = 0; i < subTask.length; i++) {
-            let newSubTask = subTask[i];
+        for(i = 0; i < subTasks.length; i++) {
+            let newSubTask = subTasks[i];
             newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
         }
         checkChangeIcons = false;

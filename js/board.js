@@ -4,7 +4,6 @@ function init_board() {
 }
 
 async function loadNewTasks() {
-    // tasks = getFromLocalStorage('tasks') || [];
     tasks = JSON.parse(await getItem('tasks'));
     let toDoField = document.getElementById('categoryToDo');
 
@@ -77,8 +76,8 @@ function returnHtmlShowToDos(singleTask, i) {
 
         <div class="">
             <div class="">
-                <span><i>Subtasks Field & loadbar</i></span>
-                ${singleTask['subTasks']}
+                <span><i>loadbar</i></span>
+                <span class="style-sub-tasks">${singleTask['subTasks']}</span>
             </div>
         </div>
 

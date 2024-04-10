@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #F6F7F8;
+}
+
 .board-distribution {
     position: absolute;
     top: 336px;
@@ -25,6 +31,7 @@
 
 input {
     border: none;
+    background-color: #F6F7F8;
 }
 
 input:focus {
@@ -81,10 +88,6 @@ input:focus {
     height: 73px;
 }
 
-/* h2 {
-    font-size: 61px;
-} */
-
 .subline-board {
     width: 1208px;
     height: 24px;
@@ -97,18 +100,20 @@ input:focus {
 
 .subline-field {
     width: 244px;
-    height: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 20px;
+}
+
+.subline-field-description {
     font-weight: 700;
+    font-size: 20px;
     line-height: 24px;
 }
 
 .add-task-board {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     padding: 3px;
     border-radius: 8px;
     border: 2px solid #2A3647;
@@ -130,16 +135,28 @@ input:focus {
 }
 
 .task-card {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 220px;
+    background-color: #FFFFFF;
     padding: 16px;
-    border: 1px solid;
     border-radius: 24px;
     font-size: 16px;
     line-height: 19.2px;
     font-weight: 400;
+}
+
+.task-card-category {
+    height: 27px;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.style-sub-tasks {
+    font-size: 12px;
+    line-height: 14.4px;
 }
 
 .bg-color-technical-task {
@@ -249,4 +266,33 @@ input:focus {
     display: flex;
     flex-direction: column;
     gap: 4px;
+}
+
+.subline-field:hover {
+    cursor: pointer;
+}
+
+.btn-add-task {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    background-color: #2A3647;
+    color: #FFFFFF;
+}
+
+.typography-create {
+    font-size: 21px;
+    line-height: 25.2px;
+    font-weight: 700;
+}
+
+.plus-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
