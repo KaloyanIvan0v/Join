@@ -4,8 +4,8 @@ function init_board() {
 }
 
 function loadNewTasks() {
-    let tasks = getItems('tasks');
-    // tasks = getFromLocalStorage('tasks') || [];
+    // let tasks = getItems('tasks');
+    tasks = getFromLocalStorage('tasks') || [];
     let toDoField = document.getElementById('categoryToDo');
 
     toDoField.innerHTML = '';
@@ -45,10 +45,10 @@ function whichPriorityTaskCard(i) {
 
 function showCurrentTask(i) {
     let backgroundDialog = document.getElementById('backgroundDialog');
-    let dialogField = document.getElementById('dialog');
+    let dialogField = document.getElementById('taskOverlay');
     let currentTask = tasks[i];
-    backgroundDialog.classList.toggle('background-dialog');
 
+    backgroundDialog.classList.toggle('background-dialog');
     dialogField.innerHTML = '';
     dialogField.innerHTML = returnHtmlCurrentTask(currentTask);
 }
@@ -92,14 +92,37 @@ function returnHtmlShowToDos(singleTask, i) {
         </div>`
 }
 
-function returnHtmlCurrentTask(currentTask) {
+function returnHtmlCurrentTask(overlayTask) {
     return `
-  
-        <div class="head-big-task">
-            <span>${currentTask['category']}</span>
-            <a href="#">X</a>
+    <div class="overlay-first-row">
+        <div class="overlay-category" id="overlayCategoryField">${overlayTask['category']}</div>
+        <a onclick="showCurrentTask()">X</a>
+    </div>
+    <div class="overlay-title">
+        ${overlayTask['title']}
+    </div>
+    <div class="overlay-description">
+        ${overlayTask['description']}
+    </div>
+    <div class="overlay-date">
+        <span>Due Date:</span>
+        <span>${overlayTask['dueDate']}</span>
+    </div>
+    <div class="overlay-assigned">
+        <span>Assigned To:</span>
+        <div class="overlay-assigned-contacts">
+            <span>Test</span>
+            <span>Test</span>
+            <span>Test</span>
         </div>
-        <div>
-            <span>${currentTask['title']}</span>
-        </div>`
+    </div>
+    <div class="overlay-assigned">
+    <span>Subtasks</span>
+    <div class="overlay-assigned-contacts">
+        <span>Test</span>
+        <span>Test</span>
+        <span>Test</span>
+    </div>
+</div>
+    </div>`
 }

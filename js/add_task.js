@@ -9,8 +9,8 @@ async function addTask() {
     let category = document.getElementById('category');
     let subTasks = document.getElementById('subTasks');
 
-    let tasks = await getItem('tasks') || [];
-    // let tasks = getFromLocalStorage('tasks') || [];
+    // let tasks = await getItem('tasks') || [];
+    let tasks = getFromLocalStorage('tasks') || [];
 
     let task = {
         "title": title.value,
@@ -23,10 +23,10 @@ async function addTask() {
         }
  
     tasks.push(task);
-    setItem('tasks', tasks);
-    // saveToLocalStorage('tasks', tasks);
+    // setItem('tasks', tasks);
+    saveToLocalStorage('tasks', tasks);
     resetInputFields();
-    // window.location.href = "board.html";
+    window.location.href = "board.html";
 }
 
 function whichPriority(level) {
