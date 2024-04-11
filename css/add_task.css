@@ -19,8 +19,6 @@ input[type=date]:hover {
     cursor: pointer;
 }
 
-
-
 textarea {
     padding: 12px 16px;
     height: 120px;
@@ -350,6 +348,30 @@ h2 {
     height: 24px;
 }
 
-/* .select-wrapper {
-    width: 440px;
-} */
+.bg-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* background-color: rgba(0, 0, 0, 0.4); */
+    z-index: 100;
+}
+
+.added-to-board {
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 999;
+}
+
+.align-center {
+    align-items: center;
+    transition: all 900ms;
+}

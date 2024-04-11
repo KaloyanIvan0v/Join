@@ -14,13 +14,12 @@ async function loadTasks() {
 }
 
 async function addTask() {
-    // let createBtn = document.getElementById('createBtn');
     let title = document.getElementById('title');
     let description = document.getElementById('description');
     let assignedTo = document.getElementById('assignedTo');
     let dueDate = document.getElementById('dueDate');
     let category = document.getElementById('category');
-    // let subTasks = document.getElementById('subTasks');
+    let subTasks =  document.getElementById('subTasks');
 
     let task = {
         "title": title.value,
@@ -34,6 +33,7 @@ async function addTask() {
     
     
     tasks.push(task);
+    addedToBoard();
     await setItem('tasks', tasks);
     resetInputFields();
     window.location.href = "board.html";
@@ -68,6 +68,13 @@ function whichPriority(level) {
     }
 }
 
+function addedToBoard() {
+    let bgDialog = document.getElementById('bgDialog');
+
+    bgDialog.classList.remove('vs-hidden');
+    bgDialog.classList.add('align-center');
+}
+
 function changeIcon(level) {
     let imgLow = document.getElementById('imgLow');
     let imgMedium = document.getElementById('imgMedium');
@@ -80,6 +87,7 @@ function changeIcon(level) {
 }
 
 function resetInputFields() {
+    let subTasks =  document.getElementById('subTasks');
     title.value = '';
     description.value = '';
     assignedTo.value = '';
@@ -89,6 +97,7 @@ function resetInputFields() {
 }
 
 function resetAddNewSubtask() {
+    let subTasks =  document.getElementById('subTasks');
     subTasks.value = '';
     checkChangeIcons = false;
     changeIconsSubtask();
