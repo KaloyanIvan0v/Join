@@ -1,0 +1,45 @@
+.contact-mask-title {
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  height: 592px;
+  background-color: rgba(42, 54, 71, 1);
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+.contact-mask-title img {
+  margin-top: 154px;
+  width: 55px;
+  height: 66px;
+  margin-bottom: 12px;
+}
+
+.contact-mask-title-first {
+  color: white;
+  font-size: 61px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.contact-mask-title-second {
+  color: white;
+  font-size: 27px;
+  font-weight: 200;
+  white-space: nowrap;
+}
+.contact-mask-workbench {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  width: 795px;
+  height: 592px;
+  background-color: rgb(255, 255, 255);
+}
+
+.contact-mask-title-underline {
+  width: 90px;
+  height: 2px;
+  background-color: var(--primary-color);
+}

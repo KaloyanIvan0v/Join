@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="../css/contacts.css">
   <link rel="stylesheet" href="../css/templates.css">
+  <link rel="stylesheet" href="../css/contact-template.css">
   <script src="../js/w3include.js"></script>
   <script src="../script.js"></script>
   <script src="../js/contacts.js"></script>
@@ -21,7 +22,7 @@
   <div w3-include-html="../templates/sidebar.html" class="sidebar"></div>
   <div class="contacts-main-box">
     <div id="id-contacts-list" class="contacts-list">
-      <button class="add-contact-button" onclick="addNewContact()">
+      <button class="add-contact-button join-button" onclick="openContactForm('addContact')">
         <div>Add new contact</div>
         <img src="../img/person_add.png" alt="">
       </button>
@@ -34,6 +35,7 @@
       </div>
     </div>
   </div>
+  <div id="id-contact-form" class="contact-form hide"></div>
 
 </body>
 

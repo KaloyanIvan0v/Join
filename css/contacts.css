@@ -14,7 +14,7 @@ body {
   margin-top: 96px;
   margin-left: 232px;
   background-color: rgb(255, 255, 255);
-  height: calc(100vh - 96px);
+  max-height: calc(100vh - 96px);
   min-width: 456px;
   width: 456px;
   box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.1);
@@ -75,4 +75,19 @@ body {
 .default-slogan-right {
   font-size: 27px;
   font-weight: 400;
+}
+
+.contact-form {
+  position: fixed;
+  top: calc(50% - 296px);
+  left: calc(50% - 606px);
+  width: 1212px;
+  height: 592px;
+  display: flex;
+  border-radius: 30px;
+  z-index: 99;
+}
+
+.hide {
+  display: none;
 }

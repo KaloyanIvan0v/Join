@@ -1,3 +1,9 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --accent-color: #ffc107;
+}
+
 @font-face {
   font-family: "inter";
   src: url("fonts/inter/Inter-VariableFont_slnt,wght.ttf");
@@ -30,4 +36,16 @@ button {
 
 input:focus {
   outline: none;
+}
+
+.join-button {
+  background-color: rgba(42, 54, 71, 1);
+}
+
+.join-button:hover {
+  background-color: rgba(41, 171, 226, 1);
+}
+
+.join-button:active {
+  background-color: rgba(9, 25, 49, 1);
 }
