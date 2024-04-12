@@ -1,11 +1,95 @@
 let currentPrio = ['medium'];
 let tasks = [];
 let subTasks = [];
+// let prioButtons = [
+//     urgent = {
+//         "iconWhite": '',
+//         'iconColor': '',
+//         'pushedButton': true,
+//     }
+// ]
+
+// let priorities = [ 
+//     {
+//         'low': false,
+//         'medium': true,
+//         'urgent': false,
+//     }
+// ]
+
+let priorities = [
+    {
+        'text': 'Urgent',
+        'iconWhite': '/img/urgent_white.png',
+        'iconColor': '/img/urgent_red.png',
+        'bgColorTrue': 'highlight-color-urgent',
+        'bgColorFalse': 'bg-color-priority',
+        'isPriority': false,
+    },
+    {
+        'text': 'Medium',
+        'iconWhite': '/img/medium_white.png',
+        'iconColor': '/img/medium_orange.png',
+        'bgColorTrue': 'highlight-color-medium',
+        'bgColorFalse': 'bg-color-priority',
+        'isPriority': true,
+    },
+    {
+        'text': 'Low',
+        'iconWhite': '/img/low_white.png',
+        'iconColor': '/img/low_green.png',
+        'bgColorTrue': 'highlight-color-low',
+        'bgColorFalse': 'bg-color-priority',
+        'isPriority': false,
+    }
+]
 let checkChangeIcons = false;
 
 function init() {
     includeHTML();
     loadTasks();
+    whichPriority();
+}
+
+function changePrio(i) {
+    currentPrio = priorities[i]['text'];
+    priorities[i]['isPriority'] = true;
+    whichPriority();
+}
+
+function whichPriority() {
+    let prioSelection = document.getElementById('prioSelection');
+    prioSelection.innerHTML = '';
+
+    for(i = 0; i < priorities.length; i++) {
+        priority = priorities[i];
+        checkBooleanForPriority(priority);
+    }
+}
+
+function checkBooleanForPriority(priority) {
+    if(priority['isPriority'] == false) {
+        prioSelection.innerHTML += prioNormal(priority);
+    } else {
+        prioSelection.innerHTML += prioActive(priority);
+        priority['isPriority'] = false;
+    }
+}
+
+function prioNormal(priority) {
+    return `
+    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorFalse']}">
+        <span class="fz-20">${priority['text']}</span>
+        <img id="imgUrgent" src="${priority['iconColor']}">
+    </div>`
+}
+
+function prioActive(priority) {
+    return `
+    <div id="prioUrgent" onclick="testtest(${i})" class="selection-field ${priority['bgColorTrue']}">
+        <span class="fz-20">${priority['text']}</span>
+        <img id="imgUrgent" src="${priority['iconWhite']}">
+    </div>`
 }
 
 async function loadTasks() {
@@ -30,8 +114,6 @@ async function addTask() {
         "category": category.value,
         "subTasks": subTasks,
         }
-    
-    
     tasks.push(task);
     addedToBoard();
     await setItem('tasks', tasks);
@@ -39,51 +121,11 @@ async function addTask() {
     window.location.href = "board.html";
 }
 
-function whichPriority(level) {
-    let medium = document.getElementById('mediumPrio');
-    let urgent = document.getElementById('urgentPrio');
-    let low = document.getElementById('lowPrio');
-    // let imgLow = document.getElementById('imgLow');
-    // let imgMedium = document.getElementById('imgMedium');
-    // let imgUrgent = document.getElementById('imgUrgent');
-
-    if(level == 'urgent') {
-        changeIcon('urgent');
-        low.classList.remove('highlight-color-low');
-        medium.classList.remove('highlight-color-medium');
-        urgent.classList.add('highlight-color-urgent');
-        currentPrio = 'urgent';
-    } else if (level == 'low') {
-        changeIcon('low');
-        urgent.classList.remove('highlight-color-urgent');
-        medium.classList.remove('highlight-color-medium');
-        low.classList.add('highlight-color-low');
-        currentPrio = 'low';
-    } else {
-        changeIcon('medium');
-        urgent.classList.remove('highlight-color-urgent');
-        medium.classList.add('highlight-color-medium');
-        low.classList.remove('highlight-color-low');
-        currentPrio = 'medium';
-    }
-}
-
 function addedToBoard() {
     let bgDialog = document.getElementById('bgDialog');
 
     bgDialog.classList.remove('vs-hidden');
     bgDialog.classList.add('align-center');
-}
-
-function changeIcon(level) {
-    let imgLow = document.getElementById('imgLow');
-    let imgMedium = document.getElementById('imgMedium');
-    let imgUrgent = document.getElementById('imgUrgent');
-    if (level == 'low' && imgLow.src.includes('prio_low.png')) {
-        imgLow.src = '/img/prio_medium_orange.png';
-    } else {
-        imgLow.src = '/img/prio_low.png';
-    }
 }
 
 function resetInputFields() {

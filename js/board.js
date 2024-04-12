@@ -33,7 +33,7 @@ function whichPriorityTaskCard(i) {
 
     prioField.innerHTML = '';
 
-    if(singleTaskPrio == 'low') {
+    if(singleTaskPrio == 'Low') {
         prioField.innerHTML = '<img src="' + '../img/prio_low.png' + '" alt="Bildbeschreibung">'
     } else if(singleTaskPrio == 'medium') {
         prioField.innerHTML = '<img src="' + '../img/prio_medium_orange.png' + '" alt="Bildbeschreibung">'

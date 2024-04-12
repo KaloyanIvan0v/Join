@@ -51,6 +51,10 @@ h2 {
     background-color: #7AE229;
 }
 
+.bg-color-priority {
+    background-color: #FFFFFF;
+}
+
 .add-task-informations {
     display: flex;
 }
@@ -230,7 +234,7 @@ h2 {
     align-items: center;
     gap: 8px;
     border-radius: 10px;
-    background-color: #FFFFFF;
+    /* background-color: #FFFFFF; */
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -375,3 +379,7 @@ h2 {
     align-items: center;
     transition: all 900ms;
 }
+
+/* .btn-prio-img {
+
+} */

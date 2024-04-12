@@ -24,7 +24,6 @@
     <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
 
     <h2>Add Task</h2>
-
     <form onsubmit="addTask(); return false" class="add-task-informations">
         <div class="leftside-add-task">
 
@@ -84,24 +83,7 @@
                 <div class="input-description">
                     <span>Prio</span>
                 </div>
-
-                <div class="priority-selection">
-                    <div id="urgentPrio" onclick="whichPriority('urgent')"  class="selection-field">
-                        <span class="fz-20">Urgent</span>
-                        <img id="imgUrgent" src="../img/prio_urgent.png">
-                    </div>
-
-                    <div id="mediumPrio" onclick="whichPriority('medium')" class="selection-field highlight-color-medium">
-                        <span class="fz-20">Medium</span>
-                        <img id="imgMedium" src="/img/prio_medium_white.png">
-                        <!-- <img id="mediumOrange" class="vs-hidden" src="/img/prio_medium_orange.png"> -->
-                    </div>
-
-                    <div id="lowPrio" onclick="whichPriority('low')" class="selection-field">
-                        <span class="fz-20">Low</span>
-                        <img id="imgLow" src="../img/prio_low.png">
-                    </div>
-                </div>
+                <div id="prioSelection" class="priority-selection">
             </div>
 
             <div class="description-category position-category d-flex-column-center">
