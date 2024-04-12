@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/templates.css">
 
     <script src="/js/w3include.js"></script>
+    <script src="/js/login.js"></script>
     <script src="/script.js"></script>
     <script src="/js/storage.js"></script>
     <script src="/js/add_task.js"></script>
@@ -50,16 +51,40 @@
                 </div>
             </div>
 
-            <div class="assigned-to d-flex-column-center">
+            <!-- <form> -->
+                <div class="assigned-to d-flex-column-center">
+                    <span class="input-description">Assigned to</span>
+                  <div onclick="showCheckboxes()">
+                    <select class="input-field width-100 option-value-disabled">
+                      <option>Select contacts to assign</option>
+                    </select>
+                    <div class="overSelect"></div>
+                  </div>
+                  <div class="userList" id="checkboxes">
+                    <!-- <label for="one"> -->
+                      <!-- <input type="checkbox" id="one" />First checkbox -->
+                    <!-- </label> -->
+                    <!-- <label for="two">
+                      <input type="checkbox" id="two" />Second checkbox</label>
+                    <label for="three">
+                      <input type="checkbox" id="three" />Third checkbox</label> -->
+                  </div>
+                </div>
+              <!-- </form> -->
+              
+
+            <!-- <div class="assigned-to d-flex-column-center">
                 <span class="input-description">Assigned to</span>
-                <!-- <div class="select-wrapper"> -->
-                    <select class="input-field option-value-disabled" id="assignedTo">
-                        <option class="option-value-disabled" value="" disabled selected>Select contacts to assign</option>
+                    <select onclick="renderAssignedToField()" id="selectAssignedTo" class="input-field option-value-disabled" id="assignedTo">
+                        <option class="option-value-disabled" disabled selected>Select contacts to assign</option>
+                    <div id="checkBox"></div>
+                        <option value=""></option>
                         <option value="Test">Test</option>
                         <option value="Test2">Test2</option>
                     </select>
-                <!-- </div> -->
-            </div>
+                    <div class="overSelect"></div>
+                    <div id="checkBox"></div>
+            </div> -->
         </div>
 
         <div class="parting-line-add-task"></div>
@@ -83,7 +108,7 @@
                 <div class="input-description">
                     <span>Prio</span>
                 </div>
-                <div id="prioSelection" class="priority-selection">
+                <div id="prioSelection" class="priority-selection"></div>
             </div>
 
             <div class="description-category position-category d-flex-column-center">

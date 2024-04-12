@@ -1,22 +1,7 @@
 let currentPrio = ['medium'];
 let tasks = [];
 let subTasks = [];
-// let prioButtons = [
-//     urgent = {
-//         "iconWhite": '',
-//         'iconColor': '',
-//         'pushedButton': true,
-//     }
-// ]
-
-// let priorities = [ 
-//     {
-//         'low': false,
-//         'medium': true,
-//         'urgent': false,
-//     }
-// ]
-
+let checkChangeIcons = false;
 let priorities = [
     {
         'text': 'Urgent',
@@ -43,12 +28,13 @@ let priorities = [
         'isPriority': false,
     }
 ]
-let checkChangeIcons = false;
 
-function init() {
+async function init() {
     includeHTML();
     loadTasks();
     whichPriority();
+    await loadUsers();
+    // renderAssignedToField();
 }
 
 function changePrio(i) {
@@ -74,22 +60,6 @@ function checkBooleanForPriority(priority) {
         prioSelection.innerHTML += prioActive(priority);
         priority['isPriority'] = false;
     }
-}
-
-function prioNormal(priority) {
-    return `
-    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorFalse']}">
-        <span class="fz-20">${priority['text']}</span>
-        <img id="imgUrgent" src="${priority['iconColor']}">
-    </div>`
-}
-
-function prioActive(priority) {
-    return `
-    <div id="prioUrgent" onclick="testtest(${i})" class="selection-field ${priority['bgColorTrue']}">
-        <span class="fz-20">${priority['text']}</span>
-        <img id="imgUrgent" src="${priority['iconWhite']}">
-    </div>`
 }
 
 async function loadTasks() {
@@ -167,13 +137,6 @@ async function addNewSubTask() {
     }
 }
 
-function returnHtmlNewSubtasks(newSubTask) {
-    return `
-    <ul>
-        <li>${newSubTask}</li>
-    </ul>`
-}
-
 function changeIconsSubtask() {
     let activeInputSubtask = document.getElementById('activeInputSubtask');
     let addIconSubtasks = document.getElementById('addIconSubtasks');
@@ -182,5 +145,55 @@ function changeIconsSubtask() {
         checkChangeIcons = true;
         addIconSubtasks.classList.toggle('vs-hidden');
         activeInputSubtask.classList.toggle('vs-hidden');
+        checkChangeIcons = true;
+    }
+}
+
+function prioNormal(priority) {
+    return `
+    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorFalse']}">
+        <span class="fz-20">${priority['text']}</span>
+        <img id="imgUrgent" src="${priority['iconColor']}">
+    </div>`
+}
+
+function prioActive(priority) {
+    return `
+    <div id="prioUrgent" onclick="testtest(${i})" class="selection-field ${priority['bgColorTrue']}">
+        <span class="fz-20">${priority['text']}</span>
+        <img id="imgUrgent" src="${priority['iconWhite']}">
+    </div>`
+}
+
+function returnHtmlNewSubtasks(newSubTask) {
+    return `
+    <ul>
+        <li>${newSubTask}</li>
+    </ul>`
+}
+
+var expanded = false;
+
+function showCheckboxes() {
+  let checkboxes = document.getElementById("checkboxes");
+  if (!expanded) {
+    checkboxes.style.display = "block";
+    renderAssignedToField();
+    expanded = true;
+  } else {
+    checkboxes.style.display = "none";
+    expanded = false;
+  }
+}
+
+function renderAssignedToField() {
+    let userCheckBox = document.getElementById('checkboxes');
+    userCheckBox.innerHTML = '';
+
+    for(i = 0; i < users.length; i++){;
+        user = users[i];
+        userCheckBox.innerHTML += `
+        <label for="${i}">
+        ${user['name']}<input type="checkbox" id="${i}" />`
     }
 }
