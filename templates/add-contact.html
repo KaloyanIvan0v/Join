@@ -16,22 +16,23 @@
     </button>
     <form onsubmit="addNewContact(); return false;">
       <div class="contact-form-input-div">
-        <input type="text">
-        <img src="../img/person.jpg" alt="">
+        <input required placeholder="Name" type="text">
+        <img src="../img/person-grey.png" alt="">
       </div>
       <div class="contact-form-input-div">
-        <input type="email">
-        <img src="../img/mail.svg" alt="">
+        <input required placeholder="Email" type="email">
+        <img src="../img/mail-grey.png" alt="">
       </div>
       <div class="contact-form-input-div">
-        <input type="tel">
+        <input required placeholder="Phone" type="number" pattern="[+]*">
+        <img src="../img/call-grey.png" alt="">
       </div>
       <div class="contact-mask-btn">
-        <button onclick="closeContactMask(event)">
+        <button class="contact-form-cancel-btn  join-button-empty" onclick="closeContactMask(event)">
           <div> Cancel </div>
           <img src="../img/close.png" alt="">
         </button>
-        <button type="submit">
+        <button class="contact-form-create-contact-btn join-button" type="submit">
           <div>Create contact</div>
           <img src="../img/check-white.png" alt="">
         </button>

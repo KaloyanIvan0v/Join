@@ -1,3 +1,25 @@
+input {
+  border: none;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input::placeholder {
+  color: rgb(209, 209, 209);
+}
+
 .contact-mask-title {
   display: flex;
   align-items: left;
@@ -102,10 +124,53 @@
 .contact-mask-btn button {
   display: flex;
   width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 16px;
+  gap: 4px;
+}
+
+.contact-form-cancel-btn {
+  height: 56px;
+  margin-right: 24px;
+  background-color: white;
+  color: var(--primary-color);
+  border: solid 1px var(--primary-color);
+}
+
+.contact-form-cancel-btn img:hover {
+  color: red;
+}
+
+.contact-form-create-contact-btn {
+  height: 56px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
 }
 
 form {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.contact-form-input-div {
+  width: 380px;
+  height: 24px;
+  margin-bottom: 32px;
+  border: solid 1px rgb(209, 209, 209);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 21px 13px 21px;
+}
+
+.contact-form-input-div img {
+  width: 24px;
+  height: 24px;
 }

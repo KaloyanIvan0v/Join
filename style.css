@@ -49,3 +49,18 @@ input:focus {
 .join-button:active {
   background-color: var(--secondary-color);
 }
+
+.join-button-empty {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.join-button-empty:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.join-button-empty:active {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
