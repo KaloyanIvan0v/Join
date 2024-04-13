@@ -14,8 +14,10 @@ function openContactForm(form) {
 }
 
 function closeContactFrom(event) {
+  let contactForm = document.getElementById("id-contact-form");
   event.preventDefault();
-  console.log("cacle");
+  contactForm.classList.add("hide");
+  contactForm.innerHTML = "";
 }
 
 function addNewContact() {

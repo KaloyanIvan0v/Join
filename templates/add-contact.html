@@ -6,19 +6,36 @@
 </div>
 <div id="id-contact-mask-workbench" class="contact-mask-workbench">
   <div id="id-mask-contact-img" class="mask-contact-img">
-    <div id="id-mask-contact-img-div" class="mask-contact-img-div"></div>
+    <div id="id-mask-contact-img-div" class="mask-contact-img-div">
+      <img src="../img/person.png" alt="">
+    </div>
   </div>
   <div id="id-mask-contact-info" class="mask-contact-info">
+    <button class="contact-form-exit-x" onclick="closeContactFrom(event)">
+      <img src="../img/close.png" alt="">
+    </button>
     <form onsubmit="addNewContact(); return false;">
-      <input type="text">
-      <input type="email">
-      <input type="tel">
+      <div class="contact-form-input-div">
+        <input type="text">
+        <img src="../img/person.jpg" alt="">
+      </div>
+      <div class="contact-form-input-div">
+        <input type="email">
+        <img src="../img/mail.svg" alt="">
+      </div>
+      <div class="contact-form-input-div">
+        <input type="tel">
+      </div>
       <div class="contact-mask-btn">
         <button onclick="closeContactMask(event)">
           <div> Cancel </div>
-          <img src="" alt="">
+          <img src="../img/close.png" alt="">
         </button>
-        <button type="submit">Create contact</button>
+        <button type="submit">
+          <div>Create contact</div>
+          <img src="../img/check-white.png" alt="">
+        </button>
+
       </div>
     </form>
 

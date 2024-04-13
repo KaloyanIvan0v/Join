@@ -20,7 +20,7 @@
 .contact-mask-title-first {
   color: white;
   font-size: 61px;
-  font-weight: 700;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -36,10 +36,76 @@
   width: 795px;
   height: 592px;
   background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: flex-end;
 }
 
 .contact-mask-title-underline {
+  margin-top: 16px;
+  border-radius: 5px;
   width: 90px;
-  height: 2px;
-  background-color: var(--primary-color);
+  height: 3px;
+  background-color: var(--accent-color);
+}
+
+.contact-form-exit-x {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 48px;
+  right: 48px;
+}
+
+.mask-contact-info {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-form-exit-x:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.mask-contact-img {
+  height: 100%;
+  min-width: 290px;
+}
+
+.mask-contact-img-div {
+  position: relative;
+  top: 204px;
+  left: 97px;
+  height: 120px;
+  width: 120px;
+  background-color: rgb(209, 209, 209);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: solid 3px white;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+}
+
+.mask-contact-img-div img {
+  height: 64px;
+  width: 64px;
+}
+.contact-mask-btn {
+  display: flex;
+}
+
+.contact-mask-btn button {
+  display: flex;
+  width: max-content;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
