@@ -141,10 +141,6 @@ input::placeholder {
   border: solid 1px var(--primary-color);
 }
 
-.contact-form-cancel-btn img:hover {
-  color: red;
-}
-
 .contact-form-create-contact-btn {
   height: 56px;
   background-color: var(--primary-color);
@@ -171,6 +167,18 @@ form {
 }
 
 .contact-form-input-div img {
+  width: 24px;
+  height: 24px;
+}
+
+.img-close-contact-form {
+  background: url("../img/close.png");
+  width: 24px;
+  height: 24px;
+}
+
+.img-close-contact-form:hover {
+  background: url("../img/close-blue.png");
   width: 24px;
   height: 24px;
 }
