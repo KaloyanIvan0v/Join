@@ -52,24 +52,18 @@
             </div>
 
             <!-- <form> -->
-                <div class="assigned-to d-flex-column-center">
-                    <span class="input-description">Assigned to</span>
-                  <div onclick="showCheckboxes()">
+            <div class="assigned-to d-flex-column-center">
+                <span class="input-description">Assigned to</span>
+                <div onclick="showCheckboxes()">
                     <select class="input-field width-100 option-value-disabled">
-                      <option>Select contacts to assign</option>
+                        <option>Select contacts to assign</option>
                     </select>
                     <div class="overSelect"></div>
-                  </div>
-                  <div class="userList" id="checkboxes">
-                    <!-- <label for="one"> -->
-                      <!-- <input type="checkbox" id="one" />First checkbox -->
-                    <!-- </label> -->
-                    <!-- <label for="two">
-                      <input type="checkbox" id="two" />Second checkbox</label>
-                    <label for="three">
-                      <input type="checkbox" id="three" />Third checkbox</label> -->
-                  </div>
                 </div>
+                <div>
+                    <div class="user-list vs-hidden" id="checkboxes"></div>
+                </div>
+            </div>
               <!-- </form> -->
               
 
@@ -128,11 +122,6 @@
                 <div class="input-field new-subtask">
                     <input onclick="changeIconsSubtask()" class="input-new-subtask" type="text" id="subTasks" placeholder="Add new subtask">
                     <a id="addIconSubtasks" onclick="addNewSubTask()" class="icon-subtask-field"><img src="/img/add.png"></a>
-                    <div id="activeInputSubtask" class="vs-hidden active-input-subtasks">
-                        <a onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
-                        <span class="height-24">|</span>
-                        <a onclick="addNewSubTask()"><img class="size-check" src="/img/check_black.png"></a>
-                    </div>
                 </div>
                 <div id="newSubTaskField"></div>
             </div>
@@ -155,7 +144,7 @@
         </button>
     </div>
     </form>
-    <div id="bgDialog" class="bg-dialog vs-hidden">
+    <div id="bgDialog" class="bg-dialog vs-hidden ps-fixed">
         <div class="added-to-board bg-color-create">
             <span>Task added to board</span>
             <img src="/img/addedBoard.png">

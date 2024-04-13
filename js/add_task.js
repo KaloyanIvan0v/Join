@@ -1,7 +1,7 @@
 let currentPrio = ['medium'];
 let tasks = [];
 let subTasks = [];
-let checkChangeIcons = false;
+let checkedUsers = [];
 let priorities = [
     {
         'text': 'Urgent',
@@ -28,6 +28,8 @@ let priorities = [
         'isPriority': false,
     }
 ]
+let checkChangeIcons = false;
+let checkBoxAssigned = true;
 
 async function init() {
     includeHTML();
@@ -70,7 +72,7 @@ async function loadTasks() {
 async function addTask() {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
-    let assignedTo = document.getElementById('assignedTo');
+    // let assignedTo = document.getElementById('assignedTo');
     let dueDate = document.getElementById('dueDate');
     let category = document.getElementById('category');
     let subTasks =  document.getElementById('subTasks');
@@ -78,7 +80,7 @@ async function addTask() {
     let task = {
         "title": title.value,
         "description": description.value,
-        "assignedTo": assignedTo.value,
+        "assignedTo": checkedUsers,
         "dueDate": dueDate.value,
         "prio": currentPrio,
         "category": category.value,
@@ -102,7 +104,7 @@ function resetInputFields() {
     let subTasks =  document.getElementById('subTasks');
     title.value = '';
     description.value = '';
-    assignedTo.value = '';
+    // assignedTo.value = '';
     dueDate.value = '';
     category.value = '';
     subTasks.value = '';
@@ -111,7 +113,7 @@ function resetInputFields() {
 function resetAddNewSubtask() {
     let subTasks =  document.getElementById('subTasks');
     subTasks.value = '';
-    checkChangeIcons = false;
+    checkChangeIcons = true;
     changeIconsSubtask();
     checkChangeIcons = false;
 }
@@ -131,7 +133,7 @@ async function addNewSubTask() {
             let newSubTask = subTasks[i];
             newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
         }
-        checkChangeIcons = false;
+        checkChangeIcons = true;
         changeIconsSubtask();
         checkChangeIcons = false;
     }
@@ -141,12 +143,27 @@ function changeIconsSubtask() {
     let activeInputSubtask = document.getElementById('activeInputSubtask');
     let addIconSubtasks = document.getElementById('addIconSubtasks');
 
+    addIconSubtasks.innerHTML = '';
+
     if(checkChangeIcons == false) {
-        checkChangeIcons = true;
-        addIconSubtasks.classList.toggle('vs-hidden');
-        activeInputSubtask.classList.toggle('vs-hidden');
-        checkChangeIcons = true;
+        addIconSubtasks.innerHTML = returnHtmlCheckAndClear()
+    } else {
+        addIconSubtasks.innerHTML = returnHtmlAdd()
     }
+}
+
+function returnHtmlCheckAndClear() {
+    return `
+    <div id="activeInputSubtask" class="active-input-subtasks">
+        <a onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
+        <span class="height-24">|</span>
+        <a onclick="addNewSubTask()"><img class="size-check" src="/img/check_black.png"></a>
+    </div>`
+}
+
+function returnHtmlAdd() {
+    return `
+    <a id="addIconSubtasks" onclick="addNewSubTask()" class="icon-subtask-field"><img src="/img/add.png"></a>`
 }
 
 function prioNormal(priority) {
@@ -175,15 +192,17 @@ function returnHtmlNewSubtasks(newSubTask) {
 var expanded = false;
 
 function showCheckboxes() {
-  let checkboxes = document.getElementById("checkboxes");
-  if (!expanded) {
-    checkboxes.style.display = "block";
-    renderAssignedToField();
-    expanded = true;
-  } else {
-    checkboxes.style.display = "none";
-    expanded = false;
-  }
+    let checkboxes = document.getElementById("checkboxes");
+    if (!expanded) {
+        checkboxes.classList.toggle('vs-hidden');
+        // checkboxes.style.display = "block";
+        renderAssignedToField();
+        expanded = true;
+    } else {
+        checkboxes.classList.toggle('vs-hidden');
+        // checkboxes.style.display = "none";
+        expanded = false;
+    }
 }
 
 function renderAssignedToField() {
@@ -193,7 +212,20 @@ function renderAssignedToField() {
     for(i = 0; i < users.length; i++){;
         user = users[i];
         userCheckBox.innerHTML += `
-        <label for="${i}">
-        ${user['name']}<input type="checkbox" id="${i}" />`
+
+        <label class="single-user" for="${i}">
+        ${user['name']}<input type="checkbox" onclick="selectedUser(${i})" id="checkBox${i}" />`
     }
+}
+
+function selectedUser(i) {
+    let singleUser = users[i]['name'];
+    let currentIndex = checkedUsers.indexOf(singleUser);
+
+    if(!checkedUsers.includes(singleUser, 0)) {
+        checkedUsers.push(singleUser);
+    } else {
+        checkedUsers.splice(currentIndex, 1);
+    }
+    setItem('checkedUsers', checkedUsers);
 }
