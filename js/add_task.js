@@ -29,7 +29,6 @@ let priorities = [
     }
 ]
 let checkChangeIcons = false;
-let checkBoxAssigned = true;
 
 async function init() {
     includeHTML();
@@ -108,6 +107,10 @@ function resetInputFields() {
     dueDate.value = '';
     category.value = '';
     subTasks.value = '';
+
+    checkChangeIcons = true;
+    changeIconsSubtask();
+    // checkChangeIcons = false;
 }
 
 function resetAddNewSubtask() {
@@ -115,7 +118,7 @@ function resetAddNewSubtask() {
     subTasks.value = '';
     checkChangeIcons = true;
     changeIconsSubtask();
-    checkChangeIcons = false;
+    // checkChangeIcons = false;
 }
 
 async function addNewSubTask() {
@@ -135,20 +138,22 @@ async function addNewSubTask() {
         }
         checkChangeIcons = true;
         changeIconsSubtask();
-        checkChangeIcons = false;
+        // checkChangeIcons = false;
     }
 }
 
 function changeIconsSubtask() {
-    let activeInputSubtask = document.getElementById('activeInputSubtask');
+    // let activeInputSubtask = document.getElementById('activeInputSubtask');
     let addIconSubtasks = document.getElementById('addIconSubtasks');
 
     addIconSubtasks.innerHTML = '';
 
     if(checkChangeIcons == false) {
-        addIconSubtasks.innerHTML = returnHtmlCheckAndClear()
+        addIconSubtasks.innerHTML = returnHtmlCheckAndClear();
+        checkChangeIcons = false;
     } else {
-        addIconSubtasks.innerHTML = returnHtmlAdd()
+        addIconSubtasks.innerHTML = returnHtmlAdd();
+        checkChangeIcons = false;
     }
 }
 
@@ -224,8 +229,34 @@ function selectedUser(i) {
 
     if(!checkedUsers.includes(singleUser, 0)) {
         checkedUsers.push(singleUser);
+        showInitials();
     } else {
         checkedUsers.splice(currentIndex, 1);
     }
     setItem('checkedUsers', checkedUsers);
+}
+
+function showInitials() {
+    let initialsArea = document.getElementById('initialArea');
+    // let singleUser = users[i]['name'];
+    // let nameParts = singleUser.split(" ");
+    // let firstLetter = nameParts[0].substring(0, 1);
+    initialsArea.innerHTML = '';
+
+
+    for(i = 0; i < checkedUsers.length; i++) {
+        let singleUser = checkedUsers[i];
+        let nameParts = singleUser.split(" ");
+        let firstLetter = nameParts[0].substring(0, 1);
+        if(nameParts.length == 2) {
+            let secondLetter = nameParts[1].substring(0, 1);
+            let nameInitial = firstLetter + secondLetter;
+            initial = nameInitial;
+            // initialsArea.innerHTML += `<div class="initial-area">${nameInitial}</div>`
+        } else {
+            // initialsArea.innerHTML += `<div class="initial-area">${firstLetter}</div>`
+            initial = firstLetter;
+        }
+        initialsArea.innerHTML += `<div class="initial-area">${initial}</div>`
+    }
 }
