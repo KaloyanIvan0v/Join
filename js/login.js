@@ -27,7 +27,6 @@ function startScreen() {
 function login() {
   let user = email.value;
   if (userExist(user) && passwordIsCorrect(user)) {
-    setLoggedInUser(usersInit[getUserIndex(user)]);
     setSesionStorage("loggedInUser", usersInit[getUserIndex(user)]);
     resetForm();
     window.location.href = "../html/summery.html";
