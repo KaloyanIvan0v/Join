@@ -19,7 +19,7 @@ body {
   width: 456px;
   box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.1);
   z-index: 4;
-  padding: 32px 24px 32px 24px;
+  padding: 32px 7px 32px 7px;
 }
 
 .add-contact-button {
@@ -93,22 +93,37 @@ body {
 }
 
 .contacts-inner-list {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 28px;
-  margin-right: 28px;
   overflow-y: auto;
   margin-top: 22px;
+}
+
+.contacts-inner-list::-webkit-scrollbar {
+  border: none;
+  width: 8px;
+}
+
+.contacts-inner-list::-webkit-scrollbar-thumb {
+  background-color: rgba(168, 168, 168, 1);
+  border-radius: 8px;
 }
 
 .contact-list-item {
   display: flex;
   align-items: center;
-  width: 352px;
+  min-width: 352px;
   height: 78px;
   padding-top: 15px;
   padding-bottom: 15px;
+  cursor: pointer;
+  transition: background-color 0.125s ease;
+}
+
+.contact-list-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .contact-list-badges {
@@ -121,10 +136,13 @@ body {
   border-radius: 50%;
   margin-right: 35px;
   margin-left: 24px;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
 }
 
 .contact-list-first-letter {
-  width: 100%;
+  width: 316px;
   font-size: 20px;
   padding-top: 17px;
   padding-bottom: 17px;
@@ -133,6 +151,51 @@ body {
 
 .contact-list-letter-parting-line {
   width: 352px;
-  height: 3px;
+  min-height: 1px;
   background-color: rgba(209, 209, 209, 1);
+}
+
+.contact-list-name {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.contact-list-email {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(0, 124, 238, 1);
+}
+
+.contact-full-mode {
+  position: relative;
+  top: 215px;
+  left: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 452px;
+  height: 364px;
+}
+
+.contact-full-mode-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact-full-mode-badges {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.contact-full-mode-name-edit-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-full-mode-edit {
+  display: flex;
+  justify-content: left;
 }
