@@ -29,6 +29,7 @@ let priorities = [
     }
 ]
 let checkChangeIcons = false;
+let expanded = false;
 
 async function init() {
     includeHTML();
@@ -101,16 +102,17 @@ function addedToBoard() {
 
 function resetInputFields() {
     let subTasks =  document.getElementById('subTasks');
+    let initialArea = document.getElementById('initialArea');
+
     title.value = '';
     description.value = '';
-    // assignedTo.value = '';
+    initialArea.innerHTML = '';
     dueDate.value = '';
     category.value = '';
     subTasks.value = '';
 
     checkChangeIcons = true;
     changeIconsSubtask();
-    // checkChangeIcons = false;
 }
 
 function resetAddNewSubtask() {
@@ -194,19 +196,19 @@ function returnHtmlNewSubtasks(newSubTask) {
     </ul>`
 }
 
-var expanded = false;
-
 function showCheckboxes() {
     let checkboxes = document.getElementById("checkboxes");
+    let initialsArea = document.getElementById('initialArea');
+
     if (!expanded) {
+        initialsArea.innerHTML = '';
         checkboxes.classList.toggle('vs-hidden');
-        // checkboxes.style.display = "block";
         renderAssignedToField();
         expanded = true;
     } else {
         checkboxes.classList.toggle('vs-hidden');
-        // checkboxes.style.display = "none";
         expanded = false;
+        clearCheckBox();
     }
 }
 
@@ -217,9 +219,20 @@ function renderAssignedToField() {
     for(i = 0; i < users.length; i++){;
         user = users[i];
         userCheckBox.innerHTML += `
+            <label class="single-user" for="${i}">
+            ${user['name']}<input type="checkbox" onclick="selectedUser(${i})" id="checkBox${i}" />`
+        examineUser(i);   
+    }
+}
 
-        <label class="single-user" for="${i}">
-        ${user['name']}<input type="checkbox" onclick="selectedUser(${i})" id="checkBox${i}" />`
+function examineUser(i) {
+    let currentLabel = document.getElementById(`checkBox${i}`);
+    let currentName = users[i]['name'];
+
+    if(checkedUsers.length > 0) {
+        if(checkedUsers.includes(currentName)) {
+            currentLabel.checked = true;
+        }
     }
 }
 
@@ -229,20 +242,22 @@ function selectedUser(i) {
 
     if(!checkedUsers.includes(singleUser, 0)) {
         checkedUsers.push(singleUser);
-        showInitials();
     } else {
         checkedUsers.splice(currentIndex, 1);
     }
     setItem('checkedUsers', checkedUsers);
 }
 
+function clearCheckBox() {
+    let checkBox = document.getElementById('checkboxes');
+    checkBox.innerHTML = '';
+
+    showInitials();
+}
+
 function showInitials() {
     let initialsArea = document.getElementById('initialArea');
-    // let singleUser = users[i]['name'];
-    // let nameParts = singleUser.split(" ");
-    // let firstLetter = nameParts[0].substring(0, 1);
     initialsArea.innerHTML = '';
-
 
     for(i = 0; i < checkedUsers.length; i++) {
         let singleUser = checkedUsers[i];
@@ -252,9 +267,7 @@ function showInitials() {
             let secondLetter = nameParts[1].substring(0, 1);
             let nameInitial = firstLetter + secondLetter;
             initial = nameInitial;
-            // initialsArea.innerHTML += `<div class="initial-area">${nameInitial}</div>`
         } else {
-            // initialsArea.innerHTML += `<div class="initial-area">${firstLetter}</div>`
             initial = firstLetter;
         }
         initialsArea.innerHTML += `<div class="initial-area">${initial}</div>`
