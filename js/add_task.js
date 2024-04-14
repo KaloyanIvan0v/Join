@@ -36,15 +36,25 @@ async function init() {
     loadTasks();
     whichPriority();
     await loadUsers();
-    // currentDate();
-    await getContacts();
-    // renderAssignedToField();
+    currentDate();
+    // await getContacts();
 }
 
-// function currentDate() {
-//     let dueDate = document.getElementById('dueDate');
-//     dueDate.valueAsDate = newDate();
-// }
+function currentDate() {
+    let inputDateField = document.getElementById('dueDate');
+    let todayDate = new Date();
+    let year = todayDate.getFullYear();
+    let month = todayDate.getMonth() + 1;
+    let day = todayDate.getDate();
+    if(month < 10) {
+        month = '0' + month;
+    }
+    if(day < 10) {
+        day = '0' + day;
+    }
+    let currentDate = year + '-' + month + '-' + day
+    inputDateField.value = currentDate;
+}
 
 function changePrio(i) {
     currentPrio = priorities[i]['text'];
@@ -228,12 +238,10 @@ function renderAssignedToField() {
         userCheckBox.innerHTML += `
             <label class="single-user" for="${i}">
             ${user['name']}<input type="checkbox" onclick="selectedUser(${i})" id="checkBox${i}" />`
-        // examineUser(i);   
     }
     for(i = 0; i < users.length; i++){;
         examineUser(i);   
     }
-
 }
 
 function examineUser(i) {
@@ -284,3 +292,18 @@ function showInitials() {
         initialsArea.innerHTML += `<div class="initial-area">${initial}</div>`
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    let dateInput = document.getElementById('dueDate');
+    let requiredDate = document.getElementById('requiredDate');
+
+    dateInput.addEventListener('input', () => {
+        if (dateInput.value == '') {
+            requiredDate.classList.remove('vs-hidden');
+            dueDate.classList.add('error-border');
+        } else {
+            requiredDate.classList.add('vs-hidden');
+            dueDate.classList.remove('error-border');
+        }
+    });
+});
