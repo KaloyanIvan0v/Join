@@ -53,15 +53,19 @@ function printContactsByLetter(contacts) {
   const sortedContacts = contacts.sort((a, b) => a.name.localeCompare(b.name));
   let currentLetter = null;
   contactList.innerHTML = "";
-  sortedContacts.forEach((contact) => {
-    const firstLetter = contact.name.charAt(0).toUpperCase();
 
+  for (let i = 0; i < sortedContacts.length; i++) {
+    const firstLetter = sortedContacts[i].name.charAt(0).toUpperCase();
     if (firstLetter !== currentLetter) {
       contactList.innerHTML += renderLetterSectionHTML(firstLetter);
       currentLetter = firstLetter;
     }
-    renderContact(contact, contactList);
-  });
+    renderContact(sortedContacts[i], contactList, i);
+    setElementBackgroundColor(
+      `id-contact-list-badges${i}`,
+      sortedContacts[i].color
+    );
+  }
 }
 
 function renderLetterSectionHTML(firstLetter) {
@@ -71,7 +75,7 @@ function renderLetterSectionHTML(firstLetter) {
   `;
 }
 
-function renderContact(contact, divId) {
+function renderContact(contact, divId, i) {
   const contactBadges = contact.nameInitials;
   const contactName = contact.name;
   const contactEmail = contact.email;
@@ -79,18 +83,85 @@ function renderContact(contact, divId) {
   divId.innerHTML += renderContactHtml(
     contactBadges,
     contactName,
-    contactEmail
+    contactEmail,
+    i
   );
 }
 
-function renderContactHtml(contactBadges, contactName, contactEmail) {
+function renderContactHtml(contactBadges, contactName, contactEmail, i) {
   return /*html*/ `
-  <div id="id-contact-list-item" class="contact-list-item">
-    <div id="id-contact-list-badges" class="contact-list-badges">${contactBadges}</div>
-    <div id="id-contact-list-name-email" class="contact-list-name-email">
-      <div id="id-contact-list-name" class="contact-list-name">${contactName}</div>
-      <div id="id-contact-list-email" class="contact-list-email">${contactEmail}</div>
+  <div id="id-contact-list-item${i}" class="contact-list-item" onclick="openContact('${contactEmail}')">
+    <div id="id-contact-list-badges${i}" class="contact-list-badges">${contactBadges}</div>
+    <div id="id-contact-list-name-email${i}" class="contact-list-name-email">
+      <div id="id-contact-list-name${i}" class="contact-list-name">${contactName}</div>
+      <div id="id-contact-list-email${i}" class="contact-list-email">${contactEmail}</div>
     </div>
   </div>
+  `;
+}
+
+function setElementBackgroundColor(elementId, colorId) {
+  let div = document.getElementById(elementId);
+  div.style.backgroundColor = contactColor[colorId];
+}
+
+function openContact(contactEmail) {
+  renderContactFullMode(getContactData(contactEmail));
+}
+
+function getContactData(contactEmail) {
+  for (let i = 0; i < contactsInit.length; i++) {
+    if (contactsInit[i].email == contactEmail) {
+      return contactsInit[i];
+    }
+  }
+}
+
+function renderContactFullMode(contact) {
+  let div = document.getElementById("id-contact-full-mode");
+  const contactName = contact.name;
+  const contactEmail = contact.email;
+  const contactPhone = contact.phone;
+  const contactBadges = contact.nameInitials;
+  const contactColor = contact.color;
+  div.innerHTML = renderContactFullModeHtml(
+    contactName,
+    contactEmail,
+    contactPhone,
+    contactBadges
+  );
+}
+
+function renderContactFullModeHtml(
+  contactName,
+  contactEmail,
+  contactPhone,
+  contactBadges
+) {
+  return /*html*/ `
+    <div class="contact-full-mode-header">
+      <div class="contact-full-mode-badges">${contactBadges}</div>
+      <div class="contact-full-mode-name-edit-section">
+        <div class="contact-full-mode-name">${contactName}</div>
+        <div class="contact-full-mode-edit">
+          <div class="contact-full-mode-edit-contact">
+            <img src="" alt="">
+            <div>Edit</div>
+          </div>
+        <div class="contact-full-mode-delete-contact">
+            <img src="" alt="">
+            <div>Delete</div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="contact-full-mode-data">
+        <div class="contact-full-mode-data-headline">Contact Information</div>
+        <div class="contact-full-mode-data-email-headline">Email</div>
+        <div class="contact-full-mode-data-email">${contactEmail}</div>
+        <div class="contact-full-mode-data-phone-headline">Phone</div>
+        <div class="contact-full-mode-data-phone">${contactPhone}</div>
+      </div>
+  
   `;
 }
