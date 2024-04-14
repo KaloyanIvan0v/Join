@@ -1,5 +1,3 @@
-// let tasks = [];
-let contacts;
 const contactColor = {
   1: "rgb(255, 187, 44)",
   2: "rgb(255, 70, 70)",
@@ -16,8 +14,6 @@ const contactColor = {
   13: "rgb(255, 94, 179)",
   14: "rgb(255, 122, 1)",
 };
-
-let loggedInUser = [];
 
 function setLoggedInUser(user) {
   saveToLocalStorage("loggedInUser", user);
@@ -42,16 +38,44 @@ function getFromLocalStorage(key) {
 
 async function loadUsers() {
   try {
-    users = JSON.parse(await getItem("users"));
+    usersInit = JSON.parse(await getItem("users"));
   } catch (e) {
     console.error("Loading error:", e);
   }
 }
 
-async function getContacts() {
+async function loadContacts() {
   try {
-    contacts = JSON.parse(await getItem("contacts"));
+    contactsInit = JSON.parse(await getItem("contacts"));
   } catch (e) {
     console.error("Loading error:", e);
+  }
+}
+
+async function loadTasks() {
+  try {
+    tasksInit = JSON.parse(await getItem("tasks"));
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
+}
+
+async function setSesionStorage(key, value) {
+  try {
+    const serializedValue = JSON.stringify(value);
+    sessionStorage.setItem(key, serializedValue);
+  } catch (error) {}
+}
+
+async function getFromSessionStorage(key) {
+  try {
+    const serializedValue = sessionStorage.getItem(key);
+    if (serializedValue === null) {
+      return null;
+    }
+    const value = JSON.parse(serializedValue);
+    return value;
+  } catch (error) {
+    return null;
   }
 }

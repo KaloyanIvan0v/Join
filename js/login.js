@@ -1,14 +1,22 @@
-let users = [];
+let usersInit = [];
+let contactsInit = [];
+let tasksInit = [];
+let loggedInUser;
 let pswVisibility = false;
 let checkBoxState = false;
 
 async function initLogin() {
   await loadUsers();
+  await loadContacts();
+  await loadTasks();
   setPwdInputEventListeners();
   setTimeout(() => {
     startScreen();
   }, 375);
   handleMsgBox();
+  setSesionStorage("contacts", contactsInit);
+  setSesionStorage("tasks", tasksInit);
+  setSesionStorage("logedInUser", loggedInUser);
 }
 
 function startScreen() {
@@ -19,7 +27,8 @@ function startScreen() {
 function login() {
   let user = email.value;
   if (userExist(user) && passwordIsCorrect(user)) {
-    setLoggedInUser(users[getUserIndex(user)]);
+    setLoggedInUser(usersInit[getUserIndex(user)]);
+    setSesionStorage("loggedInUser", usersInit[getUserIndex(user)]);
     resetForm();
     window.location.href = "../html/summery.html";
   } else {
@@ -52,8 +61,8 @@ function removeFeddbackMsg(divId) {
 }
 
 function userExist(user) {
-  for (let i = 0; i < users.length; i++) {
-    if (user == users[i].email) {
+  for (let i = 0; i < usersInit.length; i++) {
+    if (user == usersInit[i].email) {
       return true;
     }
   }
@@ -61,7 +70,7 @@ function userExist(user) {
 }
 
 function passwordIsCorrect(user) {
-  let userPsw = users[getUserIndex(user)].password;
+  let userPsw = usersInit[getUserIndex(user)].password;
   let inputPsw = document.getElementById("password0").value;
   if (userPsw == inputPsw) {
     return true;
@@ -71,8 +80,8 @@ function passwordIsCorrect(user) {
 }
 
 function getUserIndex(user) {
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].email == user) {
+  for (let i = 0; i < usersInit.length; i++) {
+    if (usersInit[i].email == user) {
       return i;
     } else {
     }
@@ -80,7 +89,7 @@ function getUserIndex(user) {
 }
 
 function guestLogIn() {
-  logInUser = { name: "Guest", email: "guest@info.com", password: "guest" };
+  loggedInUser = { name: "Guest", email: "guest@info.com", password: "guest" };
   window.location.href = "../html/summery.html";
 }
 

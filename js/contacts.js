@@ -1,6 +1,6 @@
 function initContacts() {
   includeHTML();
-  getContacts();
+  loadContacts();
 }
 
 function openContactForm(form) {
