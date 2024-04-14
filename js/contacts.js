@@ -8,7 +8,12 @@ function openContactForm(form) {
   let contactForm = document.getElementById("id-contact-form");
   if (form === "addContact") {
     setTimeout(function () {
-      handleHoverCancleButton();
+      handleHoverButtonChangeImg(
+        ".contact-form-cancel-btn",
+        ".img-close-contact-form",
+        'url("../img/close.png")',
+        'url("../img/close-blue.png")'
+      );
     }, 20);
     contactForm.innerHTML = `<div class="contact-form" w3-include-html="../templates/add-contact.html"></div>`;
   } else {
@@ -37,14 +42,19 @@ function addNewContact() {
 
 function editContact() {}
 
-function handleHoverCancleButton() {
-  var cancelButton = document.querySelector(".contact-form-cancel-btn");
-  var imgClose = document.querySelector(".img-close-contact-form");
-  cancelButton.addEventListener("mouseover", function () {
-    imgClose.style.backgroundImage = 'url("../img/close-blue.png")';
+function handleHoverButtonChangeImg(
+  hoverElementId,
+  elementToChangeId,
+  imgUrl,
+  imgUrlHover
+) {
+  var hoverElement = document.querySelector(hoverElementId);
+  var elementToChangeId = document.querySelector(elementToChangeId);
+  hoverElement.addEventListener("mouseover", function () {
+    elementToChangeId.style.backgroundImage = imgUrlHover;
   });
-  cancelButton.addEventListener("mouseout", function () {
-    imgClose.style.backgroundImage = 'url("../img/close.png")';
+  hoverElement.addEventListener("mouseout", function () {
+    elementToChangeId.style.backgroundImage = imgUrl;
   });
 }
 
@@ -130,6 +140,23 @@ function renderContactFullMode(contact) {
     contactPhone,
     contactBadges
   );
+  setElementBackgroundColor("id-contact-full-mode-badges", contactColor);
+  setListenerForEditDeleteBtn();
+}
+
+function setListenerForEditDeleteBtn() {
+  handleHoverButtonChangeImg(
+    ".contact-full-mode-edit-contact",
+    ".edit-btn-img",
+    'url("../img/edit-pencil.png")',
+    'url("../img/edit-pencil-light-blue.png")'
+  );
+  handleHoverButtonChangeImg(
+    ".contact-full-mode-delete-contact",
+    ".delete-btn-img",
+    'url("../img/trash-blue.png")',
+    'url("../img/trash-light-blue.png")'
+  );
 }
 
 function renderContactFullModeHtml(
@@ -140,18 +167,18 @@ function renderContactFullModeHtml(
 ) {
   return /*html*/ `
     <div class="contact-full-mode-header">
-      <div class="contact-full-mode-badges">${contactBadges}</div>
+      <div id="id-contact-full-mode-badges" class="contact-full-mode-badges">${contactBadges}</div>
       <div class="contact-full-mode-name-edit-section">
         <div class="contact-full-mode-name">${contactName}</div>
         <div class="contact-full-mode-edit">
-          <div class="contact-full-mode-edit-contact">
-            <img src="" alt="">
+          <button class="contact-full-mode-edit-contact" onclick="openContactForm('editContact')">
+            <div class="edit-btn-img"></div>
             <div>Edit</div>
-          </div>
-        <div class="contact-full-mode-delete-contact">
-            <img src="" alt="">
+          </button>
+        <button class="contact-full-mode-delete-contact" onclick="deleteContact('deleteContact')">
+            <div class="delete-btn-img" ></div>
             <div>Delete</div>
-          </div>
+          </button>
         </div>
       </div>
     </div>
@@ -164,4 +191,8 @@ function renderContactFullModeHtml(
       </div>
   
   `;
+}
+
+function deleteContact() {
+  console.log("delete Contact");
 }
