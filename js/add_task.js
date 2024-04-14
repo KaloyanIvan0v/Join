@@ -36,8 +36,15 @@ async function init() {
     loadTasks();
     whichPriority();
     await loadUsers();
+    // currentDate();
+    await getContacts();
     // renderAssignedToField();
 }
+
+// function currentDate() {
+//     let dueDate = document.getElementById('dueDate');
+//     dueDate.valueAsDate = newDate();
+// }
 
 function changePrio(i) {
     currentPrio = priorities[i]['text'];
@@ -103,6 +110,7 @@ function addedToBoard() {
 function resetInputFields() {
     let subTasks =  document.getElementById('subTasks');
     let initialArea = document.getElementById('initialArea');
+    let newSubTaskField = document.getElementById('newSubTaskField');
 
     title.value = '';
     description.value = '';
@@ -110,6 +118,7 @@ function resetInputFields() {
     dueDate.value = '';
     category.value = '';
     subTasks.value = '';
+    newSubTaskField.innerHTML = '';
 
     checkChangeIcons = true;
     changeIconsSubtask();
@@ -140,12 +149,10 @@ async function addNewSubTask() {
         checkChangeIcons = true;
         changeIconsSubtask();
         await setItem('subTasks', subTasks);
-        // checkChangeIcons = false;
     }
 }
 
 function changeIconsSubtask() {
-    // let activeInputSubtask = document.getElementById('activeInputSubtask');
     let addIconSubtasks = document.getElementById('addIconSubtasks');
 
     addIconSubtasks.innerHTML = '';
@@ -221,8 +228,12 @@ function renderAssignedToField() {
         userCheckBox.innerHTML += `
             <label class="single-user" for="${i}">
             ${user['name']}<input type="checkbox" onclick="selectedUser(${i})" id="checkBox${i}" />`
+        // examineUser(i);   
+    }
+    for(i = 0; i < users.length; i++){;
         examineUser(i);   
     }
+
 }
 
 function examineUser(i) {

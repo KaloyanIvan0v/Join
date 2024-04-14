@@ -83,8 +83,11 @@ h2 {
     left: 864.25px;
 }
 
+.error {
+    color: #FF8190
+}
+
 .required-field-title {
-    width: 119px;
     height: 12px;
 }
 
@@ -266,9 +269,8 @@ h2 {
 .required-field-notice {
     display: flex;
     position: absolute;
-    top: 926px;
+    top: 830px;
     left: 328px;
-    width: 170px;
     height: 27px;
 }
 
@@ -282,7 +284,7 @@ h2 {
 
 .buttons-clear-create {
     position: absolute;
-    top: 889px;
+    top: 793px;
     left: 995.25px;
     display: flex;
     gap: 16px;
