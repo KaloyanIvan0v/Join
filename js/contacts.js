@@ -1,16 +1,6 @@
-let contacts;
-
 function initContacts() {
   includeHTML();
   getContacts();
-}
-
-async function getContacts() {
-  try {
-    contacts = JSON.parse(await getItem("contacts"));
-  } catch (e) {
-    console.error("Loading error:", e);
-  }
 }
 
 function openContactForm(form) {
