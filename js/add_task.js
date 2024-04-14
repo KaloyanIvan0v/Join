@@ -130,7 +130,6 @@ async function addNewSubTask() {
 
     if(singleNewTaskValue.length >= 3){
         subTasks.push(singleNewTaskValue);
-        await setItem('subTasks', subTasks);
         singleNewTask.value = '';
         newTaskField.innerHTML = '';
 
@@ -140,6 +139,7 @@ async function addNewSubTask() {
         }
         checkChangeIcons = true;
         changeIconsSubtask();
+        await setItem('subTasks', subTasks);
         // checkChangeIcons = false;
     }
 }
