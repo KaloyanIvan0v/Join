@@ -229,10 +229,6 @@ function returnHtmlNewSubtasks(newSubTask) {
     </ul>`
 }
 
-function editSubtask(newSubTask) {
-
-}
-
 function showCheckboxes() {
     let checkboxes = document.getElementById("checkboxes");
     let initialsArea = document.getElementById('initialArea');
@@ -244,7 +240,7 @@ function showCheckboxes() {
         expanded = true;
     } else {
         // containerUserInitialen.innerHTML = '';
-        checkboxes.innerHTML = '';
+        // checkboxes.innerHTML = '';
         checkboxes.classList.remove('user-list');
         checkboxes.classList.add('d-flex-initials')
         // containerUserInitialen.classList.toggle('vs-hidden');
@@ -264,27 +260,32 @@ function renderAssignedToField() {
 
     for(i = 0; i < contactsInit.length; i++){;
         user = contactsInit[i];
-        userCheckBox.innerHTML += `
-        <div class="hover-assigned" id="paddingForChecked${i}" onclick="selectedUser(${i})">
-            <div class="user-field" id="userField${i}">
-                <div class="single-user"">
-                    <div class="initials-assigned initials" id="bgInitials${i}">
-                        ${user['nameInitials']}
-                    </div>
-                    <span class="typography-contacts-assigned">${user['name']}</span>
-                </div>
-                <label class="custom-checkbox" for="box${i}">
-                <input type="checkbox" />
-                <div id="checkBox${i}" class="box-unchecked">
-                    <span></span>
-                </div>
-            </div>
-        </div>`
+        userCheckBox.innerHTML += 
+            returnHtmlSingleContact(user);
             backgroundColorInitials(i);
     }
     for(i = 0; i < contactsInit.length; i++){;
         examineUser(i);   
     }
+}
+
+function returnHtmlSingleContact(user) {
+    return `
+    <div class="hover-assigned" id="paddingForChecked${i}" onclick="selectedUser(${i})">
+        <div class="user-field" id="userField${i}">
+            <div class="single-user"">
+                <div class="initials-assigned initials" id="bgInitials${i}">
+                    ${user['nameInitials']}
+                </div>
+                <span class="typography-contacts-assigned">${user['name']}</span>
+            </div>
+            <label class="custom-checkbox" for="box${i}">
+            <input type="checkbox" />
+            <div id="checkBox${i}" class="box-unchecked">
+                <span></span>
+            </div>
+        </div>
+    </div>`
 }
 
 function examineUser(i) {
@@ -306,19 +307,21 @@ function examineUser(i) {
 
 function backgroundColorInitials(i, whichArea) {
     let currentColor = contactsInit[i]['color'];
-    let bgColor = contactColor[currentColor];
+    let bgColorContacts = contactColor[currentColor];
 
     if(whichArea == 'showInitial') {
+        let checkedUserColor = checkedUsers[i]['color']
+        let bgColorCheckedUser = contactColor[checkedUserColor];
         let bgInitials = document.getElementById(`initialArea${i}`);
-        bgInitials.style.backgroundColor = bgColor;
+        bgInitials.style.backgroundColor = bgColorCheckedUser;
     } else {
         let bgInitials = document.getElementById(`bgInitials${i}`)
-        bgInitials.style.backgroundColor = bgColor;
+        bgInitials.style.backgroundColor = bgColorContacts;
     }
 }
 
 function selectedUser(i) {
-    let singleUser = contactsInit[i]['name'];
+    let singleUser = contactsInit[i];
     let currentIndex = checkedUsers.indexOf(singleUser);
     let checkBox = document.getElementById(`checkBox${i}`);
     let userField = document.getElementById(`userField${i}`);
@@ -338,20 +341,13 @@ function selectedUser(i) {
     setItem('checkedUsers', checkedUsers);
 }
 
-// function clearCheckBox() {
-//     let checkBox = document.getElementById('checkboxes');
-//     checkBox.innerHTML = '';
-
-//     showInitials();
-// }
-
 function showInitials() {
     let initialsArea = document.getElementById('checkboxes');
     // let containerUserInitialen = document.getElementById('containerUserInitialen');
     initialsArea.innerHTML = '';
 
     for(i = 0; i < checkedUsers.length; i++) {
-        let singleUser = checkedUsers[i];
+        let singleUser = checkedUsers[i]['name'];
         let nameParts = singleUser.split(" ");
         let firstLetter = nameParts[0].substring(0, 1);
         if(nameParts.length == 2) {
@@ -453,13 +449,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 })
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     let inputSubTask = document.getElementById('subTasks');
+document.addEventListener('DOMContentLoaded', function() {
+    let taskArea = document.getElementById('description');
 
-//     inputSubTask.addEventListener('click', function() {
-//         addNewSubTask();
-//     })
-// })
+    taskArea.addEventListener('click', function() {
+        taskArea.classList.add('fill-border');
+    })
+
+    taskArea.addEventListener('blur', function() {
+        taskArea.classList.remove('fill-border');
+    })
+})
+
 document.addEventListener('DOMContentLoaded', function() {
     let inputSubTask = document.getElementById('subTasks');
     let newSubTaskField = document.getElementById('newSubTaskField');

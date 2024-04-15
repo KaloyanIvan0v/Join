@@ -25,19 +25,69 @@ function openContactForm(form) {
 
 function closeContactFrom(event) {
   let contactForm = document.getElementById("id-contact-form");
-  event.preventDefault();
+  if (event) {
+    event.preventDefault();
+  }
   contactForm.classList.add("hide");
   contactForm.innerHTML = "";
 }
 
-function deleteContact(event) {
-  event.preventDefault();
+async function deleteContact(event) {
+  if (event) {
+    event.preventDefault();
+  }
+  let email = document.getElementById(
+    "id-contact-full-mode-data-email"
+  ).textContent;
+  let contactIndex = getContactIndex(email);
+  if (contactIndex != undefined) {
+    contactsInit.splice(contactIndex, 1);
+    document.getElementById("id-contact-full-mode").innerHTML = "";
+    printContactsByLetter(contactsInit);
+    await setItem("contacts", contactsInit);
+    await setSesionStorage("contacts", contactsInit);
+  }
+}
+
+function getContactIndex(email) {
+  for (let i = 0; i < contactsInit.length; i++) {
+    if (contactsInit[i].email == email) {
+      return i;
+    }
+  }
 }
 
 function safeEditedContact() {}
 
-function addNewContact() {
-  console.log("new Contact");
+async function addNewContact() {
+  let name = document.getElementById("id-add-contact-name").value;
+  let email = document.getElementById("id-add-contact-email").value;
+  let phone = document.getElementById("id-add-contact-phone").value;
+  let color = Math.floor(Math.random() * 14) + 1;
+  let contactBadge = generateBadge(name);
+  let author = "Günter";
+  let contact = {
+    name: name,
+    email: email,
+    phone: phone,
+    color: color,
+    nameInitials: contactBadge,
+    author: author,
+  };
+  contactsInit.push(contact);
+  await setItem("contacts", contactsInit);
+  await setSesionStorage("contacts", contactsInit);
+  closeContactFrom();
+  printContactsByLetter(contactsInit);
+}
+
+function generateBadge(name) {
+  const nameParts = name.split(" ");
+  let badge = nameParts[0][0].toUpperCase();
+  if (nameParts.length > 1) {
+    badge += nameParts[nameParts.length - 1][0].toUpperCase();
+  }
+  return badge;
 }
 
 function editContact() {}
@@ -175,7 +225,7 @@ function renderContactFullModeHtml(
             <div class="edit-btn-img"></div>
             <div>Edit</div>
           </button>
-        <button class="contact-full-mode-delete-contact" onclick="deleteContact('deleteContact')">
+        <button class="contact-full-mode-delete-contact" onclick="deleteContact()">
             <div class="delete-btn-img" ></div>
             <div>Delete</div>
           </button>
@@ -185,14 +235,10 @@ function renderContactFullModeHtml(
       <div class="contact-full-mode-data">
         <div class="contact-full-mode-data-headline">Contact Information</div>
         <div class="contact-full-mode-data-email-headline">Email</div>
-        <div class="contact-full-mode-data-email">${contactEmail}</div>
+        <div id="id-contact-full-mode-data-email" class="contact-full-mode-data-email">${contactEmail}</div>
         <div class="contact-full-mode-data-phone-headline">Phone</div>
         <div class="contact-full-mode-data-phone">${contactPhone}</div>
       </div>
   
   `;
-}
-
-function deleteContact() {
-  console.log("delete Contact");
 }

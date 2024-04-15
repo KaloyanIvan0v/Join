@@ -123,7 +123,9 @@ body {
 }
 
 .contact-list-item:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(42, 54, 71, 1);
+  border-radius: 10px;
+  color: white;
 }
 
 .contact-list-badges {
@@ -139,6 +141,7 @@ body {
   font-size: 12px;
   font-weight: 400;
   color: white;
+  border: solid 2px white;
 }
 
 .contact-list-first-letter {
@@ -153,6 +156,8 @@ body {
   width: 352px;
   min-height: 1px;
   background-color: rgba(209, 209, 209, 1);
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .contact-list-name {
