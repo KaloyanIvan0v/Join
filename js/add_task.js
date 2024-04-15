@@ -143,33 +143,44 @@ function resetAddNewSubtask() {
     // checkChangeIcons = false;
 }
 
-async function addNewSubTask() {
-    let newTaskField = document.getElementById('newSubTaskField');
+function addNewSubTask() {
     let singleNewTask = document.getElementById('subTasks');
     let singleNewTaskValue = singleNewTask.value;
 
     if(singleNewTaskValue.length >= 3){
         subTasks.push(singleNewTaskValue);
-        singleNewTask.value = '';
-        newTaskField.innerHTML = '';
+    }
+    renderSubTasks('newSubtask');
+}
+// }
 
-        for(i = 0; i < subTasks.length; i++) {
-            let newSubTask = subTasks[i];
-            newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
-        }
-        checkChangeIcons = true;
-        changeIconsSubtask();
-        await setItem('subTasks', subTasks);
+async function renderSubTasks(operator) {
+    let newTaskField = document.getElementById('newSubTaskField');
+    let singleNewTask = document.getElementById('subTasks');
+    singleNewTask.value = '';
+    newTaskField.innerHTML = '';
+
+    for(i = 0; i < subTasks.length; i++) {
+        let newSubTask = subTasks[i];
+        newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
+    }
+
+    if(operator == 'newSubtask') {
+    checkChangeIcons = true;
+    changeIconsSubtask();
+    await setItem('subTasks', subTasks);
     }
 }
 
 function changeIconsSubtask() {
     let addIconSubtasks = document.getElementById('addIconSubtasks');
+    let newSubTaskField = document.getElementById('newSubTaskField');
 
     addIconSubtasks.innerHTML = '';
 
     if(checkChangeIcons == false) {
         addIconSubtasks.innerHTML = returnHtmlCheckAndClear();
+        // renderSubTasks();
         checkChangeIcons = false;
     } else {
         addIconSubtasks.innerHTML = returnHtmlAdd();
@@ -209,13 +220,17 @@ function prioActive(priority) {
 
 function returnHtmlNewSubtasks(newSubTask) {
     return `
-    <ul class="list-element-subtasks">
+    <ul class="list-element-subtasks" onclick="editSubtask(${newSubTask})">
         <li>${newSubTask}</li>
         <div class="icons-new-subtasks">
             <img src="/img/trashbin.png">
             <img src="/img/Vector 3.png">
             <img src="/img/edit_pencil.png">
     </ul>`
+}
+
+function editSubtask(newSubTask) {
+
 }
 
 function showCheckboxes() {
@@ -250,9 +265,9 @@ function renderAssignedToField() {
     for(i = 0; i < contactsInit.length; i++){;
         user = contactsInit[i];
         userCheckBox.innerHTML += `
-        <div id="paddingForChecked${i}">
+        <div class="hover-assigned" id="paddingForChecked${i}" onclick="selectedUser(${i})">
             <div class="user-field" id="userField${i}">
-                <div class="single-user" onclick="selectedUser(${i})">
+                <div class="single-user"">
                     <div class="initials-assigned initials" id="bgInitials${i}">
                         ${user['nameInitials']}
                     </div>
@@ -436,4 +451,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         inputBorderError = false;
     }
+})
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     let inputSubTask = document.getElementById('subTasks');
+
+//     inputSubTask.addEventListener('click', function() {
+//         addNewSubTask();
+//     })
+// })
+document.addEventListener('DOMContentLoaded', function() {
+    let inputSubTask = document.getElementById('subTasks');
+    let newSubTaskField = document.getElementById('newSubTaskField');
+
+    inputSubTask.addEventListener('click', function() {
+        renderSubTasks('none');
+    })
+
+    inputSubTask.addEventListener('blur', function() {
+        newSubTaskField.innerHTML = '';
+    })
 })

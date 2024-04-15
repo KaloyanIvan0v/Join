@@ -428,7 +428,7 @@ h2 {
     padding-top: 10px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 2px;
 }
 
 .d-flex-initials {
@@ -523,4 +523,9 @@ h2 {
     background-color: #2A3647;
     padding-right: 14px;
     border-radius: 10px;
+}
+
+.user-field:hover {
+    background-color: #EEEE;
+    cursor: pointer;
 }
