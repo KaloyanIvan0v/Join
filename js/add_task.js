@@ -30,6 +30,7 @@ let priorities = [
 ]
 let checkChangeIcons = false;
 let expanded = false;
+inputBorderError = false;
 
 async function init() {
     includeHTML();
@@ -297,13 +298,42 @@ document.addEventListener('DOMContentLoaded', function() {
     let dateInput = document.getElementById('dueDate');
     let requiredDate = document.getElementById('requiredDate');
 
-    dateInput.addEventListener('input', () => {
-        if (dateInput.value == '') {
+    dateInput.addEventListener('change', changeBorder);
+    dateInput.addEventListener('keydown', changeBorder);
+    
+    function changeBorder() {
+        dateInput.classList.remove('fill-border');
+
+        if (inputBorderError == false) {
             requiredDate.classList.remove('vs-hidden');
-            dueDate.classList.add('error-border');
+            dateInput.classList.add('error-border');
+            inputBorderError = true;
         } else {
             requiredDate.classList.add('vs-hidden');
-            dueDate.classList.remove('error-border');
+            dateInput.classList.remove('error-border');
+            dateInput.classList.add('fill-border');
         }
-    });
+    }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    let title = document.getElementById('title');
+    let requiredTitle = document.getElementById('requiredTitle');
+
+    title.addEventListener('click', changeBorder);
+    title.addEventListener('keydown', changeBorder);
+    
+    function changeBorder() {
+        title.classList.remove('fill-border');
+
+        if (inputBorderError == false) {
+            requiredTitle.classList.remove('vs-hidden');
+            title.classList.add('error-border');
+            inputBorderError = true;
+        } else {
+            requiredTitle.classList.add('vs-hidden');
+            title.classList.remove('error-border');
+            title.classList.add('fill-border');
+        }
+    }
+})
