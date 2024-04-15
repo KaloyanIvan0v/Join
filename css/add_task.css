@@ -529,3 +529,7 @@ h2 {
     background-color: #EEEE;
     cursor: pointer;
 }
+
+textarea:focus-visible {
+    outline: none;
+}
