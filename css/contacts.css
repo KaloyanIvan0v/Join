@@ -291,3 +291,9 @@ body {
   width: 24px;
   height: 24px;
 }
+
+.mask-contact-img-div {
+  color: white;
+  font-size: 47px;
+  font-weight: 500;
+}

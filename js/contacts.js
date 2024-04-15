@@ -1,3 +1,5 @@
+let currentEditingContactId;
+
 async function initContacts() {
   includeHTML();
   await loadContacts();
@@ -18,6 +20,9 @@ function openContactForm(form) {
     contactForm.innerHTML = `<div class="contact-form" w3-include-html="../templates/add-contact.html"></div>`;
   } else {
     contactForm.innerHTML = `<div class="contact-form" w3-include-html="../templates/edit-contact.html"></div>`;
+    setTimeout(function () {
+      editContactFillForm();
+    }, 25);
   }
   includeHTML();
   contactForm.classList.remove("hide");
@@ -36,17 +41,26 @@ async function deleteContact(event) {
   if (event) {
     event.preventDefault();
   }
-  let email = document.getElementById(
-    "id-contact-full-mode-data-email"
-  ).textContent;
-  let contactIndex = getContactIndex(email);
+  let contactIndex = getContactIndex(getActualContactEmail());
   if (contactIndex != undefined) {
     contactsInit.splice(contactIndex, 1);
     document.getElementById("id-contact-full-mode").innerHTML = "";
     printContactsByLetter(contactsInit);
-    await setItem("contacts", contactsInit);
-    await setSesionStorage("contacts", contactsInit);
+    safeContacts();
   }
+}
+
+function safeContacts() {
+  setItem("contacts", contactsInit);
+  setSesionStorage("contacts", contactsInit);
+}
+
+function getActualContactEmail() {
+  let email = document.getElementById(
+    "id-contact-full-mode-data-email"
+  ).textContent;
+
+  return email;
 }
 
 function getContactIndex(email) {
@@ -56,8 +70,43 @@ function getContactIndex(email) {
     }
   }
 }
+function editContactFillForm() {
+  let contactIndex = getContactIndex(getActualContactEmail());
+  if (contactIndex != undefined) {
+    let name = contactsInit[contactIndex].name;
+    let email = contactsInit[contactIndex].email;
+    let phone = contactsInit[contactIndex].phone;
+    let badge = contactsInit[contactIndex].nameInitials;
+    let colorId = contactsInit[contactIndex].color;
+    document.getElementById("id-edit-contact-input-name").value = name;
+    document.getElementById("id-edit-contact-input-email").value = email;
+    document.getElementById("id-edit-contact-input-phone").value = phone;
+    setBadge(badge, colorId);
+  }
+  currentEditingContactId = contactIndex;
+}
 
-function safeEditedContact() {}
+function setBadge(badge, colorId) {
+  let badgeDiv = document.getElementById("id-mask-contact-img-div");
+  badgeDiv.innerHTML = badge;
+  badgeDiv.style.backgroundColor = contactColor[colorId];
+}
+
+function SaveEditedContact() {
+  contactsInit[currentEditingContactId].name = document.getElementById(
+    "id-edit-contact-input-name"
+  ).value;
+  contactsInit[currentEditingContactId].email = document.getElementById(
+    "id-edit-contact-input-email"
+  ).value;
+  contactsInit[currentEditingContactId].phone = document.getElementById(
+    "id-edit-contact-input-phone"
+  ).value;
+  safeContacts();
+  closeContactFrom();
+  printContactsByLetter(contactsInit);
+  renderContactFullMode(contactsInit[currentEditingContactId]);
+}
 
 async function addNewContact() {
   let name = document.getElementById("id-add-contact-name").value;
@@ -75,8 +124,7 @@ async function addNewContact() {
     author: author,
   };
   contactsInit.push(contact);
-  await setItem("contacts", contactsInit);
-  await setSesionStorage("contacts", contactsInit);
+  safeContacts();
   closeContactFrom();
   printContactsByLetter(contactsInit);
 }
@@ -89,8 +137,6 @@ function generateBadge(name) {
   }
   return badge;
 }
-
-function editContact() {}
 
 function handleHoverButtonChangeImg(
   hoverElementId,
