@@ -14,6 +14,7 @@
     <script src="/js/w3include.js"></script>
     <script src="/js/storage.js"></script>
     <script src="/js/login.js"></script>
+    <script src="/js/contacts.js"></script>
     <script src="/script.js"></script>
     <script src="/js/add_task.js"></script>
     <script src="/js/board.js"></script>
@@ -47,15 +48,31 @@
                 </div>
                 <textarea id="description" placeholder="Enter a description"></textarea>
                 <div class="required-field-description">
-                    <span></span>
+                    <span id="placeHolder"></span>
                 </div>
             </div>
 
+            <!-- <div class="assigned-to d-flex-column-center">
+                <div class="input-description">
+                    <div class="d-flex">
+                        <span>Assigned to</span>
+                    </div>
+                </div>
+                <div class="input-field normal-border" onclick="showCheckboxes()">
+                    <input id="title" type="text" placeholder="Select contacts to assign">
+                </div>
+                <div class="overSelect"></div>
+                <div>
+                    <div class="user-list vs-hidden" id="checkboxes"></div>
+                    <div id="initialArea"></div>
+                </div>
+            </div> -->
+
             <div class="assigned-to d-flex-column-center">
                 <span class="input-description">Assigned to</span>
-                <div onclick="showCheckboxes()">
-                    <select class="input-field width-100 option-value-disabled">
-                        <option>Select contacts to assign</option>
+                <div id="assignedBtn" class="select-btn" onclick="showCheckboxes()">
+                    <select id="selectAssigned" class="input-field normal-border width-100 option-value-disabled">
+                        <option id="option">Select contacts to assign</option>
                     </select>
                     <div class="overSelect"></div>
                 </div>

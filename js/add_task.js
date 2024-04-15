@@ -35,6 +35,7 @@ inputBorderError = false;
 async function init() {
     includeHTML();
     loadTasks();
+    loadContacts();
     whichPriority();
     await loadUsers();
     currentDate();
@@ -201,7 +202,7 @@ function prioNormal(priority) {
 
 function prioActive(priority) {
     return `
-    <div id="prioUrgent" onclick="testtest(${i})" class="selection-field ${priority['bgColorTrue']}">
+    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorTrue']}">
         <span class="fz-20">${priority['text']}</span>
         <img id="imgUrgent" src="${priority['iconWhite']}">
     </div>`
@@ -217,16 +218,20 @@ function returnHtmlNewSubtasks(newSubTask) {
 function showCheckboxes() {
     let checkboxes = document.getElementById("checkboxes");
     let initialsArea = document.getElementById('initialArea');
+    // let containerUserInitialen = document.getElementById('containerUserInitialen');
 
     if (!expanded) {
-        initialsArea.innerHTML = '';
-        checkboxes.classList.toggle('vs-hidden');
+        checkboxes.classList.remove('vs-hidden');
         renderAssignedToField();
         expanded = true;
     } else {
-        checkboxes.classList.toggle('vs-hidden');
+        // containerUserInitialen.innerHTML = '';
+        checkboxes.innerHTML = '';
+        checkboxes.classList.remove('user-list');
+        checkboxes.classList.add('d-flex-initials')
+        // containerUserInitialen.classList.toggle('vs-hidden');
         expanded = false;
-        clearCheckBox();
+        showInitials();
     }
 }
 
@@ -234,20 +239,36 @@ function renderAssignedToField() {
     let userCheckBox = document.getElementById('checkboxes');
     userCheckBox.innerHTML = '';
 
-    for(i = 0; i < users.length; i++){;
-        user = users[i];
-        userCheckBox.innerHTML += `
-            <label class="single-user" for="${i}">
-            ${user['name']}<input type="checkbox" onclick="selectedUser(${i})" id="checkBox${i}" />`
+    if(!userCheckBox.classList.contains('user-list')) {
+        userCheckBox.classList.remove('d-flex-initials');
+        userCheckBox.classList.add('user-list')
     }
-    for(i = 0; i < users.length; i++){;
+
+    for(i = 0; i < contactsInit.length; i++){;
+        user = contactsInit[i];
+        userCheckBox.innerHTML += `
+            <div class="user-field">
+                <div class="single-user">
+                    <div class="initials-assigned" id="bgInitials${i}">
+                        ${user['nameInitials']}
+                    </div>
+                    <label class="typography-contacts-assigned" for="${i}">
+                    ${user['name']}
+                </div>
+                <input type="checkbox" onclick="selectedUser(${i})" id="checkBox${i}" />
+            </div>`
+            backgroundColorInitials(i);
+    }
+    for(i = 0; i < contactsInit.length; i++){;
         examineUser(i);   
     }
+
+
 }
 
 function examineUser(i) {
     let currentLabel = document.getElementById(`checkBox${i}`);
-    let currentName = users[i]['name'];
+    let currentName = contactsInit[i]['name'];
 
     if(checkedUsers.length > 0) {
         if(checkedUsers.includes(currentName)) {
@@ -256,8 +277,16 @@ function examineUser(i) {
     }
 }
 
+function backgroundColorInitials(i) {
+    let bgInitials = document.getElementById(`bgInitials${i}`)
+    let currentColor = contactsInit[i]['color'];
+    let bgColor = contactColor[currentColor];
+
+    bgInitials.style.backgroundColor = bgColor;
+}
+
 function selectedUser(i) {
-    let singleUser = users[i]['name'];
+    let singleUser = contactsInit[i]['name'];
     let currentIndex = checkedUsers.indexOf(singleUser);
 
     if(!checkedUsers.includes(singleUser, 0)) {
@@ -268,15 +297,16 @@ function selectedUser(i) {
     setItem('checkedUsers', checkedUsers);
 }
 
-function clearCheckBox() {
-    let checkBox = document.getElementById('checkboxes');
-    checkBox.innerHTML = '';
+// function clearCheckBox() {
+//     let checkBox = document.getElementById('checkboxes');
+//     checkBox.innerHTML = '';
 
-    showInitials();
-}
+//     showInitials();
+// }
 
 function showInitials() {
-    let initialsArea = document.getElementById('initialArea');
+    let initialsArea = document.getElementById('checkboxes');
+    // let containerUserInitialen = document.getElementById('containerUserInitialen');
     initialsArea.innerHTML = '';
 
     for(i = 0; i < checkedUsers.length; i++) {
@@ -319,21 +349,61 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     let title = document.getElementById('title');
     let requiredTitle = document.getElementById('requiredTitle');
+    let textArea = document.getElementById('description');
 
-    title.addEventListener('click', changeBorder);
-    title.addEventListener('keydown', changeBorder);
+    title.addEventListener('click', function() {
+        changeBorder(title, requiredTitle);
+    });
+
+    title.addEventListener('keydown', function() {
+        changeBorder(title, requiredTitle);
+    });
+
+    // title.addEventListener('click', changeBorder(title, requiredTitle));
+    // title.addEventListener('keydown', changeBorder(title, requiredTitle));
+    // textArea.addEventListener('click', changeBorder);
     
-    function changeBorder() {
-        title.classList.remove('fill-border');
+    function changeBorder(test12, test34) {
+        test12.classList.remove('fill-border');
 
         if (inputBorderError == false) {
-            requiredTitle.classList.remove('vs-hidden');
-            title.classList.add('error-border');
+            test34.classList.remove('vs-hidden');
+            test12.classList.add('error-border');
             inputBorderError = true;
         } else {
-            requiredTitle.classList.add('vs-hidden');
-            title.classList.remove('error-border');
-            title.classList.add('fill-border');
+            test34.classList.add('vs-hidden');
+            test12.classList.remove('error-border');
+            test12.classList.add('fill-border');
         }
     }
 })
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     let assignedBtn = document.getElementById('assignedBtn');
+//     let selectAssigned = document.getElementById('selectAssigned');
+//     let option = document.getElementById('option');
+
+//     assignedBtn.addEventListener('click', function() {
+//         changeBorder();
+//     });
+
+//     function changeBorder() {
+//         selectAssigned.classList.remove('normal-border');
+//         selectAssigned.classList.add('fill-border');
+//         option.innerHTML = '';
+//     }
+    // selectAssigned.addEventListener('keydown', changeBorder);
+    
+    // function changeBorder() {
+    //     dateInput.classList.remove('fill-border');
+
+    //     if (inputBorderError == false) {
+    //         requiredDate.classList.remove('vs-hidden');
+    //         dateInput.classList.add('error-border');
+    //         inputBorderError = true;
+    //     } else {
+    //         requiredDate.classList.add('vs-hidden');
+    //         dateInput.classList.remove('error-border');
+    //         dateInput.classList.add('fill-border');
+    //     }
+// })
