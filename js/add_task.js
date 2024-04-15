@@ -271,9 +271,9 @@ function renderAssignedToField() {
 
 function returnHtmlSingleContact(user) {
     return `
-    <div class="hover-assigned" id="paddingForChecked${i}" onclick="selectedUser(${i})">
-        <div class="user-field" id="userField${i}">
-            <div class="single-user"">
+    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i})">
+        <div class="user-field hover-user-field" id="userField${i}">
+            <div class="single-user">
                 <div class="initials-assigned initials" id="bgInitials${i}">
                     ${user['nameInitials']}
                 </div>
@@ -330,8 +330,10 @@ function selectedUser(i) {
     if(!checkedUsers.includes(singleUser, 0)) {
         checkedUsers.push(singleUser);
         checkBox.classList.remove('box-unchecked');
+        userField.classList.remove('hover-user-field');
         paddingForChecked.classList.add('pd-right-16');
         userField.classList.add('bg-checked');
+        paddingForChecked.classList.add('hover-assigned')
     } else {
         checkedUsers.splice(currentIndex, 1);
         checkBox.classList.add('box-unchecked');
