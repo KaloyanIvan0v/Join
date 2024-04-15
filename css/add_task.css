@@ -512,7 +512,6 @@ h2 {
 }
 
 .bg-checked {
-    background-color: #2A3647;
     color: #FFFFFF;
     background-image: url('/img/Check\ button.png');
     background-repeat: no-repeat;
@@ -525,7 +524,14 @@ h2 {
     border-radius: 10px;
 }
 
-.user-field:hover {
+.hover-assigned:hover {
+    background-color: #091931;
+}
+
+textarea:focus-visible {
+    outline: none;
+}
+
+.hover-user-field:hover {
     background-color: #EEEE;
-    cursor: pointer;
 }
