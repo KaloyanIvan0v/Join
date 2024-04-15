@@ -232,10 +232,10 @@ h2 {
     top: 336px;
 }
 
-.size-check {
+/* .size-check {
     width: 14px;
     height: 14px;
-}
+} */
 
 .option-value * {
     padding: 24px;
@@ -359,7 +359,7 @@ h2 {
 .icon-subtask-field {
     display: flex;
     align-items: center;
-    padding: 12px 16px;
+    padding: 12px 8px;
     background-color: #FFFFFF;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
@@ -369,16 +369,22 @@ h2 {
     cursor: pointer;
 }
 
+.list-element-subtasks {
+    display: flex;
+    justify-content: space-between;
+}
+
 .active-input-subtasks {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 12px 16px;
+    /* padding: 12px 16px; */
     gap: 4px;
 }
 
 .height-24 {
     height: 24px;
+    color: #D1D1D1;
 }
 
 .bg-dialog {
@@ -418,14 +424,18 @@ h2 {
     position: relative;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 10px;
-    /* padding: 12px 16px; */
     margin-top: -10px;
     padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 .d-flex-initials {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
+    margin-top: 8px;
 }
 
 .select-btn {
@@ -443,24 +453,34 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.typography-contacts-assigned {
-    font-size: 20px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
+    border-radius: 10px;
 }
 
 .initials-assigned {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.typography-contacts-assigned {
+    /* display: flex;
+    align-items: center; */
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.initials {
     font-size: 12px;
     line-height: 14.4px;
     height: 42px;
     width: 42px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #FFFFFF;
 }
   
 .overSelect {
@@ -476,6 +496,31 @@ h2 {
     gap: 10px;
 }
 
-.initial-area {
-    display: flex;
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.box-unchecked {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #2A3647;
+    border-radius: 3px;
+}
+
+.box-checked {
+    background-color: #2A3647;
+}
+
+.bg-checked {
+    background-color: #2A3647;
+    color: #FFFFFF;
+    background-image: url('/img/Check\ button.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+.pd-right-16 {
+    background-color: #2A3647;
+    padding-right: 14px;
+    border-radius: 10px;
 }

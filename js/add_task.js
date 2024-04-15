@@ -30,7 +30,7 @@ let priorities = [
 ]
 let checkChangeIcons = false;
 let expanded = false;
-inputBorderError = false;
+let inputBorderError = false;
 
 async function init() {
     includeHTML();
@@ -91,7 +91,6 @@ async function loadTasks() {
 async function addTask() {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
-    // let assignedTo = document.getElementById('assignedTo');
     let dueDate = document.getElementById('dueDate');
     let category = document.getElementById('category');
     let subTasks =  document.getElementById('subTasks');
@@ -183,7 +182,7 @@ function returnHtmlCheckAndClear() {
     <div id="activeInputSubtask" class="active-input-subtasks">
         <a onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
         <span class="height-24">|</span>
-        <a onclick="addNewSubTask()"><img class="size-check" src="/img/check_black.png"></a>
+        <a onclick="addNewSubTask()"><img src="/img/Property 1=check.png"></a>
     </div>`
 }
 
@@ -210,8 +209,12 @@ function prioActive(priority) {
 
 function returnHtmlNewSubtasks(newSubTask) {
     return `
-    <ul>
+    <ul class="list-element-subtasks">
         <li>${newSubTask}</li>
+        <div class="icons-new-subtasks">
+            <img src="/img/trashbin.png">
+            <img src="/img/Vector 3.png">
+            <img src="/img/edit_pencil.png">
     </ul>`
 }
 
@@ -247,52 +250,75 @@ function renderAssignedToField() {
     for(i = 0; i < contactsInit.length; i++){;
         user = contactsInit[i];
         userCheckBox.innerHTML += `
-            <div class="user-field">
-                <div class="single-user">
-                    <div class="initials-assigned" id="bgInitials${i}">
+        <div id="paddingForChecked${i}">
+            <div class="user-field" id="userField${i}">
+                <div class="single-user" onclick="selectedUser(${i})">
+                    <div class="initials-assigned initials" id="bgInitials${i}">
                         ${user['nameInitials']}
                     </div>
-                    <label class="typography-contacts-assigned" for="${i}">
-                    ${user['name']}
+                    <span class="typography-contacts-assigned">${user['name']}</span>
                 </div>
-                <input type="checkbox" onclick="selectedUser(${i})" id="checkBox${i}" />
-            </div>`
+                <label class="custom-checkbox" for="box${i}">
+                <input type="checkbox" />
+                <div id="checkBox${i}" class="box-unchecked">
+                    <span></span>
+                </div>
+            </div>
+        </div>`
             backgroundColorInitials(i);
     }
     for(i = 0; i < contactsInit.length; i++){;
         examineUser(i);   
     }
-
-
 }
 
 function examineUser(i) {
     let currentLabel = document.getElementById(`checkBox${i}`);
     let currentName = contactsInit[i]['name'];
+    let checkBox = document.getElementById(`checkBox${i}`);
+    let userField = document.getElementById(`userField${i}`);
+    let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
 
     if(checkedUsers.length > 0) {
         if(checkedUsers.includes(currentName)) {
-            currentLabel.checked = true;
+            // currentLabel.checked = true;
+            checkBox.classList.remove('box-unchecked');
+            paddingForChecked.classList.add('pd-right-16');
+            userField.classList.add('bg-checked');
         }
     }
 }
 
-function backgroundColorInitials(i) {
-    let bgInitials = document.getElementById(`bgInitials${i}`)
+function backgroundColorInitials(i, whichArea) {
     let currentColor = contactsInit[i]['color'];
     let bgColor = contactColor[currentColor];
 
-    bgInitials.style.backgroundColor = bgColor;
+    if(whichArea == 'showInitial') {
+        let bgInitials = document.getElementById(`initialArea${i}`);
+        bgInitials.style.backgroundColor = bgColor;
+    } else {
+        let bgInitials = document.getElementById(`bgInitials${i}`)
+        bgInitials.style.backgroundColor = bgColor;
+    }
 }
 
 function selectedUser(i) {
     let singleUser = contactsInit[i]['name'];
     let currentIndex = checkedUsers.indexOf(singleUser);
+    let checkBox = document.getElementById(`checkBox${i}`);
+    let userField = document.getElementById(`userField${i}`);
+    let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
 
     if(!checkedUsers.includes(singleUser, 0)) {
         checkedUsers.push(singleUser);
+        checkBox.classList.remove('box-unchecked');
+        paddingForChecked.classList.add('pd-right-16');
+        userField.classList.add('bg-checked');
     } else {
         checkedUsers.splice(currentIndex, 1);
+        checkBox.classList.add('box-unchecked');
+        paddingForChecked.classList.remove('pd-right-16');
+        userField.classList.remove('bg-checked');
     }
     setItem('checkedUsers', checkedUsers);
 }
@@ -320,21 +346,33 @@ function showInitials() {
         } else {
             initial = firstLetter;
         }
-        initialsArea.innerHTML += `<div class="initial-area">${initial}</div>`
+        initialsArea.innerHTML += `<div id="initialArea${i}" class="initial-area initials">${initial}</div>`
+        backgroundColorInitials(i, 'showInitial');
     }
 }
 
+// <--------------Funktionen für EventListener----------------------->
+
 document.addEventListener('DOMContentLoaded', function() {
     let dateInput = document.getElementById('dueDate');
+
     let requiredDate = document.getElementById('requiredDate');
 
     dateInput.addEventListener('change', changeBorder);
     dateInput.addEventListener('keydown', changeBorder);
+    dateInput.addEventListener('blur', function() {
+        resetDateInput(dateInput, requiredDate);
+    })
     
     function changeBorder() {
         dateInput.classList.remove('fill-border');
+        let dateInputValue = dateInput.value;
 
-        if (inputBorderError == false) {
+        if (inputBorderError == false && dateInputValue == '') {
+            requiredDate.classList.remove('vs-hidden');
+            dateInput.classList.add('error-border');
+            inputBorderError = true;
+        } else if(dateInputValue == '') {
             requiredDate.classList.remove('vs-hidden');
             dateInput.classList.add('error-border');
             inputBorderError = true;
@@ -342,6 +380,15 @@ document.addEventListener('DOMContentLoaded', function() {
             requiredDate.classList.add('vs-hidden');
             dateInput.classList.remove('error-border');
             dateInput.classList.add('fill-border');
+            inputBorderError = false;
+        }
+    }
+
+    function resetDateInput(dateInput, requiredDate) {
+        if(inputBorderError == false) {
+            requiredDate.classList.add('vs-hidden');
+            dateInput.classList.remove('error-border');
+            dateInput.classList.remove('fill-border');
         }
     }
 });
@@ -349,7 +396,6 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     let title = document.getElementById('title');
     let requiredTitle = document.getElementById('requiredTitle');
-    let textArea = document.getElementById('description');
 
     title.addEventListener('click', function() {
         changeBorder(title, requiredTitle);
@@ -359,51 +405,35 @@ document.addEventListener('DOMContentLoaded', function() {
         changeBorder(title, requiredTitle);
     });
 
-    // title.addEventListener('click', changeBorder(title, requiredTitle));
-    // title.addEventListener('keydown', changeBorder(title, requiredTitle));
-    // textArea.addEventListener('click', changeBorder);
+    title.addEventListener('blur', function() {
+        resetInputTitle(title, requiredTitle);
+    })
     
     function changeBorder(test12, test34) {
         test12.classList.remove('fill-border');
+        let test12Value = test12.value;
 
-        if (inputBorderError == false) {
+        if (test12Value == '' && inputBorderError == false) {
             test34.classList.remove('vs-hidden');
             test12.classList.add('error-border');
-            inputBorderError = true;
-        } else {
+            inputBorderError = false;
+        } else if(test12Value.length == 1) {
+            test34.classList.remove('vs-hidden');
+            test12.classList.add('error-border');
+            inputBorderError = false;
+        } else if(test12Value.length >= 0) {
             test34.classList.add('vs-hidden');
             test12.classList.remove('error-border');
             test12.classList.add('fill-border');
+            inputBorderError = false;
         }
     }
+
+    function resetInputTitle(test12, test34) {
+        test34.classList.add('vs-hidden');
+        test12.classList.remove('error-border');
+        test12.classList.remove('fill-border');
+
+        inputBorderError = false;
+    }
 })
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     let assignedBtn = document.getElementById('assignedBtn');
-//     let selectAssigned = document.getElementById('selectAssigned');
-//     let option = document.getElementById('option');
-
-//     assignedBtn.addEventListener('click', function() {
-//         changeBorder();
-//     });
-
-//     function changeBorder() {
-//         selectAssigned.classList.remove('normal-border');
-//         selectAssigned.classList.add('fill-border');
-//         option.innerHTML = '';
-//     }
-    // selectAssigned.addEventListener('keydown', changeBorder);
-    
-    // function changeBorder() {
-    //     dateInput.classList.remove('fill-border');
-
-    //     if (inputBorderError == false) {
-    //         requiredDate.classList.remove('vs-hidden');
-    //         dateInput.classList.add('error-border');
-    //         inputBorderError = true;
-    //     } else {
-    //         requiredDate.classList.add('vs-hidden');
-    //         dateInput.classList.remove('error-border');
-    //         dateInput.classList.add('fill-border');
-    //     }
-// })
