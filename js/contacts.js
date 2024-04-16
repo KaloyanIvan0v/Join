@@ -3,29 +3,41 @@ let currentEditingContactId;
 async function initContacts() {
   includeHTML();
   await loadContacts();
-  printContactsByLetter(contactsInit);
+  renderContacts(contactsInit);
 }
 
 function openContactForm(form) {
   let contactForm = document.getElementById("id-contact-form");
   if (form === "addContact") {
-    setTimeout(function () {
-      handleHoverButtonChangeImg(
-        ".contact-form-cancel-btn",
-        ".img-close-contact-form",
-        'url("../img/close.png")',
-        'url("../img/close-blue.png")'
-      );
-    }, 20);
-    contactForm.innerHTML = `<div class="contact-form" w3-include-html="../templates/add-contact.html"></div>`;
+    loadAddContactTemplate(contactForm);
   } else {
-    contactForm.innerHTML = `<div class="contact-form" w3-include-html="../templates/edit-contact.html"></div>`;
-    setTimeout(function () {
-      editContactFillForm();
-    }, 25);
+    loadEditContactTemplate(contactForm);
   }
   includeHTML();
   contactForm.classList.remove("hide");
+}
+
+function loadAddContactTemplate(element) {
+  handleHoverButtonChangeImgDelayed();
+  element.innerHTML = `<div class="contact-form" w3-include-html="../templates/add-contact.html"></div>`;
+}
+
+function loadEditContactTemplate(element) {
+  element.innerHTML = `<div class="contact-form" w3-include-html="../templates/edit-contact.html"></div>`;
+  setTimeout(function () {
+    editContactFillForm();
+  }, 25);
+}
+
+function handleHoverButtonChangeImgDelayed() {
+  setTimeout(function () {
+    handleHoverButtonChangeImg(
+      ".contact-form-cancel-btn",
+      ".img-close-contact-form",
+      'url("../img/close.png")',
+      'url("../img/close-blue.png")'
+    );
+  }, 25);
 }
 
 function closeContactFrom(event) {
@@ -45,7 +57,7 @@ async function deleteContact(event) {
   if (contactIndex != undefined) {
     contactsInit.splice(contactIndex, 1);
     document.getElementById("id-contact-full-mode").innerHTML = "";
-    printContactsByLetter(contactsInit);
+    renderContacts(contactsInit);
     safeContacts();
   }
 }
@@ -70,6 +82,7 @@ function getContactIndex(email) {
     }
   }
 }
+
 function editContactFillForm() {
   let contactIndex = getContactIndex(getActualContactEmail());
   if (contactIndex != undefined) {
@@ -104,7 +117,7 @@ function SaveEditedContact() {
   ).value;
   safeContacts();
   closeContactFrom();
-  printContactsByLetter(contactsInit);
+  renderContacts(contactsInit);
   renderContactFullMode(contactsInit[currentEditingContactId]);
 }
 
@@ -126,7 +139,7 @@ async function addNewContact() {
   contactsInit.push(contact);
   safeContacts();
   closeContactFrom();
-  printContactsByLetter(contactsInit);
+  renderContacts(contactsInit);
 }
 
 function generateBadge(name) {
@@ -154,12 +167,11 @@ function handleHoverButtonChangeImg(
   });
 }
 
-function printContactsByLetter(contacts) {
-  const contactList = document.getElementById("id-contact-inner-list");
-  const sortedContacts = contacts.sort((a, b) => a.name.localeCompare(b.name));
+function renderContacts(contacts) {
   let currentLetter = null;
-  contactList.innerHTML = "";
-
+  const contactList = document.getElementById("id-contact-inner-list");
+  let sortedContacts = sortListAlphabetically(contacts);
+  clearElementById("id-contact-inner-list");
   for (let i = 0; i < sortedContacts.length; i++) {
     const firstLetter = sortedContacts[i].name.charAt(0).toUpperCase();
     if (firstLetter !== currentLetter) {
@@ -172,6 +184,38 @@ function printContactsByLetter(contacts) {
       sortedContacts[i].color
     );
   }
+}
+
+function renderContacts(contacts) {
+  let sortedContacts = sortListAlphabetically(contacts);
+  clearElementById("id-contact-inner-list");
+  renderSortedContacts(sortedContacts);
+}
+
+function renderSortedContacts(sortedContacts) {
+  let currentLetter = null;
+  const contactList = document.getElementById("id-contact-inner-list");
+  for (let i = 0; i < sortedContacts.length; i++) {
+    const firstLetter = sortedContacts[i].name.charAt(0).toUpperCase();
+    if (firstLetter !== currentLetter) {
+      contactList.innerHTML += renderLetterSectionHTML(firstLetter);
+      currentLetter = firstLetter;
+    }
+    renderContact(sortedContacts[i], contactList, i);
+    setElementBackgroundColor(
+      `id-contact-list-badges${i}`,
+      sortedContacts[i].color
+    );
+  }
+}
+
+function clearElementById(id) {
+  document.getElementById(id).innerHTML = "";
+}
+
+function sortListAlphabetically(list) {
+  const sortedList = list.sort((a, b) => a.name.localeCompare(b.name));
+  return sortedList;
 }
 
 function renderLetterSectionHTML(firstLetter) {

@@ -113,28 +113,29 @@ function inputClicked(id) {
         document.getElementById(id + "-img").src = "../img/visibility.png";
       }
     } else {
-      document.getElementById("password0-img").src = "../img/lock.svg";
-      document.getElementById("password1-img").src = "../img/lock.svg";
-      document.getElementById("password0").type = "password";
-      document.getElementById("password1").type = "password";
-      pswVisibility = [false, false];
+      hidePasswordInput();
     }
   }
 }
 
+function hidePasswordInput() {
+  document.getElementById("password0-img").src = "../img/lock.svg";
+  document.getElementById("password1-img").src = "../img/lock.svg";
+  document.getElementById("password0").type = "password";
+  document.getElementById("password1").type = "password";
+  pswVisibility = [false, false];
+}
+
 function togglePswVisibility(id) {
   let img = document.getElementById(id);
-  let index = id === "password0-img" ? 0 : 1; // Corrected the id comparison
-
+  let index = id === "password0-img" ? 0 : 1;
   if (pswVisibility[index] === false) {
     img.src = "../img/visibility.png";
     pswVisibility[index] = true;
-    document.getElementById("password" + index).type = "text"; // Changed the id construction
+    document.getElementById("password" + index).type = "text";
   } else {
     img.src = "../img/visibility_off.png";
     pswVisibility[index] = false;
-    document.getElementById("password" + index).type = "password"; // Changed the id construction
+    document.getElementById("password" + index).type = "password";
   }
 }
-
-function signUpSuccessful() {}

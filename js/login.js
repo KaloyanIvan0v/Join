@@ -117,6 +117,10 @@ function setPwdInputEventListeners() {
 }
 
 function inputClicked(id) {
+  confingPwdVisibility(id);
+}
+
+function confingPwdVisibility(id) {
   if (id != "password0-img") {
     if (id == "password0") {
       if (pswVisibility == false) {
@@ -125,11 +129,15 @@ function inputClicked(id) {
         document.getElementById(id + "-img").src = "../img/visibility.png";
       }
     } else {
-      document.getElementById("password0-img").src = "../img/lock.svg";
-      document.getElementById("password0").type = "password";
-      pswVisibility = false;
+      hidePasswordInput();
     }
   }
+}
+
+function hidePasswordInput() {
+  document.getElementById("password0-img").src = "../img/lock.svg";
+  document.getElementById("password0").type = "password";
+  pswVisibility = false;
 }
 
 function togglePswVisibility(id) {
@@ -137,11 +145,11 @@ function togglePswVisibility(id) {
   if (pswVisibility == false) {
     img.src = "../img/visibility.png";
     pswVisibility = true;
-    document.getElementById("password0").type = "text"; // Changed the id construction
+    document.getElementById("password0").type = "text";
   } else {
     img.src = "../img/visibility_off.png";
     pswVisibility = false;
-    document.getElementById("password0").type = "password"; // Changed the id construction
+    document.getElementById("password0").type = "password";
   }
 }
 
