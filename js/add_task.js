@@ -221,8 +221,12 @@ function renderAssignedToField() {
             returnHtmlSingleContact(user);
             backgroundColorInitials(i);
     }
-    for(i = 0; i < contactsInit.length; i++){;
-        examineUser(i);   
+
+    if(checkedUsers.length > 0) {
+
+        for(i = 0; i < contactsInit.length; i++){;
+            examineUser(i);   
+        }
     }
 }
 
@@ -233,19 +237,16 @@ function examineUser(i) {
     let userField = document.getElementById(`userField${i}`);
     let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
     let index = checkedUsers.findIndex(item => JSON.stringify(item['name']) === JSON.stringify(currentName));
-
-    if(checkedUsers.length > 0) {
-        // if(checkedUsers.includes(currentName)) {
-            if(index != -1) {
-            // currentLabel.checked = true;
-            checkBox.classList.remove('box-unchecked');
-            paddingForChecked.classList.add('pd-right-16');
-            userField.classList.add('bg-checked');
-            userField.classList.remove('hover-user-field');
-            // paddingForChecked.classList.add('pd-right-16');
-            // userField.classList.add('bg-checked');
-            paddingForChecked.classList.add('hover-assigned')
-        }
+        
+    if(index != -1) {
+       // currentLabel.checked = true;
+    checkBox.classList.remove('box-unchecked');
+    paddingForChecked.classList.add('pd-right-16');
+    userField.classList.add('bg-checked');
+    userField.classList.remove('hover-user-field');
+    // paddingForChecked.classList.add('pd-right-16');
+    // userField.classList.add('bg-checked');
+    paddingForChecked.classList.add('hover-assigned')
     }
 }
 
@@ -283,6 +284,8 @@ function selectedUser(i) {
         checkBox.classList.add('box-unchecked');
         paddingForChecked.classList.remove('pd-right-16');
         userField.classList.remove('bg-checked');
+        paddingForChecked.classList.remove('hover-assigned');
+        userField.classList.add('hover-user-field');
     }
     setItem('checkedUsers', checkedUsers);
 }

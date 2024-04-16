@@ -535,3 +535,11 @@ textarea:focus-visible {
 .hover-user-field:hover {
     background-color: #EEEE;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url('/img/calender_icon.png'); 
+    background-size: cover;
+    width: 18px;
+    height: 20px;
+    cursor: pointer;
+  }
