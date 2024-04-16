@@ -175,6 +175,7 @@ input:focus {
     font-size: 16px;
     line-height: 19.2px;
     font-weight: 400;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
 }
 
 .task-card-category {
@@ -190,11 +191,11 @@ input:focus {
 }
 
 .bg-color-technical-task {
-    background-color: #0038FF;
+    background-color: #1FD7C1;
 }
 
 .bg-color-user-story {
-    background-color: #1FD7C1;
+    background-color: #0038FF;
 }
 
 .which-category {
@@ -217,7 +218,7 @@ input:focus {
 .subtasks-contacts {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 24px;
 }
 
 .header-area-card {
@@ -265,8 +266,10 @@ input:focus {
 
 .overlay-category {
     padding: 4px 24px;
-    border-radius: 10px;
-    /* gap: 10px; */
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 23px;
+    line-height: 27.6px;
 }
 
 .overlay-title {
@@ -289,6 +292,34 @@ input:focus {
     width: 100%;
     display: flex;
     gap: 25px;
+}
+
+.overlay-prio {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.prio-name-image {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 18px;
+}
+
+.font-overlay {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.font-overlay-subtasks {
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.input-subtasks-overlay {
+    display: flex;
+    flex-direction: column;
 }
 
 .overlay-assigned {

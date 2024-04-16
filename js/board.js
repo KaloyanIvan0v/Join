@@ -55,7 +55,11 @@ function showCurrentTask(i) {
 
     backgroundDialog.classList.toggle('background-dialog');
     dialogField.innerHTML = '';
-    dialogField.innerHTML = returnHtmlCurrentTask(currentTask);
+    dialogField.innerHTML = returnHtmlCurrentTask(currentTask, i);
+    chooseCategoryColor(i);
+    whichPriorityTaskCard(i);
+    renderContactsBoard(i);
+    renderSubTasksBoard(i);
 }
 
 function renderSubTasksBoard(i) {
@@ -110,7 +114,7 @@ function returnHtmlShowToDos(singleTask, i) {
 
         <div class="subtasks-contacts">
             <div class="subtasks-loadbar-number">
-                <span><i>loadbar</i></span>
+                <span><i>loadbar must do</i></span>
                 <div class="number-done-subtasks">
                     <span>${finishedSubTasks.length}/</span>
                     <span>${singleTask['subTasks'].length} Subtasks</span>
@@ -126,47 +130,44 @@ function returnHtmlShowToDos(singleTask, i) {
         </div>`
 }
 
-{/* <span id="subTasksField${i}" class="style-sub-tasks"></span> */}
-
-
-function returnHtmlCurrentTask(overlayTask) {
+function returnHtmlCurrentTask(overlayTask, i) {
     return `
     <div class="overlay-first-row">
-        <div class="overlay-category" id="overlayCategoryField">${overlayTask['category']}</div>
+        <div class="overlay-category" id="categoryField${i}">${overlayTask['category']}</div>
         <a onclick="showCurrentTask()">X</a>
     </div>
     <div class="overlay-title">
         ${overlayTask['title']}
     </div>
-    <div class="overlay-description">
+    <div class="overlay-description font-overlay">
         ${overlayTask['description']}
     </div>
-    <div class="overlay-date">
+    <div class="overlay-date font-overlay">
         <span>Due Date:</span>
         <span>${overlayTask['dueDate']}</span>
     </div>
-    <div class="overlay-assigned">
-        <span>Assigned To:</span>
-        <div class="overlay-assigned-contacts">
-            <span>Test</span>
-            <span>Test</span>
-            <span>Test</span>
+    <div class="overlay-prio font-overlay">
+        <span>Priority:</span>
+        <div class="prio-name-image">
+            <span>${overlayTask['prio']}</span>
+            <div id="prioField${i}"></div>
         </div>
     </div>
-    <div class="overlay-assigned">
-    <span>Subtasks</span>
-    <div class="overlay-assigned-contacts">
-        <span>Test</span>
-        <span>Test</span>
-        <span>Test</span>
+    <div class="overlay-assigned font-overlay">
+        <span>Assigned To:</span>
+        <div id="contactsFieldBoard(${i})" class="overlay-assigned-contacts"></div>
     </div>
+    <div class="overlay-subtasks font-overlay">
+    <span>Subtasks</span>
+    <div id="subTasksField${i}" class="input-subtasks-overlay"></div>
 </div>
     </div>`
 }
 
 function returnHtmlSubtasks(subTask) {
     return `
-    <span class="style-sub-tasks">${subTask}</span>`
+    <label class="style-sub-tasks font-overlay-subtasks" for="box${i}">
+    <input type="checkbox">${subTask}</label>`
 }
 
 function returnHtmlContacts(contactForTask, j) {
