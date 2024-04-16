@@ -1,3 +1,5 @@
+let finishedSubTasks = [];
+
 async function init_board() {
     includeHTML();
     loadNewTasks();
@@ -42,7 +44,8 @@ function whichPriorityTaskCard(i) {
     } else {
         prioField.innerHTML = '<img src="' + '/img/urgent_red.png' + '" alt="Bildbeschreibung">'
     }
-    renderSubTasksBoard(i);
+    // renderSubTasksBoard(i);
+    renderContactsBoard(i);
 }
 
 function showCurrentTask(i) {
@@ -75,9 +78,7 @@ function renderContactsBoard(i) {
     for(j = 0; j < contactsForTask.length; j++) {
         let contactForTask = contactsForTask[j];
         contactsFieldBoard.innerHTML += returnHtmlContacts(contactForTask, j);
-        backgroundColorInitialsBoard(i, j);
-        let initialArea = document.getElementById(`initialArea${j}`);
-        initialArea.removeAttribute('id');
+        backgroundColorInitialsBoard(i, j);        
     }
 }
 
@@ -86,6 +87,7 @@ function backgroundColorInitialsBoard(i, j) {
     let colorNumber = tasks[i]['checkedUsers'][j]['color'];
     let bgColor = contactColor[colorNumber];
     initialArea.style.backgroundColor = bgColor;
+    initialArea.removeAttribute('id');
 }
 
 function returnHtmlShowToDos(singleTask, i) {
@@ -106,20 +108,26 @@ function returnHtmlShowToDos(singleTask, i) {
             </div>
         </div>
 
-        <div class="">
-            <div class="">
+        <div class="subtasks-contacts">
+            <div class="subtasks-loadbar-number">
                 <span><i>loadbar</i></span>
-                <span id="subTasksField${i}" class="style-sub-tasks"></span>
+                <div class="number-done-subtasks">
+                    <span>${finishedSubTasks.length}/</span>
+                    <span>${singleTask['subTasks'].length} Subtasks</span>
+                </div>
             </div>
-        </div>
 
-        <div class="last-section-card">
-            <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
-            <div id="prioField${i}" class="prio-field">
-                ${singleTask['prio']}
+            <div class="contacts-area">
+                <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
+                <div id="prioField${i}" class="prio-field">
+                    ${singleTask['prio']}
+                </div>
             </div>
         </div>`
 }
+
+{/* <span id="subTasksField${i}" class="style-sub-tasks"></span> */}
+
 
 function returnHtmlCurrentTask(overlayTask) {
     return `

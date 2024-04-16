@@ -28,6 +28,18 @@ body {
     padding-left: 8px;
 }
 
+.number-done-subtasks {
+    display: flex;
+    font-size: 12px;
+    line-height: 14.4px;
+}
+
+.subtasks-loadbar-number {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .contact-board {
     width: 32px;
     height: 32px;
@@ -196,9 +208,16 @@ input:focus {
     justify-content: space-between;
 }
 
-.last-section-card {
+.contacts-area {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.subtasks-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .header-area-card {
