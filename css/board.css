@@ -23,6 +23,24 @@ body {
     left: 232px;
 }
 
+.contacts-board {
+    display: flex;
+    padding-left: 8px;
+}
+
+.contact-board {
+    width: 32px;
+    height: 32px;
+    border-radius: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #FFFFFF;
+    font-size: 12px;
+    line-height: 14.4px;
+    margin-left: -8px;
+}
+
 .find-add-board {
     display: flex;
     align-items: center;

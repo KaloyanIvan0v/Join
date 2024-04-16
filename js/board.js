@@ -1,10 +1,12 @@
-function init_board() {
+async function init_board() {
     includeHTML();
     loadNewTasks();
+    await loadContacts();
 }
 
 async function loadNewTasks() {
     tasks = JSON.parse(await getItem('tasks'));
+    checkedUsers = JSON.parse(await getItem('checkedUsers'));
     let toDoField = document.getElementById('categoryToDo');
 
     toDoField.innerHTML = '';
@@ -34,12 +36,13 @@ function whichPriorityTaskCard(i) {
     prioField.innerHTML = '';
 
     if(singleTaskPrio == 'Low') {
-        prioField.innerHTML = '<img src="' + '../img/prio_low.png' + '" alt="Bildbeschreibung">'
+        prioField.innerHTML = '<img src="' + '/img/low_green.png' + '" alt="Bildbeschreibung">'
     } else if(singleTaskPrio == 'medium') {
-        prioField.innerHTML = '<img src="' + '../img/prio_medium_orange.png' + '" alt="Bildbeschreibung">'
+        prioField.innerHTML = '<img src="' + '/img/medium_orange.png' + '" alt="Bildbeschreibung">'
     } else {
-        prioField.innerHTML = '<img src="' + '../img/prio_urgent.png' + '" alt="Bildbeschreibung">'
+        prioField.innerHTML = '<img src="' + '/img/urgent_red.png' + '" alt="Bildbeschreibung">'
     }
+    renderSubTasksBoard(i);
 }
 
 function showCurrentTask(i) {
@@ -52,9 +55,38 @@ function showCurrentTask(i) {
     dialogField.innerHTML = returnHtmlCurrentTask(currentTask);
 }
 
-// function searchTask() {
+function renderSubTasksBoard(i) {
+    let subTasksField = document.getElementById(`subTasksField${i}`);
+    let subTasks = tasks[i]['subTasks'];
+    subTasksField.innerHTML = '';
 
-// }
+    for(j = 0; j < subTasks.length; j++) {
+        let subTask = subTasks[j];
+        subTasksField.innerHTML += returnHtmlSubtasks(subTask);
+    }
+    renderContactsBoard(i)
+}
+
+function renderContactsBoard(i) {
+    let contactsFieldBoard = document.getElementById(`contactsFieldBoard(${i})`);
+    let contactsForTask = tasks[i]['assignedTo'];
+    contactsFieldBoard.innerHTML = '';
+
+    for(j = 0; j < contactsForTask.length; j++) {
+        let contactForTask = contactsForTask[j];
+        contactsFieldBoard.innerHTML += returnHtmlContacts(contactForTask, j);
+        backgroundColorInitialsBoard(i, j);
+        let initialArea = document.getElementById(`initialArea${j}`);
+        initialArea.removeAttribute('id');
+    }
+}
+
+function backgroundColorInitialsBoard(i, j) {
+    let initialArea = document.getElementById(`initialArea${j}`);
+    let colorNumber = tasks[i]['checkedUsers'][j]['color'];
+    let bgColor = contactColor[colorNumber];
+    initialArea.style.backgroundColor = bgColor;
+}
 
 function returnHtmlShowToDos(singleTask, i) {
     return `
@@ -77,14 +109,12 @@ function returnHtmlShowToDos(singleTask, i) {
         <div class="">
             <div class="">
                 <span><i>loadbar</i></span>
-                <span class="style-sub-tasks">${singleTask['subTasks']}</span>
+                <span id="subTasksField${i}" class="style-sub-tasks"></span>
             </div>
         </div>
 
         <div class="last-section-card">
-            <div class="">
-                ${singleTask['assignedTo']}
-            </div>
+            <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
             <div id="prioField${i}" class="prio-field">
                 ${singleTask['prio']}
             </div>
@@ -124,4 +154,14 @@ function returnHtmlCurrentTask(overlayTask) {
     </div>
 </div>
     </div>`
+}
+
+function returnHtmlSubtasks(subTask) {
+    return `
+    <span class="style-sub-tasks">${subTask}</span>`
+}
+
+function returnHtmlContacts(contactForTask, j) {
+    return `
+    <div id="initialArea${j}" class="contact-board">${contactForTask['nameInitials']}</div>`
 }

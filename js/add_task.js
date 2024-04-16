@@ -94,7 +94,9 @@ async function addTask() {
     let description = document.getElementById('description');
     let dueDate = document.getElementById('dueDate');
     let category = document.getElementById('category');
-    let subTasks =  document.getElementById('subTasks');
+    let subTaskForTask = subTasks;
+    let checkedUsersForTask = checkedUsers;
+    // let subTasks =  document.getElementById('subTasks');
 
     let task = {
         "title": title.value,
@@ -103,10 +105,11 @@ async function addTask() {
         "dueDate": dueDate.value,
         "prio": currentPrio,
         "category": category.value,
-        "subTasks": subTasks,
+        "subTasks": subTaskForTask,
+        "checkedUsers": checkedUsersForTask,
         }
     tasks.push(task);
-    addedToBoard();
+    // addedToBoard();
     await setItem('tasks', tasks);
     resetInputFields();
     window.location.href = "board.html";
@@ -219,7 +222,7 @@ function renderAssignedToField() {
         user = contactsInit[i];
         userCheckBox.innerHTML += 
             returnHtmlSingleContact(user);
-            backgroundColorInitials(i);
+            backgroundColorInitials(i, 'none');
     }
 
     if(checkedUsers.length > 0) {
@@ -251,15 +254,15 @@ function examineUser(i) {
 }
 
 function backgroundColorInitials(i, whichArea) {
-    let currentColor = contactsInit[i]['color'];
-    let bgColorContacts = contactColor[currentColor];
 
     if(whichArea == 'showInitial') {
-        let checkedUserColor = checkedUsers[i]['color']
+        let checkedUserColor = checkedUsers[i]['color'];
         let bgColorCheckedUser = contactColor[checkedUserColor];
         let bgInitials = document.getElementById(`initialArea${i}`);
         bgInitials.style.backgroundColor = bgColorCheckedUser;
     } else {
+        let currentColor = contactsInit[i]['color'];
+        let bgColorContacts = contactColor[currentColor];
         let bgInitials = document.getElementById(`bgInitials${i}`)
         bgInitials.style.backgroundColor = bgColorContacts;
     }
@@ -268,26 +271,41 @@ function backgroundColorInitials(i, whichArea) {
 function selectedUser(i) {
     let singleUser = contactsInit[i];
     let currentIndex = checkedUsers.indexOf(singleUser);
+
+    if(!checkedUsers.includes(singleUser, 0)) {
+        checkedUsers.push(singleUser);
+        toggleForCheckedUser(i);
+        // name = {
+        //     'checkedUsers': checkedUsers,
+        // }
+        // setItem('name', name);
+        // checkBox.classList.remove('box-unchecked');
+        // userField.classList.remove('hover-user-field');
+        // paddingForChecked.classList.add('pd-right-16');
+        // userField.classList.add('bg-checked');
+        // paddingForChecked.classList.add('hover-assigned')
+    } else {
+        checkedUsers.splice(currentIndex, 1);
+        toggleForCheckedUser(i);
+        // checkBox.classList.add('box-unchecked');
+        // userField.classList.add('hover-user-field');
+        // paddingForChecked.classList.remove('pd-right-16');
+        // userField.classList.remove('bg-checked');
+        // paddingForChecked.classList.remove('hover-assigned');
+    }
+    // setItem('checkedUsers', checkedUsers);
+}
+
+function toggleForCheckedUser(i) {
     let checkBox = document.getElementById(`checkBox${i}`);
     let userField = document.getElementById(`userField${i}`);
     let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
 
-    if(!checkedUsers.includes(singleUser, 0)) {
-        checkedUsers.push(singleUser);
-        checkBox.classList.remove('box-unchecked');
-        userField.classList.remove('hover-user-field');
-        paddingForChecked.classList.add('pd-right-16');
-        userField.classList.add('bg-checked');
-        paddingForChecked.classList.add('hover-assigned')
-    } else {
-        checkedUsers.splice(currentIndex, 1);
-        checkBox.classList.add('box-unchecked');
-        paddingForChecked.classList.remove('pd-right-16');
-        userField.classList.remove('bg-checked');
-        paddingForChecked.classList.remove('hover-assigned');
-        userField.classList.add('hover-user-field');
-    }
-    setItem('checkedUsers', checkedUsers);
+    checkBox.classList.toggle('box-unchecked');
+    userField.classList.toggle('hover-user-field');
+    paddingForChecked.classList.toggle('pd-right-16');
+    userField.classList.toggle('bg-checked');
+    paddingForChecked.classList.toggle('hover-assigned');
 }
 
 function showInitials() {
@@ -318,6 +336,68 @@ function editSubtask(i) {
     subTaskField.innerHTML = '';
     subTaskField.innerHTML = `
     <input type="text" placeholder="${subTask}">`
+}
+
+// <--------------------- html templates ---------------------------->
+
+function returnHtmlSingleContact(user) {
+    return `
+    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i})">
+        <div class="user-field hover-user-field" id="userField${i}">
+            <div class="single-user">
+                <div class="initials-assigned initials" id="bgInitials${i}">
+                    ${user['nameInitials']}
+                </div>
+                <span class="typography-contacts-assigned">${user['name']}</span>
+            </div>
+            <label class="custom-checkbox" for="box${i}">
+            <input type="checkbox" />
+            <div id="checkBox${i}" class="box-unchecked">
+                <span></span>
+            </div>
+        </div>
+    </div>`
+}
+function returnHtmlCheckAndClear() {
+    return `
+    <div id="activeInputSubtask" class="active-input-subtasks">
+        <a onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
+        <span class="height-24">|</span>
+        <a onclick="addNewSubTask()"><img src="/img/Property 1=check.png"></a>
+    </div>`
+}
+
+function returnHtmlAdd() {
+    return `
+    <a id="addIconSubtasks" onclick="addNewSubTask()" class="icon-subtask-field"><img src="/img/add.png"></a>`
+}
+
+function prioNormal(priority) {
+    return `
+    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorFalse']}">
+        <span class="fz-20">${priority['text']}</span>
+        <img id="imgUrgent" src="${priority['iconColor']}">
+    </div>`
+}
+
+function prioActive(priority) {
+    return `
+    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorTrue']}">
+        <span class="fz-20">${priority['text']}</span>
+        <img id="imgUrgent" src="${priority['iconWhite']}">
+    </div>`
+}
+
+function returnHtmlNewSubtasks(newSubTask) {
+    return `
+    <ul class="list-element-subtasks" onclick="editSubtask(${i})">
+        <li id="subTaskElement${i}">${newSubTask}</li>
+        <div class="icons-new-subtasks">
+            <img src="/img/trashbin.png">
+            <img src="/img/Vector 3.png">
+            <img src="/img/edit_pencil.png">
+        </div>
+    </ul>`
 }
 
 // <--------------Funktionen für EventListener----------------------->
@@ -418,78 +498,3 @@ document.addEventListener('DOMContentLoaded', function() {
         taskArea.classList.remove('fill-border');
     })
 })
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     let inputSubTask = document.getElementById('subTasks');
-//     let newSubTaskField = document.getElementById('newSubTaskField');
-
-//     inputSubTask.addEventListener('click', function() {
-//         renderSubTasks('none');
-//     })
-
-//     inputSubTask.addEventListener('blur', function() {
-//         newSubTaskField.innerHTML = '';
-//     })
-// })
-
-// <--------------------- html templates ---------------------------->
-
-function returnHtmlSingleContact(user) {
-    return `
-    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i})">
-        <div class="user-field hover-user-field" id="userField${i}">
-            <div class="single-user">
-                <div class="initials-assigned initials" id="bgInitials${i}">
-                    ${user['nameInitials']}
-                </div>
-                <span class="typography-contacts-assigned">${user['name']}</span>
-            </div>
-            <label class="custom-checkbox" for="box${i}">
-            <input type="checkbox" />
-            <div id="checkBox${i}" class="box-unchecked">
-                <span></span>
-            </div>
-        </div>
-    </div>`
-}
-function returnHtmlCheckAndClear() {
-    return `
-    <div id="activeInputSubtask" class="active-input-subtasks">
-        <a onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
-        <span class="height-24">|</span>
-        <a onclick="addNewSubTask()"><img src="/img/Property 1=check.png"></a>
-    </div>`
-}
-
-function returnHtmlAdd() {
-    return `
-    <a id="addIconSubtasks" onclick="addNewSubTask()" class="icon-subtask-field"><img src="/img/add.png"></a>`
-}
-
-function prioNormal(priority) {
-    return `
-    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorFalse']}">
-        <span class="fz-20">${priority['text']}</span>
-        <img id="imgUrgent" src="${priority['iconColor']}">
-    </div>`
-}
-
-function prioActive(priority) {
-    return `
-    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorTrue']}">
-        <span class="fz-20">${priority['text']}</span>
-        <img id="imgUrgent" src="${priority['iconWhite']}">
-    </div>`
-}
-
-function returnHtmlNewSubtasks(newSubTask) {
-    return `
-    <ul class="list-element-subtasks" onclick="editSubtask(${i})">
-        <li id="subTaskElement${i}">${newSubTask}</li>
-        <div class="icons-new-subtasks">
-            <img src="/img/trashbin.png">
-            <img src="/img/Vector 3.png">
-            <img src="/img/edit_pencil.png">
-        </div>
-    </ul>`
-}
