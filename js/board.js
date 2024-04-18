@@ -114,7 +114,7 @@ function returnHtmlShowToDos(singleTask, i) {
 
         <div class="subtasks-contacts">
             <div class="subtasks-loadbar-number">
-                <span><i>loadbar must do</i></span>
+                <span><i>loadbar must to do</i></span>
                 <div class="number-done-subtasks">
                     <span>${finishedSubTasks.length}/</span>
                     <span>${singleTask['subTasks'].length} Subtasks</span>

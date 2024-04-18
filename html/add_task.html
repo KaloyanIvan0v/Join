@@ -54,11 +54,12 @@
 
             <div class="assigned-to d-flex-column-center">
                 <span class="input-description">Assigned to</span>
-                <div id="assignedBtn" class="select-btn" onclick="showCheckboxes()">
-                    <select id="selectAssigned" class="input-field normal-border width-100 option-value-disabled">
+                <div id="assignedBtn" tabindex="0" class="select-btn" onclick="showCheckboxes()">
+                    <input class="input-search-contacts" id="inputToSearchContact" type="text" value=" Testhi">
+                    <!-- <select id="selectAssigned" class="input-field normal-border width-100 option-value-disabled">
                         <option id="option">Select contacts to assign</option>
-                    </select>
-                    <div class="overSelect"></div>
+                    </select> -->
+                    <div id="overSelect" class="overSelect"></div>
                 </div>
                 <div>
                     <div class="user-list vs-hidden" id="checkboxes"></div>
@@ -112,7 +113,8 @@
                 <div id="newSubTaskField"></div>
             </div>
         </div>
-        
+    </form>
+
     <div class="required-field-notice">
         <span class="color-FF8190">*</span>
         <span>This field is required</span>
@@ -129,7 +131,6 @@
             <img src="/img/check.png">
         </button>
     </div>
-    </form>
     <div id="bgDialog" class="bg-dialog vs-hidden ps-fixed">
         <div class="added-to-board bg-color-create">
             <span>Task added to board</span>

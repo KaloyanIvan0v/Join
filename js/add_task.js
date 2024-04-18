@@ -176,7 +176,6 @@ async function renderSubTasks(operator) {
 
 function changeIconsSubtask() {
     let addIconSubtasks = document.getElementById('addIconSubtasks');
-    // let newSubTaskField = document.getElementById('newSubTaskField');
 
     addIconSubtasks.innerHTML = '';
 
@@ -187,26 +186,41 @@ function changeIconsSubtask() {
         addIconSubtasks.innerHTML = returnHtmlAdd();
         checkChangeIcons = false;
     }
+    renderSubTasks();
 }
 
 function showCheckboxes() {
+    let assignedBtn = document.getElementById('assignedBtn');
     let checkboxes = document.getElementById("checkboxes");
-    let initialsArea = document.getElementById('initialArea');
+    let inputToSearchContact = document.getElementById("inputToSearchContact");
+
+    // let initialsArea = document.getElementById('initialArea');
     // let containerUserInitialen = document.getElementById('containerUserInitialen');
 
     if (!expanded) {
         checkboxes.classList.remove('vs-hidden');
+        assignedBtn.focus();
+        inputToSearchContact.value = '';
+        inputToSearchContact.focus();
         renderAssignedToField();
         expanded = true;
     } else {
         // containerUserInitialen.innerHTML = '';
         // checkboxes.innerHTML = '';
-        checkboxes.classList.remove('user-list');
-        checkboxes.classList.add('d-flex-initials')
+        toggleUserListInitials() 
+        // checkboxes.classList.remove('user-list');
+        // checkboxes.classList.add('d-flex-initials');
         // containerUserInitialen.classList.toggle('vs-hidden');
         expanded = false;
         showInitials();
     }
+}
+
+function toggleUserListInitials() {
+    let checkboxes = document.getElementById("checkboxes");
+
+    checkboxes.classList.toggle('user-list');
+    checkboxes.classList.toggle('d-flex-initials');
 }
 
 function renderAssignedToField() {
@@ -214,8 +228,9 @@ function renderAssignedToField() {
     userCheckBox.innerHTML = '';
 
     if(!userCheckBox.classList.contains('user-list')) {
-        userCheckBox.classList.remove('d-flex-initials');
-        userCheckBox.classList.add('user-list')
+        toggleUserListInitials();
+        // userCheckBox.classList.remove('d-flex-initials');
+        // userCheckBox.classList.add('user-list')
     }
 
     for(i = 0; i < contactsInit.length; i++){;
@@ -275,23 +290,9 @@ function selectedUser(i) {
     if(!checkedUsers.includes(singleUser, 0)) {
         checkedUsers.push(singleUser);
         toggleForCheckedUser(i);
-        // name = {
-        //     'checkedUsers': checkedUsers,
-        // }
-        // setItem('name', name);
-        // checkBox.classList.remove('box-unchecked');
-        // userField.classList.remove('hover-user-field');
-        // paddingForChecked.classList.add('pd-right-16');
-        // userField.classList.add('bg-checked');
-        // paddingForChecked.classList.add('hover-assigned')
     } else {
         checkedUsers.splice(currentIndex, 1);
         toggleForCheckedUser(i);
-        // checkBox.classList.add('box-unchecked');
-        // userField.classList.add('hover-user-field');
-        // paddingForChecked.classList.remove('pd-right-16');
-        // userField.classList.remove('bg-checked');
-        // paddingForChecked.classList.remove('hover-assigned');
     }
     // setItem('checkedUsers', checkedUsers);
 }
@@ -310,7 +311,6 @@ function toggleForCheckedUser(i) {
 
 function showInitials() {
     let initialsArea = document.getElementById('checkboxes');
-    // let containerUserInitialen = document.getElementById('containerUserInitialen');
     initialsArea.innerHTML = '';
 
     for(i = 0; i < checkedUsers.length; i++) {
@@ -335,7 +335,14 @@ function editSubtask(i) {
 
     subTaskField.innerHTML = '';
     subTaskField.innerHTML = `
-    <input type="text" placeholder="${subTask}">`
+    <input id="inputField${i}" type="text" value="${subTask}" >`
+    inputFocus(i);
+}
+
+function inputFocus(i) {
+    let inputField = document.getElementById(`inputField${i}`);
+    inputField.focus();
+    inputField.setSelectionRange(inputField.value.length, inputField.value.length);
 }
 
 // <--------------------- html templates ---------------------------->
@@ -390,13 +397,8 @@ function prioActive(priority) {
 
 function returnHtmlNewSubtasks(newSubTask) {
     return `
-    <ul class="list-element-subtasks" onclick="editSubtask(${i})">
+    <ul class="list-element-subtasks" ondblclick="editSubtask(${i})">
         <li id="subTaskElement${i}">${newSubTask}</li>
-        <div class="icons-new-subtasks">
-            <img src="/img/trashbin.png">
-            <img src="/img/Vector 3.png">
-            <img src="/img/edit_pencil.png">
-        </div>
     </ul>`
 }
 
@@ -404,8 +406,10 @@ function returnHtmlNewSubtasks(newSubTask) {
 
 document.addEventListener('DOMContentLoaded', function() {
     let dateInput = document.getElementById('dueDate');
-
     let requiredDate = document.getElementById('requiredDate');
+    let taskArea = document.getElementById('description');
+    let assignedBtn = document.getElementById('assignedBtn');
+    let subTask = document.getElementById('subTasks');
 
     dateInput.addEventListener('change', changeBorder);
     dateInput.addEventListener('keydown', changeBorder);
@@ -440,13 +444,40 @@ document.addEventListener('DOMContentLoaded', function() {
             dateInput.classList.remove('fill-border');
         }
     }
+
+    taskArea.addEventListener('click', function() {
+        taskArea.classList.add('fill-border');
+    })
+
+    taskArea.addEventListener('blur', function() {
+        taskArea.classList.remove('fill-border');
+    })
+
+    // assignedBtn.addEventListener('click', function() {
+    //     assignedBtn.classList.add('fill-border');
+    // })
+
+    // assignedBtn.addEventListener('blur', function() {
+    //     assignedBtn.classList.remove('fill-border');
+    //     showCheckboxes();
+    // })
+
+    subTask.addEventListener('click', function() {
+        subTask.classList.add('fill-border');
+    })
+
+    subTask.addEventListener('blur', function() {
+        subTask.classList.remove('fill-border');
+    })
 });
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
     let title = document.getElementById('title');
     let requiredTitle = document.getElementById('requiredTitle');
 
-    title.addEventListener('click', function() {
+    title.addEventListener('input', function() {
         changeBorder(title, requiredTitle);
     });
 
@@ -478,23 +509,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function resetInputTitle(test12, test34) {
-        test34.classList.add('vs-hidden');
-        test12.classList.remove('error-border');
-        test12.classList.remove('fill-border');
 
-        inputBorderError = false;
-    }
 })
 
-document.addEventListener('DOMContentLoaded', function() {
-    let taskArea = document.getElementById('description');
+function resetInputTitle(test12, test34) {
+    test34.classList.add('vs-hidden');
+    test12.classList.remove('error-border');
+    test12.classList.remove('fill-border');
 
-    taskArea.addEventListener('click', function() {
-        taskArea.classList.add('fill-border');
-    })
-
-    taskArea.addEventListener('blur', function() {
-        taskArea.classList.remove('fill-border');
-    })
-})
+    inputBorderError = false;
+}

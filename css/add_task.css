@@ -4,7 +4,7 @@ body {
     font-weight: 400;
     margin: 0;
     background-color: #F6F7F8;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 
 input[type=text] {
@@ -35,13 +35,13 @@ textarea:focus {
 }
 
 h2 {
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     margin: 0;
     top: 206px;
     left: 328px;
     font-size: 61px;
     font-weight: 700;
-    font-family: inter;
 }
 
 .highlight-color-medium {
@@ -67,25 +67,30 @@ h2 {
 .leftside-add-task {
     width: 440px;
     height: 376px;
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     top: 327px;
     left: 328px;
 }
 
 .parting-line-add-task {
     border: 1px solid #D1D1D1;
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     height: 424px;
     top: 327px;
-    left: 816.25px;
+    /* left: 816.25px; */
+    left: 376.25px;
 }
 
 .rightside-add-task {
     width: 440px;
     height: 416px;
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     top: 327px;
-    left: 864.25px;
+    /* left: 864.25px; */
+    left: 424.25px;
 }
 
 .normal-border {
@@ -287,8 +292,10 @@ h2 {
 
 .required-field-notice {
     display: flex;
-    position: absolute;
-    top: 830px;
+    /* position: absolute; */
+    position: relative;
+    /* top: 830px; */
+    top: 411px;
     left: 328px;
     height: 27px;
 }
@@ -302,8 +309,10 @@ h2 {
 }
 
 .buttons-clear-create {
-    position: absolute;
-    top: 793px;
+    /* position: absolute; */
+    position: relative;
+    /* top: 889px; */
+    top: 354px;
     left: 995.25px;
     display: flex;
     gap: 16px;
@@ -442,12 +451,19 @@ h2 {
 .select-btn {
     z-index: 10;
     width: 100%;
+    border-radius: 10px;
 }
 
 .single-user {
     display: flex;
     gap: 16px
 }
+
+/* #newSubTaskField {
+    background-color: white;
+    position: static;
+    z-index: 10;
+} */
 
 .user-field {
     padding: 7px 16px;
@@ -470,6 +486,14 @@ h2 {
     line-height: 24px;
     display: flex;
     align-items: center;
+}
+
+.input-search-contacts {
+    width: 408px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    position: relative;
+    z-index: 5;
 }
 
 .initials {
