@@ -1,9 +1,5 @@
 let x = true;
 
-function init() {
-    includeHTML();
-}
-
 function addDNone() {
     if (x == true) {
         document.getElementById('popup').classList.replace("dNone", "popup");
@@ -22,6 +18,7 @@ function loadFirstLettersFromSessionStorage() { //load first letters of first an
         let firstName = firstAndLastName[0];
         let lastName = firstAndLastName[1];
         setAbbreviationToUserIcon(firstName, lastName);
+        document.getElementById('name').innerHTML = `${firstName} ${lastName}`;
     } else {
         document.getElementById('abbreviation').innerHTML = "G";
     }
@@ -31,4 +28,9 @@ function setAbbreviationToUserIcon(firstName, lastName) {
     if (firstName && lastName) {
         document.getElementById('abbreviation').innerHTML = firstName[0] + lastName[0]; 
     }
+}
+
+function storageClear (){
+    sessionStorage.clear();
+    //window.location.href = 'index.html';
 }
