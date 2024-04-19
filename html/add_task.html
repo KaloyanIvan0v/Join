@@ -52,19 +52,18 @@
                 </div>
             </div>
 
-            <div class="assigned-to d-flex-column-center">
+            <div class="assigned-to d-flex-column-center" onclick="showCheckboxes()">
                 <span class="input-description">Assigned to</span>
-                <div id="assignedBtn" tabindex="0" class="select-btn" onclick="showCheckboxes()">
-                    <input class="input-search-contacts" id="inputToSearchContact" type="text" value=" Testhi">
+                <!-- <div id="assignedBtn" class="select-btn" -->
+                    <input onkeydown="searchContact()" tabindex="0" class="input-search-contacts normal-border" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
                     <!-- <select id="selectAssigned" class="input-field normal-border width-100 option-value-disabled">
                         <option id="option">Select contacts to assign</option>
                     </select> -->
-                    <div id="overSelect" class="overSelect"></div>
-                </div>
-                <div>
-                    <div class="user-list vs-hidden" id="checkboxes"></div>
-                    <div id="initialArea"></div>
-                </div>
+                    <!-- <div id="overSelect" class="overSelect"></div> -->
+            </div>
+            <div>
+                <div class="user-list vs-hidden" id="checkboxes" onmousedown="preventFocusLoss(event)"></div>
+                <div id="initialArea"></div>
             </div>
         </div>
 
