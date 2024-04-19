@@ -189,34 +189,30 @@ function changeIconsSubtask() {
     renderSubTasks();
 }
 
-function showCheckboxes() {
-    let assignedBtn = document.getElementById('assignedBtn');
-    let checkboxes = document.getElementById("checkboxes");
-    let inputToSearchContact = document.getElementById("inputToSearchContact");
+function preventFocusLoss(event) {
+    event.preventDefault(); // Verhindern, dass das Eingabefeld den Fokus verliert
+}
 
-    // let initialsArea = document.getElementById('initialArea');
-    // let containerUserInitialen = document.getElementById('containerUserInitialen');
+function showCheckboxes() {
+    let checkboxes = document.getElementById("checkboxes");
+    let assignedBtn = document.getElementById('inputToSearchContact');
 
     if (!expanded) {
         checkboxes.classList.remove('vs-hidden');
-        assignedBtn.focus();
-        inputToSearchContact.value = '';
-        inputToSearchContact.focus();
+        assignedBtn.placeholder = 'Search Contact';
+        assignedBtn.classList.toggle('fill-border');
+        // assignedBtn.focus();
         renderAssignedToField();
         expanded = true;
     } else {
-        // containerUserInitialen.innerHTML = '';
-        // checkboxes.innerHTML = '';
-        toggleUserListInitials() 
-        // checkboxes.classList.remove('user-list');
-        // checkboxes.classList.add('d-flex-initials');
-        // containerUserInitialen.classList.toggle('vs-hidden');
+        assignedBtn.classList.remove('fill-border');
+        toggleUserListInitials(assignedBtn) 
         expanded = false;
         showInitials();
     }
 }
 
-function toggleUserListInitials() {
+function toggleUserListInitials(assigned) {
     let checkboxes = document.getElementById("checkboxes");
 
     checkboxes.classList.toggle('user-list');
@@ -329,6 +325,19 @@ function showInitials() {
     }
 }
 
+function searchContact() {
+    let inputSearchContact = document.getElementById('inputToSearchContact').value;
+    let userList = document.getElementById('checkboxes');
+
+    if(inputSearchContact.length == 0) {
+        inputSearchContact = inputSearchContact.toLowerCase();
+        userList.innerHTML = '';
+        userList.innerHTML = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero, obcaecati autem ullam inventore, doloribus eaque voluptates voluptatibus deleniti, amet architecto. Quae delectus nulla, est illum debitis veritatis expedita consequatur?';
+    } else {
+        renderAssignedToField();
+    }
+}
+
 function editSubtask(i) {
     let subTaskField = document.getElementById(`subTaskElement${i}`);
     let subTask = subTasks[i];
@@ -408,8 +417,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let dateInput = document.getElementById('dueDate');
     let requiredDate = document.getElementById('requiredDate');
     let taskArea = document.getElementById('description');
-    let assignedBtn = document.getElementById('assignedBtn');
+    let assignedBtn = document.getElementById('inputToSearchContact');
     let subTask = document.getElementById('subTasks');
+    let inputToSearchContact = document.getElementById("inputToSearchContact");
 
     dateInput.addEventListener('change', changeBorder);
     dateInput.addEventListener('keydown', changeBorder);
@@ -453,14 +463,10 @@ document.addEventListener('DOMContentLoaded', function() {
         taskArea.classList.remove('fill-border');
     })
 
-    // assignedBtn.addEventListener('click', function() {
-    //     assignedBtn.classList.add('fill-border');
-    // })
-
-    // assignedBtn.addEventListener('blur', function() {
-    //     assignedBtn.classList.remove('fill-border');
-    //     showCheckboxes();
-    // })
+    inputToSearchContact.addEventListener('blur', function() {
+        inputToSearchContact.classList.remove('fill-border');
+        showCheckboxes();
+    })
 
     subTask.addEventListener('click', function() {
         subTask.classList.add('fill-border');
