@@ -253,7 +253,6 @@ function examineUser(i) {
     let index = checkedUsers.findIndex(item => JSON.stringify(item['name']) === JSON.stringify(currentName));
         
     if(index != -1) {
-       // currentLabel.checked = true;
     checkBox.classList.remove('box-unchecked');
     paddingForChecked.classList.add('pd-right-16');
     userField.classList.add('bg-checked');
@@ -341,10 +340,19 @@ function searchContact() {
 function editSubtask(i) {
     let subTaskField = document.getElementById(`subTaskElement${i}`);
     let subTask = subTasks[i];
+    let subTaskElement = document.getElementById(`subTaskElement${i}`);
+    subTaskElement.classList.add('li-edit');
 
     subTaskField.innerHTML = '';
     subTaskField.innerHTML = `
-    <input id="inputField${i}" type="text" value="${subTask}" >`
+    <form class="label-edit-subtask">
+        <input id="inputField${i}" class="edit-subtask" type="text" value="${subTask}">
+        <div class="single-edit-subtask">
+            <img src="/img/trashbin.png">
+            <span>|</span>
+            <img src="/img/Property 1=check.png">
+        </div>
+    </form>`
     inputFocus(i);
 }
 
@@ -406,7 +414,7 @@ function prioActive(priority) {
 
 function returnHtmlNewSubtasks(newSubTask) {
     return `
-    <ul class="list-element-subtasks" ondblclick="editSubtask(${i})">
+    <ul class="list-element-subtasks" onclick="editSubtask(${i})">
         <li id="subTaskElement${i}">${newSubTask}</li>
     </ul>`
 }
@@ -483,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let title = document.getElementById('title');
     let requiredTitle = document.getElementById('requiredTitle');
 
-    title.addEventListener('input', function() {
+    title.addEventListener('click', function() {
         changeBorder(title, requiredTitle);
     });
 
@@ -495,27 +503,25 @@ document.addEventListener('DOMContentLoaded', function() {
         resetInputTitle(title, requiredTitle);
     })
     
-    function changeBorder(test12, test34) {
-        test12.classList.remove('fill-border');
-        let test12Value = test12.value;
+    function changeBorder(titleId, fieldId) {
+        titleId.classList.remove('fill-border');
+        let titleIdValue = titleId.value;
 
-        if (test12Value == '' && inputBorderError == false) {
-            test34.classList.remove('vs-hidden');
-            test12.classList.add('error-border');
+        if (titleIdValue == '' && inputBorderError == false) {
+            fieldId.classList.remove('vs-hidden');
+            titleId.classList.add('error-border');
             inputBorderError = false;
-        } else if(test12Value.length == 1) {
-            test34.classList.remove('vs-hidden');
-            test12.classList.add('error-border');
+        } else if(titleIdValue.length < 2) {
+            fieldId.classList.remove('vs-hidden');
+            titleId.classList.add('error-border');
             inputBorderError = false;
-        } else if(test12Value.length >= 0) {
-            test34.classList.add('vs-hidden');
-            test12.classList.remove('error-border');
-            test12.classList.add('fill-border');
+        } else if(titleIdValue.length >= 0) {
+            fieldId.classList.add('vs-hidden');
+            titleId.classList.remove('error-border');
+            titleId.classList.add('fill-border');
             inputBorderError = false;
         }
     }
-
-
 })
 
 function resetInputTitle(test12, test34) {

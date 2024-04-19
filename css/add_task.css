@@ -12,6 +12,22 @@ input[type=text] {
     font-size: 20px;
 }
 
+.single-edit-subtask {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.edit-subtask {
+    background-color: #FFFFFF;
+    border: none;
+    padding: 4px 16px;
+}
+
+.edit-subtask[type=text] {
+    padding: 4px 16px;
+}
+
 a:hover {
     cursor: pointer;
 }
@@ -69,7 +85,8 @@ h2 {
     height: 376px;
     /* position: absolute; */
     position: relative;
-    top: 327px;
+    /* top: 327px; */
+    top: 231px;
     left: 328px;
 }
 
@@ -78,9 +95,21 @@ h2 {
     /* position: absolute; */
     position: relative;
     height: 424px;
-    top: 327px;
+    /* top: 327px; */
+    top: 231px;
     /* left: 816.25px; */
     left: 376.25px;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+.label-edit-subtask {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 440px;
 }
 
 .rightside-add-task {
@@ -88,9 +117,18 @@ h2 {
     height: 416px;
     /* position: absolute; */
     position: relative;
-    top: 327px;
+    /* top: 327px; */
+    top: 231px;
     /* left: 864.25px; */
     left: 424.25px;
+}
+
+.li-edit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 440px;
+    background-color: #FFFFFF;
 }
 
 .normal-border {
@@ -564,6 +602,7 @@ h2 {
 
 .hover-assigned:hover {
     background-color: #091931;
+    cursor: pointer;
 }
 
 textarea:focus-visible {
@@ -572,6 +611,7 @@ textarea:focus-visible {
 
 .hover-user-field:hover {
     background-color: #EEEE;
+    cursor: pointer;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
