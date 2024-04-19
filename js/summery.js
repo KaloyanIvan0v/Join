@@ -13,7 +13,6 @@ function loadTasks(){
 
 function writeNumberOfAllTasks(){
     document.getElementById('numberOfTasksInBoard').innerHTML = tasks.length;
-
 }
 
 function filterHighestPrio(){
