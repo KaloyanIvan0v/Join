@@ -86,6 +86,18 @@
                 <div id="prioSelection" class="priority-selection"></div>
             </div>
 
+            <!-- <div class="description-category position-category d-flex-column-center">
+                <div class="d-flex input-description">
+                    <span>Category</span>
+                    <span class="color-FF8190">*</span>
+                </div>                
+                <div class="input-field new-subtask">
+                    <span class="input-new-subtask">Add new subtask</span>
+                    <a onclick="showCategories()" id="addIconSubtasks" class="icon-subtask-field">></a>
+                </div>
+                <div id="categories"></div>
+            </div> -->
+
             <div class="description-category position-category d-flex-column-center">
                 <div class="d-flex input-description">
                     <span>Category</span>
@@ -107,6 +119,17 @@
                 <div id="newSubTaskField"></div>
             </div>
         </div>
+        <div class="buttons-clear-create">
+            <button class="btn-add-task" onclick="resetInputFields(); return false">
+                <span class="typography-clear">Clear</span>
+                <img src="/img/iconoir_cancel.png">
+            </button>
+    
+            <button class="btn-add-task bg-color-create" id="createBtn">
+                <span class="typography-create">Create Task</span>
+                <img src="/img/check.png">
+            </button>
+        </div>
     </form>
 
     <div class="required-field-notice">
@@ -114,17 +137,6 @@
         <span>This field is required</span>
     </div>
 
-    <div class="buttons-clear-create">
-        <button class="btn-add-task" onclick="resetInputFields(); return false">
-            <span class="typography-clear">Clear</span>
-            <img src="/img/iconoir_cancel.png">
-        </button>
-
-        <button class="btn-add-task bg-color-create" id="createBtn">
-            <span class="typography-create">Create Task</span>
-            <img src="/img/check.png">
-        </button>
-    </div>
     <div id="bgDialog" class="bg-dialog vs-hidden ps-fixed">
         <div class="added-to-board bg-color-create">
             <span>Task added to board</span>
