@@ -30,7 +30,8 @@ function setAbbreviationToUserIcon(firstName, lastName) {
     }
 }
 
-function storageClear (){
+    function storageClear (){
+    //location.reload('./index.html');
+    //window.location.href = '../index.html';
     sessionStorage.clear();
-    //window.location.href = 'index.html';
 }
