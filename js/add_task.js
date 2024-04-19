@@ -341,7 +341,10 @@ function editSubtask(i) {
     let subTaskField = document.getElementById(`subTaskElement${i}`);
     let subTask = subTasks[i];
     let subTaskElement = document.getElementById(`subTaskElement${i}`);
+    let ulSubtasks = document.getElementById(`ulSubtasks(${i})`);
     subTaskElement.classList.add('li-edit');
+    subTaskElement.classList.add('pd-inline-start');
+    ulSubtasks.classList.add('pd-inline-start');
 
     subTaskField.innerHTML = '';
     subTaskField.innerHTML = `
@@ -414,7 +417,7 @@ function prioActive(priority) {
 
 function returnHtmlNewSubtasks(newSubTask) {
     return `
-    <ul class="list-element-subtasks" onclick="editSubtask(${i})">
+    <ul id="ulSubtasks(${i})" class="list-element-subtasks" onclick="editSubtask(${i})">
         <li id="subTaskElement${i}">${newSubTask}</li>
     </ul>`
 }
