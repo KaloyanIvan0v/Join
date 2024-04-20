@@ -17,6 +17,43 @@ async function loadTasksKaloyan() {
   }
 }
 
+function returnHtmlShowToDos(singleTask, i, id) {
+  return /*html*/ `
+    <div class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="showCurrentTask(${i})">
+        <div class="task-card-category">
+            <span id="categoryField${i}" class="which-category">
+                ${singleTask["category"]}
+            </span>
+        </div>
+        
+        <div class="header-area-card">
+            <div class="ft-weight-700">
+                ${singleTask["title"]}
+            </div>
+            <div class="">
+                ${singleTask["description"]}
+            </div>
+        </div>
+
+        <div class="subtasks-contacts">
+            <div class="subtasks-loadbar-number">
+                <span><i>loadbar must to do</i></span>
+                <div class="number-done-subtasks">
+                    <span>${finishedSubTasks.length}/</span>
+                    <span>${singleTask["subTasks"].length} Subtasks</span>
+                </div>
+            </div>
+
+            <div class="contacts-area">
+                <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
+                <div id="prioField${i}" class="prio-field">
+                    ${singleTask["prio"]}
+                </div>
+            </div>
+        </div>
+        `;
+}
+
 async function loadNewTasks() {
   checkedUsers = JSON.parse(await getItem("checkedUsers"));
   let toDoField = document.getElementById("categoryToDo");
@@ -95,12 +132,12 @@ function renderSubTasksBoard(i) {
   let subTasks = tasks[i]["subTasks"];
   subTasksField.innerHTML = "";
 
-    for(j = 0; j < subTasks.length; j++) {
-        let subTask = subTasks[j];
-        subTasksField.innerHTML += returnHtmlSubtasks(subTask);
-    }
-    renderContactsBoard(i);
-
+  for (j = 0; j < subTasks.length; j++) {
+    let subTask = subTasks[j];
+    subTasksField.innerHTML += returnHtmlSubtasks(subTask);
+  }
+  renderContactsBoard(i);
+}
 function renderContactsBoard(i) {
   let contactsFieldBoard = document.getElementById(`contactsFieldBoard(${i})`);
   let contactsForTask = tasks[i]["assignedTo"];
@@ -119,43 +156,6 @@ function backgroundColorInitialsBoard(i, j) {
   let bgColor = contactColor[colorNumber];
   initialArea.style.backgroundColor = bgColor;
   initialArea.removeAttribute("id");
-}
-
-function returnHtmlShowToDos(singleTask, i, id) {
-  return /*html*/ `
-    <div class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="showCurrentTask(${i})">
-        <div class="task-card-category">
-            <span id="categoryField${i}" class="which-category">
-                ${singleTask["category"]}
-            </span>
-        </div>
-        
-        <div class="header-area-card">
-            <div class="ft-weight-700">
-                ${singleTask["title"]}
-            </div>
-            <div class="">
-                ${singleTask["description"]}
-            </div>
-        </div>
-
-        <div class="subtasks-contacts">
-            <div class="subtasks-loadbar-number">
-                <span><i>loadbar must to do</i></span>
-                <div class="number-done-subtasks">
-                    <span>${finishedSubTasks.length}/</span>
-                    <span>${singleTask["subTasks"].length} Subtasks</span>
-                </div>
-            </div>
-
-            <div class="contacts-area">
-                <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
-                <div id="prioField${i}" class="prio-field">
-                    ${singleTask["prio"]}
-                </div>
-            </div>
-        </div>
-        `;
 }
 
 function returnHtmlCurrentTask(overlayTask, i) {
