@@ -16,7 +16,6 @@ async function initLogin() {
   handleMsgBox();
   setSesionStorage("contacts", contactsInit);
   setSesionStorage("tasks", tasksInit);
-  setSesionStorage("logedInUser", loggedInUser);
 }
 
 function startScreen() {

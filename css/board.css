@@ -1,366 +1,368 @@
 body {
-    margin: 0;
-    box-sizing: border-box;
-    background-color: #F6F7F8;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: #f6f7f8;
 }
 
 .board-distribution {
-    position: absolute;
-    top: 336px;
-    left: 232px;
-    padding: 0 64px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 688px;
+  position: absolute;
+  top: 336px;
+  left: 232px;
+  padding: 0 64px;
+  display: flex;
+  justify-content: center;
+  height: 688px;
 }
 
 .headline-area-board {
-    width: 1208px;
-    height: 232px;
-    position: absolute;
-    top: 96px;
-    left: 232px;
+  width: 1208px;
+  height: 232px;
+  position: absolute;
+  top: 96px;
+  left: 232px;
 }
 
 .contacts-board {
-    display: flex;
-    padding-left: 8px;
+  display: flex;
+  padding-left: 8px;
 }
 
 .number-done-subtasks {
-    display: flex;
-    font-size: 12px;
-    line-height: 14.4px;
+  display: flex;
+  font-size: 12px;
+  line-height: 14.4px;
 }
 
 .subtasks-loadbar-number {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .contact-board {
-    width: 32px;
-    height: 32px;
-    border-radius: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #FFFFFF;
-    font-size: 12px;
-    line-height: 14.4px;
-    margin-left: -8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ffffff;
+  font-size: 12px;
+  line-height: 14.4px;
+  margin-left: -8px;
 }
 
 .find-add-board {
-    display: flex;
-    align-items: center;
-    gap: 32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
 }
 
 input {
-    border: none;
-    background-color: #F6F7F8;
+  border: none;
+  background-color: #f6f7f8;
 }
 
 input:focus {
-    outline: none;
+  outline: none;
 }
 
 .input-find-task {
-    width: 280px;
-    border: 1px solid #A8A8A8;
-    border-radius: 10px;
-    padding: 8px 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  width: 280px;
+  border: 1px solid #a8a8a8;
+  border-radius: 10px;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .add-task-headline {
-    border-radius: 10px;
-    background-color: #2A3647;
-    color: white;
-    font-weight: 700;
-    border-style: none;
-    padding: 8px 16px;
-    font-size: 21px;
-    line-height: 25.2px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    height: 32px;
+  border-radius: 10px;
+  background-color: #2a3647;
+  color: white;
+  font-weight: 700;
+  border-style: none;
+  padding: 8px 16px;
+  font-size: 21px;
+  line-height: 25.2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
 }
 
 .headline-board {
-    font-size: 61px;
-    font-weight: 700;
+  font-size: 61px;
+  font-weight: 700;
 }
 
 .hover:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .add_button_headline {
-    width: 18.67px;
-    height: 18.67px;
+  width: 18.67px;
+  height: 18.67px;
 }
 
 .headline-search-add {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    left: 64px;
-    top: 79.5px;
-    width: 1056px;
-    height: 73px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  left: 64px;
+  top: 79.5px;
+  width: 1056px;
+  height: 73px;
 }
 
 .subline-board {
-    width: 1208px;
-    height: 24px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 64px;
-    position: absolute;
-    top: 200.5px;
+  width: 1208px;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 64px;
+  position: absolute;
+  top: 200.5px;
 }
 
 .subline-field {
-    width: 244px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 252px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .subline-field-description {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .add-task-board {
-    width: 14px;
-    height: 14px;
-    padding: 3px;
-    border-radius: 8px;
-    border: 2px solid #2A3647;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 14px;
+  height: 14px;
+  padding: 3px;
+  border-radius: 8px;
+  border: 2px solid #2a3647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .plus-board {
-    width: 8px;
-    height: 8px;
+  width: 8px;
+  height: 8px;
 }
 
 .task-area {
-    width: 220px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  width: 252px;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: solid 1px red;
+  margin-right: 24px;
 }
 
 .task-card {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 220px;
-    background-color: #FFFFFF;
-    padding: 16px;
-    border-radius: 24px;
-    font-size: 16px;
-    line-height: 19.2px;
-    font-weight: 400;
-    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 220px;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 24px;
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 400;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
 }
 
 .task-card-category {
-    height: 27px;
-    display: flex;
-    align-items: center;
-    color: #FFFFFF;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
 }
 
 .style-sub-tasks {
-    font-size: 12px;
-    line-height: 14.4px;
+  font-size: 12px;
+  line-height: 14.4px;
 }
 
 .bg-color-technical-task {
-    background-color: #1FD7C1;
+  background-color: #1fd7c1;
 }
 
 .bg-color-user-story {
-    background-color: #0038FF;
+  background-color: #0038ff;
 }
 
 .which-category {
-    padding: 4px 16px;
-    gap: 10px;
-    border-radius: 8px;
+  padding: 4px 16px;
+  gap: 10px;
+  border-radius: 8px;
 }
 
 .task-card-assigned {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .contacts-area {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .subtasks-contacts {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .header-area-card {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .ft-weight-700 {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .background-dialog {
-    z-index: 100;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .task-overlay {
-    width: 525px;
-    z-index: 999;
-    background-color: #FFFFFF;
-    /* position: absolute;
+  width: 525px;
+  z-index: 999;
+  background-color: #ffffff;
+  /* position: absolute;
     top: -3975px;
     left: 154px; */
-    border-radius: 30px;
-    padding: 48px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  border-radius: 30px;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .overlay-first-row {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .overlay-category {
-    padding: 4px 24px;
-    border-radius: 8px;
-    color: #FFFFFF;
-    font-size: 23px;
-    line-height: 27.6px;
+  padding: 4px 24px;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 23px;
+  line-height: 27.6px;
 }
 
 .overlay-title {
-    /* width: 445px; */
-    /* height: 219px; */
-    width: 100%;
-    font-size: 61px;
-    font-weight: 700;
-    line-height: 73.2px;
+  /* width: 445px; */
+  /* height: 219px; */
+  width: 100%;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73.2px;
 }
 
 .overlay-description {
-    width: 100%;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 73.2px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 73.2px;
 }
 
 .overlay-date {
-    width: 100%;
-    display: flex;
-    gap: 25px;
+  width: 100%;
+  display: flex;
+  gap: 25px;
 }
 
 .overlay-prio {
-    display: flex;
-    align-items: center;
-    gap: 25px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
 
 .prio-name-image {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 4px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 18px;
 }
 
 .font-overlay {
-    font-size: 20px;
-    line-height: 24px;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .font-overlay-subtasks {
-    font-size: 16px;
-    line-height: 19.2px;
+  font-size: 16px;
+  line-height: 19.2px;
 }
 
 .input-subtasks-overlay {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .overlay-assigned {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .overlay-assigned-contacts {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .subline-field:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .btn-add-task {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 16px;
-    border: 1px solid #2A3647;
-    border-radius: 10px;
-    background-color: #2A3647;
-    color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border: 1px solid #2a3647;
+  border-radius: 10px;
+  background-color: #2a3647;
+  color: #ffffff;
 }
 
 .typography-create {
-    font-size: 21px;
-    line-height: 25.2px;
-    font-weight: 700;
+  font-size: 21px;
+  line-height: 25.2px;
+  font-weight: 700;
 }
 
 .plus-icon {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

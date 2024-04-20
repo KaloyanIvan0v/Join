@@ -52,7 +52,7 @@ async function loadContacts() {
   }
 }
 
-async function loadTasks() {
+async function loadTasks(va) {
   try {
     tasksInit = JSON.parse(await getItem("tasks"));
   } catch (e) {
