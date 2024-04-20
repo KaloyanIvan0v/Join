@@ -52,12 +52,12 @@
                 </div>
             </div>
 
-            <div class="assigned-to d-flex-column-center" onclick="showCheckboxes()">
+            <div class="assigned-to d-flex-column-center" onclick="showCheckboxes(event)">
                 <span class="input-description">Assigned to</span>
                 <input onkeydown="searchContact()" tabindex="0" class="input-search-contacts normal-border" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
             </div>
             <div>
-                <div class="user-list vs-hidden" id="checkboxes" onmousedown="preventFocusLoss(event)"></div>
+                <div class="user-list vs-hidden" id="checkboxes"></div>
                 <div id="initialArea"></div>
             </div>
         </div>

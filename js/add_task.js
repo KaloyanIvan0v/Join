@@ -355,15 +355,7 @@ function editSubtask(i) {
         ulSubtasks.classList.add('pd-inline-start');
 
         subTaskField.innerHTML = '';
-        subTaskField.innerHTML = `
-        <form class="label-edit-subtask">
-            <input id="inputField${i}" class="edit-subtask" type="text" value="${subTask}">
-            <div class="single-edit-subtask">
-                <img class="hover" src="/img/trashbin.png" onclick="deleteSubtask(${i})">
-                <span>|</span>
-                <img class="hover" src="/img/Property 1=check.png" onclick="changeSubtask(${i})">
-            </div>
-        </form>`
+        subTaskField.innerHTML = editSubtaskHtml(i, subTask);
         inputFocus(i);
     }
 }
@@ -464,6 +456,18 @@ function returnHtmlNewSubtasks(newSubTask) {
     </ul>`
 }
 
+function editSubtaskHtml(i, subTask) {
+    return `
+    <form class="label-edit-subtask">
+        <input id="inputField${i}" class="edit-subtask" type="text" value="${subTask}">
+        <div class="single-edit-subtask">
+            <img class="hover" src="/img/trashbin.png" onclick="deleteSubtask(${i})">
+            <span>|</span>
+            <img class="hover" src="/img/Property 1=check.png" onclick="changeSubtask(${i})">
+        </div>
+    </form>`
+}
+
 // <--------------Funktionen für EventListener----------------------->
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -475,6 +479,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let subTaskField = document.getElementById('inputFieldSubtasks')
     let inputToSearchContact = document.getElementById("inputToSearchContact");
     let containerCategory = document.getElementById("containerCategory");
+    // let checkbox = document.getElementById('checkboxes');
     
 
     dateInput.addEventListener('change', changeBorder);
@@ -524,9 +529,9 @@ document.addEventListener('DOMContentLoaded', function() {
         showCheckboxes();
     })
 
-    containerCategory.addEventListener('blur', function() {
-        showCategories();
-    })
+    // containerCategory.addEventListener('blur', function() {
+    //     showCategories();
+    // })
 
     // subTask.addEventListener('blur', function() {
     //     checkChangeIcons = true;
@@ -534,49 +539,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // })
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    let title = document.getElementById('title');
+    let requiredTitle = document.getElementById('requiredTitle');
 
+    title.addEventListener('click', function() {
+        changeBorder(title, requiredTitle);
+    });
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     let title = document.getElementById('title');
-//     let requiredTitle = document.getElementById('requiredTitle');
+    title.addEventListener('keydown', function() {
+        changeBorder(title, requiredTitle);
+    });
 
-//     title.addEventListener('click', function() {
-//         changeBorder(title, requiredTitle);
-//     });
-
-//     title.addEventListener('keydown', function() {
-//         changeBorder(title, requiredTitle);
-//     });
-
-//     title.addEventListener('blur', function() {
-//         resetInputTitle(title, requiredTitle);
-//     })
+    title.addEventListener('blur', function() {
+        resetInputTitle(title, requiredTitle);
+    })
     
-//     function changeBorder(titleId, fieldId) {
-//         titleId.classList.remove('fill-border');
-//         let titleIdValue = titleId.value;
+    function changeBorder(titleId, fieldId) {
+        titleId.classList.remove('fill-border');
+        let titleIdValue = titleId.value;
 
-//         if (titleIdValue == '' && inputBorderError == false) {
-//             fieldId.classList.remove('vs-hidden');
-//             titleId.classList.add('error-border');
-//             inputBorderError = false;
-//         } else if(titleIdValue.length < 2) {
-//             fieldId.classList.remove('vs-hidden');
-//             titleId.classList.add('error-border');
-//             inputBorderError = false;
-//         } else if(titleIdValue.length >= 0) {
-//             fieldId.classList.add('vs-hidden');
-//             titleId.classList.remove('error-border');
-//             titleId.classList.add('fill-border');
-//             inputBorderError = false;
-//         }
-//     }
-// })
-
-// function resetInputTitle(test12, test34) {
-//     test34.classList.add('vs-hidden');
-//     test12.classList.remove('error-border');
-//     test12.classList.remove('fill-border');
-
-//     inputBorderError = false;
-// }
+        if (titleIdValue == 0) {
+            fieldId.classList.remove('vs-hidden');
+            titleId.classList.add('error-border');
+        } else if(titleIdValue.length < 2) {
+            fieldId.classList.remove('vs-hidden');
+            titleId.classList.add('error-border');
+        } else if(titleIdValue.length >= 0) {
+            fieldId.classList.add('vs-hidden');
+            titleId.classList.remove('error-border');
+            titleId.classList.add('fill-border');
+        }
+    }
+})
