@@ -1,5 +1,5 @@
 let currentPrio = ['medium'];
-let tasks = [];
+// let tasks = [];
 let taskCategory = [];
 let subTasks = [];
 let checkedUsers = [];
@@ -36,7 +36,7 @@ let inputBorderError = false;
 
 async function init() {
     includeHTML();
-    loadTasks(tasks);
+    loadTasks();
     loadContacts();
     whichPriority();
     await loadUsers();
@@ -85,10 +85,10 @@ function checkBooleanForPriority(priority) {
     }
 }
 
-async function loadTasks() {
-    tasks = JSON.parse(await getItem('tasks'));
-    subTasks = JSON.parse(await getItem('subTasks'));
-}
+// async function loadTasks() {
+//     tasks = JSON.parse(await getItem('tasks'));
+//     subTasks = JSON.parse(await getItem('subTasks'));
+// }
 
 async function addTask() {
     let title = document.getElementById('title');
@@ -210,7 +210,7 @@ function showCheckboxes(event) {
         checkboxes.classList.remove('vs-hidden');
         assignedBtn.placeholder = 'Search Contact';
         assignedBtn.classList.toggle('fill-border');
-        renderAssignedToField(contactsInit);
+        renderAssignedToField(contacts);
         expanded = true;
     } else {
         assignedBtn.classList.remove('fill-border');
@@ -252,7 +252,7 @@ function renderAssignedToField(arrayToRender) {
 
 function examineUser(i) {
     // let currentLabel = document.getElementById(`checkBox${i}`);
-    let currentName = contactsInit[i]['name'];
+    let currentName = contacts[i]['name'];
     let checkBox = document.getElementById(`checkBox${i}`);
     let userField = document.getElementById(`userField${i}`);
     let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
@@ -274,7 +274,7 @@ function backgroundColorInitials(i, whichArea) {
         let bgInitials = document.getElementById(`initialArea${i}`);
         bgInitials.style.backgroundColor = bgColorCheckedUser;
     } else {
-        let currentColor = contactsInit[i]['color'];
+        let currentColor = contacts[i]['color'];
         let bgColorContacts = contactColor[currentColor];
         let bgInitials = document.getElementById(`bgInitials${i}`)
         bgInitials.style.backgroundColor = bgColorContacts;
@@ -282,7 +282,7 @@ function backgroundColorInitials(i, whichArea) {
 }
 
 function selectedUser(i) {
-    let singleUser = contactsInit[i];
+    let singleUser = contacts[i];
     let currentIndex = checkedUsers.indexOf(singleUser);
 
     if(!checkedUsers.includes(singleUser, 0)) {
@@ -333,8 +333,8 @@ function searchContact() {
 
     searchContacts.splice(0, searchContacts.length);
     if(inputSearchContact.length >= 1) {
-        for(i = 0; i < contactsInit.length; i++) {
-            let contact = contactsInit[i]['name'];
+        for(i = 0; i < contacts.length; i++) {
+            let contact = contacts[i]['name'];
             if(contact.toLowerCase().includes(inputSearchContact)) {
                 console.log(contact);
                 searchContacts.push(contact);

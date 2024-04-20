@@ -95,19 +95,11 @@ function renderSubTasksBoard(i) {
   let subTasks = tasks[i]["subTasks"];
   subTasksField.innerHTML = "";
 
-<<<<<<< HEAD
     for(j = 0; j < subTasks.length; j++) {
         let subTask = subTasks[j];
         subTasksField.innerHTML += returnHtmlSubtasks(subTask);
     }
     renderContactsBoard(i);
-=======
-  for (j = 0; j < subTasks.length; j++) {
-    let subTask = subTasks[j];
-    subTasksField.innerHTML += returnHtmlSubtasks(subTask);
-  }
-  renderContactsBoard(i);
->>>>>>> b000f77dc55a5915617005ceaaefca9a83022ebe
 }
 
 function renderContactsBoard(i) {
