@@ -143,6 +143,10 @@ h2 {
     border: 1px solid #29ABE2;
 }
 
+.fill-border-bottom {
+    border-bottom: 1px solid #29ABE2;
+}
+
 .required-field-title {
     height: 12px;
 }
@@ -274,11 +278,6 @@ h2 {
     top: 336px;
 }
 
-/* .size-check {
-    width: 14px;
-    height: 14px;
-} */
-
 .option-value * {
     padding: 24px;
 }
@@ -320,6 +319,7 @@ h2 {
 
 .vs-hidden {
     visibility: hidden;
+    transition: all ease-in-out 100ms;
 }
 
 .ps-fixed {
@@ -345,11 +345,10 @@ h2 {
 }
 
 .buttons-clear-create {
-    /* position: absolute; */
     position: relative;
-    /* top: 889px; */
-    top: 354px;
-    left: 995.25px;
+    top: 793px;
+    left: 115px;
+    height: 56px;
     display: flex;
     gap: 16px;
 }
@@ -384,11 +383,27 @@ h2 {
     cursor: pointer;
 }
 
+.dropdown-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-category {
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    position: relative;
+    z-index: 5;
+}
+
 .new-subtask {
     display:flex;
     flex-direction:row;
-    border:1px solid grey;
-    padding:1px;
 }
 
 .input-new-subtask {
@@ -483,19 +498,29 @@ h2 {
 .categories-list {
     background-color: #FFFFFF;
     border: 1px #dadada solid;
-    max-height: 336px;
     z-index: 3;
-    /* position: relative; */
     position: absolute;
-    /* top: 371px; */
-    width: 440px;
+    width: 438px;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
-    border-radius: 10px;
     margin-top: -10px;
-    padding-top: 20px;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.categories-list::-webkit-scrollbar-thumb {
+    background-color: rgba(168, 168, 168, 1);
+    border-radius: 8px;
+    padding-top: 10px;
+}
+
+.pd-12-16 {
+    padding:12px 16px;
 }
 
 .d-flex-initials {
@@ -556,6 +581,10 @@ h2 {
 }
 
 .input-search-contacts:hover {
+    cursor: pointer;
+}
+
+.hover:hover {
     cursor: pointer;
 }
 

@@ -1,5 +1,6 @@
 let currentPrio = ['medium'];
 let tasks = [];
+let taskCategory = [];
 let subTasks = [];
 let checkedUsers = [];
 let priorities = [
@@ -39,7 +40,6 @@ async function init() {
     whichPriority();
     await loadUsers();
     currentDate();
-    // await getContacts();
 }
 
 function currentDate() {
@@ -103,7 +103,7 @@ async function addTask() {
         "assignedTo": checkedUsers,
         "dueDate": dueDate.value,
         "prio": currentPrio,
-        // "category": category.value,
+        "category": taskCategory,
         "subTasks": subTaskForTask,
         "checkedUsers": checkedUsersForTask,
         "statement": "toDo",
@@ -126,14 +126,17 @@ function resetInputFields() {
     let subTasks =  document.getElementById('subTasks');
     let initialArea = document.getElementById('initialArea');
     let newSubTaskField = document.getElementById('newSubTaskField');
+    // let containerCategory = document.getElementById('containerCategory');
 
     title.value = '';
     description.value = '';
     initialArea.innerHTML = '';
-    dueDate.value = '';
-    // category.value = '';
+    // containerCategory.innerHTML = 'Select task category';
     subTasks.value = '';
     newSubTaskField.innerHTML = '';
+    currentDate();
+    changeCategory('Select task category');
+    setItem('subTasks', []);
 
     checkChangeIcons = true;
     changeIconsSubtask();
@@ -176,14 +179,18 @@ async function renderSubTasks(operator) {
 
 function changeIconsSubtask() {
     let addIconSubtasks = document.getElementById('addIconSubtasks');
+    let subTask = document.getElementById('inputFieldSubtasks');
 
     addIconSubtasks.innerHTML = '';
 
     if(checkChangeIcons == false) {
         addIconSubtasks.innerHTML = returnHtmlCheckAndClear();
+        subTask.classList.add('fill-border');
         checkChangeIcons = false;
+        renderSubTasks();
     } else {
         addIconSubtasks.innerHTML = returnHtmlAdd();
+        subTask.classList.remove('fill-border');
         checkChangeIcons = false;
     }
     renderSubTasks();
@@ -316,24 +323,31 @@ function showInitials() {
     }
 }
 
-function searchContact() {
-    let inputSearchContact = document.getElementById('inputToSearchContact').value;
-    let userList = document.getElementById('checkboxes');
+// function searchContact() {
+//     let inputSearchContact = document.getElementById('inputToSearchContact').value;
+//     let userList = document.getElementById('checkboxes');
 
-    if(inputSearchContact.length == 0) {
-        inputSearchContact = inputSearchContact.toLowerCase();
-        userList.innerHTML = '';
-        userList.innerHTML = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero, obcaecati autem ullam inventore, doloribus eaque voluptates voluptatibus deleniti, amet architecto. Quae delectus nulla, est illum debitis veritatis expedita consequatur?';
-    } else {
-        renderAssignedToField();
-    }
-}
+//     searchContact.splice(0, searchContact.length);
+//     if(inputSearchContact.length >= 3) {
+//         for(i = 0; i < currentPokemons.length; i++) {
+//             checkIncludesSearch(i, inputSearchContact);
+//         }
+//         inputSearchContact = inputSearchContact.toLowerCase();
+//         userList.innerHTML = '';
+//         filterContact()
+//         userList.innerHTML = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero, obcaecati autem ullam inventore, doloribus eaque voluptates voluptatibus deleniti, amet architecto. Quae delectus nulla, est illum debitis veritatis expedita consequatur?';
+//     } else {
+//         renderAssignedToField();
+//     }
+// }
 
 function editSubtask(i) {
     let subTaskField = document.getElementById(`subTaskElement${i}`);
     let subTask = subTasks[i];
     let subTaskElement = document.getElementById(`subTaskElement${i}`);
     let ulSubtasks = document.getElementById(`ulSubtasks(${i})`);
+
+    subTaskField.classList.add('fill-border-bottom');
 
     if(ulSubtasks) {
         subTaskElement.classList.add('li-edit');
@@ -345,9 +359,9 @@ function editSubtask(i) {
         <form class="label-edit-subtask">
             <input id="inputField${i}" class="edit-subtask" type="text" value="${subTask}">
             <div class="single-edit-subtask">
-                <img src="/img/trashbin.png" onclick="deleteSubtask(${i})">
+                <img class="hover" src="/img/trashbin.png" onclick="deleteSubtask(${i})">
                 <span>|</span>
-                <img src="/img/Property 1=check.png" onclick="changeSubtask(${i})">
+                <img class="hover" src="/img/Property 1=check.png" onclick="changeSubtask(${i})">
             </div>
         </form>`
         inputFocus(i);
@@ -375,12 +389,22 @@ function inputFocus(i) {
 
 function showCategories() {
     let categoriesField = document.getElementById('categories');
-    categoriesField.innerHTML = '';
-    categoriesField.innerHTML = 
-    `<div class="categories-list">
-        <span>Technical Task</span>
-        <span>User Story</span>
-    </div>`
+
+    categoriesField.classList.toggle('vs-hidden');
+
+    if(!categoriesField.classList.contains('vs-hidden')) {
+        categoriesField.focus();
+    }
+}
+
+function changeCategory(category) {
+    let clickedCategory = category;
+    let categoryDropdown = document.getElementById('categoryDropdown');
+
+    categoryDropdown.innerHTML = '';
+    categoryDropdown.innerHTML = clickedCategory;
+
+    taskCategory.push(clickedCategory);
 }
 
 // <--------------------- html templates ---------------------------->
@@ -406,15 +430,15 @@ function returnHtmlSingleContact(user) {
 function returnHtmlCheckAndClear() {
     return `
     <div id="activeInputSubtask" class="active-input-subtasks">
-        <a onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
+        <a class="hover" onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
         <span class="height-24">|</span>
-        <a onclick="addNewSubTask()"><img src="/img/Property 1=check.png"></a>
+        <a class="hover" onclick="addNewSubTask()"><img src="/img/Property 1=check.png"></a>
     </div>`
 }
 
 function returnHtmlAdd() {
     return `
-    <a id="addIconSubtasks" onclick="addNewSubTask()" class="icon-subtask-field"><img src="/img/add.png"></a>`
+    <a id="addIconSubtasks" onclick="addNewSubTask()" class="icon-subtask-field hover"><img src="/img/add.png"></a>`
 }
 
 function prioNormal(priority) {
@@ -442,69 +466,73 @@ function returnHtmlNewSubtasks(newSubTask) {
 
 // <--------------Funktionen für EventListener----------------------->
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     let dateInput = document.getElementById('dueDate');
-//     let requiredDate = document.getElementById('requiredDate');
-//     let taskArea = document.getElementById('description');
-//     let assignedBtn = document.getElementById('inputToSearchContact');
-//     let subTask = document.getElementById('subTasks');
-//     let inputToSearchContact = document.getElementById("inputToSearchContact");
-
-//     dateInput.addEventListener('change', changeBorder);
-//     dateInput.addEventListener('keydown', changeBorder);
-//     dateInput.addEventListener('blur', function() {
-//         resetDateInput(dateInput, requiredDate);
-//     })
+document.addEventListener('DOMContentLoaded', function() {
+    let dateInput = document.getElementById('dueDate');
+    let requiredDate = document.getElementById('requiredDate');
+    let taskArea = document.getElementById('description');
+    let assignedBtn = document.getElementById('inputToSearchContact');
+    let subTask = document.getElementById('subTasks');
+    let subTaskField = document.getElementById('inputFieldSubtasks')
+    let inputToSearchContact = document.getElementById("inputToSearchContact");
+    let containerCategory = document.getElementById("containerCategory");
     
-//     function changeBorder() {
-//         dateInput.classList.remove('fill-border');
-//         let dateInputValue = dateInput.value;
 
-//         if (inputBorderError == false && dateInputValue == '') {
-//             requiredDate.classList.remove('vs-hidden');
-//             dateInput.classList.add('error-border');
-//             inputBorderError = true;
-//         } else if(dateInputValue == '') {
-//             requiredDate.classList.remove('vs-hidden');
-//             dateInput.classList.add('error-border');
-//             inputBorderError = true;
-//         } else {
-//             requiredDate.classList.add('vs-hidden');
-//             dateInput.classList.remove('error-border');
-//             dateInput.classList.add('fill-border');
-//             inputBorderError = false;
-//         }
-//     }
+    dateInput.addEventListener('change', changeBorder);
+    dateInput.addEventListener('keydown', changeBorder);
+    dateInput.addEventListener('blur', function() {
+        resetDateInput(dateInput, requiredDate);
+    })
+    
+    function changeBorder() {
+        dateInput.classList.remove('fill-border');
+        let dateInputValue = dateInput.value;
 
-//     function resetDateInput(dateInput, requiredDate) {
-//         if(inputBorderError == false) {
-//             requiredDate.classList.add('vs-hidden');
-//             dateInput.classList.remove('error-border');
-//             dateInput.classList.remove('fill-border');
-//         }
-//     }
+        if (inputBorderError == false && dateInputValue == '') {
+            requiredDate.classList.remove('vs-hidden');
+            dateInput.classList.add('error-border');
+            inputBorderError = true;
+        } else if(dateInputValue == '') {
+            requiredDate.classList.remove('vs-hidden');
+            dateInput.classList.add('error-border');
+            inputBorderError = true;
+        } else {
+            requiredDate.classList.add('vs-hidden');
+            dateInput.classList.remove('error-border');
+            dateInput.classList.add('fill-border');
+            inputBorderError = false;
+        }
+    }
 
-//     taskArea.addEventListener('click', function() {
-//         taskArea.classList.add('fill-border');
-//     })
+    function resetDateInput(dateInput, requiredDate) {
+        if(inputBorderError == false) {
+            requiredDate.classList.add('vs-hidden');
+            dateInput.classList.remove('error-border');
+            dateInput.classList.remove('fill-border');
+        }
+    }
 
-//     taskArea.addEventListener('blur', function() {
-//         taskArea.classList.remove('fill-border');
-//     })
+    taskArea.addEventListener('click', function() {
+        taskArea.classList.add('fill-border');
+    })
 
-//     inputToSearchContact.addEventListener('blur', function() {
-//         inputToSearchContact.classList.remove('fill-border');
-//         showCheckboxes();
-//     })
+    taskArea.addEventListener('blur', function() {
+        taskArea.classList.remove('fill-border');
+    })
 
-//     subTask.addEventListener('click', function() {
-//         subTask.classList.add('fill-border');
-//     })
+    inputToSearchContact.addEventListener('blur', function() {
+        inputToSearchContact.classList.remove('fill-border');
+        showCheckboxes();
+    })
 
-//     subTask.addEventListener('blur', function() {
-//         subTask.classList.remove('fill-border');
-//     })
-// });
+    containerCategory.addEventListener('blur', function() {
+        showCategories();
+    })
+
+    // subTask.addEventListener('blur', function() {
+    //     checkChangeIcons = true;
+    //     changeIconsSubtask();
+    // })
+});
 
 
 
