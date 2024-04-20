@@ -1,6 +1,6 @@
 let finishedSubTasks = [];
 let currentDraggedElement;
-let tasks;
+
 async function init_board() {
   await loadTasksKaloyan();
   await loadTasks();
