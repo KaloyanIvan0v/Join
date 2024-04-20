@@ -100,7 +100,6 @@ function renderSubTasksBoard(i) {
         subTasksField.innerHTML += returnHtmlSubtasks(subTask);
     }
     renderContactsBoard(i);
-}
 
 function renderContactsBoard(i) {
   let contactsFieldBoard = document.getElementById(`contactsFieldBoard(${i})`);
