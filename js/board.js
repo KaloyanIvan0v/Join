@@ -1,6 +1,5 @@
 let finishedSubTasks = [];
 let currentDraggedElement;
-let tasks;
 async function init_board() {
   await loadTasksKaloyan();
   await loadTasks();
@@ -101,16 +100,18 @@ function renderSubTasksBoard(i) {
     }
     renderContactsBoard(i);
 
-function renderContactsBoard(i) {
-  let contactsFieldBoard = document.getElementById(`contactsFieldBoard(${i})`);
-  let contactsForTask = tasks[i]["assignedTo"];
-  contactsFieldBoard.innerHTML = "";
+}
 
-  for (j = 0; j < contactsForTask.length; j++) {
-    let contactForTask = contactsForTask[j];
-    contactsFieldBoard.innerHTML += returnHtmlContacts(contactForTask, j);
-    //backgroundColorInitialsBoard(i, j);
-  }
+    function renderContactsBoard(i) {
+      let contactsFieldBoard = document.getElementById(`contactsFieldBoard(${i})`);
+      let contactsForTask = tasks[i]["assignedTo"];
+      contactsFieldBoard.innerHTML = "";
+    
+      for (j = 0; j < contactsForTask.length; j++) {
+        let contactForTask = contactsForTask[j];
+        contactsFieldBoard.innerHTML += returnHtmlContacts(contactForTask, j);
+        backgroundColorInitialsBoard(i, j);
+      }
 }
 
 function backgroundColorInitialsBoard(i, j) {
