@@ -513,10 +513,13 @@ h2 {
     line-height: 24px;
 }
 
-.categories-list::-webkit-scrollbar-thumb {
-    background-color: rgba(168, 168, 168, 1);
+.user-list::-webkit-scrollbar {
     border-radius: 8px;
-    padding-top: 10px;
+    width: 8px;
+}
+
+.user-list::-webkit-scrollbar-thumb {
+    background-color: rgba(168, 168, 168, 1);
 }
 
 .pd-12-16 {
