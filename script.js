@@ -15,6 +15,11 @@ const contactColor = {
   14: "rgb(255, 122, 1)",
 };
 
+let tasks = [];
+let conatacts = [];
+let users = [];
+let geLoggedInUser;
+
 function setLoggedInUser(user) {
   saveToLocalStorage("loggedInUser", user);
 }
@@ -36,25 +41,25 @@ function getFromLocalStorage(key) {
   }
 }
 
-async function loadUsers(variable) {
+async function loadUsers() {
   try {
-    variable = JSON.parse(await getItem("users"));
+    users = JSON.parse(await getItem("users"));
   } catch (e) {
     console.error("Loading error:", e);
   }
 }
 
-async function loadContacts(variable) {
+async function loadContacts() {
   try {
-    variable = JSON.parse(await getItem("contacts"));
+    contacts = JSON.parse(await getItem("contacts"));
   } catch (e) {
     console.error("Loading error:", e);
   }
 }
 
-async function loadTasks(variable) {
+async function loadTasks() {
   try {
-    variable = JSON.parse(await getItem("tasks"));
+    tasks = JSON.parse(await getItem("tasks"));
   } catch (e) {
     console.error("Loading error:", e);
   }
