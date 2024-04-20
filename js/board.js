@@ -70,7 +70,7 @@ function renderSubTasksBoard(i) {
         let subTask = subTasks[j];
         subTasksField.innerHTML += returnHtmlSubtasks(subTask);
     }
-    renderContactsBoard(i)
+    renderContactsBoard(i);
 }
 
 function renderContactsBoard(i) {

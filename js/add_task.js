@@ -3,6 +3,7 @@ let tasks = [];
 let taskCategory = [];
 let subTasks = [];
 let checkedUsers = [];
+let searchContacts = [];
 let priorities = [
     {
         'text': 'Urgent',
@@ -35,7 +36,7 @@ let inputBorderError = false;
 
 async function init() {
     includeHTML();
-    loadTasks();
+    loadTasks(tasks);
     loadContacts();
     whichPriority();
     await loadUsers();
@@ -209,7 +210,7 @@ function showCheckboxes(event) {
         checkboxes.classList.remove('vs-hidden');
         assignedBtn.placeholder = 'Search Contact';
         assignedBtn.classList.toggle('fill-border');
-        renderAssignedToField();
+        renderAssignedToField(contactsInit);
         expanded = true;
     } else {
         assignedBtn.classList.remove('fill-border');
@@ -227,7 +228,7 @@ function toggleUserListInitials(assigned) {
     checkboxes.classList.toggle('d-flex-initials');
 }
 
-function renderAssignedToField() {
+function renderAssignedToField(arrayToRender) {
     let userCheckBox = document.getElementById('checkboxes');
     userCheckBox.innerHTML = '';
 
@@ -235,15 +236,15 @@ function renderAssignedToField() {
         toggleUserListInitials();
     }
 
-    for(i = 0; i < contactsInit.length; i++){;
-        user = contactsInit[i];
+    for(i = 0; i < arrayToRender.length; i++){;
+        user = arrayToRender[i];
         userCheckBox.innerHTML += 
             returnHtmlSingleContact(user);
             backgroundColorInitials(i, 'none');
     }
 
     if(checkedUsers.length > 0) {
-        for(i = 0; i < contactsInit.length; i++){;
+        for(i = 0; i < arrayToRender.length; i++){;
             examineUser(i);   
         }
     }
@@ -325,23 +326,28 @@ function showInitials() {
     }
 }
 
-// function searchContact() {
-//     let inputSearchContact = document.getElementById('inputToSearchContact').value;
-//     let userList = document.getElementById('checkboxes');
+function searchContact() {
+    let inputSearchContact = document.getElementById('inputToSearchContact').value;
+    inputSearchContact = inputSearchContact.toLowerCase();
+    let userList = document.getElementById('checkboxes');
 
-//     searchContact.splice(0, searchContact.length);
-//     if(inputSearchContact.length >= 3) {
-//         for(i = 0; i < currentPokemons.length; i++) {
-//             checkIncludesSearch(i, inputSearchContact);
-//         }
-//         inputSearchContact = inputSearchContact.toLowerCase();
-//         userList.innerHTML = '';
-//         filterContact()
-//         userList.innerHTML = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero, obcaecati autem ullam inventore, doloribus eaque voluptates voluptatibus deleniti, amet architecto. Quae delectus nulla, est illum debitis veritatis expedita consequatur?';
-//     } else {
-//         renderAssignedToField();
-//     }
-// }
+    searchContacts.splice(0, searchContacts.length);
+    if(inputSearchContact.length >= 1) {
+        for(i = 0; i < contactsInit.length; i++) {
+            let contact = contactsInit[i]['name'];
+            if(contact.toLowerCase().includes(inputSearchContact)) {
+                console.log(contact);
+                searchContacts.push(contact);
+                renderAssignedToField(searchContacts);
+            }
+            // checkIncludesSearch(i, inputSearchContact);
+        }
+    }
+}
+
+function checkIncludesSearch(i, inputSearchContact) {
+
+}
 
 function editSubtask(i) {
     let subTaskField = document.getElementById(`subTaskElement${i}`);
@@ -349,12 +355,12 @@ function editSubtask(i) {
     let subTaskElement = document.getElementById(`subTaskElement${i}`);
     let ulSubtasks = document.getElementById(`ulSubtasks(${i})`);
 
-    subTaskField.classList.add('fill-border-bottom');
 
     if(ulSubtasks) {
         subTaskElement.classList.add('li-edit');
         subTaskElement.classList.add('pd-inline-start');
         ulSubtasks.classList.add('pd-inline-start');
+        subTaskField.classList.add('fill-border-bottom');
 
         subTaskField.innerHTML = '';
         subTaskField.innerHTML = editSubtaskHtml(i, subTask);
