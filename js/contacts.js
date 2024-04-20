@@ -1,9 +1,9 @@
 let currentEditingContactId;
-
+let contacts;
 async function initContacts() {
   includeHTML();
-  await loadContacts();
-  renderContacts(contactsInit);
+  await loadContacts(contacts);
+  renderContacts(contacts);
 }
 
 function openContactForm(form) {
@@ -55,16 +55,16 @@ async function deleteContact(event) {
   }
   let contactIndex = getContactIndex(getActualContactEmail());
   if (contactIndex != undefined) {
-    contactsInit.splice(contactIndex, 1);
+    contacts.splice(contactIndex, 1);
     document.getElementById("id-contact-full-mode").innerHTML = "";
-    renderContacts(contactsInit);
+    renderContacts(contacts);
     safeContacts();
   }
 }
 
 function safeContacts() {
-  setItem("contacts", contactsInit);
-  setSesionStorage("contacts", contactsInit);
+  setItem("contacts", contacts);
+  setSesionStorage("contacts", contacts);
 }
 
 function getActualContactEmail() {
@@ -76,8 +76,8 @@ function getActualContactEmail() {
 }
 
 function getContactIndex(email) {
-  for (let i = 0; i < contactsInit.length; i++) {
-    if (contactsInit[i].email == email) {
+  for (let i = 0; i < contacts.length; i++) {
+    if (contacts[i].email == email) {
       return i;
     }
   }
@@ -86,11 +86,11 @@ function getContactIndex(email) {
 function editContactFillForm() {
   let contactIndex = getContactIndex(getActualContactEmail());
   if (contactIndex != undefined) {
-    let name = contactsInit[contactIndex].name;
-    let email = contactsInit[contactIndex].email;
-    let phone = contactsInit[contactIndex].phone;
-    let badge = contactsInit[contactIndex].nameInitials;
-    let colorId = contactsInit[contactIndex].color;
+    let name = contacts[contactIndex].name;
+    let email = contacts[contactIndex].email;
+    let phone = contacts[contactIndex].phone;
+    let badge = contacts[contactIndex].nameInitials;
+    let colorId = contacts[contactIndex].color;
     document.getElementById("id-edit-contact-input-name").value = name;
     document.getElementById("id-edit-contact-input-email").value = email;
     document.getElementById("id-edit-contact-input-phone").value = phone;
@@ -106,19 +106,19 @@ function setBadge(badge, colorId) {
 }
 
 function SaveEditedContact() {
-  contactsInit[currentEditingContactId].name = document.getElementById(
+  contacts[currentEditingContactId].name = document.getElementById(
     "id-edit-contact-input-name"
   ).value;
-  contactsInit[currentEditingContactId].email = document.getElementById(
+  contacts[currentEditingContactId].email = document.getElementById(
     "id-edit-contact-input-email"
   ).value;
-  contactsInit[currentEditingContactId].phone = document.getElementById(
+  contacts[currentEditingContactId].phone = document.getElementById(
     "id-edit-contact-input-phone"
   ).value;
   safeContacts();
   closeContactFrom();
-  renderContacts(contactsInit);
-  renderContactFullMode(contactsInit[currentEditingContactId]);
+  renderContacts(contacts);
+  renderContactFullMode(contacts[currentEditingContactId]);
 }
 
 async function addNewContact() {
@@ -136,10 +136,10 @@ async function addNewContact() {
     nameInitials: contactBadge,
     author: author,
   };
-  contactsInit.push(contact);
+  contacts.push(contact);
   safeContacts();
   closeContactFrom();
-  renderContacts(contactsInit);
+  renderContacts(contacts);
 }
 
 function generateBadge(name) {
@@ -260,9 +260,9 @@ function openContact(contactEmail) {
 }
 
 function getContactData(contactEmail) {
-  for (let i = 0; i < contactsInit.length; i++) {
-    if (contactsInit[i].email == contactEmail) {
-      return contactsInit[i];
+  for (let i = 0; i < contacts.length; i++) {
+    if (contacts[i].email == contactEmail) {
+      return contacts[i];
     }
   }
 }

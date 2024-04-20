@@ -36,25 +36,25 @@ function getFromLocalStorage(key) {
   }
 }
 
-async function loadUsers() {
+async function loadUsers(variable) {
   try {
-    usersInit = JSON.parse(await getItem("users"));
+    variable = JSON.parse(await getItem("users"));
   } catch (e) {
     console.error("Loading error:", e);
   }
 }
 
-async function loadContacts() {
+async function loadContacts(variable) {
   try {
-    contactsInit = JSON.parse(await getItem("contacts"));
+    variable = JSON.parse(await getItem("contacts"));
   } catch (e) {
     console.error("Loading error:", e);
   }
 }
 
-async function loadTasks(va) {
+async function loadTasks(variable) {
   try {
-    tasksInit = JSON.parse(await getItem("tasks"));
+    variable = JSON.parse(await getItem("tasks"));
   } catch (e) {
     console.error("Loading error:", e);
   }
