@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Board</title>
 
     <link rel="icon" type="image/x-icon" href="/img/logoDark.png">
-    
+
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="/css/templates.css">
     <link rel="stylesheet" href="/css/board.css">
 
     <script src="/js/w3include.js"></script>
     <script src="/js/storage.js"></script>
-    <script src="/js/login.js"></script>
-    <script src="/js/contacts.js"></script>
+    <!-- <script src="/js/login.js"></script> -->
+    <!-- <script src="/js/contacts.js"></script> -->
     <script src="/script.js"></script>
-    <script src="/js/add_task.js"></script>
+    <!-- <script src="/js/add_task.js"></script> -->
     <script src="/js/board.js"></script>
-    
+
 </head>
+
 <body onload="init_board()">
     <div id="backgroundDialog">
         <div class="task-overlay" id="taskOverlay"></div>
@@ -47,40 +49,47 @@
         </div>
 
         <div class="subline-board">
+        </div>
+    </div>
 
+    <div class="board-distribution">
+        <div class="category-section">
             <div class="subline-field" onclick="addTaskTemplate('toDo')">
                 <span class="subline-field-description">To do</span>
                 <a class="add-task-board">
                     <img class="plus-board" src="/img/Group 11.png">
                 </a>
-            </div>        
-            
+            </div>
+            <div class="task-area" id="categoryToDo" ondrop="moveElementTo('toDo')" ondragover="allowDrop(event)"></div>
+        </div>
+        <div class="category-section">
             <div class="subline-field" onclick="addTaskTemplate('inProgress')">
                 <span class="subline-field-description">In progress</span>
                 <a class="add-task-board">
                     <img class="plus-board" src="/img/plus_icon_board.png">
                 </a>
             </div>
-            
+            <div class="task-area" id="categoryInProgress" ondrop="moveElementTo('inProgress')"
+                ondragover="allowDrop(event)">
+            </div>
+        </div>
+        <div class="category-section">
             <div class="subline-field" onclick="addTaskTemplate('awaitFeedback')">
                 <span class="subline-field-description">Await Feedback</span>
                 <a class="add-task-board">
                     <img class="plus-board" src="/img/plus_icon_board.png">
                 </a>
             </div>
-        
+            <div class="task-area" id="categoryAwaitFeedback" ondrop="moveElementTo('awaitFeedback')"
+                ondragover="allowDrop(event)"></div>
+        </div>
+        <div class="category-section">
             <div class="subline-field">
                 <span class="subline-field-description">Done</span>
             </div>
-
+            <div class="task-area" id="categoryDone" ondrop="moveElementTo('done')" ondragover="allowDrop(event)"></div>
         </div>
     </div>
-
-    <div class="board-distribution">
-        <div class="task-area" id="categoryToDo"></div>
-        <div class="task-area" id="categoryInProgress"></div>
-        <div class="task-area" id="categoryAwaitFeedback"></div>
-        <div class="task-area" id="categoryDone"></div>
-    </div>
 </body>
+
 </html>
