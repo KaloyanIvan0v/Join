@@ -31,7 +31,5 @@ function setAbbreviationToUserIcon(firstName, lastName) {
 }
 
     function storageClear (){
-    //location.reload('./index.html');
-    //window.location.href = '../index.html';
     sessionStorage.clear();
 }
