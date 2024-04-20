@@ -96,7 +96,6 @@ async function addTask() {
     let category = document.getElementById('category');
     let subTaskForTask = subTasks;
     let checkedUsersForTask = checkedUsers;
-    // let subTasks =  document.getElementById('subTasks');
 
     let task = {
         "title": title.value,
@@ -104,9 +103,10 @@ async function addTask() {
         "assignedTo": checkedUsers,
         "dueDate": dueDate.value,
         "prio": currentPrio,
-        "category": category.value,
+        // "category": category.value,
         "subTasks": subTaskForTask,
         "checkedUsers": checkedUsersForTask,
+        "statement": "toDo",
         }
     tasks.push(task);
     // addedToBoard();
@@ -131,7 +131,7 @@ function resetInputFields() {
     description.value = '';
     initialArea.innerHTML = '';
     dueDate.value = '';
-    category.value = '';
+    // category.value = '';
     subTasks.value = '';
     newSubTaskField.innerHTML = '';
 
@@ -168,9 +168,9 @@ async function renderSubTasks(operator) {
     }
 
     if(operator == 'newSubtask') {
-    checkChangeIcons = true;
-    changeIconsSubtask();
-    await setItem('subTasks', subTasks);
+        checkChangeIcons = true;
+        changeIconsSubtask();
+        await setItem('subTasks', subTasks);
     }
 }
 
@@ -190,7 +190,7 @@ function changeIconsSubtask() {
 }
 
 function preventFocusLoss(event) {
-    event.preventDefault(); // Verhindern, dass das Eingabefeld den Fokus verliert
+    event.preventDefault();
 }
 
 function showCheckboxes() {
@@ -201,7 +201,6 @@ function showCheckboxes() {
         checkboxes.classList.remove('vs-hidden');
         assignedBtn.placeholder = 'Search Contact';
         assignedBtn.classList.toggle('fill-border');
-        // assignedBtn.focus();
         renderAssignedToField();
         expanded = true;
     } else {
@@ -225,8 +224,6 @@ function renderAssignedToField() {
 
     if(!userCheckBox.classList.contains('user-list')) {
         toggleUserListInitials();
-        // userCheckBox.classList.remove('d-flex-initials');
-        // userCheckBox.classList.add('user-list')
     }
 
     for(i = 0; i < contactsInit.length; i++){;
@@ -237,7 +234,6 @@ function renderAssignedToField() {
     }
 
     if(checkedUsers.length > 0) {
-
         for(i = 0; i < contactsInit.length; i++){;
             examineUser(i);   
         }
@@ -245,7 +241,7 @@ function renderAssignedToField() {
 }
 
 function examineUser(i) {
-    let currentLabel = document.getElementById(`checkBox${i}`);
+    // let currentLabel = document.getElementById(`checkBox${i}`);
     let currentName = contactsInit[i]['name'];
     let checkBox = document.getElementById(`checkBox${i}`);
     let userField = document.getElementById(`userField${i}`);
@@ -253,18 +249,15 @@ function examineUser(i) {
     let index = checkedUsers.findIndex(item => JSON.stringify(item['name']) === JSON.stringify(currentName));
         
     if(index != -1) {
-    checkBox.classList.remove('box-unchecked');
-    paddingForChecked.classList.add('pd-right-16');
-    userField.classList.add('bg-checked');
-    userField.classList.remove('hover-user-field');
-    // paddingForChecked.classList.add('pd-right-16');
-    // userField.classList.add('bg-checked');
-    paddingForChecked.classList.add('hover-assigned')
+        checkBox.classList.remove('box-unchecked');
+        paddingForChecked.classList.add('pd-right-16');
+        userField.classList.add('bg-checked');
+        userField.classList.remove('hover-user-field');
+        paddingForChecked.classList.add('hover-assigned')
     }
 }
 
 function backgroundColorInitials(i, whichArea) {
-
     if(whichArea == 'showInitial') {
         let checkedUserColor = checkedUsers[i]['color'];
         let bgColorCheckedUser = contactColor[checkedUserColor];
@@ -289,7 +282,6 @@ function selectedUser(i) {
         checkedUsers.splice(currentIndex, 1);
         toggleForCheckedUser(i);
     }
-    // setItem('checkedUsers', checkedUsers);
 }
 
 function toggleForCheckedUser(i) {
@@ -342,27 +334,53 @@ function editSubtask(i) {
     let subTask = subTasks[i];
     let subTaskElement = document.getElementById(`subTaskElement${i}`);
     let ulSubtasks = document.getElementById(`ulSubtasks(${i})`);
-    subTaskElement.classList.add('li-edit');
-    subTaskElement.classList.add('pd-inline-start');
-    ulSubtasks.classList.add('pd-inline-start');
 
-    subTaskField.innerHTML = '';
-    subTaskField.innerHTML = `
-    <form class="label-edit-subtask">
-        <input id="inputField${i}" class="edit-subtask" type="text" value="${subTask}">
-        <div class="single-edit-subtask">
-            <img src="/img/trashbin.png">
-            <span>|</span>
-            <img src="/img/Property 1=check.png">
-        </div>
-    </form>`
-    inputFocus(i);
+    if(ulSubtasks) {
+        subTaskElement.classList.add('li-edit');
+        subTaskElement.classList.add('pd-inline-start');
+        ulSubtasks.classList.add('pd-inline-start');
+
+        subTaskField.innerHTML = '';
+        subTaskField.innerHTML = `
+        <form class="label-edit-subtask">
+            <input id="inputField${i}" class="edit-subtask" type="text" value="${subTask}">
+            <div class="single-edit-subtask">
+                <img src="/img/trashbin.png" onclick="deleteSubtask(${i})">
+                <span>|</span>
+                <img src="/img/Property 1=check.png" onclick="changeSubtask(${i})">
+            </div>
+        </form>`
+        inputFocus(i);
+    }
+}
+
+function deleteSubtask(i) {
+    subTasks.splice(i, 1);
+    setItem('subTasks', subTasks);
+    renderSubTasks();
+}
+
+async function changeSubtask(i) {
+    let changedSubTask = document.getElementById(`inputField${i}`).value;
+    subTasks[i] = changedSubTask;
+    await setItem('subTasks', subTasks);
+    renderSubTasks();
 }
 
 function inputFocus(i) {
     let inputField = document.getElementById(`inputField${i}`);
     inputField.focus();
     inputField.setSelectionRange(inputField.value.length, inputField.value.length);
+}
+
+function showCategories() {
+    let categoriesField = document.getElementById('categories');
+    categoriesField.innerHTML = '';
+    categoriesField.innerHTML = 
+    `<div class="categories-list">
+        <span>Technical Task</span>
+        <span>User Story</span>
+    </div>`
 }
 
 // <--------------------- html templates ---------------------------->
@@ -424,113 +442,113 @@ function returnHtmlNewSubtasks(newSubTask) {
 
 // <--------------Funktionen für EventListener----------------------->
 
-document.addEventListener('DOMContentLoaded', function() {
-    let dateInput = document.getElementById('dueDate');
-    let requiredDate = document.getElementById('requiredDate');
-    let taskArea = document.getElementById('description');
-    let assignedBtn = document.getElementById('inputToSearchContact');
-    let subTask = document.getElementById('subTasks');
-    let inputToSearchContact = document.getElementById("inputToSearchContact");
+// document.addEventListener('DOMContentLoaded', function() {
+//     let dateInput = document.getElementById('dueDate');
+//     let requiredDate = document.getElementById('requiredDate');
+//     let taskArea = document.getElementById('description');
+//     let assignedBtn = document.getElementById('inputToSearchContact');
+//     let subTask = document.getElementById('subTasks');
+//     let inputToSearchContact = document.getElementById("inputToSearchContact");
 
-    dateInput.addEventListener('change', changeBorder);
-    dateInput.addEventListener('keydown', changeBorder);
-    dateInput.addEventListener('blur', function() {
-        resetDateInput(dateInput, requiredDate);
-    })
+//     dateInput.addEventListener('change', changeBorder);
+//     dateInput.addEventListener('keydown', changeBorder);
+//     dateInput.addEventListener('blur', function() {
+//         resetDateInput(dateInput, requiredDate);
+//     })
     
-    function changeBorder() {
-        dateInput.classList.remove('fill-border');
-        let dateInputValue = dateInput.value;
+//     function changeBorder() {
+//         dateInput.classList.remove('fill-border');
+//         let dateInputValue = dateInput.value;
 
-        if (inputBorderError == false && dateInputValue == '') {
-            requiredDate.classList.remove('vs-hidden');
-            dateInput.classList.add('error-border');
-            inputBorderError = true;
-        } else if(dateInputValue == '') {
-            requiredDate.classList.remove('vs-hidden');
-            dateInput.classList.add('error-border');
-            inputBorderError = true;
-        } else {
-            requiredDate.classList.add('vs-hidden');
-            dateInput.classList.remove('error-border');
-            dateInput.classList.add('fill-border');
-            inputBorderError = false;
-        }
-    }
+//         if (inputBorderError == false && dateInputValue == '') {
+//             requiredDate.classList.remove('vs-hidden');
+//             dateInput.classList.add('error-border');
+//             inputBorderError = true;
+//         } else if(dateInputValue == '') {
+//             requiredDate.classList.remove('vs-hidden');
+//             dateInput.classList.add('error-border');
+//             inputBorderError = true;
+//         } else {
+//             requiredDate.classList.add('vs-hidden');
+//             dateInput.classList.remove('error-border');
+//             dateInput.classList.add('fill-border');
+//             inputBorderError = false;
+//         }
+//     }
 
-    function resetDateInput(dateInput, requiredDate) {
-        if(inputBorderError == false) {
-            requiredDate.classList.add('vs-hidden');
-            dateInput.classList.remove('error-border');
-            dateInput.classList.remove('fill-border');
-        }
-    }
+//     function resetDateInput(dateInput, requiredDate) {
+//         if(inputBorderError == false) {
+//             requiredDate.classList.add('vs-hidden');
+//             dateInput.classList.remove('error-border');
+//             dateInput.classList.remove('fill-border');
+//         }
+//     }
 
-    taskArea.addEventListener('click', function() {
-        taskArea.classList.add('fill-border');
-    })
+//     taskArea.addEventListener('click', function() {
+//         taskArea.classList.add('fill-border');
+//     })
 
-    taskArea.addEventListener('blur', function() {
-        taskArea.classList.remove('fill-border');
-    })
+//     taskArea.addEventListener('blur', function() {
+//         taskArea.classList.remove('fill-border');
+//     })
 
-    inputToSearchContact.addEventListener('blur', function() {
-        inputToSearchContact.classList.remove('fill-border');
-        showCheckboxes();
-    })
+//     inputToSearchContact.addEventListener('blur', function() {
+//         inputToSearchContact.classList.remove('fill-border');
+//         showCheckboxes();
+//     })
 
-    subTask.addEventListener('click', function() {
-        subTask.classList.add('fill-border');
-    })
+//     subTask.addEventListener('click', function() {
+//         subTask.classList.add('fill-border');
+//     })
 
-    subTask.addEventListener('blur', function() {
-        subTask.classList.remove('fill-border');
-    })
-});
+//     subTask.addEventListener('blur', function() {
+//         subTask.classList.remove('fill-border');
+//     })
+// });
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    let title = document.getElementById('title');
-    let requiredTitle = document.getElementById('requiredTitle');
+// document.addEventListener('DOMContentLoaded', function() {
+//     let title = document.getElementById('title');
+//     let requiredTitle = document.getElementById('requiredTitle');
 
-    title.addEventListener('click', function() {
-        changeBorder(title, requiredTitle);
-    });
+//     title.addEventListener('click', function() {
+//         changeBorder(title, requiredTitle);
+//     });
 
-    title.addEventListener('keydown', function() {
-        changeBorder(title, requiredTitle);
-    });
+//     title.addEventListener('keydown', function() {
+//         changeBorder(title, requiredTitle);
+//     });
 
-    title.addEventListener('blur', function() {
-        resetInputTitle(title, requiredTitle);
-    })
+//     title.addEventListener('blur', function() {
+//         resetInputTitle(title, requiredTitle);
+//     })
     
-    function changeBorder(titleId, fieldId) {
-        titleId.classList.remove('fill-border');
-        let titleIdValue = titleId.value;
+//     function changeBorder(titleId, fieldId) {
+//         titleId.classList.remove('fill-border');
+//         let titleIdValue = titleId.value;
 
-        if (titleIdValue == '' && inputBorderError == false) {
-            fieldId.classList.remove('vs-hidden');
-            titleId.classList.add('error-border');
-            inputBorderError = false;
-        } else if(titleIdValue.length < 2) {
-            fieldId.classList.remove('vs-hidden');
-            titleId.classList.add('error-border');
-            inputBorderError = false;
-        } else if(titleIdValue.length >= 0) {
-            fieldId.classList.add('vs-hidden');
-            titleId.classList.remove('error-border');
-            titleId.classList.add('fill-border');
-            inputBorderError = false;
-        }
-    }
-})
+//         if (titleIdValue == '' && inputBorderError == false) {
+//             fieldId.classList.remove('vs-hidden');
+//             titleId.classList.add('error-border');
+//             inputBorderError = false;
+//         } else if(titleIdValue.length < 2) {
+//             fieldId.classList.remove('vs-hidden');
+//             titleId.classList.add('error-border');
+//             inputBorderError = false;
+//         } else if(titleIdValue.length >= 0) {
+//             fieldId.classList.add('vs-hidden');
+//             titleId.classList.remove('error-border');
+//             titleId.classList.add('fill-border');
+//             inputBorderError = false;
+//         }
+//     }
+// })
 
-function resetInputTitle(test12, test34) {
-    test34.classList.add('vs-hidden');
-    test12.classList.remove('error-border');
-    test12.classList.remove('fill-border');
+// function resetInputTitle(test12, test34) {
+//     test34.classList.add('vs-hidden');
+//     test12.classList.remove('error-border');
+//     test12.classList.remove('fill-border');
 
-    inputBorderError = false;
-}
+//     inputBorderError = false;
+// }

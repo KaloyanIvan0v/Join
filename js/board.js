@@ -44,7 +44,6 @@ function whichPriorityTaskCard(i) {
     } else {
         prioField.innerHTML = '<img src="' + '/img/urgent_red.png' + '" alt="Bildbeschreibung">'
     }
-    // renderSubTasksBoard(i);
     renderContactsBoard(i);
 }
 

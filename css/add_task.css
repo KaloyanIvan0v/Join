@@ -92,12 +92,9 @@ h2 {
 
 .parting-line-add-task {
     border: 1px solid #D1D1D1;
-    /* position: absolute; */
     position: relative;
     height: 424px;
-    /* top: 327px; */
     top: 231px;
-    /* left: 816.25px; */
     left: 376.25px;
 }
 
@@ -115,11 +112,8 @@ h2 {
 .rightside-add-task {
     width: 440px;
     height: 416px;
-    /* position: absolute; */
     position: relative;
-    /* top: 327px; */
     top: 231px;
-    /* left: 864.25px; */
     left: 424.25px;
 }
 
@@ -480,7 +474,25 @@ h2 {
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 10px;
     margin-top: -10px;
-    padding-top: 10px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.categories-list {
+    background-color: #FFFFFF;
+    border: 1px #dadada solid;
+    max-height: 336px;
+    z-index: 3;
+    /* position: relative; */
+    position: absolute;
+    /* top: 371px; */
+    width: 440px;
+    box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    margin-top: -10px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 2px;
