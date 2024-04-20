@@ -200,7 +200,8 @@ function preventFocusLoss(event) {
     event.preventDefault();
 }
 
-function showCheckboxes() {
+function showCheckboxes(event) {
+    preventFocusLoss(event);
     let checkboxes = document.getElementById("checkboxes");
     let assignedBtn = document.getElementById('inputToSearchContact');
 
@@ -215,6 +216,7 @@ function showCheckboxes() {
         toggleUserListInitials(assignedBtn) 
         expanded = false;
         showInitials();
+        event.target.blur();
     }
 }
 
@@ -470,105 +472,105 @@ function editSubtaskHtml(i, subTask) {
 
 // <--------------Funktionen für EventListener----------------------->
 
-document.addEventListener('DOMContentLoaded', function() {
-    let dateInput = document.getElementById('dueDate');
-    let requiredDate = document.getElementById('requiredDate');
-    let taskArea = document.getElementById('description');
-    let assignedBtn = document.getElementById('inputToSearchContact');
-    let subTask = document.getElementById('subTasks');
-    let subTaskField = document.getElementById('inputFieldSubtasks')
-    let inputToSearchContact = document.getElementById("inputToSearchContact");
-    let containerCategory = document.getElementById("containerCategory");
-    // let checkbox = document.getElementById('checkboxes');
+// document.addEventListener('DOMContentLoaded', function() {
+//     let dateInput = document.getElementById('dueDate');
+//     let requiredDate = document.getElementById('requiredDate');
+//     let taskArea = document.getElementById('description');
+//     let assignedBtn = document.getElementById('inputToSearchContact');
+//     let subTask = document.getElementById('subTasks');
+//     let subTaskField = document.getElementById('inputFieldSubtasks')
+//     let inputToSearchContact = document.getElementById("inputToSearchContact");
+//     let containerCategory = document.getElementById("containerCategory");
+//     // let checkbox = document.getElementById('checkboxes');
     
 
-    dateInput.addEventListener('change', changeBorder);
-    dateInput.addEventListener('keydown', changeBorder);
-    dateInput.addEventListener('blur', function() {
-        resetDateInput(dateInput, requiredDate);
-    })
+//     dateInput.addEventListener('change', changeBorder);
+//     dateInput.addEventListener('keydown', changeBorder);
+//     dateInput.addEventListener('blur', function() {
+//         resetDateInput(dateInput, requiredDate);
+//     })
     
-    function changeBorder() {
-        dateInput.classList.remove('fill-border');
-        let dateInputValue = dateInput.value;
+//     function changeBorder() {
+//         dateInput.classList.remove('fill-border');
+//         let dateInputValue = dateInput.value;
 
-        if (inputBorderError == false && dateInputValue == '') {
-            requiredDate.classList.remove('vs-hidden');
-            dateInput.classList.add('error-border');
-            inputBorderError = true;
-        } else if(dateInputValue == '') {
-            requiredDate.classList.remove('vs-hidden');
-            dateInput.classList.add('error-border');
-            inputBorderError = true;
-        } else {
-            requiredDate.classList.add('vs-hidden');
-            dateInput.classList.remove('error-border');
-            dateInput.classList.add('fill-border');
-            inputBorderError = false;
-        }
-    }
+//         if (inputBorderError == false && dateInputValue == '') {
+//             requiredDate.classList.remove('vs-hidden');
+//             dateInput.classList.add('error-border');
+//             inputBorderError = true;
+//         } else if(dateInputValue == '') {
+//             requiredDate.classList.remove('vs-hidden');
+//             dateInput.classList.add('error-border');
+//             inputBorderError = true;
+//         } else {
+//             requiredDate.classList.add('vs-hidden');
+//             dateInput.classList.remove('error-border');
+//             dateInput.classList.add('fill-border');
+//             inputBorderError = false;
+//         }
+//     }
 
-    function resetDateInput(dateInput, requiredDate) {
-        if(inputBorderError == false) {
-            requiredDate.classList.add('vs-hidden');
-            dateInput.classList.remove('error-border');
-            dateInput.classList.remove('fill-border');
-        }
-    }
+//     function resetDateInput(dateInput, requiredDate) {
+//         if(inputBorderError == false) {
+//             requiredDate.classList.add('vs-hidden');
+//             dateInput.classList.remove('error-border');
+//             dateInput.classList.remove('fill-border');
+//         }
+//     }
 
-    taskArea.addEventListener('click', function() {
-        taskArea.classList.add('fill-border');
-    })
+//     taskArea.addEventListener('click', function() {
+//         taskArea.classList.add('fill-border');
+//     })
 
-    taskArea.addEventListener('blur', function() {
-        taskArea.classList.remove('fill-border');
-    })
+//     taskArea.addEventListener('blur', function() {
+//         taskArea.classList.remove('fill-border');
+//     })
 
-    inputToSearchContact.addEventListener('blur', function() {
-        inputToSearchContact.classList.remove('fill-border');
-        showCheckboxes();
-    })
+//     inputToSearchContact.addEventListener('blur', function() {
+//         inputToSearchContact.classList.remove('fill-border');
+//         showCheckboxes();
+//     })
 
-    // containerCategory.addEventListener('blur', function() {
-    //     showCategories();
-    // })
+//     // containerCategory.addEventListener('blur', function() {
+//     //     showCategories();
+//     // })
 
-    // subTask.addEventListener('blur', function() {
-    //     checkChangeIcons = true;
-    //     changeIconsSubtask();
-    // })
-});
+//     // subTask.addEventListener('blur', function() {
+//     //     checkChangeIcons = true;
+//     //     changeIconsSubtask();
+//     // })
+// });
 
-document.addEventListener('DOMContentLoaded', function() {
-    let title = document.getElementById('title');
-    let requiredTitle = document.getElementById('requiredTitle');
+// document.addEventListener('DOMContentLoaded', function() {
+//     let title = document.getElementById('title');
+//     let requiredTitle = document.getElementById('requiredTitle');
 
-    title.addEventListener('click', function() {
-        changeBorder(title, requiredTitle);
-    });
+//     title.addEventListener('click', function() {
+//         changeBorder(title, requiredTitle);
+//     });
 
-    title.addEventListener('keydown', function() {
-        changeBorder(title, requiredTitle);
-    });
+//     title.addEventListener('keydown', function() {
+//         changeBorder(title, requiredTitle);
+//     });
 
-    title.addEventListener('blur', function() {
-        resetInputTitle(title, requiredTitle);
-    })
+//     title.addEventListener('blur', function() {
+//         resetInputTitle(title, requiredTitle);
+//     })
     
-    function changeBorder(titleId, fieldId) {
-        titleId.classList.remove('fill-border');
-        let titleIdValue = titleId.value;
+//     function changeBorder(titleId, fieldId) {
+//         titleId.classList.remove('fill-border');
+//         let titleIdValue = titleId.value;
 
-        if (titleIdValue == 0) {
-            fieldId.classList.remove('vs-hidden');
-            titleId.classList.add('error-border');
-        } else if(titleIdValue.length < 2) {
-            fieldId.classList.remove('vs-hidden');
-            titleId.classList.add('error-border');
-        } else if(titleIdValue.length >= 0) {
-            fieldId.classList.add('vs-hidden');
-            titleId.classList.remove('error-border');
-            titleId.classList.add('fill-border');
-        }
-    }
-})
+//         if (titleIdValue == 0) {
+//             fieldId.classList.remove('vs-hidden');
+//             titleId.classList.add('error-border');
+//         } else if(titleIdValue.length < 2) {
+//             fieldId.classList.remove('vs-hidden');
+//             titleId.classList.add('error-border');
+//         } else if(titleIdValue.length >= 0) {
+//             fieldId.classList.add('vs-hidden');
+//             titleId.classList.remove('error-border');
+//             titleId.classList.add('fill-border');
+//         }
+//     }
+// })
