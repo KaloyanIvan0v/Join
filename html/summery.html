@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,71 +10,77 @@
     <link rel="stylesheet" href="/css/templates.css">
     <link rel="stylesheet" href="/css/summery.css">
     <script src="/js/w3include.js"></script>
+    <script src="/js/storage.js"></script>
     <script src="/script.js"></script>
     <script src="/js/templates.js"></script>
     <script src="/js/summery.js"></script>
 </head>
+
 <body onload="init()">
     <div w3-include-html="/templates/header.html" class="header"></div>
     <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
     <div class="summeryContent">
         <div class="summeryTop">
-        <h1>Join 360</h1>
-        <div class="partingLineTop"></div>
-        <p style="font-size: 27px;">Key Metrics at a Glance</p>
-    </div>
-    <div class="summeryinfoParent">
-        <div class="summeryInfo">
-            <div class="summeryInfo1">
-                <div class="summeryToDo shadow" >
-                    <img style="width: 69px; height: 69px; margin-right: 18px;" src="/img/toDo.png">
-                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                        <H1 id="counttoDo" style="margin: 0;"></H1>
-                        <p style="margin: 0;">To-Do</p>
+            <h1>Join 360</h1>
+            <div class="partingLineTop"></div>
+            <p style="font-size: 27px;">Key Metrics at a Glance</p>
+        </div>
+        <div class="summeryinfoParent">
+            <div class="summeryInfo">
+                <div class="summeryInfo1">
+                    <div class="summeryToDo shadow">
+                        <img style="width: 69px; height: 69px; margin-right: 18px;" src="/img/toDo.png">
+                        <div
+                            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <H1 id="counttoDo" style="margin: 0;"></H1>
+                            <p style="margin: 0;">To-Do</p>
+                        </div>
+                    </div>
+                    <div class="summeryDone shadow">
+                        <img style="width: 69px; height: 69px; margin-right: 18px;" src="/img/checkDark.png">
+                        <div
+                            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <H1 id="countdone" style="margin: 0;"></H1>
+                            <p style="margin: 0;">Done</p>
+                        </div>
                     </div>
                 </div>
-                <div class="summeryDone shadow">
-                    <img style="width: 69px; height: 69px; margin-right: 18px;" src="/img/checkDark.png">
-                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                        <H1 id="countdone" style="margin: 0;"></H1>
-                        <p style="margin: 0;">Done</p>
+                <div class="summeryInfo2 shadow">
+                    <div class="upcomming1">
+                        <img style="width: 69px; height: 69px; margin-right: 18px;" src="/img/prioCircle.png">
+                        <div
+                            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <H1 id="highestPrio" style="margin: 0;"></H1>
+                            <p style="margin: 0;">Urgent</p>
+                        </div>
+                    </div>
+                    <div class="upcommingpartingLine"></div>
+                    <div>
+                        <h3>Oktober 16, 2022</h3>
+                        <p>Upcomming Deadline</p>
+                    </div>
+                </div>
+                <div class="summeryInfo3">
+                    <div class="summeryTasksInBoard shadow">
+                        <h1 id="numberOfTasksInBoard" style="margin: 0;"></h1>
+                        <p style="margin: 0;">Tasks in <br> Board</p>
+                    </div>
+                    <div class="summeryTasksInProgress shadow">
+                        <h1 id="countinProgress" style="margin: 0;"></h1>
+                        <p style="margin: 0;">Tasks in <br> Progress</p>
+                    </div>
+                    <div class="summeryAwaitingFeedback shadow">
+                        <h1 id="countawaitFeedback" style="margin: 0;"></h1>
+                        <p style="margin: 0;">Awaiting <br> Feedback</p>
                     </div>
                 </div>
             </div>
-            <div class="summeryInfo2 shadow">
-                <div class="upcomming1">
-                    <img style="width: 69px; height: 69px; margin-right: 18px;" src="/img/prioCircle.png">
-                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                        <H1 id="highestPrio" style="margin: 0;"></H1>
-                        <p style="margin: 0;">Urgent</p>
-                    </div>
-                </div>
-                <div class="upcommingpartingLine"></div>
-                <div>
-                    <h3>Oktober 16, 2022</h3>
-                    <p>Upcomming Deadline</p>
-                </div>
-            </div>
-            <div class="summeryInfo3">
-                <div class="summeryTasksInBoard shadow">
-                    <h1 id="numberOfTasksInBoard" style="margin: 0;"></h1>
-                    <p style="margin: 0;">Tasks in <br> Board</p>
-                </div>
-                <div class="summeryTasksInProgress shadow">
-                    <h1 id="countinProgress" style="margin: 0;"></h1>
-                    <p style="margin: 0;">Tasks in <br> Progress</p>
-                </div>
-                <div class="summeryAwaitingFeedback shadow">
-                    <h1 id="countawaitFeedback" style="margin: 0;"></h1>
-                    <p style="margin: 0;">Awaiting <br> Feedback</p>
-                </div>
+            <div class="greetings">
+                <h4>Good morning</h4>
+                <p id="name" class="name"></p>
             </div>
         </div>
-        <div class="greetings">
-            <h4>Good morning</h4>
-            <p id="name" class="name"></p>
-        </div>
-    </div>
     </div>
 </body>
+
 </html>

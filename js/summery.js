@@ -1,39 +1,33 @@
-let tasks;
-
-function init() {
-    includeHTML();
-    setTimeout(loadFirstLettersFromSessionStorage, 20);
-    loadTasks();
-    writeNumberOfAllTasks();
-    filterHighestPrio();
-    countStatements('toDo');
-    countStatements('done');
-    countStatements('inProgress');
-    countStatements('awaitFeedback');
-}
-
-function loadTasks() {
-    tasks = JSON.parse(sessionStorage.getItem('tasks'));
+async function init() {
+  await loadTasks();
+  includeHTML();
+  setTimeout(loadFirstLettersFromSessionStorage, 20);
+  writeNumberOfAllTasks();
+  filterHighestPrio();
+  countStatements("toDo");
+  countStatements("done");
+  countStatements("inProgress");
+  countStatements("awaitFeedback");
 }
 
 function writeNumberOfAllTasks() {
-    document.getElementById('numberOfTasksInBoard').innerHTML = tasks.length;
+  document.getElementById("numberOfTasksInBoard").innerHTML = tasks.length;
 }
 
 function filterHighestPrio() {
-    let highestPrio = "Urgent";
-    let count = tasks.reduce(function (acc, tasks) {
-        return tasks.prio === highestPrio ? acc + 1 : acc;
-    }, 0);
-    document.getElementById('highestPrio').innerHTML = count;
+  let highestPrio = "Urgent";
+  let count = tasks.reduce(function (acc, tasks) {
+    return tasks.prio === highestPrio ? acc + 1 : acc;
+  }, 0);
+  document.getElementById("highestPrio").innerHTML = count;
 }
 
 function countStatements(index) {
-    let statementCounts = 0;
-    tasks.forEach(task => {
-        if (task.statement === index) {
-            statementCounts++;
-        }
-    });
-    document.getElementById(`count${index}`).innerHTML = statementCounts;
+  let statementCounts = 0;
+  tasks.forEach((task) => {
+    if (task.statement === index) {
+      statementCounts++;
+    }
+  });
+  document.getElementById(`count${index}`).innerHTML = statementCounts;
 }
