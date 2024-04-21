@@ -381,3 +381,10 @@ input:focus {
   border: 1px dashed rgba(168, 168, 168, 1);
   border-radius: 10px;
 }
+
+.preview-element {
+  width: 252px;
+  height: 228px;
+  border: 1px dashed rgba(168, 168, 168, 1);
+  border-radius: 24px;
+}

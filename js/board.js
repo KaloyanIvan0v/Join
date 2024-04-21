@@ -1,24 +1,15 @@
 let finishedSubTasks = [];
 let currentDraggedElement;
 async function init_board() {
-  await loadTasksKaloyan();
-  //await loadTasks();
+  await loadTasks();
   includeHTML();
   loadNewTasks();
   loadContacts();
 }
 
-async function loadTasksKaloyan() {
-  try {
-    tasks = JSON.parse(await getItem("tasksKaloyan"));
-  } catch (e) {
-    console.error("Loading error:", e);
-  }
-}
-
 function returnHtmlShowToDos(singleTask, i, id) {
   return /*html*/ `
-    <div class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="showCurrentTask(${i})">
+    <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="showCurrentTask(${i})">
         <div class="task-card-statement">
             <span id="statementField${i}" class="which-statement">
                 ${singleTask["statement"]}
@@ -62,7 +53,6 @@ function diclareTaskAreas() {
 }
 
 async function loadNewTasks() {
-  checkedUsers = JSON.parse(await getItem("checkedUsers"));
   let taskAreas = diclareTaskAreas();
   taskAreas[0].innerHTML = "";
   taskAreas[1].innerHTML = "";
@@ -218,6 +208,8 @@ function returnHtmlContacts(contactForTask, j) {
 
 function startDragging(id) {
   currentDraggedElement = id;
+  rotateTaksCard(id);
+  previewDrop(id);
 }
 
 function allowDrop(event) {
@@ -227,7 +219,8 @@ function allowDrop(event) {
 function moveElementTo(newstatement) {
   tasks[getIndexOfElement(currentDraggedElement)].statement = newstatement;
   loadNewTasks();
-  setItem("tasksKaloyan", JSON.stringify(tasks));
+  setSesionStorage("tasks", tasks);
+  setItem("tasks", JSON.stringify(tasks));
 }
 
 function getIndexOfElement(id) {
@@ -267,4 +260,46 @@ function getStatementByTaskI(i) {
   };
 
   return TaskAreaStatements[i];
+}
+
+function rotateTaksCard(id) {
+  let taskCard = document.getElementById(`taskCard${id}`);
+  taskCard.style.transform = "rotate(5deg)";
+}
+
+function previewDrop(id) {
+  let taskAreas = diclareTaskAreas();
+  let previewAreasPosition = getPreviewAreas(id);
+  if (previewAreasPosition[0] > -1) {
+    taskAreas[previewAreasPosition[0]].innerHTML += previewElementHtml();
+  }
+  if (previewAreasPosition[1] < 4) {
+    taskAreas[previewAreasPosition[1]].innerHTML += previewElementHtml();
+  }
+}
+
+function previewElementHtml() {
+  return /*html*/ `
+  <div class="preview-element"></div>
+  `;
+}
+
+function getPreviewAreas(id) {
+  let taskAreaPosition = getTaskStatementIndex(id);
+  let previewTaskAreas = [taskAreaPosition - 1, taskAreaPosition + 1];
+  return previewTaskAreas;
+}
+
+function getTaskStatementIndex(id) {
+  let statement = tasks[getIndexOfElement(id)].statement;
+  switch (statement) {
+    case "toDo":
+      return 0;
+    case "inProgress":
+      return 1;
+    case "awaitFeedback":
+      return 2;
+    case "done":
+      return 3;
+  }
 }
