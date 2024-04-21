@@ -50,41 +50,43 @@
     </div>
 
     <div class="board-distribution">
-        <div class="category-section">
+        <div class="statement-section">
             <div class="subline-field" onclick="addTaskTemplate('toDo')">
                 <span class="subline-field-description">To do</span>
                 <a class="add-task-board">
                     <img class="plus-board" src="/img/Group 11.png">
                 </a>
             </div>
-            <div class="task-area" id="categoryToDo" ondrop="moveElementTo('toDo')" ondragover="allowDrop(event)"></div>
+            <div class="task-area" id="statementToDo" ondrop="moveElementTo('toDo')" ondragover="allowDrop(event)">
+            </div>
         </div>
-        <div class="category-section">
+        <div class="statement-section">
             <div class="subline-field" onclick="addTaskTemplate('inProgress')">
                 <span class="subline-field-description">In progress</span>
                 <a class="add-task-board">
                     <img class="plus-board" src="/img/plus_icon_board.png">
                 </a>
             </div>
-            <div class="task-area" id="categoryInProgress" ondrop="moveElementTo('inProgress')"
+            <div class="task-area" id="statementInProgress" ondrop="moveElementTo('inProgress')"
                 ondragover="allowDrop(event)">
             </div>
         </div>
-        <div class="category-section">
+        <div class="statement-section">
             <div class="subline-field" onclick="addTaskTemplate('awaitFeedback')">
                 <span class="subline-field-description">Await Feedback</span>
                 <a class="add-task-board">
                     <img class="plus-board" src="/img/plus_icon_board.png">
                 </a>
             </div>
-            <div class="task-area" id="categoryAwaitFeedback" ondrop="moveElementTo('awaitFeedback')"
+            <div class="task-area" id="statementAwaitFeedback" ondrop="moveElementTo('awaitFeedback')"
                 ondragover="allowDrop(event)"></div>
         </div>
-        <div class="category-section">
+        <div class="statement-section">
             <div class="subline-field">
                 <span class="subline-field-description">Done</span>
             </div>
-            <div class="task-area" id="categoryDone" ondrop="moveElementTo('done')" ondragover="allowDrop(event)"></div>
+            <div class="task-area" id="statementDone" ondrop="moveElementTo('done')" ondragover="allowDrop(event)">
+            </div>
         </div>
     </div>
 </body>

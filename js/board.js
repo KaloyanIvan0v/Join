@@ -19,9 +19,9 @@ async function loadTasksKaloyan() {
 function returnHtmlShowToDos(singleTask, i, id) {
   return /*html*/ `
     <div class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="showCurrentTask(${i})">
-        <div class="task-card-category">
-            <span id="categoryField${i}" class="which-category">
-                ${singleTask["category"]}
+        <div class="task-card-statement">
+            <span id="statementField${i}" class="which-statement">
+                ${singleTask["statement"]}
             </span>
         </div>
         
@@ -53,42 +53,47 @@ function returnHtmlShowToDos(singleTask, i, id) {
         `;
 }
 
+function diclareTaskAreas() {
+  let toDoField = document.getElementById("statementToDo");
+  let inProgressField = document.getElementById("statementInProgress");
+  let awaitFeedbackField = document.getElementById("statementAwaitFeedback");
+  let doneField = document.getElementById("statementDone");
+  return [toDoField, inProgressField, awaitFeedbackField, doneField];
+}
+
 async function loadNewTasks() {
   checkedUsers = JSON.parse(await getItem("checkedUsers"));
-  let toDoField = document.getElementById("categoryToDo");
-  let inProgressField = document.getElementById("categoryInProgress");
-  let awaitFeedbackField = document.getElementById("categoryAwaitFeedback");
-  let doneField = document.getElementById("categoryDone");
-
-  toDoField.innerHTML = "";
-  inProgressField.innerHTML = "";
-  awaitFeedbackField.innerHTML = "";
-  doneField.innerHTML = "";
+  let taskAreas = diclareTaskAreas();
+  taskAreas[0].innerHTML = "";
+  taskAreas[1].innerHTML = "";
+  taskAreas[2].innerHTML = "";
+  taskAreas[3].innerHTML = "";
   for (i = 0; i < tasks.length; i++) {
     let singleTask = tasks[i];
     let id = tasks[i]["id"];
-    let category = tasks[i]["statement"];
-    if (category == "toDo") {
-      toDoField.innerHTML += returnHtmlShowToDos(singleTask, i, id);
-    } else if (category == "inProgress") {
-      inProgressField.innerHTML += returnHtmlShowToDos(singleTask, i, id);
-    } else if (category == "awaitFeedback") {
-      awaitFeedbackField.innerHTML += returnHtmlShowToDos(singleTask, i, id);
-    } else if (category == "done") {
-      doneField.innerHTML += returnHtmlShowToDos(singleTask, i, id);
+    let statement = tasks[i]["statement"];
+    if (statement == "toDo") {
+      taskAreas[0].innerHTML += returnHtmlShowToDos(singleTask, i, id);
+    } else if (statement == "inProgress") {
+      taskAreas[1].innerHTML += returnHtmlShowToDos(singleTask, i, id);
+    } else if (statement == "awaitFeedback") {
+      taskAreas[2].innerHTML += returnHtmlShowToDos(singleTask, i, id);
+    } else if (statement == "done") {
+      taskAreas[3].innerHTML += returnHtmlShowToDos(singleTask, i, id);
     }
-    chooseCategoryColor(i);
+    choosestatementColor(i);
   }
+  checkIfTaskAreaIsEmpty();
 }
 
-function chooseCategoryColor(i) {
-  let categoryField = document.getElementById(`categoryField${i}`);
-  let singleTaskCategory = tasks[i]["category"];
+function choosestatementColor(i) {
+  let statementField = document.getElementById(`statementField${i}`);
+  let singleTaskstatement = tasks[i]["statement"];
 
-  if (singleTaskCategory == "Technical Task") {
-    categoryField.classList.add("bg-color-technical-task");
+  if (singleTaskstatement == "Technical Task") {
+    statementField.classList.add("bg-color-technical-task");
   } else {
-    categoryField.classList.add("bg-color-user-story");
+    statementField.classList.add("bg-color-user-story");
   }
   whichPriorityTaskCard(i);
 }
@@ -120,7 +125,7 @@ function showCurrentTask(i) {
   backgroundDialog.classList.toggle("background-dialog");
   dialogField.innerHTML = "";
   dialogField.innerHTML = returnHtmlCurrentTask(currentTask, i);
-  chooseCategoryColor(i);
+  choosestatementColor(i);
   whichPriorityTaskCard(i);
   renderContactsBoard(i);
   renderSubTasksBoard(i);
@@ -165,7 +170,7 @@ function backgroundColorInitialsBoard(i, j) {
 function returnHtmlCurrentTask(overlayTask, i) {
   return `
     <div class="overlay-first-row">
-        <div class="overlay-category" id="categoryField${i}">${overlayTask["category"]}</div>
+        <div class="overlay-statement" id="statementField${i}">${overlayTask["statement"]}</div>
         <a onclick="showCurrentTask()">X</a>
     </div>
     <div class="overlay-title">
@@ -219,8 +224,8 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-function moveElementTo(newCategory) {
-  tasks[getIndexOfElement(currentDraggedElement)].statement = newCategory;
+function moveElementTo(newstatement) {
+  tasks[getIndexOfElement(currentDraggedElement)].statement = newstatement;
   loadNewTasks();
   setItem("tasksKaloyan", JSON.stringify(tasks));
 }
@@ -233,4 +238,33 @@ function getIndexOfElement(id) {
     }
   }
   return index;
+}
+
+function checkIfTaskAreaIsEmpty() {
+  let taskAreas = diclareTaskAreas();
+  for (i = 0; i < taskAreas.length; i++) {
+    if (taskAreas[i].innerHTML == "") {
+      let statement = getStatementByTaskI(i);
+      taskAreas[i].innerHTML = taskAreaIsEmptyHtml(statement);
+    }
+  }
+}
+
+function taskAreaIsEmptyHtml(statement) {
+  return /*html*/ `
+  <div class="task-area-empty-mgs">
+    no tasks ${statement}
+  </div>
+  `;
+}
+
+function getStatementByTaskI(i) {
+  const TaskAreaStatements = {
+    0: "To do",
+    1: "In progress",
+    2: "Await Feedback",
+    3: "Done",
+  };
+
+  return TaskAreaStatements[i];
 }
