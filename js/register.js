@@ -1,4 +1,3 @@
-let users = [];
 let checkBoxState = false;
 let pswVisibility = [false, false];
 async function initRegister() {

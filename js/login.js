@@ -6,6 +6,7 @@ let pswVisibility = false;
 let checkBoxState = false;
 
 async function initLogin() {
+  setStartScreenImgAndBackgroundcolor();
   await loadUsers();
   await loadContacts();
   await loadTasks();
@@ -23,6 +24,18 @@ function startScreen() {
   document.querySelector(".opacity-layer").classList.add("hidden");
 }
 
+function setStartScreenImgAndBackgroundcolor() {
+  if (window.innerWidth > 860) {
+  } else {
+    document.getElementById("id-logo-img").src = "../img/logo-light.svg";
+    document.getElementById(
+      "id-opacity-layer"
+    ).style.backgroundColor = `var(--primary-color)`;
+    setTimeout(() => {
+      document.getElementById("id-logo-img").src = "../img/logo-dark.svg";
+    }, 1200);
+  }
+}
 function login() {
   let user = email.value;
   if (userExist(user) && passwordIsCorrect(user)) {
