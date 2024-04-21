@@ -3,8 +3,10 @@ let currentDraggedElement;
 async function init_board() {
   await loadTasks();
   includeHTML();
-  loadNewTasks();
+  renderTask(tasks);
   loadContacts();
+  filterTaskListener();
+  setSearchFieldBorderListener();
 }
 
 function returnHtmlShowToDos(singleTask, i, id) {
@@ -52,16 +54,13 @@ function diclareTaskAreas() {
   return [toDoField, inProgressField, awaitFeedbackField, doneField];
 }
 
-async function loadNewTasks() {
+async function renderTask(tasksList) {
   let taskAreas = diclareTaskAreas();
-  taskAreas[0].innerHTML = "";
-  taskAreas[1].innerHTML = "";
-  taskAreas[2].innerHTML = "";
-  taskAreas[3].innerHTML = "";
-  for (i = 0; i < tasks.length; i++) {
-    let singleTask = tasks[i];
-    let id = tasks[i]["id"];
-    let statement = tasks[i]["statement"];
+  clearBoard(taskAreas);
+  for (i = 0; i < tasksList.length; i++) {
+    let singleTask = tasksList[i];
+    let id = tasksList[i]["id"];
+    let statement = tasksList[i]["statement"];
     if (statement == "toDo") {
       taskAreas[0].innerHTML += returnHtmlShowToDos(singleTask, i, id);
     } else if (statement == "inProgress") {
@@ -74,6 +73,13 @@ async function loadNewTasks() {
     choosestatementColor(i);
   }
   checkIfTaskAreaIsEmpty();
+}
+
+function clearBoard(taskAreas) {
+  taskAreas[0].innerHTML = "";
+  taskAreas[1].innerHTML = "";
+  taskAreas[2].innerHTML = "";
+  taskAreas[3].innerHTML = "";
 }
 
 function choosestatementColor(i) {
@@ -218,7 +224,7 @@ function allowDrop(event) {
 
 function moveElementTo(newstatement) {
   tasks[getIndexOfElement(currentDraggedElement)].statement = newstatement;
-  loadNewTasks();
+  renderTask(tasks);
   setSesionStorage("tasks", tasks);
   setItem("tasks", JSON.stringify(tasks));
 }
@@ -328,4 +334,35 @@ function setPreviewElementwidthAndHeightRight() {
   let previewElementRight = document.querySelector(".preview-element-right");
   previewElementRight.style.width = `${widthAndHeight[0]}px`;
   previewElementRight.style.height = `${widthAndHeight[1]}px`;
+}
+
+function filterTaskListener() {
+  document
+    .getElementById("id-find-task-input")
+    .addEventListener("input", () => renderFilteredTasks());
+}
+
+function renderFilteredTasks() {
+  var inputValue = document
+    .getElementById("id-find-task-input")
+    .value.toLowerCase();
+  var filteredTasks = tasks.filter(function (task) {
+    return (
+      task.title.toLowerCase().includes(inputValue) ||
+      task.description.toLowerCase().includes(inputValue)
+    );
+  });
+  renderTask(filteredTasks);
+}
+
+function setSearchFieldBorderListener() {
+  const inputElement = document.getElementById("id-find-task-input");
+  const formElement = document.getElementById("id-input-find-task");
+  inputElement.addEventListener("focus", function () {
+    formElement.style.border = `1px solid var(--accent-color)`;
+  });
+
+  inputElement.addEventListener("blur", function () {
+    formElement.style.border = "1px solid  rgba(168, 168, 168, 1)";
+  });
 }
