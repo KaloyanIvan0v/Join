@@ -403,6 +403,7 @@ function changeCategory(category) {
     categoryDropdown.innerHTML = clickedCategory;
 
     taskCategory.push(clickedCategory);
+    showCategories();
 }
 
 // <--------------------- html templates ---------------------------->
@@ -436,12 +437,12 @@ function returnHtmlCheckAndClear() {
 
 function returnHtmlAdd() {
     return `
-    <a id="addIconSubtasks" onclick="addNewSubTask()" class="icon-subtask-field hover"><img src="/img/add.png"></a>`
+    <a id="addIconSubtasks" onclick="addNewSubTask()" class="hover"><img src="/img/add.png"></a>`
 }
 
 function prioNormal(priority) {
     return `
-    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorFalse']}">
+    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field hover-prio-btn ${priority['bgColorFalse']}">
         <span class="fz-20">${priority['text']}</span>
         <img id="imgUrgent" src="${priority['iconColor']}">
     </div>`
@@ -530,10 +531,10 @@ document.addEventListener('DOMContentLoaded', function() {
         taskArea.classList.remove('fill-border');
     })
 
-    inputToSearchContact.addEventListener('blur', function() {
-        inputToSearchContact.classList.remove('fill-border');
-        showCheckboxes();
-    })
+    // inputToSearchContact.addEventListener('blur', function() {
+    //     inputToSearchContact.classList.remove('fill-border');
+    //     showCheckboxes();
+    // })
 
     // containerCategory.addEventListener('blur', function() {
     //     showCategories();
@@ -565,16 +566,31 @@ document.addEventListener('DOMContentLoaded', function() {
         titleId.classList.remove('fill-border');
         let titleIdValue = titleId.value;
 
-        if (titleIdValue == 0) {
+        if (titleIdValue == 1) {
             fieldId.classList.remove('vs-hidden');
             titleId.classList.add('error-border');
-        } else if(titleIdValue.length < 2) {
+        } else if(titleIdValue.length < 2 && inputBorderError == false) {
             fieldId.classList.remove('vs-hidden');
             titleId.classList.add('error-border');
-        } else if(titleIdValue.length >= 0) {
+            inputBorderError = true;
+        // } else if(titleIdValue.length >= 1) {
+        } else if(inputBorderError == true) {
             fieldId.classList.add('vs-hidden');
             titleId.classList.remove('error-border');
             titleId.classList.add('fill-border');
+            inputBorderError = false;
         }
     }
+
+    function resetInputTitle(titleId, fieldId) {
+        fieldId.classList.add('vs-hidden');
+        titleId.classList.remove('error-border');
+    }
 })
+
+// function showAddTaskTemplate() {
+//     let bgDialog = document.getElementById('bgDialog');
+
+//     bgDialog.classList.remove('vs-hidden');
+//     bgDialog.classList.add('align-center');
+// }

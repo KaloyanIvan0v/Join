@@ -8,9 +8,18 @@ body {
     overflow-x: hidden;
 }
 
+/* .add_task_formular_template {
+    background-color: #FFFFFF;
+    position: relative;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
 input[type=text] {
-    padding: 12px 16px;
     font-size: 20px;
+    /* border: none; */
 }
 
 .single-edit-subtask {
@@ -81,12 +90,18 @@ h2 {
     display: flex;
 }
 
+.hover-prio-btn:hover {
+    box-shadow: 0 4px 4px 3px rgba(0, 0, 0, 0.25);
+}
+
+.border-none[type=text] {
+    border: none;
+}
+
 .leftside-add-task {
     width: 440px;
     height: 376px;
-    /* position: absolute; */
     position: relative;
-    /* top: 327px; */
     top: 231px;
     left: 328px;
 }
@@ -215,7 +230,6 @@ h2 {
 .input-field {
     border-radius: 10px;
     height: 48px;
-    /* border: 1px solid #D1D1D1; */
 }
 
 .description-input {
@@ -408,6 +422,7 @@ h2 {
 }
 
 .input-new-subtask {
+    padding: 12px 16px;
     flex-grow:2;
     border: none;
     border-top-left-radius: 10px;
@@ -421,7 +436,7 @@ h2 {
 .icon-subtask-field {
     display: flex;
     align-items: center;
-    padding: 12px 8px;
+    padding: 12px 16px;
     background-color: #FFFFFF;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;

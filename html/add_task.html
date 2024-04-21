@@ -22,6 +22,10 @@
     <div w3-include-html="/templates/header.html" class="header"></div>
     <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
 
+    <!-- <div class="bg-dialog vs-hidden" id="bgDialog">
+        <div w3-include-html="/templates/add_task_formular_template.html" class="add_task_formular_template"></div>
+    </div> -->
+
     <h2>Add Task</h2>
     <form onsubmit="addTask(); return false" class="add-task-informations">
         <div class="leftside-add-task">
@@ -33,7 +37,7 @@
                         <span class="color-FF8190">*</span>
                     </div>
                 </div>
-                <input class="input-field normal-border" id="title" type="text" placeholder="Enter a title">
+                <input class="input-field normal-border pd-12-16" id="title" type="text" placeholder="Enter a title">
                 <div id="requiredTitle" class="required-field-title vs-hidden">
                     <span class="error">This field is required</span>
                 </div>
@@ -49,9 +53,27 @@
                 </div>
             </div>
 
+            <!-- <div class="description-category position-category d-flex-column-center">
+                <div class="d-flex input-description">
+                    <span>Category</span>
+                    <span class="color-FF8190">*</span>
+                </div>                
+                <div tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover" onclick="showCategories()">
+                    <span id="categoryDropdown">Select task category</span>
+                    <div class="dropdown-icon">
+                        <img src="/img/arrow_drop_down.png" id="dropDownArrow">
+                    </div>
+                </div> -->
+            
+
             <div class="assigned-to d-flex-column-center" onclick="showCheckboxes(event)">
                 <span class="input-description">Assigned to</span>
-                <input onkeydown="searchContact()" tabindex="0" class="input-search-contacts normal-border" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
+                <div class="input-category new-subtask normal-border hover">
+                    <input onkeydown="searchContact()" tabindex="0" class="border-none" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
+                    <div class="dropdown-icon">
+                        <img src="/img/arrow_drop_down.png" id="dropDownArrow">
+                    </div>
+                </div>
             </div>
             <div>
                 <div class="user-list vs-hidden" id="checkboxes"></div>
@@ -109,8 +131,8 @@
                 </div>
                 <div id="categories" class="vs-hidden">
                     <div class="categories-list">
-                        <span onclick="changeCategory('Technical Task')" class="pd-12-16">Technical Task</span>
-                        <span onclick="changeCategory('User Story')" class="pd-12-16">User Story</span>
+                        <span onclick="changeCategory('Technical Task')" class="pd-12-16 hover-user-field">Technical Task</span>
+                        <span onclick="changeCategory('User Story')" class="pd-12-16 hover-user-field">User Story</span>
                     </div>
                 </div>
             </div>
@@ -149,7 +171,7 @@
         </div>
     </form>
 
-    <div class="required-field-notice">
+    <div onclick="showAddTaskTemplate()" class="required-field-notice">
         <span class="color-FF8190">*</span>
         <span>This field is required</span>
     </div>
