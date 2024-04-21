@@ -1,5 +1,6 @@
 let currentPrio = ['medium'];
 let taskCategory = [];
+let idNumber = [];
 let subTasks = [];
 let checkedUsers = [];
 let searchContacts = [];
@@ -90,6 +91,7 @@ function checkBooleanForPriority(priority) {
 // }
 
 async function addTask() {
+    let idNumber = increaseId();
     let title = document.getElementById('title');
     let description = document.getElementById('description');
     let dueDate = document.getElementById('dueDate');
@@ -107,12 +109,27 @@ async function addTask() {
         "subTasks": subTaskForTask,
         "checkedUsers": checkedUsersForTask,
         "statement": "toDo",
+        "id": idNumber,
         }
     tasks.push(task);
     // addedToBoard();
     await setItem('tasks', tasks);
     resetInputFields();
     window.location.href = "board.html";
+}
+
+
+function increaseId() {
+    let lastTaskofTasks = tasks.length - 1;
+
+    if(lastTaskofTasks == -1) {
+        return currentId = 0;
+    
+    } else {
+        let currentId = tasks[lastTaskofTasks]['id'];
+        currentId++;
+        return currentId;
+    }
 }
 
 function addedToBoard() {
@@ -569,12 +586,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (titleIdValue == 1) {
             fieldId.classList.remove('vs-hidden');
             titleId.classList.add('error-border');
+            // inputBorderError = false;
         } else if(titleIdValue.length < 2 && inputBorderError == false) {
             fieldId.classList.remove('vs-hidden');
             titleId.classList.add('error-border');
-            inputBorderError = true;
+            inputBorderError = false;
         // } else if(titleIdValue.length >= 1) {
-        } else if(inputBorderError == true) {
+        } else if(inputBorderError == true && titleIdValue.length > 0) {
             fieldId.classList.add('vs-hidden');
             titleId.classList.remove('error-border');
             titleId.classList.add('fill-border');
