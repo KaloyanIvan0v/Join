@@ -271,16 +271,18 @@ function previewDrop(id) {
   let taskAreas = diclareTaskAreas();
   let previewAreasPosition = getPreviewAreas(id);
   if (previewAreasPosition[0] > -1) {
-    taskAreas[previewAreasPosition[0]].innerHTML += previewElementHtml();
+    taskAreas[previewAreasPosition[0]].innerHTML += previewElementHtml("left");
+    setPreviewElementwidthAndHeightLeft();
   }
   if (previewAreasPosition[1] < 4) {
-    taskAreas[previewAreasPosition[1]].innerHTML += previewElementHtml();
+    taskAreas[previewAreasPosition[1]].innerHTML += previewElementHtml("right");
+    setPreviewElementwidthAndHeightRight();
   }
 }
 
-function previewElementHtml() {
+function previewElementHtml(positon) {
   return /*html*/ `
-  <div class="preview-element"></div>
+  <div class="preview-element-${positon}"></div>
   `;
 }
 
@@ -302,4 +304,28 @@ function getTaskStatementIndex(id) {
     case "done":
       return 3;
   }
+}
+
+function getDragedElementWidthAndHeigth() {
+  let width = document.getElementById(
+    `taskCard${currentDraggedElement}`
+  ).offsetWidth;
+  let height = document.getElementById(
+    `taskCard${currentDraggedElement}`
+  ).offsetHeight;
+  return [width, height];
+}
+
+function setPreviewElementwidthAndHeightLeft() {
+  let widthAndHeight = getDragedElementWidthAndHeigth();
+  let previewElementLeft = document.querySelector(".preview-element-left");
+  previewElementLeft.style.width = `${widthAndHeight[0]}px`;
+  previewElementLeft.style.height = `${widthAndHeight[1]}px`;
+}
+
+function setPreviewElementwidthAndHeightRight() {
+  let widthAndHeight = getDragedElementWidthAndHeigth();
+  let previewElementRight = document.querySelector(".preview-element-right");
+  previewElementRight.style.width = `${widthAndHeight[0]}px`;
+  previewElementRight.style.height = `${widthAndHeight[1]}px`;
 }
