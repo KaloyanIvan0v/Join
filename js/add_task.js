@@ -201,11 +201,11 @@ function preventFocusLoss(event) {
 }
 
 function showCheckboxes(event) {
-    preventFocusLoss(event);
     let checkboxes = document.getElementById("checkboxes");
     let assignedBtn = document.getElementById('inputToSearchContact');
 
     if (!expanded) {
+        preventFocusLoss(event);
         checkboxes.classList.remove('vs-hidden');
         assignedBtn.placeholder = 'Search Contact';
         assignedBtn.classList.toggle('fill-border');
@@ -216,7 +216,7 @@ function showCheckboxes(event) {
         toggleUserListInitials(assignedBtn) 
         expanded = false;
         showInitials();
-        event.target.blur();
+        // event.target.blur();
     }
 }
 
@@ -331,21 +331,20 @@ function searchContact() {
     let userList = document.getElementById('checkboxes');
 
     searchContacts.splice(0, searchContacts.length);
-    if(inputSearchContact.length >= 1) {
+    if(inputSearchContact.length > 0) {
         for(i = 0; i < contacts.length; i++) {
             let contact = contacts[i]['name'];
+            let contactComplete = contacts[i];
             if(contact.toLowerCase().includes(inputSearchContact)) {
                 console.log(contact);
-                searchContacts.push(contact);
-                renderAssignedToField(searchContacts);
+                searchContacts.push(contactComplete);
             }
             // checkIncludesSearch(i, inputSearchContact);
         }
+        renderAssignedToField(searchContacts);
+    } else {
+        renderAssignedToField(contacts);
     }
-}
-
-function checkIncludesSearch(i, inputSearchContact) {
-
 }
 
 function editSubtask(i) {
