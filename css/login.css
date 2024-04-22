@@ -221,6 +221,10 @@ footer {
   font-size: 16px;
 }
 
+footer a {
+  padding: 8px;
+}
+
 .moving-img {
   position: absolute;
   top: 50%;
@@ -239,8 +243,8 @@ footer {
 
 .moving-img.move {
   position: absolute;
-  top: 80px;
-  left: 77px;
+  top: 141px;
+  left: 127px;
   width: 100px;
   height: 122px;
 }
@@ -260,42 +264,6 @@ footer {
 
 .opacity-layer.hidden {
   opacity: 0; /* When the hidden class is added, set opacity to 0 */
-}
-
-.msg-box {
-  position: absolute;
-  top: 150px;
-  right: calc(0px - 312px);
-  width: 312px;
-  height: 74px;
-  background-color: rgb(43, 54, 71);
-  color: white;
-  border-radius: 20px;
-  border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px;
-  font-size: 20px;
-  transition: all 0.7s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.msg-show {
-  position: absolute;
-  top: 150px;
-  right: calc(0px - 0px);
-  width: 312px;
-  height: 74px;
-  background-color: rgb(43, 54, 71);
-  color: white;
-  border-radius: 20px;
-  border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px;
-  font-size: 20px;
-  transition: all 0.7s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .hide {
@@ -330,6 +298,13 @@ footer {
     height: 78px;
     top: calc(40px);
     left: calc(37px);
+  }
+
+  .moving-img {
+    width: 100px;
+    height: 122px;
+    top: calc(50% - 61px);
+    left: calc(50% - 17px);
   }
 
   .moving-img img {
@@ -410,6 +385,10 @@ footer {
   }
 
   .guest-log-in-btn {
+    margin: 8px;
+  }
+
+  .log-in-btn {
     margin: 8px;
   }
 }

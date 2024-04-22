@@ -5,6 +5,7 @@ body {
   justify-content: center;
   height: 100vh;
   background-color: rgb(246, 247, 248);
+  overflow-y: hidden;
 }
 
 a {
@@ -152,9 +153,8 @@ footer {
   font-size: 16px;
 }
 
-.moving-img img {
-  width: 100%;
-  height: 100%;
+footer a {
+  padding: 8px;
 }
 
 .moving-img {
@@ -163,6 +163,57 @@ footer {
   left: 77px;
   width: 100px;
   height: 122px;
+}
+.moving-img img {
+  width: 100%;
+  height: 100%;
+}
+
+.msg-box {
+  position: absolute;
+  bottom: -74px;
+  left: calc(50% - 156px);
+  width: 312px;
+  height: 74px;
+  background-color: rgb(43, 54, 71);
+  color: white;
+  border-radius: 20px;
+  font-size: 20px;
+  transition: all 0.225s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.msg-box.show {
+  position: absolute;
+  bottom: 50%;
+  left: calc(50% - 156px);
+  width: 312px;
+  height: 74px;
+  background-color: rgb(43, 54, 71);
+  color: white;
+  border-radius: 20px;
+  font-size: 20px;
+  transition: all 0.225s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.shadow-layer {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+}
+
+.hide {
+  display: none;
 }
 
 @media (max-width: 860px) {
@@ -223,5 +274,11 @@ footer {
 
   .sign-up-text {
     font-size: 42px;
+  }
+}
+
+@media (max-height: 820px) {
+  .moving-img {
+    display: none;
   }
 }

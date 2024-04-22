@@ -1,6 +1,3 @@
-let usersInit = [];
-let contactsInit = [];
-let tasksInit = [];
 let loggedInUser;
 let pswVisibility = false;
 let checkBoxState = false;
@@ -14,9 +11,8 @@ async function initLogin() {
   setTimeout(() => {
     startScreen();
   }, 375);
-  handleMsgBox();
-  setSesionStorage("contacts", contactsInit);
-  setSesionStorage("tasks", tasksInit);
+  setSesionStorage("contacts", contacts);
+  setSesionStorage("tasks", tasks);
 }
 
 function startScreen() {
@@ -39,7 +35,7 @@ function setStartScreenImgAndBackgroundcolor() {
 function login() {
   let user = email.value;
   if (userExist(user) && passwordIsCorrect(user)) {
-    setSesionStorage("loggedInUser", usersInit[getUserIndex(user)]);
+    setSesionStorage("loggedInUser", users[getUserIndex(user)]);
     resetForm();
     window.location.href = "../html/summery.html";
   } else {
@@ -72,8 +68,8 @@ function removeFeddbackMsg(divId) {
 }
 
 function userExist(user) {
-  for (let i = 0; i < usersInit.length; i++) {
-    if (user == usersInit[i].email) {
+  for (let i = 0; i < users.length; i++) {
+    if (user == users[i].email) {
       return true;
     }
   }
@@ -81,7 +77,7 @@ function userExist(user) {
 }
 
 function passwordIsCorrect(user) {
-  let userPsw = usersInit[getUserIndex(user)].password;
+  let userPsw = users[getUserIndex(user)].password;
   let inputPsw = document.getElementById("password0").value;
   if (userPsw == inputPsw) {
     return true;
@@ -91,8 +87,8 @@ function passwordIsCorrect(user) {
 }
 
 function getUserIndex(user) {
-  for (let i = 0; i < usersInit.length; i++) {
-    if (usersInit[i].email == user) {
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].email == user) {
       return i;
     } else {
     }
@@ -163,23 +159,4 @@ function togglePswVisibility(id) {
     pswVisibility = false;
     document.getElementById("password0").type = "password";
   }
-}
-
-function handleMsgBox() {
-  let msgBox = document.getElementById("id-msg-box");
-  const urlParams = new URLSearchParams(window.location.search);
-  const msg = urlParams.get("msg");
-  if (msg) {
-    msgBox.innerHTML = msg;
-    handleMsgBoxMovement(3000, msgBox);
-  } else {
-  }
-}
-
-function handleMsgBoxMovement(duration) {
-  let msgBox = document.getElementById("id-msg-box");
-  msgBox.classList.add("msg-show");
-  setTimeout(() => {
-    msgBox.classList.remove("msg-show");
-  }, duration);
 }

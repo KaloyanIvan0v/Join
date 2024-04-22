@@ -8,7 +8,10 @@ async function initRegister() {
 async function register() {
   let inputEmail = email.value;
   if (!userExist(inputEmail) && passwordMatch() && checkBoxState) {
-    registerNewUser();
+    handleMsgBox();
+    setTimeout(() => {
+      registerNewUser();
+    }, 1000);
   } else {
     handleLoginFeedbackMsg(inputEmail);
   }
@@ -137,4 +140,16 @@ function togglePswVisibility(id) {
     pswVisibility[index] = false;
     document.getElementById("password" + index).type = "password";
   }
+}
+
+function handleMsgBox() {
+  let msgBox = document.getElementById("id-msg-box");
+  let shadowLayer = document.getElementById("id-shadow-layer");
+  shadowLayer.classList.remove("hide");
+  handleMsgBoxMovement();
+}
+
+function handleMsgBoxMovement() {
+  let msgBox = document.getElementById("id-msg-box");
+  msgBox.classList.add("show");
 }
