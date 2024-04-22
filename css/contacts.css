@@ -15,8 +15,8 @@ body {
   margin-left: 232px;
   background-color: rgb(255, 255, 255);
   max-height: calc(100vh - 96px);
-  min-width: 456px;
-  width: 456px;
+  width: 100%;
+  max-width: 456px;
   box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.1);
   z-index: 4;
   padding: 32px 7px 32px 7px;
@@ -174,7 +174,7 @@ body {
 .contact-full-mode {
   position: relative;
   top: 155px;
-  left: 65px;
+  left: 55px;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -219,6 +219,8 @@ body {
 .contact-full-mode-name {
   font-size: 47px;
   font-weight: 500;
+  max-width: 400px;
+  overflow: auto;
 }
 
 .contact-full-mode-edit-contact {
@@ -296,4 +298,62 @@ body {
   color: white;
   font-size: 47px;
   font-weight: 500;
+}
+
+.mobile-dot-menu {
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+  z-index: 99;
+  width: 56px;
+  height: 56px;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+@media (max-width: 1360px) {
+  .default-slogan {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .default-slogan-middle {
+    order: 3;
+    height: 3px;
+    width: 90px;
+    margin: 0px;
+    margin-top: 16px;
+  }
+
+  .default-slogan-left {
+    font-size: 47px;
+    font-weight: 700;
+  }
+
+  .default-slogan-right {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .contact-full-mode-badges {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+  }
+
+  .contact-full-mode-badges {
+    font-size: 27px;
+  }
+
+  .contact-full-mode-name {
+    font-size: 36px;
+    max-width: 100%;
+  }
+
+  .contact-full-mode-header {
+    width: max-content;
+  }
 }
