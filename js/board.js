@@ -15,7 +15,7 @@ function returnHtmlShowToDos(singleTask, i, id) {
     <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="showCurrentTask(${i})">
         <div class="task-card-statement">
             <span id="statementField${i}" class="which-statement">
-                ${singleTask["statement"]}
+                ${singleTask["category"]}
             </span>
         </div>
         
@@ -82,7 +82,7 @@ async function loadNewTasks() {
 
 function choosestatementColor(i) {
   let statementField = document.getElementById(`statementField${i}`);
-  let singleTaskstatement = tasks[i]["statement"];
+  let singleTaskstatement = tasks[i]["category"];
 
   if (singleTaskstatement == "Technical Task") {
     statementField.classList.add("bg-color-technical-task");

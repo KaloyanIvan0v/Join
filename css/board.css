@@ -4,6 +4,22 @@ body {
   background-color: #f6f7f8;
 }
 
+.add_task_formular_template {
+  background-color: #FFFFFF;
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 174px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 1116px;
+  height: 870px;
+  border-radius: 30px;
+}
+
 .board-distribution {
   position: absolute;
   top: 336px;
@@ -406,7 +422,6 @@ input:focus {
 }
 
 .overlay-assigned-contacts {
-  /* width: 100%; */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -534,7 +549,7 @@ textarea {
   border-radius: 10px;
   font-size: 20px;
   font-family: 'inter';
-  width: 413px;
+  width: 408px;
 }
 
 .overlay-date {

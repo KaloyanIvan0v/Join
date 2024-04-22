@@ -617,10 +617,3 @@ document.addEventListener('DOMContentLoaded', function() {
         titleId.classList.remove('error-border');
     }
 })
-
-// function showAddTaskTemplate() {
-//     let bgDialog = document.getElementById('bgDialog');
-
-//     bgDialog.classList.remove('vs-hidden');
-//     bgDialog.classList.add('align-center');
-// }

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="/css/add_task.css">
     <link rel="stylesheet" href="/css/templates.css">
+    <link rel="stylesheet" href="/css/add_task_template.css">
 
     <script src="/js/w3include.js"></script>
     <script src="/js/storage.js"></script>
@@ -26,8 +27,6 @@
         <div w3-include-html="/templates/add_task_formular_template.html" class="add_task_formular_template"></div>
     </div> -->
 
-    <textarea name="" id="" value=""></textarea>
-
     <h2>Add Task</h2>
     <form onsubmit="addTask(); return false" class="add-task-informations">
         <div class="leftside-add-task">
@@ -39,7 +38,7 @@
                         <span class="color-FF8190">*</span>
                     </div>
                 </div>
-                <input class="input-field normal-border pd-12-16" id="title" type="text" placeholder="Enter a title">
+                <input required class="input-field normal-border pd-12-16" id="title" type="text" placeholder="Enter a title">
                 <div id="requiredTitle" class="required-field-title vs-hidden">
                     <span class="error">This field is required</span>
                 </div>
@@ -54,19 +53,6 @@
                     <span id="placeHolder"></span>
                 </div>
             </div>
-
-            <!-- <div class="description-category position-category d-flex-column-center">
-                <div class="d-flex input-description">
-                    <span>Category</span>
-                    <span class="color-FF8190">*</span>
-                </div>                
-                <div tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover" onclick="showCategories()">
-                    <span id="categoryDropdown">Select task category</span>
-                    <div class="dropdown-icon">
-                        <img src="/img/arrow_drop_down.png" id="dropDownArrow">
-                    </div>
-                </div> -->
-            
 
             <div class="assigned-to d-flex-column-center" onclick="showCheckboxes(event)">
                 <span class="input-description">Assigned to</span>
@@ -107,19 +93,6 @@
                 <div id="prioSelection" class="priority-selection"></div>
             </div>
 
-            <!-- <div class="description-category position-category d-flex-column-center">
-                <div class="d-flex input-description">
-                    <span>Category</span>
-                    <span class="color-FF8190">*</span>
-                </div>
-                <div class="select-custom normal-border">
-                    <select class="normal-border" name="" id="">
-                        <option value="">Technical Task</option>
-                        <option value="">User Story</option>
-                    </select>
-                </div>
-            </div> -->
-
             <div class="description-category position-category d-flex-column-center">
                 <div class="d-flex input-description">
                     <span>Category</span>
@@ -138,18 +111,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="description-category position-category d-flex-column-center">
-                <div class="d-flex input-description">
-                    <span>Category</span>
-                    <span class="color-FF8190">*</span>
-                </div>
-                <select class="input-field option-value-disabled" id="category">
-                    <option class="option-value-disabled" value="" disabled selected>Select task category</option>
-                    <option value="Technical Task">Technical Task</option>
-                    <option value="User Story">User Story</option>
-                </select>
-            </div> -->
 
             <div class="description-category position-subtasks d-flex-column-center">
                 <span class="input-description">Subtasks</span>
@@ -173,7 +134,7 @@
         </div>
     </form>
 
-    <!-- <div onclick="showAddTaskTemplate()" class="required-field-notice"> -->
+    <div onclick="showAddTaskTemplate()" class="required-field-notice">
         <span class="color-FF8190">*</span>
         <span>This field is required</span>
     </div>

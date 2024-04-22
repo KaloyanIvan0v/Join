@@ -8,14 +8,9 @@ body {
     overflow-x: hidden;
 }
 
-/* .add_task_formular_template {
-    background-color: #FFFFFF;
-    position: relative;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
+.bg-dialog {
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
 input[type=text] {
     font-size: 20px;
@@ -201,9 +196,9 @@ h2 {
     padding: 0;
 }
 
-.input-search-contacts::placeholder {
+/* .input-search-contacts::placeholder {
     color: black;
-}
+} */
 
 .required-field-description {
     width: 100%;
