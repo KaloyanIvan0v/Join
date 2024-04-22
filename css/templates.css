@@ -139,3 +139,13 @@ a{
     color: #CDCDCD;
     margin-left: 26px;
 }
+
+@media (max-width: 480px) {
+    .sidebar{
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 90%;
+    }
+}
