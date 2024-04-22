@@ -25,6 +25,10 @@
     align-items: center;
 }
 
+.headerLogo{
+    display: none;
+}
+
 .relative{
     position: relative;
     width: 56px;
@@ -141,11 +145,43 @@ a{
 }
 
 @media (max-width: 480px) {
+.header{
+    padding-left: 40px;
+}
+
+.headerText{
+    display: none;
+}
+
+.headerLogo{
+    display: block;
+    width: 56px;
+}
+
+.headerHelpImage{
+    display: none;
+}
+
     .sidebar{
         position: fixed;
         left: 0;
         right: 0;
         bottom: 0;
         top: 90%;
+        width: 100%;
+    }
+
+    .privacyLegalLinks{
+        display: none;
+    }
+
+    .sidebarLogo{
+        display: none;
+    }
+
+    .menu{
+        flex-direction: row;
+        margin-top: 0;
+
     }
 }
