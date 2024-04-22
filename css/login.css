@@ -382,3 +382,34 @@ footer {
     font-size: 42px;
   }
 }
+
+@media (max-height: 820px) {
+  .under-line-title {
+    margin: 8px;
+  }
+
+  .moving-img.move {
+    width: 44px;
+    height: 58px;
+    top: calc(20px);
+    left: calc(17px);
+  }
+
+  .log-in-box {
+    padding: 12px;
+    height: max-content;
+    position: absolute;
+    top: 13%;
+    left: 3%;
+    max-width: 94%;
+  }
+
+  .header-right {
+    top: calc(100vh - 18%);
+    right: calc(50% - 130px);
+  }
+
+  .guest-log-in-btn {
+    margin: 8px;
+  }
+}
