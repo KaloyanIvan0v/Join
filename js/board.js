@@ -151,7 +151,7 @@ function renderContactsBoard(i) {
   for (j = 0; j < contactsForTask.length; j++) {
     let contactForTask = contactsForTask[j];
     contactsFieldBoard.innerHTML += returnHtmlContacts(contactForTask, j);
-    //backgroundColorInitialsBoard(i, j);
+    backgroundColorInitialsBoard(i, j);
   }
 }
 

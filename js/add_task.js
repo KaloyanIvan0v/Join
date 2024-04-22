@@ -32,7 +32,8 @@ let priorities = [
 ]
 let checkChangeIcons = false;
 let expanded = false;
-let inputBorderError = false;
+// let inputBorderError = false;
+let arrowToggleCheck = false;
 
 async function init() {
     includeHTML();
@@ -124,7 +125,6 @@ function increaseId() {
 
     if(lastTaskofTasks == -1) {
         return currentId = 0;
-    
     } else {
         let currentId = tasks[lastTaskofTasks]['id'];
         currentId++;
@@ -143,6 +143,7 @@ function resetInputFields() {
     let subTasks =  document.getElementById('subTasks');
     let initialArea = document.getElementById('initialArea');
     let newSubTaskField = document.getElementById('newSubTaskField');
+    let initialen = document.getElementById('checkboxes')
     // let containerCategory = document.getElementById('containerCategory');
 
     title.value = '';
@@ -154,6 +155,9 @@ function resetInputFields() {
     currentDate();
     changeCategory('Select task category');
     setItem('subTasks', []);
+    checkedUsers = [];
+    initialen.innerHTML = '';
+    changePrio(1);
 
     checkChangeIcons = true;
     changeIconsSubtask();
@@ -213,27 +217,42 @@ function changeIconsSubtask() {
     renderSubTasks();
 }
 
-function preventFocusLoss(event) {
-    event.preventDefault();
-}
+// function preventFocusLoss(event) {
+//     event.preventDefault();
+// }
 
 function showCheckboxes(event) {
     let checkboxes = document.getElementById("checkboxes");
     let assignedBtn = document.getElementById('inputToSearchContact');
 
     if (!expanded) {
-        preventFocusLoss(event);
+        toggleDropDownArrow("dropDownArrow");
+        // preventFocusLoss(event);
+        assignedBtn.focus();
         checkboxes.classList.remove('vs-hidden');
         assignedBtn.placeholder = 'Search Contact';
-        assignedBtn.classList.toggle('fill-border');
+        assignedBtn.classList.add('fill-border');
         renderAssignedToField(contacts);
         expanded = true;
     } else {
+        toggleDropDownArrow("dropDownArrow");
+        assignedBtn.blur();
+        // checkboxes.classList.add('vs-hidden');
         assignedBtn.classList.remove('fill-border');
         toggleUserListInitials(assignedBtn) 
         expanded = false;
         showInitials();
-        // event.target.blur();
+    }
+}
+
+function toggleDropDownArrow(idImage) {
+    let arrow = document.getElementById(idImage);
+    if(arrowToggleCheck == false) {
+        arrow.src = '../img/arrow_drop_down_up.png'
+        arrowToggleCheck = true;
+    } else {
+        arrow.src = '../img/arrow_drop_down.png';
+        arrowToggleCheck = false;
     }
 }
 
@@ -345,21 +364,18 @@ function showInitials() {
 function searchContact() {
     let inputSearchContact = document.getElementById('inputToSearchContact').value;
     inputSearchContact = inputSearchContact.toLowerCase();
-    let userList = document.getElementById('checkboxes');
 
     searchContacts.splice(0, searchContacts.length);
-    if(inputSearchContact.length > 0) {
+    if(inputSearchContact.length > 1) {
         for(i = 0; i < contacts.length; i++) {
-            let contact = contacts[i]['name'];
+            contact = contacts[i]['name'];
             let contactComplete = contacts[i];
             if(contact.toLowerCase().includes(inputSearchContact)) {
-                console.log(contact);
                 searchContacts.push(contactComplete);
             }
-            // checkIncludesSearch(i, inputSearchContact);
         }
         renderAssignedToField(searchContacts);
-    } else {
+    } else if(inputSearchContact.length == 1) {
         renderAssignedToField(contacts);
     }
 }
@@ -403,6 +419,7 @@ function inputFocus(i) {
 }
 
 function showCategories() {
+    toggleDropDownArrow('dropDownArrowCategory');
     let categoriesField = document.getElementById('categories');
 
     categoriesField.classList.toggle('vs-hidden');
@@ -420,7 +437,11 @@ function changeCategory(category) {
     categoryDropdown.innerHTML = clickedCategory;
 
     taskCategory.push(clickedCategory);
-    showCategories();
+    containerCategory.classList.toggle('fill-border');
+
+    if(category != 'Select task category'){
+        showCategories();
+    }
 }
 
 // <--------------------- html templates ---------------------------->
@@ -516,10 +537,9 @@ document.addEventListener('DOMContentLoaded', function() {
         dateInput.classList.remove('fill-border');
         let dateInputValue = dateInput.value;
 
-        if (inputBorderError == false && dateInputValue == '') {
+        if (!dateInputValue) {
             requiredDate.classList.remove('vs-hidden');
             dateInput.classList.add('error-border');
-            inputBorderError = true;
         } else if(dateInputValue == '') {
             requiredDate.classList.remove('vs-hidden');
             dateInput.classList.add('error-border');
@@ -548,18 +568,13 @@ document.addEventListener('DOMContentLoaded', function() {
         taskArea.classList.remove('fill-border');
     })
 
-    // inputToSearchContact.addEventListener('blur', function() {
-    //     inputToSearchContact.classList.remove('fill-border');
+    containerCategory.addEventListener('click', function() {
+        containerCategory.classList.toggle('fill-border');
+    })
+
+    // assignedBtn.addEventListener('blur', function() {
+    //     assignedBtn.classList.remove('fill-border');
     //     showCheckboxes();
-    // })
-
-    // containerCategory.addEventListener('blur', function() {
-    //     showCategories();
-    // })
-
-    // subTask.addEventListener('blur', function() {
-    //     checkChangeIcons = true;
-    //     changeIconsSubtask();
     // })
 });
 
@@ -582,21 +597,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function changeBorder(titleId, fieldId) {
         titleId.classList.remove('fill-border');
         let titleIdValue = titleId.value;
+        value = titleIdValue.length;
 
-        if (titleIdValue == 1) {
+        if (value == 0) {
             fieldId.classList.remove('vs-hidden');
             titleId.classList.add('error-border');
-            // inputBorderError = false;
-        } else if(titleIdValue.length < 2 && inputBorderError == false) {
-            fieldId.classList.remove('vs-hidden');
-            titleId.classList.add('error-border');
-            inputBorderError = false;
-        // } else if(titleIdValue.length >= 1) {
-        } else if(inputBorderError == true && titleIdValue.length > 0) {
-            fieldId.classList.add('vs-hidden');
+        } else if(value >= 2) {
             titleId.classList.remove('error-border');
+            fieldId.classList.add('vs-hidden');
             titleId.classList.add('fill-border');
-            inputBorderError = false;
+        } else if(value == 1) {
+            fieldId.classList.remove('vs-hidden');
+            titleId.classList.add('error-border');
         }
     }
 

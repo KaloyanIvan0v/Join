@@ -8,6 +8,10 @@ body {
     overflow-x: hidden;
 }
 
+.border-none::placeholder {
+    color: #000000;
+}
+
 /* .add_task_formular_template {
     background-color: #FFFFFF;
     position: relative;
@@ -19,7 +23,6 @@ body {
 
 input[type=text] {
     font-size: 20px;
-    /* border: none; */
 }
 
 .single-edit-subtask {
@@ -96,6 +99,7 @@ h2 {
 
 .border-none[type=text] {
     border: none;
+    width: 100%;
 }
 
 .leftside-add-task {
