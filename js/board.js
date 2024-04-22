@@ -2,32 +2,6 @@ let finishedSubTasks = [];
 let subTasksGlobal = [];
 let currentDraggedElement;
 let checkedStatusSubtasks = false;
-let priorities = [
-  {
-      'text': 'Urgent',
-      'iconWhite': '/img/urgent_white.png',
-      'iconColor': '/img/urgent_red.png',
-      'bgColorTrue': 'highlight-color-urgent',
-      'bgColorFalse': 'bg-color-priority',
-      'isPriority': false,
-  },
-  {
-      'text': 'Medium',
-      'iconWhite': '/img/medium_white.png',
-      'iconColor': '/img/medium_orange.png',
-      'bgColorTrue': 'highlight-color-medium',
-      'bgColorFalse': 'bg-color-priority',
-      'isPriority': true,
-  },
-  {
-      'text': 'Low',
-      'iconWhite': '/img/low_white.png',
-      'iconColor': '/img/low_green.png',
-      'bgColorTrue': 'highlight-color-low',
-      'bgColorFalse': 'bg-color-priority',
-      'isPriority': false,
-  }
-]
 
 async function init_board() {
   await loadTasks();
@@ -71,8 +45,7 @@ function returnHtmlShowToDos(singleTask, i, id) {
                     ${singleTask["prio"]}
                 </div>
             </div>
-        </div>
-        `;
+        </div>`;
 }
 
 function diclareTaskAreas() {
@@ -135,22 +108,29 @@ function whichPriorityTaskCard(i) {
     prioField.innerHTML =
       '<img src="' + "/img/urgent_red.png" + '" alt="Bildbeschreibung">';
   }
-  renderContactsBoardInitialen(i);
+  renderContactsBoardInitialen(i, 'fullName');
 }
 
 function showCurrentTask(i) {
-  let backgroundDialog = document.getElementById("backgroundDialog");
   let dialogField = document.getElementById("taskOverlay");
 
+  toggleBackgroundDialog()
   let currentTask = tasks[i];
 
-  backgroundDialog.classList.toggle("background-dialog");
   dialogField.innerHTML = "";
   dialogField.innerHTML = returnHtmlCurrentTask(currentTask, i);
   choosestatementColor(i);
   whichPriorityTaskCard(i);
   renderSubTasksBoard(i);
-  updateLoadbar(i);
+  // updateLoadbar(i);
+}
+
+function toggleBackgroundDialog() {
+  let dialogField = document.getElementById("taskOverlay");
+  dialogField.innerHTML = "";
+
+  let backgroundDialog = document.getElementById("backgroundDialog");
+  backgroundDialog.classList.toggle("background-dialog");
 }
 
 function renderSubTasksBoard(i) {
@@ -176,7 +156,7 @@ function checkSubtaskBoardOverlayChecked() {
   }
 }
 
-function renderContactsBoardInitialen(i) {
+function renderContactsBoardInitialen(i, status) {
   let contactsFieldBoard = document.getElementById(`contactsFieldBoard(${i})`);
   let contactsForTask = tasks[i]["assignedTo"];
   contactsFieldBoard.innerHTML = "";
@@ -186,7 +166,8 @@ function renderContactsBoardInitialen(i) {
     contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(contactForTask, j);
     backgroundColorInitialsBoard(i, j);
   }
-    renderFullName(i, contactsForTask);
+  if(status == 'fullName')
+  renderFullName(i, contactsForTask);
 }
 
 function renderFullName(i, contactsForTask) {
@@ -203,12 +184,12 @@ function renderFullName(i, contactsForTask) {
   }
 }
 
-function updateLoadbar(i) {
-  let subTasks = tasks[i]['subTasks'].length;
-  let loadbar = document.getElementById('loadBar');
-  let progress = (finishedSubTasks.length / subTasks.length) * 100;
-  loadbar.style.width = progress + '%';
-}
+// function updateLoadbar(i) {
+//   let subTasks = tasks[i]['subTasks'].length;
+//   let loadbar = document.getElementById('loadBar');
+//   let progress = (finishedSubTasks.length / subTasks.length) * 100;
+//   loadbar.style.width = progress + '%';
+// }
 
 function backgroundColorInitialsBoard(i, j) {
   let initialArea = document.getElementById(`initialArea${j}`);
@@ -221,16 +202,16 @@ function backgroundColorInitialsBoard(i, j) {
 function checkSubtaskBoardOverlay(j) {
   let currentSubTask = subTasksGlobal[j];
   let imgCheck = document.getElementById(`checkEmptySubtask(${j})`);
-  let index = finishedSubTasks.findIndex(subTask => JSON.stringify(subTask) === JSON.stringify(currentSubTask));
 
   if(checkedStatusSubtasks == false) {
     finishedSubTasks.push(currentSubTask);
     imgCheck.src = "../img/box-checked.png"
     checkedStatusSubtasks = true;
-    updateLoadbar(i);
+    // updateLoadbar(i);
   } else {
-    updateLoadbar(i);
-    finishedSubTasks[i].splice(index, 1);
+    let index = finishedSubTasks.findIndex(subTask => JSON.stringify(subTask) === JSON.stringify(currentSubTask));
+    // updateLoadbar(i);
+    finishedSubTasks.splice(index, 1);
     imgCheck.src = "../img/check_empty.png";
     checkedStatusSubtasks = false;
   }
@@ -239,27 +220,17 @@ function checkSubtaskBoardOverlay(j) {
 function editTaskOverlay(i) {
   let overlayTask = tasks[i];
   let dialogField = document.getElementById("taskOverlay");
+  let currentPrio = tasks[i]['prio'];
   dialogField.innerHTML = '';
   dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i);
-  let prioSelection = document.getElementById(`prioArea(${i})`);
-
-  whichPriority(prioSelection);
+  
+  prioSelect(i, currentPrio);
+  renderContactsBoardInitialen(i, 'noFullName');
 }
 
-function changePrio(i) {
-  currentPrio = priorities[i]['text'];
-  priorities[i]['isPriority'] = true;
-  editTaskOverlay(i)
-  whichPriority();
-}
-
-function whichPriority(prioSelection) {
-  prioSelection.innerHTML = '';
-
-  for(i = 0; i < priorities.length; i++) {
-      priority = priorities[i];
-      checkBooleanForPriority(priority, prioSelection, i);
-  }
+function closeCurrentTask() {
+  toggleBackgroundDialog();
+  loadNewTasks();
 }
 
 function checkBooleanForPriority(priority, prioSelection, i) {
@@ -273,39 +244,68 @@ function checkBooleanForPriority(priority, prioSelection, i) {
 
 function returnHtmlEditCurrentTask(overlayTask, i) {
   return /*html*/`
+    <div class="overlay-current-task">
       <div id="categoryArea(${i})" class="overlay-first-row">
         <div></div>
-        <a onclick="showCurrentTask()">X</a>
+        <a onclick="closeCurrentTask()">X</a>
     </div>
 
-    <div class="description-input d-flex-column-center">
+    <div class="title-edit-board">
       <div class="input-description">
         <div class="title-headline">
           <span>Title</span>
-          <span class="color-FF8190">*</span>
         </div>
       </div>
-      <input class="input-field normal-border pd-12-16" id="title" type="text" value="${overlayTask["title"]}">
-      <div id="title(${i})" class="required-field-title vs-hidden">
-         <span class="error">This field is required</span>
+      <div>
+        <input class="input-edit-title" id="title" type="text" value="${overlayTask["title"]}">
+        <div>
+          <span class="required-field-edit vs-hidden">This field is required</span>   
+        </div>
       </div>
     </div>
     
-    <div class="overlay-description font-overlay">
-      <textarea id="description(${i})">${overlayTask["description"]}</textarea>
+    <div class="description-edit-board">
+      <span>Description</span>
+      <div>
+        <textarea id="description(${i})">${overlayTask["description"]}</textarea>
+        <div class="vs-hidden">
+         <span class="required-field-edit">This field is required</span>
+        </div>
+      </div>
     </div>
     
     <div class="overlay-date font-overlay">
         <span>Due Date:</span>
-        <input type="date" value="${overlayTask["dueDate"]}" id="date(${i})">
+        <input class="input-edit-title" type="date" value="${overlayTask["dueDate"]}" id="date(${i})">
+        <div class="vs-hidden">
+         <span class="required-field-edit">This field is required</span>
+        </div>
     </div>
     
-    <div id="prioArea(${i})"></div>
+    <div class="prio-area" id="prioArea(${i})">
+      <div onclick="prioSelect(${i}, 'urgent')">
+        <img id="urgent(${i})" src="../img/urgent.png">
+      </div>
 
-    <div class="overlay-assigned font-overlay">
+      <div onclick="prioSelect(${i}, 'medium')">
+        <img id="medium(${i})" src="../img/medium_highlight.png">
+      </div>
+
+      <div onclick="prioSelect(${i}, 'Low')">
+        <img id="low(${i})" src="../img/low.png">
+      </div>
+    </div>
+
+    <div class="overlay-assigned">
         <span>Assigned To:</span>
-        <div class="d-flex">
-          <div id="contactsFieldBoard(${i})" class="column-gap-contacts"></div>
+        <div onclick="showCheckboxes(event)" class="add-contacts-edit-board">
+          <input onkeydown="searchContact()" tabindex="0" class="input-contacts-edit" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
+          <div class="dropdown-icon">
+            <img src="/img/arrow_drop_down.png" id="dropDownArrow">
+          </div>
+        </div>
+        <div class="contacts-edit-board">
+          <div id="contactsFieldBoard(${i})" class="contacts-edit-board"></div>
         </div>
     </div>
 
@@ -326,14 +326,38 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
         <img src="../img/check-white.png">
       </button>
       </div>
-    </div>`
+    </div>
+</div>`
+}
+
+function prioSelect(i, prioSelect) {
+  let urgent = document.getElementById(`urgent(${i})`);
+  let medium = document.getElementById(`medium(${i})`);
+  let low = document.getElementById(`low(${i})`);
+  tasks[i]['prio'] = prioSelect;
+  setItem('tasks', tasks);
+
+  if(prioSelect == 'urgent') {
+    urgent.src = '../img/urgent_highlight.png';
+    medium.src = '../img/medium.png';
+    low.src = '../img/low.png';
+  } else if(prioSelect == 'medium') {
+    urgent.src = '../img/urgent.png';
+    medium.src = '../img/medium_highlight.png';
+    low.src = '../img/low.png';
+  } else {
+    urgent.src = '../img/urgent.png';
+    medium.src = '../img/medium.png';
+    low.src = '../img/low_highlight.png';
+  }
 }
 
 function returnHtmlCurrentTask(overlayTask, i) {
   return /*html*/`
+  <div class="overlay-current-task">
     <div id="categoryArea(${i})" class="overlay-first-row">
         <div class="overlay-statement" id="statementField${i}">${overlayTask["statement"]}</div>
-        <a onclick="showCurrentTask()">X</a>
+        <a onclick="closeCurrentTask()">X</a>
     </div>
     <div class="overlay-title">
         <span id="title(${i})">${overlayTask["title"]}</span>
@@ -366,18 +390,19 @@ function returnHtmlCurrentTask(overlayTask, i) {
     <div class="last-section-overlay">
       <div></div>
       <div class="delete-edit-overlay">
-        <div class="flex-center">
+        <div class="flex-center hover">
           <img src="../img/trashbin.png">
           <span>Delete</span>
         </div>
         <img src="../img/Vector 3.png">
-        <div onclick="editTaskOverlay(${i})" class="flex-center">
+        <div onclick="editTaskOverlay(${i})" class="flex-center hover">
           <img src="../img/edit_pencil.png">
           <span>Edit</span>
         </div>
       </div>
     </div>
-    </div>`;
+    </div>
+  <div>`;
 }
 
 function returnHtmlSubtasks(subTask, j) {
@@ -402,21 +427,21 @@ function returnHtmlContactsFullName(currentTask) {
     </div>`
 }
 
-function prioNormal(priority, i) {
-  return `
-  <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field hover-prio-btn ${priority['bgColorFalse']}">
-      <span class="fz-20">${priority['text']}</span>
-      <img id="imgUrgent" src="${priority['iconColor']}">
-  </div>`
-}
+// function prioNormal(priority, i) {
+//   return `
+//   <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field hover-prio-btn ${priority['bgColorFalse']}">
+//       <span class="fz-20">${priority['text']}</span>
+//       <img id="imgUrgent" src="${priority['iconColor']}">
+//   </div>`
+// }
 
-function prioActive(priority, i) {
-  return `
-  <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorTrue']}">
-      <span class="fz-20">${priority['text']}</span>
-      <img id="imgUrgent" src="${priority['iconWhite']}">
-  </div>`
-}
+// function prioActive(priority, i) {
+//   return `
+//   <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorTrue']}">
+//       <span class="fz-20">${priority['text']}</span>
+//       <img id="imgUrgent" src="${priority['iconWhite']}">
+//   </div>`
+// }
 
 //###################################################################################
 //*********************Kaloyan's Code fängt hier an!!!*******************************

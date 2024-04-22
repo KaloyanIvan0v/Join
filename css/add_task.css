@@ -8,10 +8,6 @@ body {
     overflow-x: hidden;
 }
 
-.border-none::placeholder {
-    color: #000000;
-}
-
 /* .add_task_formular_template {
     background-color: #FFFFFF;
     position: relative;
