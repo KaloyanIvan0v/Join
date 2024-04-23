@@ -1,4 +1,4 @@
-let finishedSubTasks = [];
+// let finishedSubTasks = [];
 let subTasksGlobal = [];
 let currentDraggedElement;
 let checkedStatusSubtasks = false;

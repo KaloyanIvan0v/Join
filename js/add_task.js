@@ -4,44 +4,102 @@ let idNumber = [];
 let subTasks = [];
 let checkedUsers = [];
 let searchContacts = [];
-let priorities = [
-    {
-        'text': 'Urgent',
-        'iconWhite': '/img/urgent_white.png',
-        'iconColor': '/img/urgent_red.png',
-        'bgColorTrue': 'highlight-color-urgent',
-        'bgColorFalse': 'bg-color-priority',
-        'isPriority': false,
-    },
-    {
-        'text': 'Medium',
-        'iconWhite': '/img/medium_white.png',
-        'iconColor': '/img/medium_orange.png',
-        'bgColorTrue': 'highlight-color-medium',
-        'bgColorFalse': 'bg-color-priority',
-        'isPriority': true,
-    },
-    {
-        'text': 'Low',
-        'iconWhite': '/img/low_white.png',
-        'iconColor': '/img/low_green.png',
-        'bgColorTrue': 'highlight-color-low',
-        'bgColorFalse': 'bg-color-priority',
-        'isPriority': false,
-    }
-]
+let finishedSubTasks = [];
 let checkChangeIcons = false;
 let expanded = false;
 // let inputBorderError = false;
 let arrowToggleCheck = false;
+let priorities = [
+    {
+        'text': 'Urgent', 'iconWhite': '/img/urgent_white.png', 'iconColor': '/img/urgent_red.png', 'bgColorTrue': 'highlight-color-urgent', 'bgColorFalse': 'bg-color-priority','isPriority': false,
+    },
+    {
+        'text': 'Medium', 'iconWhite': '/img/medium_white.png', 'iconColor': '/img/medium_orange.png', 'bgColorTrue': 'highlight-color-medium', 'bgColorFalse': 'bg-color-priority', 'isPriority': true,
+    },
+    {   'text': 'Low',    'iconWhite': '/img/low_white.png',     'iconColor': '/img/low_green.png',  'bgColorTrue': 'highlight-color-low',    'bgColorFalse': 'bg-color-priority',   'isPriority': false,
+    }
+]
 
-async function init() {
+function init() {
     includeHTML();
     loadTasks();
     loadContacts();
     whichPriority();
-    await loadUsers();
+    loadUsers();
     currentDate();
+}
+
+async function addTask() {
+    let idNumber = increaseId();
+    let title = document.getElementById('title');
+    let description = document.getElementById('description');
+    let dueDate = document.getElementById('dueDate');
+    let subTaskForTask = subTasks;
+    let checkedUsersForTask = checkedUsers;
+
+    let task = {
+        "title": title.value,
+        "description": description.value,
+        "assignedTo": checkedUsers,
+        "dueDate": dueDate.value,
+        "prio": currentPrio,
+        "category": taskCategory,
+        "subTasks": subTaskForTask,
+        "finishedSubTasks": finishedSubTasks,
+        "checkedUsers": checkedUsersForTask,
+        "statement": "toDo",
+        "id": idNumber,
+        }
+    tasks.push(task);
+    addedToBoard();
+    await setItem('tasks', tasks);
+    resetInputFields();
+    window.location.href = "board.html";
+}
+
+function increaseId() {
+    let lastTaskofTasks = tasks.length - 1;
+
+    if(lastTaskofTasks == -1) {
+        return currentId = 0;
+    } else {
+        let currentId = tasks[lastTaskofTasks]['id'];
+        currentId++;
+        return currentId;
+    }
+}
+
+function addedToBoard() {
+    let bgDialog = document.getElementById('bgDialog');
+
+    bgDialog.classList.remove('vs-hidden');
+    bgDialog.classList.add('align-center');
+}
+
+function resetInputFields() {
+    let subTasks =  document.getElementById('subTasks');
+    let initialArea = document.getElementById('initialArea');
+    let newSubTaskField = document.getElementById('newSubTaskField');
+    let initialen = document.getElementById('checkboxes')
+
+    title.value = '';
+    description.value = '';
+    initialArea.innerHTML = '';
+    subTasks.value = '';
+    newSubTaskField.innerHTML = '';
+    checkedUsers = [];
+    initialen.innerHTML = '';
+    furtherResetField();
+}
+
+function furtherResetField() {
+    currentDate();
+    changeCategory('Select task category');
+    setItem('subTasks', []);
+    changePrio(1);
+
+    checkChangeIcons = true;
+    changeIconsSubtask();
 }
 
 function currentDate() {
@@ -86,89 +144,7 @@ function checkBooleanForPriority(priority) {
     }
 }
 
-// async function loadTasks() {
-//     tasks = JSON.parse(await getItem('tasks'));
-//     subTasks = JSON.parse(await getItem('subTasks'));
-// }
-
-async function addTask() {
-    let idNumber = increaseId();
-    let title = document.getElementById('title');
-    let description = document.getElementById('description');
-    let dueDate = document.getElementById('dueDate');
-    let category = document.getElementById('category');
-    let subTaskForTask = subTasks;
-    let checkedUsersForTask = checkedUsers;
-
-    let task = {
-        "title": title.value,
-        "description": description.value,
-        "assignedTo": checkedUsers,
-        "dueDate": dueDate.value,
-        "prio": currentPrio,
-        "category": taskCategory,
-        "subTasks": subTaskForTask,
-        "checkedUsers": checkedUsersForTask,
-        "statement": "toDo",
-        "id": idNumber,
-        }
-    tasks.push(task);
-    // addedToBoard();
-    await setItem('tasks', tasks);
-    resetInputFields();
-    window.location.href = "board.html";
-}
-
-
-function increaseId() {
-    let lastTaskofTasks = tasks.length - 1;
-
-    if(lastTaskofTasks == -1) {
-        return currentId = 0;
-    } else {
-        let currentId = tasks[lastTaskofTasks]['id'];
-        currentId++;
-        return currentId;
-    }
-}
-
-function addedToBoard() {
-    let bgDialog = document.getElementById('bgDialog');
-
-    bgDialog.classList.remove('vs-hidden');
-    bgDialog.classList.add('align-center');
-}
-
-function resetInputFields() {
-    let subTasks =  document.getElementById('subTasks');
-    let initialArea = document.getElementById('initialArea');
-    let newSubTaskField = document.getElementById('newSubTaskField');
-    let initialen = document.getElementById('checkboxes')
-    // let containerCategory = document.getElementById('containerCategory');
-
-    title.value = '';
-    description.value = '';
-    initialArea.innerHTML = '';
-    // containerCategory.innerHTML = 'Select task category';
-    subTasks.value = '';
-    newSubTaskField.innerHTML = '';
-    currentDate();
-    changeCategory('Select task category');
-    setItem('subTasks', []);
-    checkedUsers = [];
-    initialen.innerHTML = '';
-    changePrio(1);
-
-    checkChangeIcons = true;
-    changeIconsSubtask();
-}
-
-function resetAddNewSubtask() {
-    let subTasks =  document.getElementById('subTasks');
-    subTasks.value = '';
-    checkChangeIcons = true;
-    changeIconsSubtask();
-}
+// <-------------Subtasks functions----------------->
 
 function addNewSubTask() {
     let singleNewTask = document.getElementById('subTasks');
@@ -180,7 +156,14 @@ function addNewSubTask() {
     renderSubTasks('newSubtask');
 }
 
-async function renderSubTasks(operator) {
+function resetAddNewSubtask() {
+    let subTasks =  document.getElementById('subTasks');
+    subTasks.value = '';
+    checkChangeIcons = true;
+    changeIconsSubtask();
+}
+
+function renderSubTasks(operator) {
     let newTaskField = document.getElementById('newSubTaskField');
     let singleNewTask = document.getElementById('subTasks');
     singleNewTask.value = '';
@@ -190,7 +173,10 @@ async function renderSubTasks(operator) {
         let newSubTask = subTasks[i];
         newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
     }
+    checkIfNewSubTask(operator);
+}
 
+async function checkIfNewSubTask(operator) {
     if(operator == 'newSubtask') {
         checkChangeIcons = true;
         changeIconsSubtask();
@@ -444,176 +430,10 @@ function changeCategory(category) {
     }
 }
 
-// <--------------------- html templates ---------------------------->
-
-function returnHtmlSingleContact(user) {
-    return `
-    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i})">
-        <div class="user-field hover-user-field" id="userField${i}">
-            <div class="single-user">
-                <div class="initials-assigned initials" id="bgInitials${i}">
-                    ${user['nameInitials']}
-                </div>
-                <span class="typography-contacts-assigned">${user['name']}</span>
-            </div>
-            <label class="custom-checkbox" for="box${i}">
-            <input type="checkbox" />
-            <div id="checkBox${i}" class="box-unchecked">
-                <span></span>
-            </div>
-        </div>
-    </div>`
-}
-function returnHtmlCheckAndClear() {
-    return `
-    <div id="activeInputSubtask" class="active-input-subtasks">
-        <a class="hover" onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
-        <span class="height-24">|</span>
-        <a class="hover" onclick="addNewSubTask()"><img src="/img/Property 1=check.png"></a>
-    </div>`
-}
-
-function returnHtmlAdd() {
-    return `
-    <a id="addIconSubtasks" onclick="addNewSubTask()" class="hover"><img src="/img/add.png"></a>`
-}
-
-function prioNormal(priority) {
-    return `
-    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field hover-prio-btn ${priority['bgColorFalse']}">
-        <span class="fz-20">${priority['text']}</span>
-        <img id="imgUrgent" src="${priority['iconColor']}">
-    </div>`
-}
-
-function prioActive(priority) {
-    return `
-    <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorTrue']}">
-        <span class="fz-20">${priority['text']}</span>
-        <img id="imgUrgent" src="${priority['iconWhite']}">
-    </div>`
-}
-
-function returnHtmlNewSubtasks(newSubTask) {
-    return `
-    <ul id="ulSubtasks(${i})" class="list-element-subtasks" onclick="editSubtask(${i})">
-        <li id="subTaskElement${i}">${newSubTask}</li>
-    </ul>`
-}
-
-function editSubtaskHtml(i, subTask) {
-    return `
-    <form class="label-edit-subtask">
-        <input id="inputField${i}" class="edit-subtask" type="text" value="${subTask}">
-        <div class="single-edit-subtask">
-            <img class="hover" src="/img/trashbin.png" onclick="deleteSubtask(${i})">
-            <span>|</span>
-            <img class="hover" src="/img/Property 1=check.png" onclick="changeSubtask(${i})">
-        </div>
-    </form>`
-}
-
-// <--------------Funktionen für EventListener----------------------->
-
-document.addEventListener('DOMContentLoaded', function() {
-    let dateInput = document.getElementById('dueDate');
-    let requiredDate = document.getElementById('requiredDate');
-    let taskArea = document.getElementById('description');
-    let assignedBtn = document.getElementById('inputToSearchContact');
-    let subTask = document.getElementById('subTasks');
-    let subTaskField = document.getElementById('inputFieldSubtasks')
-    let inputToSearchContact = document.getElementById("inputToSearchContact");
-    let containerCategory = document.getElementById("containerCategory");
-    // let checkbox = document.getElementById('checkboxes');
-    
-
-    dateInput.addEventListener('change', changeBorder);
-    dateInput.addEventListener('keydown', changeBorder);
-    dateInput.addEventListener('blur', function() {
-        resetDateInput(dateInput, requiredDate);
-    })
-    
-    function changeBorder() {
-        dateInput.classList.remove('fill-border');
-        let dateInputValue = dateInput.value;
-
-        if (!dateInputValue) {
-            requiredDate.classList.remove('vs-hidden');
-            dateInput.classList.add('error-border');
-        } else if(dateInputValue == '') {
-            requiredDate.classList.remove('vs-hidden');
-            dateInput.classList.add('error-border');
-            inputBorderError = true;
-        } else {
-            requiredDate.classList.add('vs-hidden');
-            dateInput.classList.remove('error-border');
-            dateInput.classList.add('fill-border');
-            inputBorderError = false;
-        }
-    }
-
-    function resetDateInput(dateInput, requiredDate) {
-        if(inputBorderError == false) {
-            requiredDate.classList.add('vs-hidden');
-            dateInput.classList.remove('error-border');
-            dateInput.classList.remove('fill-border');
-        }
-    }
-
-    taskArea.addEventListener('click', function() {
-        taskArea.classList.add('fill-border');
-    })
-
-    taskArea.addEventListener('blur', function() {
-        taskArea.classList.remove('fill-border');
-    })
-
-    containerCategory.addEventListener('click', function() {
-        containerCategory.classList.toggle('fill-border');
-    })
-
-    // assignedBtn.addEventListener('blur', function() {
-    //     assignedBtn.classList.remove('fill-border');
-    //     showCheckboxes();
-    // })
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    let title = document.getElementById('title');
-    let requiredTitle = document.getElementById('requiredTitle');
-
-    title.addEventListener('click', function() {
-        changeBorder(title, requiredTitle);
-    });
-
-    title.addEventListener('keydown', function() {
-        changeBorder(title, requiredTitle);
-    });
-
-    title.addEventListener('blur', function() {
-        resetInputTitle(title, requiredTitle);
-    })
-    
-    function changeBorder(titleId, fieldId) {
-        titleId.classList.remove('fill-border');
-        let titleIdValue = titleId.value;
-        value = titleIdValue.length;
-
-        if (value == 0) {
-            fieldId.classList.remove('vs-hidden');
-            titleId.classList.add('error-border');
-        } else if(value >= 2) {
-            titleId.classList.remove('error-border');
-            fieldId.classList.add('vs-hidden');
-            titleId.classList.add('fill-border');
-        } else if(value == 1) {
-            fieldId.classList.remove('vs-hidden');
-            titleId.classList.add('error-border');
-        }
-    }
-
-    function resetInputTitle(titleId, fieldId) {
-        fieldId.classList.add('vs-hidden');
-        titleId.classList.remove('error-border');
-    }
-})
+function showAddTaskTemplate() {
+    currentDate();
+    let bgDialog = document.getElementById('bgDialog');
+  
+    bgDialog.classList.toggle('vs-hidden');
+    bgDialog.classList.toggle('align-center');
+  }
