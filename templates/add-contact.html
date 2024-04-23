@@ -1,5 +1,8 @@
 <div id="id-contact-mask-title" class="contact-mask-title">
-  <img src="../img/logoBright.png" alt="">
+  <button id="id-close-contact-mask" class="close-contact-mask" onclick="closeContactFrom(event)">
+    <img src="../img/close-white.svg" alt="">
+  </button>
+  <img class="logo-contact-form" src="../img/logoBright.png" alt="">
   <div class="contact-mask-title-first">Add contact</div>
   <div class="contact-mask-title-second">Tasks are better with a team!</div>
   <div class="contact-mask-title-underline"></div>
@@ -28,7 +31,8 @@
         <img src="../img/call-grey.png" alt="">
       </div>
       <div class="contact-mask-btn">
-        <button class="contact-form-cancel-btn  join-button-empty" onclick="closeContactFrom(event)">
+        <button id="id-contact-form-cancel" class="contact-form-cancel-btn  join-button-empty"
+          onclick="closeContactFrom(event)">
           <div> Cancel </div>
           <div class="img-close-contact-form"></div>
         </button>

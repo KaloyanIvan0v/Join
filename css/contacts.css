@@ -309,7 +309,7 @@ body {
 }
 
 .mobile-dot-menu {
-  position: absolute;
+  position: fixed;
   right: 20px;
   bottom: 100px;
   z-index: 99;
@@ -321,6 +321,7 @@ body {
   align-items: center;
   border-radius: 50%;
   visibility: hidden;
+  cursor: pointer;
 }
 
 .mobile-add-contact {
@@ -335,6 +336,18 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.contacts-arrow-exit {
+  position: fixed;
+  right: 20px;
+  top: 128px;
+  z-index: 99;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
   visibility: hidden;
 }
 
@@ -416,5 +429,19 @@ body {
 
   .contacts-single-view {
     margin-left: 232px;
+  }
+
+  .contacts-arrow-exit {
+    visibility: visible;
+  }
+}
+
+@media (max-width: 860px) {
+  .contacts-single-view {
+    margin-left: 0px;
+  }
+
+  .contacts-list {
+    margin-left: 0px;
   }
 }

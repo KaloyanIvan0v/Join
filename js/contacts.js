@@ -20,6 +20,9 @@ function openContactForm(form) {
 function loadAddContactTemplate(element) {
   handleHoverButtonChangeImgDelayed();
   element.innerHTML = `<div class="contact-form" w3-include-html="../templates/add-contact.html"></div>`;
+  setTimeout(function () {
+    document.getElementById("id-contact-form-cancel").classList.add("d-none");
+  }, 25);
 }
 
 function loadEditContactTemplate(element) {
@@ -207,6 +210,7 @@ function renderSortedContacts(sortedContacts) {
       sortedContacts[i].color
     );
   }
+  renderMobileAddContactButton();
 }
 
 function clearElementById(id) {
@@ -308,6 +312,12 @@ function renderContactFullModeHtml(
 ) {
   return /*html*/ `
     <div class="contact-full-mode-header">
+      <div id="id-mobile-dot-menu" class="mobile-dot-menu join-button">
+    <img src="../img/dot-menu.svg" alt="">
+    </div>
+    <div id="id-contacts-arrow-exit" class="contacts-arrow-exit" onclick="HideFullViewShowContactList()">
+    <img src="../img/arrow-left-line.svg" alt="">
+  </div>
       <div id="id-contact-full-mode-badges" class="contact-full-mode-badges">${contactBadges}</div>
       <div class="contact-full-mode-name-edit-section">
         <div class="contact-full-mode-name">${contactName}</div>
@@ -346,4 +356,12 @@ function HideFullViewShowContactList() {
   let contactSingleView = document.getElementById("id-contacts-single-view");
   contactList.classList.remove("d-none-mobile");
   contactSingleView.classList.add("d-none-mobile");
+}
+
+function renderMobileAddContactButton() {
+  document.getElementById("id-contacts-list").innerHTML += /*html*/ `
+<div id="id-mobile-add-contact" class="mobile-add-contact join-button" onclick="openContactForm('addContact')">
+    <img src="../img/person_add.png" alt="">
+</div>
+`;
 }
