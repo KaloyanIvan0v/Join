@@ -144,7 +144,7 @@ a{
     margin-left: 26px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 860px) {
 .header{
     padding-left: 40px;
 }
