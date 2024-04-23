@@ -2,7 +2,7 @@ let currentEditingContactId;
 let contacts;
 async function initContacts() {
   includeHTML();
-  await loadContacts(contacts);
+  await loadContacts();
   renderContacts(contacts);
 }
 
@@ -257,6 +257,7 @@ function setElementBackgroundColor(elementId, colorId) {
 
 function openContact(contactEmail) {
   renderContactFullMode(getContactData(contactEmail));
+  HideContactsListShowFullView();
 }
 
 function getContactData(contactEmail) {
@@ -331,4 +332,18 @@ function renderContactFullModeHtml(
       </div>
   
   `;
+}
+
+function HideContactsListShowFullView() {
+  let contactList = document.getElementById("id-contacts-list");
+  let contactSingleView = document.getElementById("id-contacts-single-view");
+  contactList.classList.add("d-none-mobile");
+  contactSingleView.classList.remove("d-none-mobile");
+}
+
+function HideFullViewShowContactList() {
+  let contactList = document.getElementById("id-contacts-list");
+  let contactSingleView = document.getElementById("id-contacts-single-view");
+  contactList.classList.remove("d-none-mobile");
+  contactSingleView.classList.add("d-none-mobile");
 }

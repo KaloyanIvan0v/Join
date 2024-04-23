@@ -28,6 +28,7 @@ body {
   align-items: center;
   color: white;
   width: 352px;
+  min-width: 200px;
   min-height: 56px;
   background-color: rgb(43, 54, 71);
   font-size: 21px;
@@ -45,6 +46,7 @@ body {
   margin-top: 96px;
   height: calc(100vh - 96px);
   width: 100%;
+  min-width: 470px;
   background-color: rgb(246, 247, 248);
 }
 
@@ -89,7 +91,7 @@ body {
 }
 
 .hide {
-  display: none;
+  visibility: hidden;
 }
 
 .contacts-inner-list {
@@ -146,6 +148,7 @@ body {
 
 .contact-list-first-letter {
   width: 316px;
+  min-width: 200px;
   font-size: 20px;
   padding-top: 17px;
   padding-bottom: 17px;
@@ -154,6 +157,7 @@ body {
 
 .contact-list-letter-parting-line {
   width: 352px;
+  min-width: 200px;
   min-height: 1px;
   background-color: rgba(209, 209, 209, 1);
   margin-top: 8px;
@@ -178,7 +182,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: left;
-  min-width: 452px;
+
   width: max-content;
   height: 364px;
 }
@@ -219,7 +223,7 @@ body {
 .contact-full-mode-name {
   font-size: 47px;
   font-weight: 500;
-  max-width: 400px;
+  max-width: 300px;
   overflow: auto;
 }
 
@@ -241,6 +245,10 @@ body {
 }
 .contact-full-mode-delete-contact:hover {
   color: var(--accent-color);
+}
+
+.contact-full-mode-data {
+  width: max-content;
 }
 
 .contact-full-mode-data-headline {
@@ -301,7 +309,7 @@ body {
 }
 
 .mobile-dot-menu {
-  position: fixed;
+  position: absolute;
   right: 20px;
   bottom: 100px;
   z-index: 99;
@@ -312,6 +320,22 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  visibility: hidden;
+}
+
+.mobile-add-contact {
+  position: absolute;
+  right: 20px;
+  bottom: 100px;
+  z-index: 99;
+  width: 56px;
+  height: 56px;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  visibility: hidden;
 }
 
 @media (max-width: 1360px) {
@@ -350,10 +374,47 @@ body {
 
   .contact-full-mode-name {
     font-size: 36px;
-    max-width: 100%;
+    max-width: 300px;
   }
 
   .contact-full-mode-header {
     width: max-content;
+  }
+}
+
+@media (max-width: 1080px) {
+  .d-none-mobile {
+    display: none;
+  }
+
+  .contacts-list {
+    max-width: 100%;
+  }
+
+  .contacts-inner-list {
+    align-items: start;
+  }
+
+  .contact-list-letter-parting-line {
+    width: 98%;
+  }
+
+  .add-contact-button {
+    display: none;
+  }
+  .contact-list-item {
+    width: 100%;
+  }
+
+  .mobile-add-contact {
+    visibility: visible;
+  }
+
+  .mobile-dot-menu {
+    visibility: visible;
+  }
+
+  .contacts-single-view {
+    margin-left: 232px;
   }
 }
