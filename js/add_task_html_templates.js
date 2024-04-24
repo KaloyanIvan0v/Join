@@ -10,8 +10,8 @@ function returnHtmlSingleContact(user) {
             </div>
             <label class="custom-checkbox" for="box${i}">
             <input type="checkbox" />
-            <div id="checkBox${i}" class="box-unchecked">
-                <span></span>
+            <div id="" class="">
+                <img src="../img/box-unchecked.png" id="checkBox${i}"></span>
             </div>
         </div>
     </div>`
@@ -63,4 +63,8 @@ function editSubtaskHtml(i, subTask) {
             <img class="hover" src="/img/Property 1=check.png" onclick="changeSubtask(${i})">
         </div>
     </form>`
+}
+
+function loadInitial(i, initial) {
+    return `<div id="initialArea${i}" class="initial-area initials">${initial}</div>`
 }

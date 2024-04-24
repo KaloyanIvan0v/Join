@@ -2,15 +2,15 @@
    <span class="headline-add-task-template">Add Task</span>
    <a onclick="showAddTaskTemplate()"><img src="/img/close.png"></a>
 </div>
-<form onsubmit="addTask(); return false" class="add-task-informations">
-    
+<form onsubmit="addTask(); return false">
+<div class="test-container">
     <div class="leftside-add-task-template">
         <div class="d-flex-column-center">
             <div class="title-template">
                 <span>Title</span>
                 <span class="color-FF8190">*</span>
             </div>
-            <input class="input-field normal-border" id="title" type="text" placeholder="Enter a title">
+            <input class="input-field focus normal-border pd-font-size" id="title" type="text" placeholder="Enter a title">
             <div id="requiredTitle" class="required-field-title">
                 <span class="error vs-hidden">This field is required</span>
             </div>
@@ -28,8 +28,8 @@
 
         <div class="d-flex-column-center" onclick="showCheckboxes(event)">
             <span class="input-description">Assigned to</span>
-            <div class="input-category new-subtask normal-border hover">
-                <input onkeydown="searchContact()" tabindex="0" class="input-search-contacts normal-border" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
+            <div class="input-category new-subtask normal-border hover blue-focus">
+                <input onkeydown="searchContact()" tabindex="0" class="input-search-contacts normal-border pd-font-size" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
                 <div class="dropdown-icon">
                     <img src="/img/arrow_drop_down.png" id="dropDownArrow">
                 </div>
@@ -61,7 +61,20 @@
         <div class="">
             <div class="input-description">
                 <span>Prio</span>
-            </div>       
+            </div>
+            <div class="prio-area" id="prioArea">
+                <div onclick="prioSelectAddTask('urgent')">
+                  <img id="urgent" src="../img/urgent.png">
+                </div>
+          
+                <div onclick="prioSelectAddTask('medium')">
+                  <img id="medium" src="../img/medium_highlight.png">
+                </div>
+          
+                <div onclick="prioSelectAddTask('Low')">
+                  <img id="low" src="../img/low.png">
+                </div>
+              </div>       
         </div>
 
         <div class="d-flex-column-center">
@@ -86,7 +99,7 @@
         <div class="d-flex-column-center">
             <span class="input-description">Subtasks</span>
             <div id="inputFieldSubtasks" class="input-field subtasks-field normal-border">
-                <input onclick="changeIconsSubtask(event)" class="input-new-subtask" type="text" id="subTasks" placeholder="Add new subtask">
+                <input onclick="changeIconsSubtask(event)" class="input-new-subtask pd-font-size" type="text" id="subTasks" placeholder="Add new subtask">
                 <a id="addIconSubtasks" class="icon-subtask-field"><img src="/img/add.png"></a>
             </div>
             <div id="newSubTaskField"></div>
@@ -95,14 +108,23 @@
     </div>
 
     </div>
-</form>
-<div class="buttons-clear-create">
-    <button class="btn-add-task-template border-cancel" onclick="resetInputFields(); return false">
-        <span class="typography-clear">Cancel</span>
-        <img src="/img/iconoir_cancel.png">
-    </button>
+    <div class="reuired-notice-cancel-create">
+        <div class="required-field-notice">
+            <span>This field is required</span>
+            <span class="color-FF8190">*</span>
+        </div>
 
-    <button class="btn-add-task-template bg-color-create" id="createBtn">
-        <span class="typography-create">Create Task</span>
-        <img src="/img/check.png">
-    </button>
+        <div class="buttons-clear-create">
+            <button class="btn-add-task-template border-cancel" onclick="resetInputFields(); return false">
+                <span class="typography-clear">Cancel</span>
+                <img src="/img/iconoir_cancel.png">
+            </button>
+        
+            <button class="btn-add-task-template bg-color-create" id="createBtn">
+                <span class="typography-create">Create Task</span>
+                <img src="/img/check.png">
+            </button>
+        </div>
+    </div>
+</form>
+

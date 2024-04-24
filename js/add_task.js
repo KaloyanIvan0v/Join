@@ -7,6 +7,7 @@ let searchContacts = [];
 let finishedSubTasks = [];
 let checkChangeIcons = false;
 let expanded = false;
+let checkBoxContact = false;
 // let inputBorderError = false;
 let arrowToggleCheck = false;
 let priorities = [
@@ -24,7 +25,7 @@ function init() {
     includeHTML();
     loadTasks();
     loadContacts();
-    whichPriority();
+    // whichPriority();
     loadUsers();
     currentDate();
 }
@@ -96,7 +97,7 @@ function furtherResetField() {
     currentDate();
     changeCategory('Select task category');
     setItem('subTasks', []);
-    changePrio(1);
+    // changePrio(1);
 
     checkChangeIcons = true;
     changeIconsSubtask();
@@ -119,30 +120,54 @@ function currentDate() {
     inputDateField.value = currentDate;
 }
 
-function changePrio(i) {
-    currentPrio = priorities[i]['text'];
-    priorities[i]['isPriority'] = true;
-    whichPriority();
-}
-
-function whichPriority() {
-    let prioSelection = document.getElementById('prioSelection');
-    prioSelection.innerHTML = '';
-
-    for(i = 0; i < priorities.length; i++) {
-        priority = priorities[i];
-        checkBooleanForPriority(priority);
-    }
-}
-
-function checkBooleanForPriority(priority) {
-    if(priority['isPriority'] == false) {
-        prioSelection.innerHTML += prioNormal(priority);
+function prioSelectAddTask(prioSelect) {
+    let urgent = document.getElementById(`urgent`);
+    let medium = document.getElementById(`medium`);
+    let low = document.getElementById(`low`);
+    // setItem('tasks', tasks);
+  
+    if(prioSelect == 'urgent') {
+      urgent.src = '../img/urgent_highlight.png';
+      medium.src = '../img/medium.png';
+      low.src = '../img/low.png';
+      currentPrio = 'urgent';
+    } else if(prioSelect == 'medium') {
+      urgent.src = '../img/urgent.png';
+      medium.src = '../img/medium_highlight.png';
+      low.src = '../img/low.png';
+      currentPrio = 'medium';
     } else {
-        prioSelection.innerHTML += prioActive(priority);
-        priority['isPriority'] = false;
+      urgent.src = '../img/urgent.png';
+      medium.src = '../img/medium.png';
+      low.src = '../img/low_highlight.png';
+      currentPrio = 'Low';
     }
-}
+  }
+
+// function changePrio(i) {
+//     currentPrio = priorities[i]['text'];
+//     priorities[i]['isPriority'] = true;
+//     whichPriority();
+// }
+
+// function whichPriority() {
+//     let prioSelection = document.getElementById('prioSelection');
+//     prioSelection.innerHTML = '';
+
+//     for(i = 0; i < priorities.length; i++) {
+//         priority = priorities[i];
+//         checkBooleanForPriority(priority);
+//     }
+// }
+
+// function checkBooleanForPriority(priority) {
+//     if(priority['isPriority'] == false) {
+//         prioSelection.innerHTML += prioNormal(priority);
+//     } else {
+//         prioSelection.innerHTML += prioActive(priority);
+//         priority['isPriority'] = false;
+//     }
+// }
 
 // <-------------Subtasks functions----------------->
 
@@ -214,10 +239,10 @@ function showCheckboxes(event) {
     if (!expanded) {
         toggleDropDownArrow("dropDownArrow");
         // preventFocusLoss(event);
-        assignedBtn.focus();
+        // assignedBtn.focus();
         checkboxes.classList.remove('vs-hidden');
         assignedBtn.placeholder = 'Search Contact';
-        assignedBtn.classList.add('fill-border');
+        // assignedBtn.classList.add('fill-border');
         renderAssignedToField(contacts);
         expanded = true;
     } else {
@@ -273,19 +298,29 @@ function renderAssignedToField(arrayToRender) {
 
 function examineUser(i) {
     // let currentLabel = document.getElementById(`checkBox${i}`);
+    // let checkBox = document.getElementById(`checkBox${i}`);
     let currentName = contacts[i]['name'];
-    let checkBox = document.getElementById(`checkBox${i}`);
-    let userField = document.getElementById(`userField${i}`);
-    let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
     let index = checkedUsers.findIndex(item => JSON.stringify(item['name']) === JSON.stringify(currentName));
         
     if(index != -1) {
-        checkBox.classList.remove('box-unchecked');
-        paddingForChecked.classList.add('pd-right-16');
-        userField.classList.add('bg-checked');
-        userField.classList.remove('hover-user-field');
-        paddingForChecked.classList.add('hover-assigned')
+        toggleForCheckedUser(i)
+        // checkBox.classList.remove('box-unchecked');
+        // userField.classList.add('bg-checked');
+        // userField.classList.toggle('hover-user-field');
+        // paddingForChecked.classList.toggle('pd-right-16');
+        // paddingForChecked.classList.toggle('hover-assigned');
     }
+}
+
+function toggleForCheckedUser(i) {
+    let userField = document.getElementById(`userField${i}`);
+    let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
+
+    // checkBox.classList.toggle('box-unchecked');
+    // userField.classList.toggle('bg-checked');
+    userField.classList.toggle('hover-user-field');
+    paddingForChecked.classList.toggle('pd-right-16');
+    paddingForChecked.classList.toggle('hover-assigned');
 }
 
 function backgroundColorInitials(i, whichArea) {
@@ -308,23 +343,25 @@ function selectedUser(i) {
 
     if(!checkedUsers.includes(singleUser, 0)) {
         checkedUsers.push(singleUser);
-        toggleForCheckedUser(i);
+        // toggleForCheckedUser(i);
     } else {
         checkedUsers.splice(currentIndex, 1);
-        toggleForCheckedUser(i);
+        // toggleForCheckedUser(i);
     }
+    toggleForCheckedUser(i);
+    toggleCheckbox(i);
 }
 
-function toggleForCheckedUser(i) {
+function toggleCheckbox(i) {
     let checkBox = document.getElementById(`checkBox${i}`);
-    let userField = document.getElementById(`userField${i}`);
-    let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
 
-    checkBox.classList.toggle('box-unchecked');
-    userField.classList.toggle('hover-user-field');
-    paddingForChecked.classList.toggle('pd-right-16');
-    userField.classList.toggle('bg-checked');
-    paddingForChecked.classList.toggle('hover-assigned');
+    if(checkBoxContact == true) {
+        checkBox.src = '../img/box-unchecked.png';
+        checkBoxContact = false;
+    } else {
+        checkBox.src = '../img/Check button.png';
+        checkBoxContact = true;
+    }
 }
 
 function showInitials() {
@@ -342,7 +379,7 @@ function showInitials() {
         } else {
             initial = firstLetter;
         }
-        initialsArea.innerHTML += `<div id="initialArea${i}" class="initial-area initials">${initial}</div>`
+        initialsArea.innerHTML += loadInitial(i, initial);
         backgroundColorInitials(i, 'showInitial');
     }
 }

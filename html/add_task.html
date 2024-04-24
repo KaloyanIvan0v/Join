@@ -91,7 +91,20 @@
                 <div class="input-description">
                     <span>Prio</span>
                 </div>
-                <div id="prioSelection" class="priority-selection"></div>
+                <div class="prio-area" id="prioArea">
+                    <div onclick="prioSelectAddTask('urgent')">
+                      <img id="urgent" src="../img/urgent.png">
+                    </div>
+              
+                    <div onclick="prioSelectAddTask('medium')">
+                      <img id="medium" src="../img/medium_highlight.png">
+                    </div>
+              
+                    <div onclick="prioSelectAddTask('Low')">
+                      <img id="low" src="../img/low.png">
+                    </div>
+                  </div> 
+                <!-- <div id="prioSelection" class="priority-selection"></div> -->
             </div>
 
             <div class="description-category position-category d-flex-column-center">
@@ -135,9 +148,9 @@
         </div>
     </form>
 
-    <div onclick="showAddTaskTemplate()" class="required-field-notice">
-        <span class="color-FF8190">*</span>
+    <div class="required-field-notice">
         <span>This field is required</span>
+        <span class="color-FF8190">*</span>
     </div>
 
     <div id="bgDialog" class="bg-dialog vs-hidden ps-fixed">
