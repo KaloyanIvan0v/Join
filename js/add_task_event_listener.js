@@ -55,10 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
         containerCategory.classList.toggle('fill-border');
     })
 
-    // assignedBtn.addEventListener('blur', function() {
-    //     assignedBtn.classList.remove('fill-border');
-    //     showCheckboxes();
-    // })
+    assignedBtn.addEventListener('blur', function() {
+        assignedBtn.classList.remove('fill-border');
+        showCheckboxes();
+    })
 });
 
 document.addEventListener('DOMContentLoaded', function() {

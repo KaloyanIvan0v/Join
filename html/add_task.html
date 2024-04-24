@@ -24,14 +24,14 @@
     <div w3-include-html="/templates/header.html" class="header"></div>
     <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
 
-    <!-- <div class="bg-dialog vs-hidden" id="bgDialog">
-        <div w3-include-html="/templates/add_task_formular_template.html" class="add_task_formular_template"></div>
-    </div> -->
-
-    <h2>Add Task</h2>
+    <div class="test-container">
+    <!-- <h2>Add Task</h2> -->
+    <div class="headline-area-template">
+        <span class="headline-add-task-template">Add Task</span>
+     </div>
     <form onsubmit="addTask(); return false" class="add-task-informations">
+        <div class="left-and-rightside">
         <div class="leftside-add-task">
-
             <div class="description-input d-flex-column-center">
                 <div class="input-description">
                     <div class="d-flex">
@@ -92,15 +92,15 @@
                     <span>Prio</span>
                 </div>
                 <div class="prio-area" id="prioArea">
-                    <div onclick="prioSelectAddTask('urgent')">
+                    <div class="hover" onclick="prioSelectAddTask('urgent')">
                       <img id="urgent" src="../img/urgent.png">
                     </div>
               
-                    <div onclick="prioSelectAddTask('medium')">
+                    <div class="hover" onclick="prioSelectAddTask('medium')">
                       <img id="medium" src="../img/medium_highlight.png">
                     </div>
               
-                    <div onclick="prioSelectAddTask('Low')">
+                    <div class="hover" onclick="prioSelectAddTask('Low')">
                       <img id="low" src="../img/low.png">
                     </div>
                   </div> 
@@ -135,6 +135,12 @@
                 <div id="newSubTaskField"></div>
             </div>
         </div>
+        </div>
+        <div class="reuired-notice-cancel-create">
+        <div class="required-field-notice">
+            <span>This field is required</span>
+            <span class="color-FF8190">*</span>
+        </div>
         <div class="buttons-clear-create">
             <button class="btn-add-task" onclick="resetInputFields(); return false">
                 <span class="typography-clear">Clear</span>
@@ -148,16 +154,13 @@
         </div>
     </form>
 
-    <div class="required-field-notice">
-        <span>This field is required</span>
-        <span class="color-FF8190">*</span>
-    </div>
-
     <div id="bgDialog" class="bg-dialog vs-hidden ps-fixed">
         <div class="added-to-board bg-color-create">
             <span>Task added to board</span>
             <img src="/img/addedBoard.png">
         </div>
+    </div>
+    </div>
     </div>
 </body>
 </html>

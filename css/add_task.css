@@ -40,6 +40,10 @@ input[type=date]:hover {
     cursor: pointer;
 }
 
+.test-container {
+    padding: 206px 328px;
+}
+
 textarea {
     padding: 12px 16px;
     height: 120px;
@@ -50,13 +54,26 @@ textarea {
     font-family: 'inter';
 }
 
+.headline-area-template {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 32px;
+}
+
+.headline-add-task-template {
+    font-size: 61px;
+    font-weight: 700; 
+}
+
 textarea:focus {
     border: 1px solid #29ABE2;
 }
 
 h2 {
     /* position: absolute; */
-    position: relative;
+    /* position: relative; */
     margin: 0;
     top: 206px;
     left: 328px;
@@ -82,6 +99,8 @@ h2 {
 
 .add-task-informations {
     display: flex;
+    flex-direction: column;
+    padding-top: 48px;
 }
 
 .hover-prio-btn:hover {
@@ -96,17 +115,22 @@ h2 {
 .leftside-add-task {
     width: 440px;
     height: 376px;
-    position: relative;
-    top: 231px;
-    left: 328px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-right: 48.25px;
 }
 
 .parting-line-add-task {
     border: 1px solid #D1D1D1;
-    position: relative;
+    /* position: relative; */
     height: 424px;
     top: 231px;
     left: 376.25px;
+}
+
+.left-and-rightside {
+    display: flex;
 }
 
 .pd-inline-start {
@@ -123,9 +147,10 @@ h2 {
 .rightside-add-task {
     width: 440px;
     height: 416px;
-    position: relative;
-    top: 231px;
-    left: 424.25px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-left: 48.25px;
 }
 
 .li-edit {
@@ -171,7 +196,7 @@ h2 {
 .add-icon {
     width: 14px;
     height: 14px;
-    position: absolute;
+    /* position: absolute; */
     right: 16px;
     bottom: 5px;   
 }
@@ -238,7 +263,7 @@ h2 {
 }
 
 .description-textarea {
-    position: absolute;
+    /* position: absolute; */
     top: 112px;
     height: 168px;
 }
@@ -246,12 +271,12 @@ h2 {
 .assigned-to {
     width: 100%;
     height: 80px;
-    position: absolute;
+    /* position: absolute; */
     top: 296px;
 }
 
 .assigned-to {
-    position: absolute;
+    /* position: absolute; */
     top: 296px;
 }
 
@@ -270,21 +295,26 @@ h2 {
     justify-content: space-between;
 }
 
-.position-prio {
+#newSubTaskField {
+    position: static;
+    z-index: 100;
+}
+
+/* .position-prio {
     position: absolute;
     top: 120px;
     width: 100%;
     height: 56px;
     gap: 16px;
-}
+} */
 
 .position-category {
-    position: absolute;
+    /* position: absolute; */
     top: 232px;
 }
 
 .position-subtasks {
-    position: absolute;
+    /* position: absolute; */
     top: 336px;
 }
 
@@ -320,7 +350,6 @@ h2 {
 
 .option-value-disabled {
     padding: 12px 21px;
-    /* font-size: 24px; */
     font-family: Inter;
     font-weight: 400;
     font-size: 20px;
@@ -338,12 +367,15 @@ h2 {
 
 .required-field-notice {
     display: flex;
-    /* position: absolute; */
-    position: relative;
-    /* top: 830px; */
-    top: 411px;
-    left: 328px;
     height: 27px;
+}
+
+.reuired-notice-cancel-create {
+    width: 976.25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 160px;
 }
 
 .color-FF8190 {
@@ -355,7 +387,7 @@ h2 {
 }
 
 .buttons-clear-create {
-    position: relative;
+    /* position: relative; */
     top: 793px;
     left: 115px;
     height: 56px;
@@ -407,7 +439,7 @@ h2 {
     border-radius: 10px;
     font-size: 20px;
     line-height: 24px;
-    position: relative;
+    /* position: relative; */
     z-index: 5;
 }
 
@@ -498,8 +530,8 @@ h2 {
     max-height: 336px;
     overflow-y: scroll;
     z-index: 3;
-    position: absolute;
-    top: 371px;
+    /* position: absolute;
+    top: 371px; */
     width: 440px;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 10px;
@@ -514,7 +546,7 @@ h2 {
     background-color: #FFFFFF;
     border: 1px #dadada solid;
     z-index: 3;
-    position: absolute;
+    /* position: absolute; */
     width: 438px;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
     margin-top: -10px;
@@ -546,7 +578,7 @@ h2 {
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 8px;
-    position: absolute;
+    /* position: absolute; */
     top: 371px;
 }
 
@@ -593,8 +625,7 @@ h2 {
 .input-search-contacts {
     width: 408px;
     border-radius: 10px;
-    /* border: 1px solid #D1D1D1; */
-    position: relative;
+    /* position: relative; */
     z-index: 5;
 }
 
@@ -619,7 +650,7 @@ h2 {
 }
   
 .overSelect {
-    position: absolute;
+    /* position: absolute; */
     left: 0;
     right: 0;
     top: 0;

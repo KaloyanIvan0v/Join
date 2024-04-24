@@ -52,7 +52,7 @@
                     <span class="color-FF8190">*</span>
                 </div>
             </div>
-            <input class="input-field option-value-disabled normal-border" id="dueDate" type="date">
+            <input class="input-field option-value-disabled hover normal-border" id="dueDate" type="date">
             <div id="requiredDate" class="required-field-title vs-hidden">
                 <span class="error">This field is required</span>
             </div>
@@ -63,16 +63,16 @@
                 <span>Prio</span>
             </div>
             <div class="prio-area" id="prioArea">
-                <div onclick="prioSelectAddTask('urgent')">
+                <div class="prio-hover" onclick="prioSelectAddTask('urgent')">
                   <img id="urgent" src="../img/urgent.png">
                 </div>
           
                 <div onclick="prioSelectAddTask('medium')">
-                  <img id="medium" src="../img/medium_highlight.png">
+                  <img class="prio-hover" id="medium" src="../img/medium_highlight.png">
                 </div>
           
                 <div onclick="prioSelectAddTask('Low')">
-                  <img id="low" src="../img/low.png">
+                  <img class="prio-hover" id="low" src="../img/low.png">
                 </div>
               </div>       
         </div>

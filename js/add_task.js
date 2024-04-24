@@ -10,16 +10,16 @@ let expanded = false;
 let checkBoxContact = false;
 // let inputBorderError = false;
 let arrowToggleCheck = false;
-let priorities = [
-    {
-        'text': 'Urgent', 'iconWhite': '/img/urgent_white.png', 'iconColor': '/img/urgent_red.png', 'bgColorTrue': 'highlight-color-urgent', 'bgColorFalse': 'bg-color-priority','isPriority': false,
-    },
-    {
-        'text': 'Medium', 'iconWhite': '/img/medium_white.png', 'iconColor': '/img/medium_orange.png', 'bgColorTrue': 'highlight-color-medium', 'bgColorFalse': 'bg-color-priority', 'isPriority': true,
-    },
-    {   'text': 'Low',    'iconWhite': '/img/low_white.png',     'iconColor': '/img/low_green.png',  'bgColorTrue': 'highlight-color-low',    'bgColorFalse': 'bg-color-priority',   'isPriority': false,
-    }
-]
+// let priorities = [
+//     {
+//         'text': 'Urgent', 'iconWhite': '/img/urgent_white.png', 'iconColor': '/img/urgent_red.png', 'bgColorTrue': 'highlight-color-urgent', 'bgColorFalse': 'bg-color-priority','isPriority': false,
+//     },
+//     {
+//         'text': 'Medium', 'iconWhite': '/img/medium_white.png', 'iconColor': '/img/medium_orange.png', 'bgColorTrue': 'highlight-color-medium', 'bgColorFalse': 'bg-color-priority', 'isPriority': true,
+//     },
+//     {   'text': 'Low',    'iconWhite': '/img/low_white.png',     'iconColor': '/img/low_green.png',  'bgColorTrue': 'highlight-color-low',    'bgColorFalse': 'bg-color-priority',   'isPriority': false,
+//     }
+// ]
 
 function init() {
     includeHTML();
@@ -228,11 +228,12 @@ function changeIconsSubtask() {
     renderSubTasks();
 }
 
-// function preventFocusLoss(event) {
-//     event.preventDefault();
-// }
+function preventFocusLoss(event) {
+    event.preventDefault();
+}
 
 function showCheckboxes(event) {
+    // preventFocusLoss(event);
     let checkboxes = document.getElementById("checkboxes");
     let assignedBtn = document.getElementById('inputToSearchContact');
 
@@ -244,6 +245,7 @@ function showCheckboxes(event) {
         assignedBtn.placeholder = 'Search Contact';
         // assignedBtn.classList.add('fill-border');
         renderAssignedToField(contacts);
+
         expanded = true;
     } else {
         toggleDropDownArrow("dropDownArrow");

@@ -17,8 +17,6 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    /* position: absolute;
-    top: 64px; */
     padding-bottom: 32px;
 }
 
@@ -97,6 +95,10 @@
     width: 398px;
 }
 
+textarea::placeholder {
+    color: #D1D1D1;
+}
+
 .pd-font-size {
     font-size: 20px;
     padding: 12px 21px;
@@ -118,6 +120,23 @@
     font-size: 20px;
     padding: 12px 21px;
 } */
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url('/img/calender_icon.png'); 
+    background-size: cover;
+    width: 18px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.user-list::-webkit-scrollbar {
+    border-radius: 8px;
+    width: 8px;
+}
+
+.user-list::-webkit-scrollbar-thumb {
+    background-color: rgba(168, 168, 168, 1);
+}
 
 .input-search-contacts {
     width: 400px;
@@ -154,6 +173,11 @@
 
 .hover:hover {
     cursor: pointer;
+}
+
+.prio-hover:hover {
+    cursor: pointer;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .d-flex-template {
@@ -209,6 +233,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    padding-top: 160px;
 }
 
 .buttons-clear-create {
@@ -266,8 +291,8 @@ textarea:focus {
     max-height: 336px;
     overflow-y: scroll;
     z-index: 3;
-    /* position: absolute;
-    top: 371px; */
+    z-index: 4;
+    position: relative;
     width: 440px;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 10px;

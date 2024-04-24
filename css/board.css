@@ -162,10 +162,6 @@ input:focus {
   font-weight: 700;
 }
 
-.hover:hover {
-  cursor: pointer;
-}
-
 .add_button_headline {
   width: 18.67px;
   height: 18.67px;

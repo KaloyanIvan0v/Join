@@ -10,14 +10,6 @@ let expanded = false;
 // let inputBorderError = false;
 let arrowToggleCheck = false;
 
-// function showAddTaskTemplate() {
-//     currentDate();
-//     let bgDialog = document.getElementById('bgDialog');
-  
-//     bgDialog.classList.toggle('vs-hidden');
-//     bgDialog.classList.toggle('align-center');
-//   }
-
   async function addTask() {
     let idNumber = increaseId();
     let title = document.getElementById('title');
