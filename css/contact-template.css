@@ -56,7 +56,7 @@ input::placeholder {
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   width: 795px;
-  height: 592px;
+  height: 100%;
   background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: flex-end;
@@ -81,6 +81,11 @@ input::placeholder {
   right: 48px;
 }
 
+.contact-form-exit-x img {
+  width: 24px;
+  height: 24px;
+}
+
 .mask-contact-info {
   width: 100%;
   display: flex;
@@ -94,7 +99,6 @@ input::placeholder {
 }
 
 .mask-contact-img {
-  height: 100%;
   min-width: 290px;
 }
 
@@ -195,6 +199,7 @@ form {
   right: 20px;
   width: 24px;
   height: 24px;
+  visibility: hidden;
 }
 
 .close-contact-mask:hover {
@@ -207,6 +212,18 @@ form {
 }
 
 @media (max-width: 1300px) {
+  .d-none-mobile-1300 {
+    display: none;
+  }
+
+  .contact-form-exit-x {
+    visibility: hidden;
+  }
+
+  .close-contact-mask {
+    visibility: visible;
+  }
+
   .contact-form {
     position: fixed;
     top: calc(50% - 400px);
@@ -221,8 +238,10 @@ form {
   }
 
   .contact-mask-workbench {
-    flex-direction: column;
+    display: flex;
+    align-items: center;
     max-width: 396px;
+    height: 448px;
     border-radius: 0px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -230,8 +249,10 @@ form {
   }
 
   .mask-contact-img {
-    position: relative;
+    position: absolute;
     top: -63px;
+    width: 100%;
+    margin-top: 352px;
   }
 
   .contact-mask-title {
@@ -239,6 +260,7 @@ form {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     padding-left: 24px;
+    height: 352px;
     box-sizing: border-box;
   }
 
@@ -259,18 +281,22 @@ form {
     width: 322px;
   }
   .contact-form-input-div {
-    width: max-content;
-    height: 24px;
+    box-sizing: border-box;
+    max-width: 364px;
+    height: 41px;
     border: solid 1px rgb(209, 209, 209);
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 13px 21px 13px 21px;
+    margin-bottom: 24px;
   }
 
   .mask-contact-info form {
-    padding-bottom: 80px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
   }
 
   .mask-contact-img-div {
@@ -289,9 +315,33 @@ form {
   }
 
   .contact-mask-btn {
+    margin-top: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+  }
+}
+
+@media (max-width: 415px) {
+  .contact-form {
+    top: calc(50% - 400px);
+    left: calc(50% - 150px);
+    width: 300px;
+    height: 800px;
+  }
+
+  .contact-mask-workbench {
+    max-width: 300px;
+    height: 448px;
+  }
+
+  .contact-mask-title {
+    padding: 12px;
+  }
+
+  .contact-form-input-div {
+    max-width: 280px;
+    height: 41px;
   }
 }

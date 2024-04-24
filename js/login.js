@@ -13,6 +13,7 @@ async function initLogin() {
   }, 375);
   setSesionStorage("contacts", contacts);
   setSesionStorage("tasks", tasks);
+  handleInputOnFocusChangeParentElementBorderColor();
 }
 
 function startScreen() {

@@ -15,13 +15,17 @@ function openContactForm(form) {
   }
   includeHTML();
   contactForm.classList.remove("hide");
+  addShadowLayer();
 }
 
 function loadAddContactTemplate(element) {
   handleHoverButtonChangeImgDelayed();
   element.innerHTML = `<div class="contact-form" w3-include-html="../templates/add-contact.html"></div>`;
   setTimeout(function () {
-    document.getElementById("id-contact-form-cancel").classList.add("d-none");
+    document
+      .getElementById("id-contact-form-cancel")
+      .classList.add("d-none-mobile-1300");
+    handleInputOnFocusChangeParentElementBorderColor();
   }, 25);
 }
 
@@ -29,6 +33,7 @@ function loadEditContactTemplate(element) {
   element.innerHTML = `<div class="contact-form" w3-include-html="../templates/edit-contact.html"></div>`;
   setTimeout(function () {
     editContactFillForm();
+    handleInputOnFocusChangeParentElementBorderColor();
   }, 25);
 }
 
@@ -50,12 +55,15 @@ function closeContactFrom(event) {
   }
   contactForm.classList.add("hide");
   contactForm.innerHTML = "";
+  removeShadowLayer();
 }
 
 async function deleteContact(event) {
   if (event) {
     event.preventDefault();
   }
+  closeContactFrom();
+  HideFullViewShowContactList();
   let contactIndex = getContactIndex(getActualContactEmail());
   if (contactIndex != undefined) {
     contacts.splice(contactIndex, 1);
@@ -364,4 +372,14 @@ function renderMobileAddContactButton() {
     <img src="../img/person_add.png" alt="">
 </div>
 `;
+}
+
+function addShadowLayer() {
+  let shadowLayer = document.getElementById("id-shadow-layer");
+  shadowLayer.classList.remove("hide");
+}
+
+function removeShadowLayer() {
+  let shadowLayer = document.getElementById("id-shadow-layer");
+  shadowLayer.classList.add("hide");
 }

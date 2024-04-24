@@ -84,3 +84,15 @@ async function getFromSessionStorage(key) {
     return null;
   }
 }
+
+function handleInputOnFocusChangeParentElementBorderColor() {
+  let inputs = document.querySelectorAll("input");
+  inputs.forEach(function (input) {
+    input.addEventListener("focus", function () {
+      input.parentElement.style.borderColor = "var(--accent-color)";
+    });
+    input.addEventListener("blur", function () {
+      input.parentElement.style.borderColor = "rgba(0, 0, 0, 0.1)";
+    });
+  });
+}

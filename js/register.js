@@ -3,6 +3,7 @@ let pswVisibility = [false, false];
 async function initRegister() {
   await loadUsers();
   setPwdInputEventListeners();
+  handleInputOnFocusChangeParentElementBorderColor();
 }
 
 async function register() {
