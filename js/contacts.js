@@ -4,6 +4,7 @@ async function initContacts() {
   includeHTML();
   await loadContacts();
   renderContacts(contacts);
+  addClickListener();
 }
 
 function openContactForm(form) {
@@ -163,18 +164,21 @@ function generateBadge(name) {
 }
 
 function handleHoverButtonChangeImg(
-  hoverElementId,
-  elementToChangeId,
+  hoverClassName,
+  elementsToChangeClassName,
   imgUrl,
   imgUrlHover
 ) {
-  var hoverElement = document.querySelector(hoverElementId);
-  var elementToChangeId = document.querySelector(elementToChangeId);
-  hoverElement.addEventListener("mouseover", function () {
-    elementToChangeId.style.backgroundImage = imgUrlHover;
-  });
-  hoverElement.addEventListener("mouseout", function () {
-    elementToChangeId.style.backgroundImage = imgUrl;
+  var hoverElements = document.querySelectorAll(hoverClassName);
+  var elementsToChange = document.querySelectorAll(elementsToChangeClassName);
+
+  hoverElements.forEach(function (hoverElement, index) {
+    hoverElement.addEventListener("mouseover", function () {
+      elementsToChange[index].style.backgroundImage = imgUrlHover;
+    });
+    hoverElement.addEventListener("mouseout", function () {
+      elementsToChange[index].style.backgroundImage = imgUrl;
+    });
   });
 }
 
@@ -294,7 +298,10 @@ function renderContactFullMode(contact) {
     contactBadges
   );
   setElementBackgroundColor("id-contact-full-mode-badges", contactColor);
-  setListenerForEditDeleteBtn();
+  div.innerHTML += renderContactEditMenuMobile();
+  setTimeout(function () {
+    setListenerForEditDeleteBtn();
+  }, 25);
 }
 
 function setListenerForEditDeleteBtn() {
@@ -320,8 +327,8 @@ function renderContactFullModeHtml(
 ) {
   return /*html*/ `
     <div class="contact-full-mode-header">
-      <div id="id-mobile-dot-menu" class="mobile-dot-menu join-button">
-    <img src="../img/dot-menu.svg" alt="">
+      <div id="id-mobile-dot-menu" class="mobile-dot-menu join-button" onclick="openContactEditMenu()">
+    <img id="dot-menu-img" src="../img/dot-menu.svg" alt="">
     </div>
     <div id="id-contacts-arrow-exit" class="contacts-arrow-exit" onclick="HideFullViewShowContactList()">
     <img src="../img/arrow-left-line.svg" alt="">
@@ -382,4 +389,40 @@ function addShadowLayer() {
 function removeShadowLayer() {
   let shadowLayer = document.getElementById("id-shadow-layer");
   shadowLayer.classList.add("hide");
+}
+
+function renderContactEditMenuMobile() {
+  return /*html*/ `
+  <div id="id-contact-full-mode-edit-mobile" class="contact-full-mode-edit-mobile hide">
+          <button class="contact-full-mode-edit-contact" onclick="openContactForm('editContact')">
+            <div class="edit-btn-img"></div>
+            <div>Edit</div>
+          </button>
+        <button class="contact-full-mode-delete-contact" onclick="deleteContact()">
+            <div class="delete-btn-img" ></div>
+            <div>Delete</div>
+          </button>
+        </div>`;
+}
+
+function openContactEditMenu() {
+  var element = document.getElementById("id-contact-full-mode-edit-mobile");
+  element.classList.remove("hide");
+}
+
+function closeContactEditMenu() {
+  var element = document.getElementById("id-contact-full-mode-edit-mobile");
+  element.classList.add("hide");
+}
+
+function addClickListener() {
+  var element = document.getElementById("id-contacts-single-view");
+  element.addEventListener("click", function (event) {
+    if (
+      event.target.id !== "id-mobile-dot-menu" &&
+      event.target.id !== "dot-menu-img"
+    ) {
+      closeContactEditMenu();
+    }
+  });
 }

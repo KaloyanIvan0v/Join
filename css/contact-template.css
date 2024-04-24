@@ -233,7 +233,7 @@ form {
     display: flex;
     flex-direction: column;
     border-radius: 30px;
-    z-index: 99;
+    z-index: 999;
     box-sizing: border-box;
   }
 
