@@ -150,3 +150,32 @@ h1{
     font-size: 64px;
     color: #29ABE2;
 }
+
+@media (max-width: 860px){
+    .summeryContent{
+        padding-top: 110px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .summeryTop{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .summeryTopH1{
+        margin: 0;
+    }
+
+    .partingLineTop{
+        display: none;
+    }
+
+    .greetings{
+        display: none;
+    }
+
+    .summeryinfoParent{
+        justify-content: center;
+    }
+}
