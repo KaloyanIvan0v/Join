@@ -1,11 +1,5 @@
 let x = true;
 
-function init() {
-    includeHTML();
-    setTimeout(loadFirstLettersFromSessionStorage(), 20);
-    changeBackgroundColorOfLink();
-}
-
 function addDNone() {
     if (x == true) {
         document.getElementById('popup').classList.replace("dNone", "popup");
@@ -43,10 +37,4 @@ function storageClear() {
 function setActiveSite(siteName) {
     sessionStorage.setItem("activeSite", siteName);
     changeBackgroundColorOfLink();
-}
-
-function changeBackgroundColorOfLink(){
-    let activeSite = sessionStorage.getItem("activeSite");
-    document.getElementById(`${activeSite}`).classList.add("background");
-    console.log(activeSite);
 }
