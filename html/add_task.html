@@ -39,7 +39,9 @@
                         <span class="color-FF8190">*</span>
                     </div>
                 </div>
-                <input required class="input-field normal-border pd-12-16" id="title" type="text" placeholder="Enter a title">
+                <!-- <div> -->
+                    <input required class="input-field normal-border pd-12-16" id="title" type="text" placeholder="Enter a title">
+                <!-- </div> -->
                 <div id="requiredTitle" class="required-field-title vs-hidden">
                     <span class="error">This field is required</span>
                 </div>
@@ -142,7 +144,7 @@
             <span class="color-FF8190">*</span>
         </div>
         <div class="buttons-clear-create">
-            <button class="btn-add-task" onclick="resetInputFields(); return false">
+            <button class="btn-add-task d-none-mobile" onclick="resetInputFields(); return false">
                 <span class="typography-clear">Clear</span>
                 <img src="/img/iconoir_cancel.png">
             </button>
@@ -161,6 +163,6 @@
         </div>
     </div>
     </div>
-    </div>
+    <!-- </div> -->
 </body>
 </html>
