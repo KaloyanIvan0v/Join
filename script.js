@@ -96,3 +96,22 @@ function handleInputOnFocusChangeParentElementBorderColor() {
     });
   });
 }
+
+function handleHoverButtonChangeImg(
+  hoverClassName,
+  elementsToChangeClassName,
+  imgUrl,
+  imgUrlHover
+) {
+  var hoverElements = document.querySelectorAll(hoverClassName);
+  var elementsToChange = document.querySelectorAll(elementsToChangeClassName);
+
+  hoverElements.forEach(function (hoverElement, index) {
+    hoverElement.addEventListener("mouseover", function () {
+      elementsToChange[index].style.backgroundImage = imgUrlHover;
+    });
+    hoverElement.addEventListener("mouseout", function () {
+      elementsToChange[index].style.backgroundImage = imgUrl;
+    });
+  });
+}

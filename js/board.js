@@ -609,3 +609,5 @@ function setSearchFieldBorderListener() {
     formElement.style.border = "1px solid  rgba(168, 168, 168, 1)";
   });
 }
+
+function deleteTaskFromBoard(taskId) {}
