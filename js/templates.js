@@ -3,6 +3,7 @@ let x = true;
 function init() {
     includeHTML();
     setTimeout(loadFirstLettersFromSessionStorage, 20);
+    changeBackgroundColorOfLink();
 }
 
 function addDNone() {
@@ -37,4 +38,15 @@ function setAbbreviationToUserIcon(firstName, lastName) {
 
 function storageClear() {
     sessionStorage.clear();
+}
+
+function setActiveSite(siteName) {
+    sessionStorage.setItem("activeSite", siteName);
+    changeBackgroundColorOfLink();
+}
+
+function changeBackgroundColorOfLink(){
+    let activeSite = sessionStorage.getItem("activeSite");
+    //document.getElementById(activeSite).classList.add("background");
+    console.log(activeSite);
 }
