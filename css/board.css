@@ -1,5 +1,5 @@
-*{
-  font-family: 'inter';
+* {
+  font-family: "inter";
 }
 
 body {
@@ -9,7 +9,7 @@ body {
 }
 
 .add_task_formular_template {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   position: relative;
   z-index: 100;
   display: flex;
@@ -101,10 +101,10 @@ body {
 }
 
 .column-gap-contacts {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 8px;
 }
 
 .input {
@@ -121,8 +121,8 @@ input:focus {
 }
 
 .find-task {
-  background-color: #F6F7F8;
-  bordeR: none;
+  background-color: #f6f7f8;
+  border: none;
 }
 
 .input-find-task {
@@ -133,7 +133,7 @@ input:focus {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #F6F7F8;
+  background-color: #f6f7f8;
 }
 
 .input-find-task input {
@@ -200,6 +200,7 @@ input:focus {
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  color: rgba(66, 82, 110, 1);
 }
 
 .add-task-board {
@@ -266,6 +267,7 @@ input:focus {
   padding: 4px 16px;
   gap: 10px;
   border-radius: 8px;
+  color: white;
 }
 
 .task-card-assigned {
@@ -293,6 +295,8 @@ input:focus {
 
 .ft-weight-700 {
   font-weight: 700;
+  color: rgba(42, 54, 71, 1);
+  font-size: 16px;
 }
 
 .background-dialog {
@@ -371,6 +375,7 @@ input:focus {
 .overlay-date {
   width: 100%;
   display: flex;
+  flex-direction: row;
   gap: 25px;
 }
 
@@ -498,12 +503,12 @@ input:focus {
 .loadbar-container {
   width: 128px;
   border-radius: 8px;
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
 }
 
 .loadbar {
   height: 8px;
-  background-color: #4589FF;
+  background-color: #4589ff;
   width: 0;
   transition: width 0.3s ease;
   border-radius: 16px;
@@ -520,12 +525,12 @@ input:focus {
 }
 
 .input-edit-title {
-  background-color: #FFFF;
-  border: 1px solid #D1D1D1;
+  background-color: #ffff;
+  border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 12px 21px;
   font-size: 20px;
-  font-family: 'inter';
+  font-family: "inter";
   width: 403px;
 }
 
@@ -557,10 +562,10 @@ input:focus {
 textarea {
   padding: 18px 16px;
   height: 84px;
-  border: 1px solid #D1D1D1;
+  border: 1px solid #d1d1d1;
   border-radius: 10px;
   font-size: 20px;
-  font-family: 'inter';
+  font-family: "inter";
   width: 408px;
 }
 
@@ -575,21 +580,21 @@ textarea {
 }
 
 .prio-area {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .highlight-color-medium {
-  background-color: #FFA800;
+  background-color: #ffa800;
 }
 
 .highlight-color-urgent {
-  background-color: #FF3D00;
+  background-color: #ff3d00;
 }
 
 .highlight-color-low {
-  background-color: #7AE229;
+  background-color: #7ae229;
 }
 
 .selection-field {
@@ -612,15 +617,19 @@ textarea {
 }
 
 .add-contacts-edit-board {
-  width:408px;
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 16px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px
+  width: 408px;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
 }
 
 .dropdown-icon {
   display: flex;
   align-items: center;
+}
+
+.task-msg {
+  color: rgba(168, 168, 168, 1);
 }

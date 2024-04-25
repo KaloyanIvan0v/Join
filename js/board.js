@@ -6,8 +6,10 @@ let checkedStatusSubtasks = false;
 async function init_board() {
   await loadTasks();
   includeHTML();
-  loadNewTasks();
+  loadNewTasks(tasks);
   loadContacts();
+  filterTaskListener();
+  setSearchFieldBorderListener();
 }
 
 function returnHtmlShowToDos(singleTask, i, id) {
@@ -23,7 +25,7 @@ function returnHtmlShowToDos(singleTask, i, id) {
             <div class="ft-weight-700">
                 ${singleTask["title"]}
             </div>
-            <div class="">
+            <div class="task-msg">
                 ${singleTask["description"]}
             </div>
         </div>
@@ -56,16 +58,16 @@ function diclareTaskAreas() {
   return [toDoField, inProgressField, awaitFeedbackField, doneField];
 }
 
-async function loadNewTasks() {
+async function loadNewTasks(taskList) {
   let taskAreas = diclareTaskAreas();
   taskAreas[0].innerHTML = "";
   taskAreas[1].innerHTML = "";
   taskAreas[2].innerHTML = "";
   taskAreas[3].innerHTML = "";
-  for (i = 0; i < tasks.length; i++) {
-    let singleTask = tasks[i];
-    let id = tasks[i]["id"];
-    let statement = tasks[i]["statement"];
+  for (i = 0; i < taskList.length; i++) {
+    let singleTask = taskList[i];
+    let id = taskList[i]["id"];
+    let statement = taskList[i]["statement"];
     if (statement == "toDo") {
       taskAreas[0].innerHTML += returnHtmlShowToDos(singleTask, i, id);
     } else if (statement == "inProgress") {
@@ -108,13 +110,13 @@ function whichPriorityTaskCard(i) {
     prioField.innerHTML =
       '<img src="' + "/img/urgent_red.png" + '" alt="Bildbeschreibung">';
   }
-  renderContactsBoardInitialen(i, 'fullName');
+  renderContactsBoardInitialen(i, "fullName");
 }
 
 function showCurrentTask(i) {
   let dialogField = document.getElementById("taskOverlay");
 
-  toggleBackgroundDialog()
+  toggleBackgroundDialog();
   let currentTask = tasks[i];
 
   dialogField.innerHTML = "";
@@ -163,21 +165,25 @@ function renderContactsBoardInitialen(i, status) {
 
   for (j = 0; j < contactsForTask.length; j++) {
     let contactForTask = contactsForTask[j];
-    contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(contactForTask, j);
+    contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(
+      contactForTask,
+      j
+    );
     backgroundColorInitialsBoard(i, j);
   }
-  if(status == 'fullName')
-  renderFullName(i, contactsForTask);
+  if (status == "fullName") renderFullName(i, contactsForTask);
 }
 
 function renderFullName(i, contactsForTask) {
-  let backgroundDialog = document.getElementById("backgroundDialog")
-  
-  if(backgroundDialog.classList.contains('background-dialog')) {
-    let contactsFieldBoard = document.getElementById(`contactsFieldBoardFullName(${i})`);
-    contactsFieldBoard.innerHTML = '';
+  let backgroundDialog = document.getElementById("backgroundDialog");
 
-    for(j = 0; j < contactsForTask.length; j++) {
+  if (backgroundDialog.classList.contains("background-dialog")) {
+    let contactsFieldBoard = document.getElementById(
+      `contactsFieldBoardFullName(${i})`
+    );
+    contactsFieldBoard.innerHTML = "";
+
+    for (j = 0; j < contactsForTask.length; j++) {
       fullName = contactsForTask[j];
       contactsFieldBoard.innerHTML += returnHtmlContactsFullName(fullName);
     }
@@ -203,13 +209,15 @@ function checkSubtaskBoardOverlay(j) {
   let currentSubTask = subTasksGlobal[j];
   let imgCheck = document.getElementById(`checkEmptySubtask(${j})`);
 
-  if(checkedStatusSubtasks == false) {
+  if (checkedStatusSubtasks == false) {
     finishedSubTasks.push(currentSubTask);
-    imgCheck.src = "../img/box-checked.png"
+    imgCheck.src = "../img/box-checked.png";
     checkedStatusSubtasks = true;
     // updateLoadbar(i);
   } else {
-    let index = finishedSubTasks.findIndex(subTask => JSON.stringify(subTask) === JSON.stringify(currentSubTask));
+    let index = finishedSubTasks.findIndex(
+      (subTask) => JSON.stringify(subTask) === JSON.stringify(currentSubTask)
+    );
     // updateLoadbar(i);
     finishedSubTasks.splice(index, 1);
     imgCheck.src = "../img/check_empty.png";
@@ -220,30 +228,30 @@ function checkSubtaskBoardOverlay(j) {
 function editTaskOverlay(i) {
   let overlayTask = tasks[i];
   let dialogField = document.getElementById("taskOverlay");
-  let currentPrio = tasks[i]['prio'];
-  dialogField.innerHTML = '';
+  let currentPrio = tasks[i]["prio"];
+  dialogField.innerHTML = "";
   dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i);
-  
+
   prioSelect(i, currentPrio);
-  renderContactsBoardInitialen(i, 'noFullName');
+  renderContactsBoardInitialen(i, "noFullName");
 }
 
 function closeCurrentTask() {
   toggleBackgroundDialog();
-  loadNewTasks();
+  loadNewTasks(tasks);
 }
 
 function checkBooleanForPriority(priority, prioSelection, i) {
-  if(priority['isPriority'] == false) {
-      prioSelection.innerHTML += prioNormal(priority, i);
+  if (priority["isPriority"] == false) {
+    prioSelection.innerHTML += prioNormal(priority, i);
   } else {
-      prioSelection.innerHTML += prioActive(priority, i);
-      priority['isPriority'] = false;
+    prioSelection.innerHTML += prioActive(priority, i);
+    priority["isPriority"] = false;
   }
 }
 
 function returnHtmlEditCurrentTask(overlayTask, i) {
-  return /*html*/`
+  return /*html*/ `
     <div class="overlay-current-task">
       <div id="categoryArea(${i})" class="overlay-first-row">
         <div></div>
@@ -327,33 +335,33 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
       </button>
       </div>
     </div>
-</div>`
+</div>`;
 }
 
 function prioSelect(i, prioSelect) {
   let urgent = document.getElementById(`urgent(${i})`);
   let medium = document.getElementById(`medium(${i})`);
   let low = document.getElementById(`low(${i})`);
-  tasks[i]['prio'] = prioSelect;
-  setItem('tasks', tasks);
+  tasks[i]["prio"] = prioSelect;
+  setItem("tasks", tasks);
 
-  if(prioSelect == 'urgent') {
-    urgent.src = '../img/urgent_highlight.png';
-    medium.src = '../img/medium.png';
-    low.src = '../img/low.png';
-  } else if(prioSelect == 'medium') {
-    urgent.src = '../img/urgent.png';
-    medium.src = '../img/medium_highlight.png';
-    low.src = '../img/low.png';
+  if (prioSelect == "urgent") {
+    urgent.src = "../img/urgent_highlight.png";
+    medium.src = "../img/medium.png";
+    low.src = "../img/low.png";
+  } else if (prioSelect == "medium") {
+    urgent.src = "../img/urgent.png";
+    medium.src = "../img/medium_highlight.png";
+    low.src = "../img/low.png";
   } else {
-    urgent.src = '../img/urgent.png';
-    medium.src = '../img/medium.png';
-    low.src = '../img/low_highlight.png';
+    urgent.src = "../img/urgent.png";
+    medium.src = "../img/medium.png";
+    low.src = "../img/low_highlight.png";
   }
 }
 
 function returnHtmlCurrentTask(overlayTask, i) {
-  return /*html*/`
+  return /*html*/ `
   <div class="overlay-current-task">
     <div id="categoryArea(${i})" class="overlay-first-row">
         <div class="overlay-statement" id="statementField${i}">${overlayTask["statement"]}</div>
@@ -406,7 +414,7 @@ function returnHtmlCurrentTask(overlayTask, i) {
 }
 
 function returnHtmlSubtasks(subTask, j) {
-  return /*html*/`
+  return /*html*/ `
     <div onclick="checkSubtaskBoardOverlay(${j})" class="subtasks-check-board">
       <img id="checkEmptySubtask(${j})" src="../img/check_empty.png">
       <span>${subTask}</span>
@@ -414,17 +422,17 @@ function returnHtmlSubtasks(subTask, j) {
 }
 
 function returnHtmlContactsInitialen(contactForTask, j) {
-  return /*html*/`
+  return /*html*/ `
     <div id="initialArea${j}" class="contact-board mg-left-8">
       <span>${contactForTask["nameInitials"]}</span>
     </div>`;
-} 
+}
 
 function returnHtmlContactsFullName(currentTask) {
-  return /*html*/`
+  return /*html*/ `
     <div class="full-name">
-      <span>${currentTask['name']}</span>
-    </div>`
+      <span>${currentTask["name"]}</span>
+    </div>`;
 }
 
 // function prioNormal(priority, i) {
@@ -459,7 +467,7 @@ function allowDrop(event) {
 
 function moveElementTo(newstatement) {
   tasks[getIndexOfElement(currentDraggedElement)].statement = newstatement;
-  loadNewTasks();
+  loadNewTasks(tasks);
   setSesionStorage("tasks", tasks);
   setItem("tasks", JSON.stringify(tasks));
 }
@@ -569,4 +577,35 @@ function setPreviewElementwidthAndHeightRight() {
   let previewElementRight = document.querySelector(".preview-element-right");
   previewElementRight.style.width = `${widthAndHeight[0]}px`;
   previewElementRight.style.height = `${widthAndHeight[1]}px`;
+}
+
+function filterTaskListener() {
+  document
+    .getElementById("id-find-task-input")
+    .addEventListener("input", () => renderFilteredTasks());
+}
+
+function renderFilteredTasks() {
+  var inputValue = document
+    .getElementById("id-find-task-input")
+    .value.toLowerCase();
+  var filteredTasks = tasks.filter(function (task) {
+    return (
+      task.title.toLowerCase().includes(inputValue) ||
+      task.description.toLowerCase().includes(inputValue)
+    );
+  });
+  loadNewTasks(filteredTasks);
+}
+
+function setSearchFieldBorderListener() {
+  const inputElement = document.getElementById("id-find-task-input");
+  const formElement = document.getElementById("id-input-find-task");
+  inputElement.addEventListener("focus", function () {
+    formElement.style.border = `1px solid var(--accent-color)`;
+  });
+
+  inputElement.addEventListener("blur", function () {
+    formElement.style.border = "1px solid  rgba(168, 168, 168, 1)";
+  });
 }
