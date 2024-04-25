@@ -2,7 +2,7 @@ let x = true;
 
 function init() {
     includeHTML();
-    setTimeout(loadFirstLettersFromSessionStorage, 20);
+    setTimeout(loadFirstLettersFromSessionStorage(), 20);
     changeBackgroundColorOfLink();
 }
 
@@ -47,6 +47,6 @@ function setActiveSite(siteName) {
 
 function changeBackgroundColorOfLink(){
     let activeSite = sessionStorage.getItem("activeSite");
-    //document.getElementById(activeSite).classList.add("background");
+    document.getElementById(`${activeSite}`).classList.add("background");
     console.log(activeSite);
 }
