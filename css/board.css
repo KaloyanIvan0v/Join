@@ -6,6 +6,7 @@ body {
   margin: 0;
   box-sizing: border-box;
   background-color: #f6f7f8;
+  max-height: 100vh;
 }
 
 .add_task_formular_template {
@@ -28,14 +29,27 @@ body {
   position: absolute;
   top: 336px;
   left: 232px;
-  padding: 0 64px;
+  padding-left: 64px;
   display: flex;
   justify-content: center;
-  height: 688px;
+  height: calc(100vh - 340px);
+  width: max-content;
+  overflow-y: auto;
+}
+
+.board-distribution::-webkit-scrollbar {
+  border: none;
+  width: 8px;
+}
+
+.board-distribution::-webkit-scrollbar-thumb {
+  background-color: rgba(168, 168, 168, 1);
+  border-radius: 8px;
 }
 
 .headline-area-board {
-  width: 1208px;
+  display: flex;
+  width: calc(100% - 232px);
   height: 232px;
   position: absolute;
   top: 96px;
@@ -174,7 +188,7 @@ input:focus {
   position: absolute;
   left: 64px;
   top: 79.5px;
-  width: 1056px;
+
   height: 73px;
 }
 
@@ -193,7 +207,11 @@ input:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  padding-bottom: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: rgb(246, 247, 248);
 }
 
 .subline-field-description {
@@ -221,11 +239,12 @@ input:focus {
 
 .task-area {
   width: 252px;
-  min-height: calc(100vh - 380px);
+  min-height: calc(100% - 76px);
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-right: 24px;
+  padding-top: 20px;
 }
 
 .task-card {
@@ -342,7 +361,7 @@ input:focus {
 }
 
 .overlay-category {
-  padding: 4px 24px;
+  padding: 4px 16px 4px 16px;
   border-radius: 8px;
   color: #ffffff;
   font-size: 23px;
@@ -485,6 +504,9 @@ input:focus {
   background-color: rgba(231, 231, 231, 1);
   border: 1px dashed rgba(168, 168, 168, 1);
   border-radius: 10px;
+  position: sticky;
+  top: 60px;
+  z-index: 1;
 }
 
 .preview-element-left {
@@ -632,4 +654,58 @@ textarea {
 
 .task-msg {
   color: rgba(168, 168, 168, 1);
+}
+
+.btn-hover-trash:hover {
+  color: var(--accent-color);
+}
+
+.btn-hover-edit:hover {
+  color: var(--accent-color);
+}
+
+.img-hover-trash {
+  background-image: url("../img/trash-blue.png");
+  width: 24px;
+  height: 24px;
+}
+
+.img-hover-edit {
+  background-image: url("../img/edit-pencil.png");
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 1430px) {
+  .board-distribution {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow-y: unset;
+  }
+
+  .statement-section {
+    width: calc(100vw - 323px);
+    margin-top: 26px;
+  }
+
+  .task-area {
+    min-height: 200px;
+    min-width: 100%;
+    flex-direction: row;
+    max-width: calc(100% - 64px);
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 12px;
+  }
+
+  .task-area::-webkit-scrollbar {
+    border: none;
+    height: 8px;
+  }
+
+  .task-area::-webkit-scrollbar-thumb {
+    background-color: rgba(168, 168, 168, 1);
+    border-radius: 8px;
+  }
 }

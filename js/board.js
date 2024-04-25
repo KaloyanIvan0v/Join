@@ -14,8 +14,8 @@ async function init_board() {
 
 function returnHtmlShowToDos(singleTask, i, id) {
   return /*html*/ `
-    <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="showCurrentTask(${i})">
-        <div class="task-card-statement">
+    <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="viewTaskDetails(${i})">
+        <div class="task-card-category">
             <span id="statementField${i}" class="which-statement">
                 ${singleTask["category"]}
             </span>
@@ -113,18 +113,33 @@ function whichPriorityTaskCard(i) {
   renderContactsBoardInitialen(i, "fullName");
 }
 
-function showCurrentTask(i) {
+function viewTaskDetails(i) {
   let dialogField = document.getElementById("taskOverlay");
-
   toggleBackgroundDialog();
   let currentTask = tasks[i];
-
   dialogField.innerHTML = "";
   dialogField.innerHTML = returnHtmlCurrentTask(currentTask, i);
   choosestatementColor(i);
   whichPriorityTaskCard(i);
   renderSubTasksBoard(i);
+  handleHoverButtonDeleteEditTask();
+
   // updateLoadbar(i);
+}
+
+function handleHoverButtonDeleteEditTask() {
+  handleHoverButtonChangeImg(
+    ".btn-hover-trash",
+    ".img-hover-trash",
+    "url('../img/trashbin.png')",
+    "url('/img/trash-light-blue.png')"
+  );
+  handleHoverButtonChangeImg(
+    ".btn-hover-edit",
+    ".img-hover-edit",
+    "url('../img/edit-pencil.png')",
+    "url('../img/edit-pencil-light-blue.png')"
+  );
 }
 
 function toggleBackgroundDialog() {
@@ -364,7 +379,7 @@ function returnHtmlCurrentTask(overlayTask, i) {
   return /*html*/ `
   <div class="overlay-current-task">
     <div id="categoryArea(${i})" class="overlay-first-row">
-        <div class="overlay-statement" id="statementField${i}">${overlayTask["statement"]}</div>
+        <div class="overlay-category" id="statementField${i}">${overlayTask["category"]}</div>
         <a onclick="closeCurrentTask()">X</a>
     </div>
     <div class="overlay-title">
@@ -398,13 +413,13 @@ function returnHtmlCurrentTask(overlayTask, i) {
     <div class="last-section-overlay">
       <div></div>
       <div class="delete-edit-overlay">
-        <div class="flex-center hover">
-          <img src="../img/trashbin.png">
+        <div class="flex-center hover btn-hover-trash">
+          <div class="img-hover-trash"></div>
           <span>Delete</span>
         </div>
         <img src="../img/Vector 3.png">
-        <div onclick="editTaskOverlay(${i})" class="flex-center hover">
-          <img src="../img/edit_pencil.png">
+        <div onclick="editTaskOverlay(${i})" class="flex-center hover  btn-hover-edit">
+         <div class="img-hover-edit"></div>
           <span>Edit</span>
         </div>
       </div>
