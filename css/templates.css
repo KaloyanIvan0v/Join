@@ -148,6 +148,10 @@ a {
     display: none;
 }
 
+.background{
+    background-color: #091931;
+}
+
 @media (max-width: 860px) {
     .header {
         padding-left: 40px;
