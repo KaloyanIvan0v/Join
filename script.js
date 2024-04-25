@@ -20,6 +20,8 @@ let conatacts = [];
 let users = [];
 let geLoggedInUser;
 
+let activeSite = "summery";
+
 function setLoggedInUser(user) {
   saveToLocalStorage("loggedInUser", user);
 }
@@ -114,4 +116,8 @@ function handleHoverButtonChangeImg(
       elementsToChange[index].style.backgroundImage = imgUrl;
     });
   });
+}
+
+function setActiveSite(name){
+  activeSite = name;
 }
