@@ -88,6 +88,7 @@ body {
   font-size: 12px;
   line-height: 14.4px;
   /* padding: 7px 16px; */
+  color: white;
 }
 
 .find-add-board {
@@ -135,7 +136,7 @@ input:focus {
 }
 
 .find-task {
-  background-color: #f6f7f8;
+  background-color: white;
   border: none;
 }
 
@@ -147,7 +148,7 @@ input:focus {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #f6f7f8;
+  background-color: white;
 }
 
 .input-find-task input {
@@ -182,14 +183,17 @@ input:focus {
 }
 
 .headline-search-add {
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: absolute;
   left: 64px;
   top: 79.5px;
-
+  width: 90%;
+  max-width: 1110px;
   height: 73px;
+  margin-right: 3px;
 }
 
 .subline-board {
@@ -472,7 +476,6 @@ input:focus {
   align-items: center;
   gap: 4px;
   padding: 8px 16px;
-  border: 1px solid #2a3647;
   border-radius: 10px;
   background-color: #2a3647;
   color: #ffffff;
@@ -678,8 +681,10 @@ textarea {
 
 @media (max-width: 1430px) {
   .board-distribution {
+    top: 250px;
     display: flex;
     flex-direction: column;
+    justify-content: start;
     box-sizing: border-box;
     overflow-y: unset;
   }

@@ -14,7 +14,7 @@ async function init_board() {
 
 function returnHtmlShowToDos(singleTask, i, id) {
   return /*html*/ `
-    <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="viewTaskDetails(${i})">
+    <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="viewTaskDetails(${i},${id})">
         <div class="task-card-category">
             <span id="statementField${i}" class="which-statement">
                 ${singleTask["category"]}
@@ -91,10 +91,10 @@ function choosestatementColor(i) {
   } else {
     statementField.classList.add("bg-color-user-story");
   }
-  whichPriorityTaskCard(i);
+  whichPriorityTaskCard(i, false);
 }
 
-function whichPriorityTaskCard(i) {
+function whichPriorityTaskCard(i, renderFull) {
   let prioField = document.getElementById(`prioField${i}`);
   let singleTaskPrio = tasks[i]["prio"];
 
@@ -110,17 +110,17 @@ function whichPriorityTaskCard(i) {
     prioField.innerHTML =
       '<img src="' + "/img/urgent_red.png" + '" alt="Bildbeschreibung">';
   }
-  renderContactsBoardInitialen(i, "fullName");
+  renderContactsBoardInitialen(i, renderFull);
 }
 
-function viewTaskDetails(i) {
+function viewTaskDetails(i, id) {
   let dialogField = document.getElementById("taskOverlay");
   toggleBackgroundDialog();
   let currentTask = tasks[i];
   dialogField.innerHTML = "";
-  dialogField.innerHTML = returnHtmlCurrentTask(currentTask, i);
+  dialogField.innerHTML = returnHtmlCurrentTask(currentTask, i, id);
   choosestatementColor(i);
-  whichPriorityTaskCard(i);
+  whichPriorityTaskCard(i, true);
   renderSubTasksBoard(i);
   handleHoverButtonDeleteEditTask();
 
@@ -173,20 +173,32 @@ function checkSubtaskBoardOverlayChecked() {
   }
 }
 
-function renderContactsBoardInitialen(i, status) {
+function renderContactsBoardInitialen(i, renderFull) {
   let contactsFieldBoard = document.getElementById(`contactsFieldBoard(${i})`);
   let contactsForTask = tasks[i]["assignedTo"];
   contactsFieldBoard.innerHTML = "";
-
   for (j = 0; j < contactsForTask.length; j++) {
-    let contactForTask = contactsForTask[j];
-    contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(
-      contactForTask,
-      j
-    );
-    backgroundColorInitialsBoard(i, j);
+    if (j < 3 || renderFull == true) {
+      let contactForTask = contactsForTask[j];
+      contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(
+        contactForTask,
+        j
+      );
+      backgroundColorInitialsBoard(i, j);
+    } else {
+      let restAmount = contactsForTask.length - 3;
+      contactsFieldBoard.innerHTML += returnMoreContactsPreview(restAmount);
+      return;
+    }
   }
-  if (status == "fullName") renderFullName(i, contactsForTask);
+  //if (status == "fullName") renderFullName(i, contactsForTask);
+}
+
+function returnMoreContactsPreview(restAmount) {
+  return /*html*/ `
+    <div id="initialArea${j}" class="contact-board mg-left-8" style="background-color: rgb(42, 54, 71)">
+      <span>+${restAmount}</span>
+    </div>`;
 }
 
 function renderFullName(i, contactsForTask) {
@@ -248,7 +260,7 @@ function editTaskOverlay(i) {
   dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i);
 
   prioSelect(i, currentPrio);
-  renderContactsBoardInitialen(i, "noFullName");
+  renderContactsBoardInitialen(i, false);
 }
 
 function closeCurrentTask() {
@@ -375,7 +387,7 @@ function prioSelect(i, prioSelect) {
   }
 }
 
-function returnHtmlCurrentTask(overlayTask, i) {
+function returnHtmlCurrentTask(overlayTask, i, id) {
   return /*html*/ `
   <div class="overlay-current-task">
     <div id="categoryArea(${i})" class="overlay-first-row">
@@ -413,7 +425,7 @@ function returnHtmlCurrentTask(overlayTask, i) {
     <div class="last-section-overlay">
       <div></div>
       <div class="delete-edit-overlay">
-        <div class="flex-center hover btn-hover-trash">
+        <div onclick="deleteTask(${id})" class="flex-center hover btn-hover-trash">
           <div class="img-hover-trash"></div>
           <span>Delete</span>
         </div>
@@ -625,4 +637,19 @@ function setSearchFieldBorderListener() {
   });
 }
 
-function deleteTaskFromBoard(taskId) {}
+function deleteTask(taskId) {
+  tasks.splice(tasks[getIndexOfElmentById(taskId)], 1);
+  loadNewTasks(tasks);
+  setSesionStorage("tasks", tasks);
+  setItem("tasks", JSON.stringify(tasks));
+}
+
+function getIndexOfElmentById(id) {
+  let index = 0;
+  for (i = 0; i < tasks.length; i++) {
+    if (tasks[i]["id"] == id) {
+      index = i;
+    }
+  }
+  return index;
+}
