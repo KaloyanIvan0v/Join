@@ -1,4 +1,4 @@
-.header{
+.header {
     position: fixed;
     top: 0;
     right: 0;
@@ -15,32 +15,32 @@
     box-shadow: 5px 0 8px #888888;
 }
 
-#helpImage:hover{
+#helpImage:hover {
     width: 24px;
     height: 24px;
 }
 
-.headerImages{
+.headerImages {
     display: flex;
     align-items: center;
 }
 
-.headerLogo{
+.headerLogo {
     display: none;
 }
 
-.relative{
+.relative {
     position: relative;
     width: 56px;
     height: 56px;
     border-radius: 50%;
 }
 
-.relative:hover{
+.relative:hover {
     background-color: #e2e6ec;
 }
 
-span.absolute{
+span.absolute {
     position: absolute;
     top: 16px;
     left: 13px;
@@ -50,11 +50,11 @@ span.absolute{
     text-align: center;
 }
 
-span.absolute:hover{
+span.absolute:hover {
     cursor: pointer;
 }
 
-.sidebar{
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
@@ -66,19 +66,19 @@ span.absolute:hover{
     flex-direction: column;
 }
 
-.sidebarLogo{
+.sidebarLogo {
     margin-top: 64px;
     margin-left: 66px;
 }
 
-.menu{
+.menu {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 114px; 
+    margin-top: 114px;
 }
 
-.menuLinks{
+.menuLinks {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -88,45 +88,45 @@ span.absolute:hover{
     padding-left: 66px;
 }
 
-.menuLinks:hover{
+.menuLinks:hover {
     background-color: #2a3d59;
     cursor: pointer;
 }
 
-.icon{
+.icon {
     margin-right: 10px;
     height: 25px;
     width: 25px;
 }
 
-.menuPTag{
+.menuPTag {
     color: #CDCDCD;
 }
 
-.privacyLegalLinks{
+.privacyLegalLinks {
     position: fixed;
     bottom: 64px;
     margin-left: 66px;
 }
 
-p.privacyLegalLink{
+p.privacyLegalLink {
     color: #A8A8A8;
 }
 
-p.privacyLegalLink:hover{
+p.privacyLegalLink:hover {
     color: #29ABE2;
     cursor: pointer;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.dNone{
+.dNone {
     display: none;
 }
 
-.popup{
+.popup {
     width: 150px;
     height: 158px;
     background-color: #2A3647;
@@ -139,30 +139,34 @@ a{
     border-radius: 20px 0px 20px 20px;
 }
 
-.popupLinks{
+.popupLinks {
     color: #CDCDCD;
     margin-left: 26px;
 }
 
+.popupHelp {
+    display: none;
+}
+
 @media (max-width: 860px) {
-.header{
-    padding-left: 40px;
-}
+    .header {
+        padding-left: 40px;
+    }
 
-.headerText{
-    display: none;
-}
+    .headerText {
+        display: none;
+    }
 
-.headerLogo{
-    display: block;
-    width: 56px;
-}
+    .headerLogo {
+        display: block;
+        width: 56px;
+    }
 
-.headerHelpImage{
-    display: none;
-}
+    .headerHelpImage {
+        display: none;
+    }
 
-    .sidebar{
+    .sidebar {
         position: fixed;
         left: 0;
         right: 0;
@@ -171,30 +175,34 @@ a{
         width: 100%;
     }
 
-    .privacyLegalLinks{
+    .privacyLegalLinks {
         display: none;
     }
 
-    .sidebarLogo{
+    .sidebarLogo {
         display: none;
     }
 
-    .menu{
+    .menu {
         flex-direction: row;
         margin-top: 0;
         height: 100%;
         justify-content: space-between;
     }
 
-    .menu a{
+    .menu a {
         height: 100%;
         width: 25%;
     }
 
-    .menuLinks{
+    .menuLinks {
         height: 100%;
         margin-bottom: 0;
         padding-left: 0;
         flex-direction: column;
+    }
+
+    .popupHelp{
+        display: block;
     }
 }

@@ -27,3 +27,14 @@ h1{
 h3{
     font-size: 27px;
 }
+
+@media (max-width: 860px){
+    .privacyPolicyContent{
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .privacyPolicySectionBackImage{
+        display: none;
+    }
+}

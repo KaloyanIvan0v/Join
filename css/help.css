@@ -35,3 +35,14 @@ span.join{
 b{
     font-size: 27px;
 }
+
+@media (max-width: 860px){
+    .infoContent{
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .helpSectionBackImage{
+        display: none;
+    }
+}

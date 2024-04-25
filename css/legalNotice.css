@@ -36,3 +36,14 @@ h3{
 p{
     margin-top: 5px;
 }
+
+@media (max-width: 860px){
+    .legalNoticeContent{
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .legalNoticeSectionBackImage{
+        display: none;
+    }
+}
