@@ -115,3 +115,13 @@ function handleHoverButtonChangeImg(
     });
   });
 }
+
+function getIndexOfElmentById(id, list) {
+  let index = 0;
+  for (i = 0; i < list.length; i++) {
+    if (list[i]["id"] == id) {
+      index = i;
+      return index;
+    }
+  }
+}
