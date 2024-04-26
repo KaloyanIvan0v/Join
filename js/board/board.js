@@ -10,17 +10,11 @@ async function init_board() {
   setSearchFieldBorderListener();
 }
 
-function openPopUp(path, elementClass) {
+function openPopUp() {
   document
     .getElementById("id-shadow-layer")
     .classList.remove("visibility-hidden");
-  document.getElementById("id-pop-up").innerHTML = `
-  <div w3-include-html="${path}"
-    class="${elementClass}">
-  </div>`;
-  includeHTML();
 }
-
 function closePopUp() {
   document.getElementById("id-shadow-layer").classList.add("visibility-hidden");
   document.getElementById("id-pop-up").innerHTML = "";
@@ -109,11 +103,9 @@ function whichPriorityTaskCard(i, renderFull) {
 }
 
 function openTaskDetailView(i, id) {
-  let dialogField = document.getElementById("taskOverlay");
-  toggleBackgroundDialog();
-  let currentTask = tasks[i];
-  dialogField.innerHTML = "";
-  dialogField.innerHTML = openTaskDetailViewHtml(currentTask, i, id);
+  openPopUp();
+  let popUpDiv = document.getElementById("id-pop-up");
+  popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[i], i, id);
   choosestatementColor(i);
   whichPriorityTaskCard(i, true);
   renderSubTasksBoard(i);
@@ -152,7 +144,7 @@ function renderSubTasksBoard(i) {
     subTasksGlobal.push(subTask);
     subTasksField.innerHTML += returnHtmlSubtasks(subTask, j);
   }
-  checkSubtaskBoardOverlayChecked();
+  //checkSubtaskBoardOverlayChecked();
 }
 
 function checkSubtaskBoardOverlayChecked() {
@@ -428,9 +420,25 @@ function setSearchFieldBorderListener() {
 
 function deleteTask(taskId) {
   tasks.splice(getIndexOfElmentById(taskId, tasks), 1);
-  closeCurrentTask();
+  closePopUp();
   setSesionStorage("tasks", tasks);
   renderTasks(tasks);
-  document.getElementById(`backgroundDialog`).add("d-none");
-  //setItem("tasks", JSON.stringify(tasks));
+  setItem("tasks", JSON.stringify(tasks));
+}
+
+function clearAddTaskForm() {
+  let subTasks = document.getElementById("subTasks");
+  let initialArea = document.getElementById("initialArea");
+  let newSubTaskField = document.getElementById("newSubTaskField");
+  let initialen = document.getElementById("checkboxes");
+
+  title.value = "";
+  description.value = "";
+  initialArea.innerHTML = "";
+  subTasks.value = "";
+  newSubTaskField.innerHTML = "";
+  checkedUsers = [];
+  initialen.innerHTML = "";
+  furtherResetField();
+  closePopUp();
 }

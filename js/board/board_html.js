@@ -116,12 +116,37 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
 </div>`;
 }
 
+function previewElementHtml(positon) {
+  return /*html*/ `
+  <div class="preview-element-${positon}"></div>
+  `;
+}
+
+function renderSubtaskProgressBarHtml(singleTask, finishedSubTasks) {
+  return /*html*/ `
+<div class="loadbar-container">
+   <div id="loadBar" class="loadbar"></div>
+  </div>
+  <div class="number-done-subtasks">
+    <span>${finishedSubTasks.length}/</span>
+    <span>${singleTask["subTasks"].length} Subtasks</span>
+  </div>
+  `;
+}
+
+function returnMoreContactsPreview(restAmount) {
+  return /*html*/ `
+    <div id="initialArea${j}" class="contact-board mg-left-8" style="background-color: rgb(42, 54, 71)">
+      <span>+${restAmount}</span>
+    </div>`;
+}
+
 function openTaskDetailViewHtml(overlayTask, i, id) {
   return /*html*/ `
   <div class="overlay-current-task">
     <div id="categoryArea(${i})" class="overlay-first-row">
         <div class="overlay-category" id="statementField${i}">${overlayTask["category"]}</div>
-        <a onclick="closeCurrentTask()">X</a>
+        <a onclick="closePopUp()">X</a>
     </div>
     <div class="overlay-title">
         <span id="title(${i})">${overlayTask["title"]}</span>
@@ -169,18 +194,18 @@ function openTaskDetailViewHtml(overlayTask, i, id) {
   <div>`;
 }
 
+function returnHtmlContactsInitialen(contactForTask, j) {
+  return /*html*/ `
+    <div id="initialArea${j}" class="contact-board mg-left-8">
+      <span>${contactForTask["nameInitials"]}</span>
+    </div>`;
+}
+
 function returnHtmlSubtasks(subTask, j) {
   return /*html*/ `
     <div onclick="checkSubtaskBoardOverlay(${j})" class="subtasks-check-board">
       <img id="checkEmptySubtask(${j})" src="/img/check_empty.png">
       <span>${subTask}</span>
-    </div>`;
-}
-
-function returnHtmlContactsInitialen(contactForTask, j) {
-  return /*html*/ `
-    <div id="initialArea${j}" class="contact-board mg-left-8">
-      <span>${contactForTask["nameInitials"]}</span>
     </div>`;
 }
 
@@ -197,29 +222,4 @@ function taskAreaIsEmptyHtml(statement) {
     no tasks ${statement}
   </div>
   `;
-}
-
-function previewElementHtml(positon) {
-  return /*html*/ `
-  <div class="preview-element-${positon}"></div>
-  `;
-}
-
-function renderSubtaskProgressBarHtml(singleTask, finishedSubTasks) {
-  return /*html*/ `
-<div class="loadbar-container">
-   <div id="loadBar" class="loadbar"></div>
-  </div>
-  <div class="number-done-subtasks">
-    <span>${finishedSubTasks.length}/</span>
-    <span>${singleTask["subTasks"].length} Subtasks</span>
-  </div>
-  `;
-}
-
-function returnMoreContactsPreview(restAmount) {
-  return /*html*/ `
-    <div id="initialArea${j}" class="contact-board mg-left-8" style="background-color: rgb(42, 54, 71)">
-      <span>+${restAmount}</span>
-    </div>`;
 }
