@@ -6,24 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join Register</title>
-  <link rel="icon" type="image/x-icon" href="../img/logoDark.png">
-  <link rel="stylesheet" type="text/css" href="../css/register.css">
-  <link rel="stylesheet" type="text/css" href="../style.css">
-  <script src="../script.js"></script>
-  <script src="../js/storage.js"></script>
-  <script src="../js/register.js"></script>
+  <link rel="icon" type="image/x-icon" href="/img/logoDark.png">
+  <link rel="stylesheet" type="text/css" href="/css/register.css">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <script src="/script.js"></script>
+  <script src="/js/storage.js"></script>
+  <script src="/js/register.js"></script>
 </head>
 
 <body onload="initRegister()">
   <div id="id-shadow-layer" class="shadow-layer hide"></div>
   <div id="id-msg-box" class="msg-box">You Signed Up successfully</div>
   <div class="moving-img">
-    <img src="../img/logo-dark.svg" alt="">
+    <img src="/img/logo-dark.svg" alt="">
   </div>
 
   <div id="id-sign-up-box" class="sign-up-box">
     <div id="id-register-arrow-back" class="register-arrow-back">
-      <a href="../index.html"> <img src="../img/arrow-left-line.svg" alt=""></a>
+      <a href="/index.html"> <img src="/img/arrow-left-line.svg" alt=""></a>
     </div>
     <div class="inner-sign-up-box">
       <div class="sign-up-header">
@@ -35,26 +35,26 @@
         <form onsubmit="register(); return false;">
           <div class="form-input">
             <input placeholder="Name" required type="text" id="names">
-            <img src="../img/person.svg" alt="">
+            <img src="/img/person.svg" alt="">
           </div>
           <div class="form-input">
             <input placeholder="Email" required type="email" id="email">
-            <img src="../img/mail.svg" alt="">
+            <img src="/img/mail.svg" alt="">
           </div>
           <div class="form-input">
             <input placeholder="Password" required type="password" id="password0">
-            <img id="password0-img" src="../img/lock.svg" alt="" onclick="togglePswVisibility(`password0-img`)">
+            <img id="password0-img" src="/img/lock.svg" alt="" onclick="togglePswVisibility(`password0-img`)">
           </div>
           <div class="form-input">
             <input placeholder="Confirm Password" required type="password" id="password1">
-            <img id="password1-img" src="../img/lock.svg" alt="" onclick="togglePswVisibility(`password1-img`)">
+            <img id="password1-img" src="/img/lock.svg" alt="" onclick="togglePswVisibility(`password1-img`)">
           </div>
           <div id="id-input-feedback" class="input-feedback"></div>
           <div div="id-accept-policy" class="accept-policy">
             <img onclick="toggleCheckbox()" id="id-checkbox-sign-up" class="checkbox-sign-up"
-              src="../img/box-unchecked.png" alt="">
+              src="/img/box-unchecked.png" alt="">
             <div>I accept the</div>
-            <a href="../html/privacyPolicy.html">Privacy policy</a>
+            <a href="/html/privacyPolicy.html">Privacy policy</a>
           </div>
           <button id="registerBtn" class="register-btn">Sign up</button>
         </form>
@@ -65,8 +65,8 @@
   </div>
 
   <footer>
-    <a href="../html/privacyPolicy.html">Privacy Policy</a>
-    <a href="../html/legalNotice.html">Legal notice</a>
+    <a href="/html/privacyPolicy.html">Privacy Policy</a>
+    <a href="/html/legalNotice.html">Legal notice</a>
   </footer>
 </body>
 

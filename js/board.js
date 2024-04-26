@@ -131,14 +131,14 @@ function handleHoverButtonDeleteEditTask() {
   handleHoverButtonChangeImg(
     ".btn-hover-trash",
     ".img-hover-trash",
-    "url('../img/trashbin.png')",
+    "url('/img/trashbin.png')",
     "url('/img/trash-light-blue.png')"
   );
   handleHoverButtonChangeImg(
     ".btn-hover-edit",
     ".img-hover-edit",
-    "url('../img/edit-pencil.png')",
-    "url('../img/edit-pencil-light-blue.png')"
+    "url('/img/edit-pencil.png')",
+    "url('/img/edit-pencil-light-blue.png')"
   );
 }
 
@@ -168,7 +168,7 @@ function checkSubtaskBoardOverlayChecked() {
     let subTask = subTasksGlobal[i];
     if (finishedSubTasks.includes(subTask)) {
       let imgCheck = document.getElementById(`checkEmptySubtask(${i})`);
-      imgCheck.src = "../img/box-checked.png";
+      imgCheck.src = "/img/box-checked.png";
     }
   }
 }
@@ -238,7 +238,7 @@ function checkSubtaskBoardOverlay(j) {
 
   if (checkedStatusSubtasks == false) {
     finishedSubTasks.push(currentSubTask);
-    imgCheck.src = "../img/box-checked.png";
+    imgCheck.src = "/img/box-checked.png";
     checkedStatusSubtasks = true;
     // updateLoadbar(i);
   } else {
@@ -247,7 +247,7 @@ function checkSubtaskBoardOverlay(j) {
     );
     // updateLoadbar(i);
     finishedSubTasks.splice(index, 1);
-    imgCheck.src = "../img/check_empty.png";
+    imgCheck.src = "/img/check_empty.png";
     checkedStatusSubtasks = false;
   }
 }
@@ -319,15 +319,15 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
     
     <div class="prio-area" id="prioArea(${i})">
       <div onclick="prioSelect(${i}, 'urgent')">
-        <img id="urgent(${i})" src="../img/urgent.png">
+        <img id="urgent(${i})" src="/img/urgent.png">
       </div>
 
       <div onclick="prioSelect(${i}, 'medium')">
-        <img id="medium(${i})" src="../img/medium_highlight.png">
+        <img id="medium(${i})" src="/img/medium_highlight.png">
       </div>
 
       <div onclick="prioSelect(${i}, 'Low')">
-        <img id="low(${i})" src="../img/low.png">
+        <img id="low(${i})" src="/img/low.png">
       </div>
     </div>
 
@@ -358,7 +358,7 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
       <div class="delete-edit-overlay">
       <button class="btn-add-task" onclick="resetInputFields(); return false">
         <span class="typography-clear">Ok</span>
-        <img src="../img/check-white.png">
+        <img src="/img/check-white.png">
       </button>
       </div>
     </div>
@@ -373,17 +373,17 @@ function prioSelect(i, prioSelect) {
   setItem("tasks", tasks);
 
   if (prioSelect == "urgent") {
-    urgent.src = "../img/urgent_highlight.png";
-    medium.src = "../img/medium.png";
-    low.src = "../img/low.png";
+    urgent.src = "/img/urgent_highlight.png";
+    medium.src = "/img/medium.png";
+    low.src = "/img/low.png";
   } else if (prioSelect == "medium") {
-    urgent.src = "../img/urgent.png";
-    medium.src = "../img/medium_highlight.png";
-    low.src = "../img/low.png";
+    urgent.src = "/img/urgent.png";
+    medium.src = "/img/medium_highlight.png";
+    low.src = "/img/low.png";
   } else {
-    urgent.src = "../img/urgent.png";
-    medium.src = "../img/medium.png";
-    low.src = "../img/low_highlight.png";
+    urgent.src = "/img/urgent.png";
+    medium.src = "/img/medium.png";
+    low.src = "/img/low_highlight.png";
   }
 }
 
@@ -429,7 +429,7 @@ function returnHtmlCurrentTask(overlayTask, i, id) {
           <div class="img-hover-trash"></div>
           <span>Delete</span>
         </div>
-        <img src="../img/Vector 3.png">
+        <img src="/img/Vector 3.png">
         <div onclick="editTaskOverlay(${i})" class="flex-center hover  btn-hover-edit">
          <div class="img-hover-edit"></div>
           <span>Edit</span>
@@ -443,7 +443,7 @@ function returnHtmlCurrentTask(overlayTask, i, id) {
 function returnHtmlSubtasks(subTask, j) {
   return /*html*/ `
     <div onclick="checkSubtaskBoardOverlay(${j})" class="subtasks-check-board">
-      <img id="checkEmptySubtask(${j})" src="../img/check_empty.png">
+      <img id="checkEmptySubtask(${j})" src="/img/check_empty.png">
       <span>${subTask}</span>
     </div>`;
 }
