@@ -152,6 +152,10 @@ a {
     background-color: #091931;
 }
 
+p.textColor{
+    color: #29ABE2;
+}
+
 @media (max-width: 860px) {
     .header {
         padding-left: 40px;

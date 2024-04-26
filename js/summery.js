@@ -1,14 +1,12 @@
 async function init() {
   await loadTasks();
   includeHTML();
-  setTimeout(loadFirstLettersFromSessionStorage, 200);
   writeNumberOfAllTasks();
   filterHighestPrio();
   countStatements("toDo");
   countStatements("done");
   countStatements("inProgress");
   countStatements("awaitFeedback");
-  setTimeout(changeBackgroundColorOfLink(), 1000);
 }
 
 function writeNumberOfAllTasks() {
@@ -33,8 +31,3 @@ function countStatements(index) {
   document.getElementById(`count${index}`).innerHTML = statementCounts;
 }
 
-function changeBackgroundColorOfLink(){
-  let activeSite = sessionStorage.getItem("activeSite");
-  document.getElementById(`${activeSite}`).classList.add("background");
-  console.log(activeSite);
-}

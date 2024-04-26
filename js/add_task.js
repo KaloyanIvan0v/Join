@@ -23,6 +23,7 @@ let arrowToggleCheck = false;
 
 function init() {
     includeHTML();
+    setTimeout(loadFirstLettersFromSessionStorage, 200);
     loadTasks();
     loadContacts();
     // whichPriority();
