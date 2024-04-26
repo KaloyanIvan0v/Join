@@ -31,11 +31,12 @@ function goToNextSite(name){
 
 function changeBackgroundColorOfLink(){
     let activeSite = sessionStorage.getItem("activeSite");
-    if (activeSite == "privacyPolicy" || "legalNotice") {
+    if (activeSite == "privacyPolicy" || activeSite == "legalNotice") {
         document.getElementById(`${activeSite}`).classList.add("textColor");
-    }
+    } else {
     document.getElementById(`${activeSite}`).classList.add("background");
-  }
+    console.log(activeSite);
+  }}
   
   function loadFirstLettersFromSessionStorage() { //load first letters of first and last Name!
     let loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
