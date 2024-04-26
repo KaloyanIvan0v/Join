@@ -32,13 +32,7 @@ function returnHtmlShowToDos(singleTask, i, id) {
 
         <div class="subtasks-contacts">
             <div class="subtasks-loadbar-number">
-                <div class="loadbar-container">
-                  <div id="loadBar" class="loadbar"></div>
-                </div>
-                <div class="number-done-subtasks">
-                    <span>${finishedSubTasks.length}/</span>
-                    <span>${singleTask["subTasks"].length} Subtasks</span>
-                </div>
+                
             </div>
 
             <div class="contacts-area">
@@ -48,6 +42,25 @@ function returnHtmlShowToDos(singleTask, i, id) {
                 </div>
             </div>
         </div>`;
+}
+
+function updateLoadbar(i) {
+  let subTasks = tasks[i]["subTasks"].length;
+  let loadbar = document.getElementById("loadBar");
+  let progress = (finishedSubTasks.length / subTasks.length) * 100;
+  loadbar.style.width = progress + "%";
+}
+
+function renderSubtaskProgressBarHtml(singleTask, finishedSubTasks) {
+  return /*html*/ `
+<div class="loadbar-container">
+   <div id="loadBar" class="loadbar"></div>
+  </div>
+  <div class="number-done-subtasks">
+    <span>${finishedSubTasks.length}/</span>
+    <span>${singleTask["subTasks"].length} Subtasks</span>
+  </div>
+  `;
 }
 
 function diclareTaskAreas() {
@@ -123,8 +136,6 @@ function viewTaskDetails(i, id) {
   whichPriorityTaskCard(i, true);
   renderSubTasksBoard(i);
   handleHoverButtonDeleteEditTask();
-
-  // updateLoadbar(i);
 }
 
 function handleHoverButtonDeleteEditTask() {
@@ -216,13 +227,6 @@ function renderFullName(i, contactsForTask) {
     }
   }
 }
-
-// function updateLoadbar(i) {
-//   let subTasks = tasks[i]['subTasks'].length;
-//   let loadbar = document.getElementById('loadBar');
-//   let progress = (finishedSubTasks.length / subTasks.length) * 100;
-//   loadbar.style.width = progress + '%';
-// }
 
 function backgroundColorInitialsBoard(i, j) {
   let initialArea = document.getElementById(`initialArea${j}`);
