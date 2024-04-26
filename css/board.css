@@ -7,6 +7,7 @@ body {
   box-sizing: border-box;
   background-color: #f6f7f8;
   max-height: 100vh;
+  font-family: "inter";
 }
 
 .add_task_formular_template {

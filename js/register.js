@@ -58,7 +58,7 @@ async function registerNewUser() {
   });
   await setItem("users", JSON.stringify(users));
   resetForm();
-  window.location.href = "../index.html?msg=You Signed Up successfully";
+  window.location.href = "/index.html?msg=You Signed Up successfully";
 }
 
 function resetForm() {
@@ -93,10 +93,10 @@ function toggleCheckbox() {
   let checkBox = document.getElementById("id-checkbox-sign-up");
   if (checkBoxState == false) {
     checkBoxState = true;
-    checkBox.src = "../img/box-checked.png";
+    checkBox.src = "/img/box-checked.png";
   } else {
     checkBoxState = false;
-    checkBox.src = "../img/box-unchecked.png";
+    checkBox.src = "/img/box-unchecked.png";
   }
 }
 
@@ -111,9 +111,9 @@ function inputClicked(id) {
     if (id == "password0" || id == "password1") {
       let index = id === "password0" ? 0 : 1;
       if (pswVisibility[index] == false) {
-        document.getElementById(id + "-img").src = "../img/visibility_off.png";
+        document.getElementById(id + "-img").src = "/img/visibility_off.png";
       } else {
-        document.getElementById(id + "-img").src = "../img/visibility.png";
+        document.getElementById(id + "-img").src = "/img/visibility.png";
       }
     } else {
       hidePasswordInput();
@@ -122,8 +122,8 @@ function inputClicked(id) {
 }
 
 function hidePasswordInput() {
-  document.getElementById("password0-img").src = "../img/lock.svg";
-  document.getElementById("password1-img").src = "../img/lock.svg";
+  document.getElementById("password0-img").src = "/img/lock.svg";
+  document.getElementById("password1-img").src = "/img/lock.svg";
   document.getElementById("password0").type = "password";
   document.getElementById("password1").type = "password";
   pswVisibility = [false, false];
@@ -133,11 +133,11 @@ function togglePswVisibility(id) {
   let img = document.getElementById(id);
   let index = id === "password0-img" ? 0 : 1;
   if (pswVisibility[index] === false) {
-    img.src = "../img/visibility.png";
+    img.src = "/img/visibility.png";
     pswVisibility[index] = true;
     document.getElementById("password" + index).type = "text";
   } else {
-    img.src = "../img/visibility_off.png";
+    img.src = "/img/visibility_off.png";
     pswVisibility[index] = false;
     document.getElementById("password" + index).type = "password";
   }

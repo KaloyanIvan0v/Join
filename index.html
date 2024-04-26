@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Login</title>
     <link rel="icon" type="image/x-icon" href="img/logoDark.png">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="../script.js"></script>
-    <script src="../js/storage.js"></script>
-    <script src="../js/login.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script src="/script.js"></script>
+    <script src="/js/storage.js"></script>
+    <script src="/js/login.js"></script>
 
 </head>
 
 <body onload="initLogin()">
     <div class="moving-img">
-        <img id="id-logo-img" src="../img/logo-dark.svg" alt="">
+        <img id="id-logo-img" src="/img/logo-dark.svg" alt="">
     </div>
     <div id="id-opacity-layer" class="opacity-layer"></div>
     <div class="header-right">
@@ -37,17 +37,17 @@
                 <form onsubmit="login(); return false;">
                     <div class="form-input">
                         <input placeholder="Email" required type="email" id="email">
-                        <img src="../img/mail.svg" alt="">
+                        <img src="/img/mail.svg" alt="">
                     </div>
                     <div class="form-input">
                         <input placeholder="Password" required type="password" id="password0">
-                        <img id="password0-img" src="../img/lock.svg" alt=""
+                        <img id="password0-img" src="/img/lock.svg" alt=""
                             onclick="togglePswVisibility(`password0-img`)">
                     </div>
                     <div id="id-input-feedback" class="input-feedback"></div>
                     <div div="id-accept-policy" class="accept-policy">
                         <img onclick="toggleCheckbox()" id="id-checkbox-log-in" class="checkbox-log-in"
-                            src="../img/box-unchecked.png" alt="">
+                            src="/img/box-unchecked.png" alt="">
                         <div>Remember me</div>
 
                     </div>

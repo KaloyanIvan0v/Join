@@ -21,7 +21,7 @@ function openContactForm(form) {
 
 function loadAddContactTemplate(element) {
   handleHoverButtonChangeImgDelayed();
-  element.innerHTML = `<div class="contact-form" w3-include-html="../templates/add-contact.html"></div>`;
+  element.innerHTML = `<div class="contact-form" w3-include-html="/templates/add-contact.html"></div>`;
   setTimeout(function () {
     document
       .getElementById("id-contact-form-cancel")
@@ -31,7 +31,7 @@ function loadAddContactTemplate(element) {
 }
 
 function loadEditContactTemplate(element) {
-  element.innerHTML = `<div class="contact-form" w3-include-html="../templates/edit-contact.html"></div>`;
+  element.innerHTML = `<div class="contact-form" w3-include-html="/templates/edit-contact.html"></div>`;
   setTimeout(function () {
     editContactFillForm();
     handleInputOnFocusChangeParentElementBorderColor();
@@ -43,8 +43,8 @@ function handleHoverButtonChangeImgDelayed() {
     handleHoverButtonChangeImg(
       ".contact-form-cancel-btn",
       ".img-close-contact-form",
-      'url("../img/close.png")',
-      'url("../img/close-blue.png")'
+      'url("/img/close.png")',
+      'url("/img/close-blue.png")'
     );
   }, 25);
 }
@@ -289,14 +289,14 @@ function setListenerForEditDeleteBtn() {
   handleHoverButtonChangeImg(
     ".contact-full-mode-edit-contact",
     ".edit-btn-img",
-    'url("../img/edit-pencil.png")',
-    'url("../img/edit-pencil-light-blue.png")'
+    'url("/img/edit-pencil.png")',
+    'url("/img/edit-pencil-light-blue.png")'
   );
   handleHoverButtonChangeImg(
     ".contact-full-mode-delete-contact",
     ".delete-btn-img",
-    'url("../img/trash-blue.png")',
-    'url("../img/trash-light-blue.png")'
+    'url("/img/trash-blue.png")',
+    'url("/img/trash-light-blue.png")'
   );
 }
 
@@ -309,10 +309,10 @@ function renderContactFullModeHtml(
   return /*html*/ `
     <div class="contact-full-mode-header">
       <div id="id-mobile-dot-menu" class="mobile-dot-menu join-button" onclick="openContactEditMenu()">
-    <img id="dot-menu-img" src="../img/dot-menu.svg" alt="">
+    <img id="dot-menu-img" src="/img/dot-menu.svg" alt="">
     </div>
     <div id="id-contacts-arrow-exit" class="contacts-arrow-exit" onclick="HideFullViewShowContactList()">
-    <img src="../img/arrow-left-line.svg" alt="">
+    <img src="/img/arrow-left-line.svg" alt="">
   </div>
       <div id="id-contact-full-mode-badges" class="contact-full-mode-badges">${contactBadges}</div>
       <div class="contact-full-mode-name-edit-section">
@@ -357,7 +357,7 @@ function HideFullViewShowContactList() {
 function renderMobileAddContactButton() {
   document.getElementById("id-contacts-list").innerHTML += /*html*/ `
 <div id="id-mobile-add-contact" class="mobile-add-contact join-button" onclick="openContactForm('addContact')">
-    <img src="../img/person_add.png" alt="">
+    <img src="/img/person_add.png" alt="">
 </div>
 `;
 }
