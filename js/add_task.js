@@ -286,7 +286,6 @@ function renderContactsToField(arrayToRender) {
   if (checkedUsers.length > 0) {
     for (i = 0; i < arrayToRender.length; i++) {
       examineUser(i);
-<<<<<<< HEAD
 
     }}
 
@@ -297,8 +296,6 @@ function renderContactsToField(arrayToRender) {
     if (index != -1) {
       toggleForCheckedUser(i);
       toggleCheckbox(i);
-=======
->>>>>>> 01868e629fe00b332ae199e56d20fc8d50271872
     }
   }
 }
@@ -363,7 +360,6 @@ function selectedUser(i) {
 
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkBox${i}`);
-<<<<<<< HEAD
   let checkBoxStatus = contacts[i]["checkBoxContact"];
 
   if (checkBoxStatus == true) {
@@ -374,18 +370,6 @@ function toggleCheckbox(i) {
     checkBox.src = "../img/Check button.png";
     // checkBoxContact = true;
     // contacts[i]['checkBox'] = true;
-=======
-  let checkBoxStatus = contacts[i]["checkBox"];
-
-  if (checkBoxStatus == true) {
-    checkBox.src = "../img/box-unchecked.png";
-    // checkBoxContact = false;
-    contacts[i]["checkBox"] = false;
-  } else {
-    checkBox.src = "../img/Check button.png";
-    // checkBoxContact = true;
-    contacts[i]["checkBox"] = true;
->>>>>>> 01868e629fe00b332ae199e56d20fc8d50271872
   }
 }
 
