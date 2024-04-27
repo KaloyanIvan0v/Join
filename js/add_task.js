@@ -20,6 +20,12 @@ function init() {
     currentDate();
 }
 
+function createTask() {
+    addTask();
+    addedToBoard();
+    window.location.href = "board.html";
+}
+
 async function addTask() {
   let idNumber = increaseId();
   let title = document.getElementById("title");
@@ -42,10 +48,8 @@ async function addTask() {
     id: idNumber,
   };
   tasks.push(task);
-  addedToBoard();
   await setItem("tasks", tasks);
   resetInputFields();
-  window.location.href = "board.html";
 }
 
 function increaseId() {
@@ -87,7 +91,7 @@ function furtherResetField() {
     currentDate();
     changeCategory('Select task category');
     setItem('subTasks', []);
-    changePrio(1);
+    // changePrio(1);
 
   checkChangeIcons = true;
   changeIconsSubtask();
@@ -132,7 +136,6 @@ function prioSelectAddTask(prioSelect) {
       currentPrio = 'Low';
     }
   }
-}
 
 function changePrio(i) {
     currentPrio = priorities[i]['text'];
