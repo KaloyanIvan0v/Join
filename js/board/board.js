@@ -474,8 +474,11 @@ function setBorderColorForTimePeriod(elementId) {
 
 function renderTaskAssignedNames(i) {
   let nameArea = document.getElementById("contactsFieldBoardFullName");
-  let task = tasks[i];
-  for (let i = 0; i < checkedUsers.length; i++) {}
+  let checkedContacts = tasks[i].checkedUsers;
+  for (let i = 0; i < checkedContacts.length; i++) {
+    let chekedContact = checkedContacts[i].name;
+    nameArea.innerHTML += renturnTaksAssignetContactNameHtml(chekedContact);
+  }
 }
 
 function closeTaskFormTemplate() {

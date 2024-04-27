@@ -226,6 +226,6 @@ function taskAreaIsEmptyHtml(statement) {
 
 function renturnTaksAssignetContactNameHtml(name) {
   return /*html*/ `
-  <div class="task-assignet-contact-name">name</div>
+  <div class="task-assignet-contact-name">${name}</div>
  `;
 }
