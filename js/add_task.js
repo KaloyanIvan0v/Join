@@ -32,7 +32,7 @@ async function addTask() {
   let title = document.getElementById("title");
   let description = document.getElementById("description");
   let dueDate = document.getElementById("dueDate");
-  let subTaskForTask = renderSubTasks();
+  // let subTaskForTask = renderSubTasks();
   let checkedUsersForTask = checkedUsers;
 
   let task = {
@@ -42,7 +42,7 @@ async function addTask() {
     dueDate: dueDate.value,
     prio: currentPrio,
     category: taskCategory,
-    subTasks: subTaskForTask,
+    subTasks: subTasks,
     finishedSubTasks: finishedSubTasks,
     checkedUsers: checkedUsersForTask,
     statement: "toDo",
@@ -50,7 +50,6 @@ async function addTask() {
   };
   tasks.push(task);
   await setItem("tasks", tasks);
-  //resetInputFields();
 }
 
 function increaseId() {
@@ -76,7 +75,6 @@ function resetInputFields() {
   let subTasks = document.getElementById("subTasks");
   let subTasksArea = document.getElementById("newSubTaskField")
   let initialArea = document.getElementById("checkboxes");
-  let newSubTaskField = document.getElementById("newSubTaskField");
   let initialen = document.getElementById("checkboxes");
   let assignedBtn = document.getElementById("inputToSearchContact");
 
@@ -85,7 +83,6 @@ function resetInputFields() {
   initialArea.innerHTML = "";
   subTasks.value = "";
   subTasksArea.innerHTML = '';
-  newSubTaskField.innerHTML = "";
   assignedBtn.innerHTML = "";
   checkedUsers = [];
   initialen.innerHTML = "";
@@ -93,11 +90,11 @@ function resetInputFields() {
 }
 
 function furtherResetField() {
+  subTasks = [];
+  renderSubTasks('none');
   currentDate();
   changeCategory("Select task category");
-  setItem("subTasks", []);
   changePrio(1);
-
   checkChangeIcons = true;
   changeIconsSubtask();
 }
@@ -264,33 +261,18 @@ function renderContactsToField(arrayToRender) {
     user = arrayToRender[i];
     userCheckBox.innerHTML += returnHtmlSingleContact(user);
     backgroundColorInitials(i, "none");
-  }
-
-  if (checkedUsers.length > 0) {
-    for (i = 0; i < arrayToRender.length; i++) {
-      examineUser(i);
-    }
+    checkIfChecked(i);
   }
 }
 
-function examineUser(i) {
-    let currentName = contacts[i]["name"];
-    let indexCheckedUsers = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
-
-    if (indexCheckedUsers != -1) {
+function checkIfChecked(i) {
+    let testCheckbox = contacts[i]['checkBoxContact'];
+    
+    if(testCheckbox == true) {
       toggleForCheckedUser(i);
+      contacts[i]['checkBoxContact'] = false;
       toggleCheckbox(i);
     }
-}
-
-function examineUser(i) {
-  let currentName = contacts[i]["name"];
-  let index = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
-
-  if (index != -1) {
-    toggleForCheckedUser(i);
-    toggleCheckbox(i);
-  }
 }
 
 function toggleForCheckedUser(i) {
@@ -334,8 +316,10 @@ function toggleCheckbox(i) {
 
   if (checkBoxStatus == true) {
     checkBox.src = "../img/box-unchecked.png";
+    contacts[i]["checkBoxContact"] = false;
   } else {
     checkBox.src = "../img/Check button.png";
+    contacts[i]["checkBoxContact"] = true
   }
 }
 
@@ -361,7 +345,7 @@ function showInitials() {
 
 function searchContact() {
   let inputSearchContact = document.getElementById("inputToSearchContact").value;
-  let checkbox = document.getElementById('checkboxes');
+  // let checkbox = document.getElementById('checkboxes');
   inputSearchContact = inputSearchContact.toLowerCase();
 
   searchContacts.splice(0, searchContacts.length);
@@ -370,11 +354,12 @@ function searchContact() {
       let contactComplete = contacts[i];
       if (contact.toLowerCase().includes(inputSearchContact)) {
         searchContacts.push(contactComplete);
-        renderContactsToField(searchContacts);
       } else {
         // checkbox.classList.add('vs-hidden')
       }
     }
+    renderContactsToField(searchContacts);
+
 }
 
 function editSubtask(i) {
@@ -428,26 +413,17 @@ function showCategories(category) {
   if (category != "Select task category") {
     toggleDropDownArrow("dropDownArrowCategory");
     categoriesField.classList.toggle("vs-hidden");
-    giveFocus(categoriesField);
-  }
-}
-
-function giveFocus(categoriesField) {
-  if (!categoriesField.classList.contains("vs-hidden")) {
-    categoriesField.focus();
   }
 }
 
 function changeCategory(category) {
   let clickedCategory = category;
+
   let categoryDropdown = document.getElementById("categoryDropdown");
 
   categoryDropdown.innerHTML = "";
   categoryDropdown.innerHTML = clickedCategory;
 
   taskCategory = clickedCategory;
-  // taskCategory.push(clickedCategory);
-  containerCategory.classList.toggle("fill-border");
-
   showCategories(category);
 }

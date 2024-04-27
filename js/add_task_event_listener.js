@@ -56,11 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
     taskArea.addEventListener('blur', function() {
         taskArea.classList.remove('fill-border');
     })
-
-    containerCategory.addEventListener('click', function() {
-        containerCategory.classList.toggle('fill-border');
-    })
-
     // assignedBtn.addEventListener('blur', function(event) {
     //     assignedBtn.classList.remove('fill-border');
     //     showCheckboxes()    
