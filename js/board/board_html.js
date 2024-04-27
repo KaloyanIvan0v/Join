@@ -169,7 +169,7 @@ function openTaskDetailViewHtml(overlayTask, i, id) {
         <span class="task-detail-view-section-title">Assigned To:</span>
         <div class="d-flex">
           <div id="contactsFieldBoard(${i})" class="column-gap-contacts"></div>
-          <div id="contactsFieldBoardFullName(${i})" class="column-gap-contacts"></div>
+          <div id="contactsFieldBoardFullName" class="column-gap-contacts"></div>
         </div>
     </div>
     <div class="overlay-subtasks font-overlay">
@@ -222,4 +222,10 @@ function taskAreaIsEmptyHtml(statement) {
     no tasks ${statement}
   </div>
   `;
+}
+
+function renturnTaksAssignetContactNameHtml(name) {
+  return /*html*/ `
+  <div class="task-assignet-contact-name">name</div>
+ `;
 }

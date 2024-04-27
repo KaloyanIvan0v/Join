@@ -108,8 +108,9 @@ function openTaskDetailView(i, id) {
   popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[i], i, id);
   choosestatementColor(i);
   whichPriorityTaskCard(i, true);
-  renderSubTasksBoard(i);
+  //renderSubTasksBoard(i);
   handleHoverButtonDeleteEditTask();
+  renderTaskAssignedNames(i);
 }
 
 function handleHoverButtonDeleteEditTask() {
@@ -444,7 +445,39 @@ function clearAddTaskForm() {
 }
 
 function createTaskAtBoard() {
-  addTask();
+  if (checkCategoryInput()) {
+    addTask();
+    closePopUp();
+    renderTasks(tasks);
+  } else {
+    setBorderColorForTimePeriod("containerCategory");
+  }
+}
+
+function checkCategoryInput() {
+  let inputCategory = document.getElementById("categoryDropdown");
+  let categoryValue = inputCategory.textContent;
+  if (categoryValue === "Select task category") {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function setBorderColorForTimePeriod(elementId) {
+  let div = document.getElementById(elementId);
+  div.style.borderColor = "red";
+  setTimeout(() => {
+    div.style.borderColor = "grey";
+  }, 2000);
+}
+
+function renderTaskAssignedNames(i) {
+  let nameArea = document.getElementById("contactsFieldBoardFullName");
+  let task = tasks[i];
+  for (let i = 0; i < checkedUsers.length; i++) {}
+}
+
+function closeTaskFormTemplate() {
   closePopUp();
-  renderTasks(tasks);
 }

@@ -374,6 +374,10 @@ input:focus {
   justify-content: space-between;
 }
 
+.overlay-first-row a {
+  cursor: pointer;
+}
+
 .overlay-category {
   padding: 4px 16px 4px 16px;
   border-radius: 8px;
@@ -688,6 +692,12 @@ textarea {
   font-size: 20px;
   font-weight: 400;
   color: rgba(66, 82, 110, 1);
+}
+
+.task-assigned-to {
+  display: flex;
+  gap: 12px;
+  color: balck;
 }
 
 @media (max-width: 1430px) {
