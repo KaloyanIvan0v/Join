@@ -89,17 +89,10 @@ function resetInputFields() {
 }
 
 function furtherResetField() {
-<<<<<<< HEAD
-    currentDate();
-    changeCategory('Select task category');
-    setItem('subTasks', []);
-    changePrio(1);
-=======
   currentDate();
   changeCategory("Select task category");
   setItem("subTasks", []);
-  // changePrio(1);
->>>>>>> 3b661da6135851763a524c4bf19610ccf77f2425
+  changePrio(1);
 
   checkChangeIcons = true;
   changeIconsSubtask();
@@ -284,25 +277,15 @@ function renderContactsToField(arrayToRender) {
     toggleUserListInitials();
   }
 
-<<<<<<< HEAD
-function examineUser(i) {
+  function examineUser(i) {
     let currentName = contacts[i]["name"];
-    let index = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
-  
-    if (index != -1) {
-        toggleForCheckedUser(i);
-        toggleCheckbox(i);
-=======
-  for (i = 0; i < arrayToRender.length; i++) {
-    user = arrayToRender[i];
-    userCheckBox.innerHTML += returnHtmlSingleContact(user);
-    backgroundColorInitials(i, "none");
-  }
+    let index = checkedUsers.findIndex(
+      (item) => JSON.stringify(item["name"]) === JSON.stringify(currentName)
+    );
 
-  if (checkedUsers.length > 0) {
-    for (i = 0; i < arrayToRender.length; i++) {
-      examineUser(i);
->>>>>>> 3b661da6135851763a524c4bf19610ccf77f2425
+    if (index != -1) {
+      toggleForCheckedUser(i);
+      toggleCheckbox(i);
     }
   }
 }
@@ -344,15 +327,6 @@ function selectedUser(i) {
   let singleUser = contacts[i];
   let currentIndex = checkedUsers.indexOf(singleUser);
 
-<<<<<<< HEAD
-    if(!checkedUsers.includes(singleUser, 0)) {
-        checkedUsers.push(singleUser);
-    } else {
-        checkedUsers.splice(currentIndex, 1);
-    }
-    toggleForCheckedUser(i);
-    toggleCheckbox(i);
-=======
   if (!checkedUsers.includes(singleUser, 0)) {
     checkedUsers.push(singleUser);
   } else {
@@ -360,21 +334,19 @@ function selectedUser(i) {
   }
   toggleForCheckedUser(i);
   toggleCheckbox(i);
-  return;
->>>>>>> 3b661da6135851763a524c4bf19610ccf77f2425
 }
 
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkBox${i}`);
-  let checkBoxContact = contacts[i]['checkBoxContact'];
+  let checkBoxContact = contacts[i]["checkBoxContact"];
 
   if (checkBoxContact == true) {
     checkBox.src = "../img/box-unchecked.png";
-    contacts[i]['checkBoxContact'] = false;
+    contacts[i]["checkBoxContact"] = false;
     // checkBoxContact = false;
   } else {
     checkBox.src = "../img/Check button.png";
-    contacts[i]['checkBoxContact'] = true;
+    contacts[i]["checkBoxContact"] = true;
     // checkBoxContact = true;
   }
 }
