@@ -61,10 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
         containerCategory.classList.toggle('fill-border');
     })
 
-    assignedBtn.addEventListener('blur', function(event) {
-        assignedBtn.classList.remove('fill-border');
-        elseForshowCheckBoxes(assignedBtn);
-    })
+    // assignedBtn.addEventListener('blur', function(event) {
+    //     assignedBtn.classList.remove('fill-border');
+    //     showCheckboxes()    
+    // })
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -105,3 +105,19 @@ document.addEventListener('DOMContentLoaded', function() {
         inputBorderError = false;
     }
 })
+
+document.addEventListener('click', function(event) {
+    var assignedToContainer = document.querySelector('.assigned-to');
+    var clickedElement = event.target;
+
+    if (!assignedToContainer.contains(clickedElement)) {
+        var checkboxes = document.getElementById("checkboxes");
+        var assignedBtn = document.getElementById("inputToSearchContact");
+        checkboxes.classList.add("vs-hidden");
+        toggleDropDownArrow("dropDownArrow");
+        assignedBtn.parentElement.classList.remove("fill-border");
+        assignedBtn.blur();
+        divContacts = false;
+        showInitials();
+    }
+});

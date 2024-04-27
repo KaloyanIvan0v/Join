@@ -230,11 +230,11 @@ function showCheckboxes() {
 
   if (divContacts == false) {
     ifForshowCheckBoxes(checkboxes, assignedBtn);
+    assignedBtn.focus();
   } else {
     elseForshowCheckBoxes(assignedBtn);
   }
   assignedBtn.parentElement.classList.toggle("fill-border");
-  // checkboxes.classList.toggle("d-flex-initials");
   toggleDropDownArrow("dropDownArrow");
 }
 
