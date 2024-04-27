@@ -2,6 +2,7 @@ let currentPrio = ["medium"];
 let taskCategory = [];
 let idNumber = [];
 let subTasks = [];
+let subTaskStatus = [];
 let checkedUsers = [];
 let searchContacts = [];
 let finishedSubTasks = [];
@@ -23,6 +24,7 @@ function init() {
 function createTask() {
     addTask();
     addedToBoard();
+    resetInputFields();
     window.location.href = "board.html";
 }
 
@@ -31,7 +33,7 @@ async function addTask() {
   let title = document.getElementById("title");
   let description = document.getElementById("description");
   let dueDate = document.getElementById("dueDate");
-  let subTaskForTask = subTasks;
+  let subTaskForTask = renderSubTasks();
   let checkedUsersForTask = checkedUsers;
 
   let task = {
@@ -49,7 +51,6 @@ async function addTask() {
   };
   tasks.push(task);
   await setItem("tasks", tasks);
-  resetInputFields();
 }
 
 function increaseId() {
