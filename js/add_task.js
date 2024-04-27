@@ -2,6 +2,7 @@ let currentPrio = ["medium"];
 let taskCategory = [];
 let idNumber = [];
 let subTasks = [];
+let subTaskStatus = [];
 let checkedUsers = [];
 let searchContacts = [];
 let finishedSubTasks = [];
@@ -31,7 +32,7 @@ async function addTask() {
   let title = document.getElementById("title");
   let description = document.getElementById("description");
   let dueDate = document.getElementById("dueDate");
-  let subTaskForTask = subTasks;
+  let subTaskForTask = renderSubTasks();
   let checkedUsersForTask = checkedUsers;
 
   let task = {
