@@ -364,12 +364,8 @@ function toggleCheckbox(i) {
 
   if (checkBoxStatus == true) {
     checkBox.src = "../img/box-unchecked.png";
-    // contacts[i]["checkBoxContact"] = false;
-    // checkBoxContact = false;
   } else {
     checkBox.src = "../img/Check button.png";
-    // checkBoxContact = true;
-    // contacts[i]['checkBox'] = true;
   }
 }
 
