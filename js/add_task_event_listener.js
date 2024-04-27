@@ -2,19 +2,25 @@ document.addEventListener('DOMContentLoaded', function() {
     let dateInput = document.getElementById('dueDate');
     let requiredDate = document.getElementById('requiredDate');
     let taskArea = document.getElementById('description');
-    let assignedBtn = document.getElementById('inputToSearchContact');
+    // let assignedBtn = document.getElementById('inputToSearchContact');
     let subTask = document.getElementById('subTasks');
-    let subTaskField = document.getElementById('inputFieldSubtasks')
-    let inputToSearchContact = document.getElementById("inputToSearchContact");
+    // let subTaskField = document.getElementById('inputFieldSubtasks')
+    // let inputToSearchContact = document.getElementById("inputToSearchContact");
     let containerCategory = document.getElementById("containerCategory");
-    // let checkbox = document.getElementById('checkboxes');
-    
+
 
     dateInput.addEventListener('change', changeBorder);
     dateInput.addEventListener('keydown', changeBorder);
     dateInput.addEventListener('blur', function() {
         resetDateInput(dateInput, requiredDate);
     })
+    
+    // subTask.addEventListener('keypress', function(event) {
+    //     let x = event.code;
+    //     if(x == 'Enter') {
+    //         addNewSubTask();
+    //     }
+    // })
     
     function changeBorder() {
         dateInput.classList.remove('fill-border');
@@ -55,27 +61,27 @@ document.addEventListener('DOMContentLoaded', function() {
         containerCategory.classList.toggle('fill-border');
     })
 
-    assignedBtn.addEventListener('blur', function() {
-        assignedBtn.classList.remove('fill-border');
-        showCheckboxes();
-    })
+    // assignedBtn.addEventListener('blur', function(event) {
+    //     assignedBtn.classList.remove('fill-border');
+    //     showCheckboxes();
+    // })
 });
 
 document.addEventListener('DOMContentLoaded', function() {
     let title = document.getElementById('title');
     let requiredTitle = document.getElementById('requiredTitle');
 
-    title.addEventListener('click', function() {
-        changeBorder(title, requiredTitle);
-    });
+    title.addEventListener('click', handleInput);
+    title.addEventListener('input', handleInput);
+    title.addEventListener('blur', handleBlur);
 
-    title.addEventListener('keydown', function() {
+    function handleInput() {
         changeBorder(title, requiredTitle);
-    });
+    }
 
-    title.addEventListener('blur', function() {
+    function handleBlur() {
         resetInputTitle(title, requiredTitle);
-    })
+    }
     
     function changeBorder(titleId, fieldId) {
         titleId.classList.remove('fill-border');
@@ -85,13 +91,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (value == 0) {
             fieldId.classList.remove('vs-hidden');
             titleId.classList.add('error-border');
-        } else if(value >= 2) {
-            titleId.classList.remove('error-border');
+        } else if(value > 0) {
             fieldId.classList.add('vs-hidden');
+            titleId.classList.remove('error-border');
             titleId.classList.add('fill-border');
-        } else if(value == 1) {
-            fieldId.classList.remove('vs-hidden');
-            titleId.classList.add('error-border');
         }
     }
 
@@ -99,5 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
         fieldId.classList.add('vs-hidden');
         titleId.classList.remove('error-border');
         titleId.classList.remove('fill-border');
+        inputBorderError = false;
     }
 })

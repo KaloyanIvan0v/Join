@@ -1,3 +1,29 @@
+let priorities = [
+    {
+        'text': 'Urgent',
+        'iconWhite': '/img/urgent_white.png',
+        'iconColor': '/img/urgent_red.png',
+        'bgColorTrue': 'highlight-color-urgent',
+        'bgColorFalse': 'bg-color-priority',
+        'isPriority': false,
+    },
+    {
+        'text': 'Medium', 
+        'iconWhite': '/img/medium_white.png', 
+        'iconColor': '/img/medium_orange.png', 
+        'bgColorTrue': 'highlight-color-medium', 
+        'bgColorFalse': 'bg-color-priority', 
+        'isPriority': true,
+    },
+    {   'text': 'Low', 
+        'iconWhite': '/img/low_white.png',     
+        'iconColor': '/img/low_green.png',  
+        'bgColorTrue': 'highlight-color-low',    
+        'bgColorFalse': 'bg-color-priority',
+        'isPriority': false,
+    }
+]
+
 function returnHtmlSingleContact(user) {
     return `
     <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i})">
@@ -21,7 +47,7 @@ function returnHtmlCheckAndClear() {
     <div id="activeInputSubtask" class="active-input-subtasks">
         <a class="hover" onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
         <span class="height-24">|</span>
-        <a class="hover" onclick="addNewSubTask()"><img src="/img/Property 1=check.png"></a>
+        <a id="checkNewSubtask" class="hover" onclick="addNewSubTask()"><img src="/img/Property 1=check.png"></a>
     </div>`
 }
 

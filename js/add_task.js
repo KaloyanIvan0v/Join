@@ -6,27 +6,16 @@ let checkedUsers = [];
 let searchContacts = [];
 let finishedSubTasks = [];
 let checkChangeIcons = false;
-let expanded = false;
+let divContacts = false;
 let checkBoxContact = false;
-// let inputBorderError = false;
 let arrowToggleCheck = false;
-// let priorities = [
-//     {
-//         'text': 'Urgent', 'iconWhite': '/img/urgent_white.png', 'iconColor': '/img/urgent_red.png', 'bgColorTrue': 'highlight-color-urgent', 'bgColorFalse': 'bg-color-priority','isPriority': false,
-//     },
-//     {
-//         'text': 'Medium', 'iconWhite': '/img/medium_white.png', 'iconColor': '/img/medium_orange.png', 'bgColorTrue': 'highlight-color-medium', 'bgColorFalse': 'bg-color-priority', 'isPriority': true,
-//     },
-//     {   'text': 'Low',    'iconWhite': '/img/low_white.png',     'iconColor': '/img/low_green.png',  'bgColorTrue': 'highlight-color-low',    'bgColorFalse': 'bg-color-priority',   'isPriority': false,
-//     }
-// ]
 
 function init() {
     includeHTML();
     setTimeout(loadFirstLettersFromSessionStorage, 200);
     loadTasks();
     loadContacts();
-    // whichPriority();
+    whichPriority();
     loadUsers();
     currentDate();
 }
@@ -80,7 +69,7 @@ function addedToBoard() {
 
 function resetInputFields() {
     let subTasks =  document.getElementById('subTasks');
-    let initialArea = document.getElementById('initialArea');
+    let initialArea = document.getElementById('checkboxes');
     let newSubTaskField = document.getElementById('newSubTaskField');
     let initialen = document.getElementById('checkboxes')
 
@@ -98,7 +87,7 @@ function furtherResetField() {
     currentDate();
     changeCategory('Select task category');
     setItem('subTasks', []);
-    // changePrio(1);
+    changePrio(1);
 
     checkChangeIcons = true;
     changeIconsSubtask();
@@ -124,8 +113,7 @@ function currentDate() {
 function prioSelectAddTask(prioSelect) {
     let urgent = document.getElementById(`urgent`);
     let medium = document.getElementById(`medium`);
-    let low = document.getElementById(`low`);
-    // setItem('tasks', tasks);
+    let low = document.getElementById(`Low`);
   
     if(prioSelect == 'urgent') {
       urgent.src = '../img/urgent_highlight.png';
@@ -145,30 +133,30 @@ function prioSelectAddTask(prioSelect) {
     }
   }
 
-// function changePrio(i) {
-//     currentPrio = priorities[i]['text'];
-//     priorities[i]['isPriority'] = true;
-//     whichPriority();
-// }
+function changePrio(i) {
+    currentPrio = priorities[i]['text'];
+    priorities[i]['isPriority'] = true;
+    whichPriority();
+}
 
-// function whichPriority() {
-//     let prioSelection = document.getElementById('prioSelection');
-//     prioSelection.innerHTML = '';
+function whichPriority() {
+    let prioSelection = document.getElementById('prioSelection');
+    prioSelection.innerHTML = '';
 
-//     for(i = 0; i < priorities.length; i++) {
-//         priority = priorities[i];
-//         checkBooleanForPriority(priority);
-//     }
-// }
+    for(i = 0; i < priorities.length; i++) {
+        priority = priorities[i];
+        checkBooleanForPriority(priority);
+    }
+}
 
-// function checkBooleanForPriority(priority) {
-//     if(priority['isPriority'] == false) {
-//         prioSelection.innerHTML += prioNormal(priority);
-//     } else {
-//         prioSelection.innerHTML += prioActive(priority);
-//         priority['isPriority'] = false;
-//     }
-// }
+function checkBooleanForPriority(priority) {
+    if(priority['isPriority'] == false) {
+        prioSelection.innerHTML += prioNormal(priority);
+    } else {
+        prioSelection.innerHTML += prioActive(priority);
+        priority['isPriority'] = false;
+    }
+}
 
 // <-------------Subtasks functions----------------->
 
@@ -229,34 +217,33 @@ function changeIconsSubtask() {
     renderSubTasks();
 }
 
-function preventFocusLoss(event) {
-    event.preventDefault();
-}
-
-function showCheckboxes(event) {
-    // preventFocusLoss(event);
+function showCheckboxes() {
     let checkboxes = document.getElementById("checkboxes");
     let assignedBtn = document.getElementById('inputToSearchContact');
 
-    if (!expanded) {
-        toggleDropDownArrow("dropDownArrow");
-        // preventFocusLoss(event);
-        // assignedBtn.focus();
-        checkboxes.classList.remove('vs-hidden');
-        assignedBtn.placeholder = 'Search Contact';
-        // assignedBtn.classList.add('fill-border');
-        renderAssignedToField(contacts);
+    toggleUserListInitials();
 
-        expanded = true;
+    if (divContacts == false) {
+        ifForshowCheckBoxes(checkboxes, assignedBtn)
     } else {
-        toggleDropDownArrow("dropDownArrow");
-        assignedBtn.blur();
-        // checkboxes.classList.add('vs-hidden');
-        assignedBtn.classList.remove('fill-border');
-        toggleUserListInitials(assignedBtn) 
-        expanded = false;
-        showInitials();
+        elseForshowCheckBoxes(assignedBtn)
     }
+    assignedBtn.parentElement.classList.toggle('fill-border');
+    checkboxes.classList.toggle('d-flex-initials');
+    toggleDropDownArrow("dropDownArrow");
+}
+
+function ifForshowCheckBoxes(checkboxes, assignedBtn) {
+    checkboxes.classList.remove('vs-hidden');
+    assignedBtn.placeholder = 'Search Contact';
+    renderContactsToField(contacts, checkboxes);
+    divContacts = true;
+}
+
+function elseForshowCheckBoxes(assignedBtn) {
+    assignedBtn.blur();
+    divContacts = false;
+    showInitials();
 }
 
 function toggleDropDownArrow(idImage) {
@@ -270,60 +257,49 @@ function toggleDropDownArrow(idImage) {
     }
 }
 
-function toggleUserListInitials(assigned) {
+function toggleUserListInitials() {
     let checkboxes = document.getElementById("checkboxes");
 
     checkboxes.classList.toggle('user-list');
     checkboxes.classList.toggle('d-flex-initials');
 }
 
-function renderAssignedToField(arrayToRender) {
-    let userCheckBox = document.getElementById('checkboxes');
-    userCheckBox.innerHTML = '';
-
-    if(!userCheckBox.classList.contains('user-list')) {
-        toggleUserListInitials();
+function renderContactsToField(arrayToRender) {
+    let userCheckBox = document.getElementById("checkboxes");
+    userCheckBox.innerHTML = "";
+  
+    if (!userCheckBox.classList.contains("user-list")) {
+      toggleUserListInitials();
     }
-
-    for(i = 0; i < arrayToRender.length; i++){;
-        user = arrayToRender[i];
-        userCheckBox.innerHTML += 
-            returnHtmlSingleContact(user);
-            backgroundColorInitials(i, 'none');
+  
+    for (i = 0; i < arrayToRender.length; i++) {
+      user = arrayToRender[i];
+      userCheckBox.innerHTML += returnHtmlSingleContact(user);
+      backgroundColorInitials(i, "none");
     }
-
-    if(checkedUsers.length > 0) {
-        for(i = 0; i < arrayToRender.length; i++){;
-            examineUser(i);   
-        }
+  
+    if (checkedUsers.length > 0) {
+      for (i = 0; i < arrayToRender.length; i++) {
+        examineUser(i);
+      }
     }
-}
+  }
 
 function examineUser(i) {
-    // let currentLabel = document.getElementById(`checkBox${i}`);
-    // let checkBox = document.getElementById(`checkBox${i}`);
-    let currentName = contacts[i]['name'];
-    let index = checkedUsers.findIndex(item => JSON.stringify(item['name']) === JSON.stringify(currentName));
-        
-    if(index != -1) {
-        toggleForCheckedUser(i)
-        // checkBox.classList.remove('box-unchecked');
-        // userField.classList.add('bg-checked');
-        // userField.classList.toggle('hover-user-field');
-        // paddingForChecked.classList.toggle('pd-right-16');
-        // paddingForChecked.classList.toggle('hover-assigned');
+    let currentName = contacts[i]["name"];
+    let index = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
+  
+    if (index != -1) {
+      toggleForCheckedUser(i);
     }
-}
+  }
 
 function toggleForCheckedUser(i) {
     let userField = document.getElementById(`userField${i}`);
     let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
 
-    // checkBox.classList.toggle('box-unchecked');
-    // userField.classList.toggle('bg-checked');
     userField.classList.toggle('hover-user-field');
     paddingForChecked.classList.toggle('pd-right-16');
-    paddingForChecked.classList.toggle('hover-assigned');
 }
 
 function backgroundColorInitials(i, whichArea) {
@@ -346,13 +322,12 @@ function selectedUser(i) {
 
     if(!checkedUsers.includes(singleUser, 0)) {
         checkedUsers.push(singleUser);
-        // toggleForCheckedUser(i);
     } else {
         checkedUsers.splice(currentIndex, 1);
-        // toggleForCheckedUser(i);
     }
     toggleForCheckedUser(i);
     toggleCheckbox(i);
+    return;
 }
 
 function toggleCheckbox(i) {
@@ -400,9 +375,9 @@ function searchContact() {
                 searchContacts.push(contactComplete);
             }
         }
-        renderAssignedToField(searchContacts);
+        renderContactsToField(searchContacts);
     } else if(inputSearchContact.length == 1) {
-        renderAssignedToField(contacts);
+        renderContactsToField(contacts);
     }
 }
 
@@ -414,10 +389,10 @@ function editSubtask(i) {
 
 
     if(ulSubtasks) {
-        subTaskElement.classList.add('li-edit');
+        // subTaskElement.classList.add('li-edit');
         subTaskElement.classList.add('pd-inline-start');
         ulSubtasks.classList.add('pd-inline-start');
-        subTaskField.classList.add('fill-border-bottom');
+        // subTaskField.classList.add('fill-border-bottom');
 
         subTaskField.innerHTML = '';
         subTaskField.innerHTML = editSubtaskHtml(i, subTask);
@@ -444,12 +419,17 @@ function inputFocus(i) {
     inputField.setSelectionRange(inputField.value.length, inputField.value.length);
 }
 
-function showCategories() {
-    toggleDropDownArrow('dropDownArrowCategory');
+function showCategories(category) {
     let categoriesField = document.getElementById('categories');
 
-    categoriesField.classList.toggle('vs-hidden');
+    if(category != 'Select task category') {
+        toggleDropDownArrow('dropDownArrowCategory');
+        categoriesField.classList.toggle('vs-hidden');
+        giveFocus(categoriesField);
+    }
+}   
 
+function giveFocus(categoriesField) {
     if(!categoriesField.classList.contains('vs-hidden')) {
         categoriesField.focus();
     }
@@ -465,15 +445,15 @@ function changeCategory(category) {
     taskCategory.push(clickedCategory);
     containerCategory.classList.toggle('fill-border');
 
-    if(category != 'Select task category'){
-        showCategories();
-    }
+    showCategories(category);
 }
 
-function showAddTaskTemplate() {
-    currentDate();
-    let bgDialog = document.getElementById('bgDialog');
-  
-    bgDialog.classList.toggle('vs-hidden');
-    bgDialog.classList.toggle('align-center');
-  }
+function hoverPrioImage(prioImage) {
+    let currentImage = document.getElementById(prioImage);
+    currentImage.setAttribute('src', '../img/prio_low_hover.png');
+}
+
+function leaveHover(prioImage) {
+    let currentImage = document.getElementById(prioImage);
+    currentImage.setAttribute('src', '../img/low.png');
+}

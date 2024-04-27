@@ -40,11 +40,11 @@
                         <span class="color-FF8190">*</span>
                     </div>
                 </div>
-                <!-- <div> -->
-                    <input required class="input-field normal-border pd-12-16" id="title" type="text" placeholder="Enter a title">
-                <!-- </div> -->
-                <div id="requiredTitle" class="required-field-title vs-hidden">
-                    <span class="error">This field is required</span>
+                <div class="container-input-required">
+                    <input required class="input-field normal-border pd-12-16 width-408" id="title" type="text" placeholder="Enter a title">
+                    <div id="requiredTitle" class="required-field-title vs-hidden">
+                        <span class="error">This field is required</span>
+                    </div>
                 </div>
             </div>
 
@@ -58,18 +58,17 @@
                 </div>
             </div>
 
-            <div class="assigned-to d-flex-column-center" onclick="showCheckboxes(event)">
+            <div class="assigned-to d-flex-column-center">
                 <span class="input-description">Assigned to</span>
-                <div class="input-category new-subtask normal-border hover">
-                    <input onkeydown="searchContact()" tabindex="0" class="border-none" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
+                <div onclick="showCheckboxes()" class="input-category new-subtask normal-border hover">
+                    <input onkeydown="searchContact()" tabindex="0" class="border-none hover" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
                     <div class="dropdown-icon">
                         <img src="/img/arrow_drop_down.png" id="dropDownArrow">
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="user-list vs-hidden" id="checkboxes"></div>
-                <div id="initialArea"></div>
+                <div class="container-input-required">
+                    <div class="d-flex-initials vs-hidden" id="checkboxes"></div>
+                </div>
             </div>
         </div>
 
@@ -84,9 +83,11 @@
                         <span class="color-FF8190">*</span>
                     </div>
                 </div>
+                <div class="container-input-required">
                 <input class="input-field option-value-disabled normal-border" id="dueDate" type="date">
-                <div id="requiredDate" class="required-field-title vs-hidden">
-                    <span class="error">This field is required</span>
+                    <div id="requiredDate" class="required-field-title vs-hidden">
+                        <span class="error">This field is required</span>
+                    </div>
                 </div>
             </div>
 
@@ -94,7 +95,7 @@
                 <div class="input-description">
                     <span>Prio</span>
                 </div>
-                <div class="prio-area" id="prioArea">
+                <!-- <div class="prio-area" id="prioArea">
                     <div class="hover" onclick="prioSelectAddTask('urgent')">
                       <img id="urgent" src="../img/urgent.png">
                     </div>
@@ -104,29 +105,34 @@
                     </div>
               
                     <div class="hover" onclick="prioSelectAddTask('Low')">
-                      <img id="low" src="../img/low.png">
+                      <img onmouseover="hoverPrioImage('Low')" onmouseleave="leaveHover('Low')" id="Low" src="../img/low.png">
                     </div>
-                  </div> 
-                <!-- <div id="prioSelection" class="priority-selection"></div> -->
+                  </div>  -->
+                <div id="prioSelection" class="priority-selection"></div>
             </div>
 
             <div class="description-category position-category d-flex-column-center">
                 <div class="d-flex input-description">
                     <span>Category</span>
                     <span class="color-FF8190">*</span>
-                </div>                
+                </div>
+                <!-- <select id="mySelect" class="custom-select">
+                    <option value="" disabled selected>Select task category</option>
+                    <option value="Technical Task">Technical Task</option>
+                    <option value="User Story">User Story</option>
+                  </select>             -->
                 <div tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover" onclick="showCategories()">
                     <span id="categoryDropdown">Select task category</span>
                     <div class="dropdown-icon">
                         <img src="/img/arrow_drop_down.png" id="dropDownArrowCategory">
                     </div>
                 </div>
-                <div id="categories" class="vs-hidden">
+                <label id="categories" class="vs-hidden">
                     <div class="categories-list">
                         <span onclick="changeCategory('Technical Task')" class="pd-12-16 hover-user-field">Technical Task</span>
                         <span onclick="changeCategory('User Story')" class="pd-12-16 hover-user-field">User Story</span>
                     </div>
-                </div>
+                </label>
             </div>
 
             <div class="description-category position-subtasks d-flex-column-center">
@@ -164,6 +170,5 @@
         </div>
     </div>
     </div>
-    <!-- </div> -->
 </body>
 </html>
