@@ -277,7 +277,6 @@ function renderContactsToField(arrayToRender) {
     toggleUserListInitials();
   }
 
-<<<<<<< HEAD
   for (i = 0; i < arrayToRender.length; i++) {
     user = arrayToRender[i];
     userCheckBox.innerHTML += returnHtmlSingleContact(user);
@@ -287,17 +286,16 @@ function renderContactsToField(arrayToRender) {
   if (checkedUsers.length > 0) {
     for (i = 0; i < arrayToRender.length; i++) {
       examineUser(i);
-=======
+
+    }}
+
   function examineUser(i) {
     let currentName = contacts[i]["name"];
-    let index = checkedUsers.findIndex(
-      (item) => JSON.stringify(item["name"]) === JSON.stringify(currentName)
-    );
+    let index = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
 
     if (index != -1) {
       toggleForCheckedUser(i);
       toggleCheckbox(i);
->>>>>>> aac5ccd3bda208ca49b1104eca349284fb807a01
     }
   }
 }
@@ -346,37 +344,20 @@ function selectedUser(i) {
   }
   toggleForCheckedUser(i);
   toggleCheckbox(i);
-<<<<<<< HEAD
-  return;
-=======
->>>>>>> aac5ccd3bda208ca49b1104eca349284fb807a01
 }
 
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkBox${i}`);
-<<<<<<< HEAD
-  let checkBoxStatus = contacts[i]['checkBox'];
-=======
-  let checkBoxContact = contacts[i]["checkBoxContact"];
->>>>>>> aac5ccd3bda208ca49b1104eca349284fb807a01
+  let checkBoxStatus = contacts[i]["checkBoxContact"];
 
   if (checkBoxStatus == true) {
     checkBox.src = "../img/box-unchecked.png";
-<<<<<<< HEAD
-=======
-    contacts[i]["checkBoxContact"] = false;
->>>>>>> aac5ccd3bda208ca49b1104eca349284fb807a01
+    // contacts[i]["checkBoxContact"] = false;
     // checkBoxContact = false;
-    contacts[i]['checkBox'] = false;
   } else {
     checkBox.src = "../img/Check button.png";
-<<<<<<< HEAD
-=======
-    contacts[i]["checkBoxContact"] = true;
->>>>>>> aac5ccd3bda208ca49b1104eca349284fb807a01
     // checkBoxContact = true;
-    contacts[i]['checkBox'] = true;
-
+    // contacts[i]['checkBox'] = true;
   }
 }
 
