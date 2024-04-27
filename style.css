@@ -66,3 +66,20 @@ input:focus {
   border-color: var(--secondary-color);
   color: var(--secondary-color);
 }
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.shadow-layer {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

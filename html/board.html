@@ -12,24 +12,24 @@
     <link rel="stylesheet" href="/css/templates.css">
     <link rel="stylesheet" href="/css/board.css">
     <link rel="stylesheet" href="/css/add_task_template.css">
-
+    <script src="/js/templates.js"></script>
     <script src="/js/w3include.js"></script>
     <script src="/js/storage.js"></script>
     <script src="/script.js"></script>
     <script src="/js/add_task.js"></script>
     <script src="/js/add_task_html_templates.js"></script>
-    <script src="/js/board.js"></script>
+    <script src="/js/board/board_html.js"></script>
+    <script src="/js/board/board.js"></script>
+
 
 </head>
 
 <body onload="init_board()">
-    <div id="backgroundDialog">
-        <div class="task-overlay" id="taskOverlay"></div>
+    <div id="id-shadow-layer" class="shadow-layer visibility-hidden">
+        <div id="id-pop-up" class="pop-up"></div>
     </div>
 
-    <div class="bg-dialog vs-hidden" id="bgDialog">
-        <div w3-include-html="/templates/add_task_formular_template.html" class="add_task_formular_template"></div>
-    </div>
+
 
     <div w3-include-html="/templates/header.html" class="header"></div>
     <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
@@ -44,8 +44,10 @@
                     <input class="find-task" id="id-find-task-input" type="text" placeholder="Find Task">
                     <img src="/img/line_with_searchicon.png">
                 </form>
-                <button onclick="showAddTaskTemplate()" class="btn-add-task hover join-button">
-                    <span class="typography-create">Add Task</span>
+                <button
+                    onclick="openPopUpW3Include('/templates/add_task_formular_template.html','add_task_formular_template')"
+                    class="btn-add-task hover join-button">
+                    <span class="typography-create hide1040">Add Task</span>
                     <div class="plus-icon">
                         <img src="/img/add_white.png">
                     </div>

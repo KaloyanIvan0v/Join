@@ -1,0 +1,48 @@
+<div class="overlay-current-task">
+  <div id="categoryArea(${i})" class="overlay-first-row">
+    <div class="overlay-category" id="statementField${i}">${overlayTask["category"]}</div>
+    <a onclick="closeCurrentTask()">X</a>
+  </div>
+  <div class="overlay-title">
+    <span id="title(${i})">${overlayTask["title"]}</span>
+  </div>
+  <div class="overlay-description font-overlay">
+    <span id="description(${i})">${overlayTask["description"]}</span>
+  </div>
+  <div class="overlay-date font-overlay">
+    <span>Due Date:</span>
+    <span id="date(${i})">${overlayTask["dueDate"]}</span>
+  </div>
+  <div class="overlay-prio font-overlay">
+    <span>Priority:</span>
+    <div class="prio-name-image">
+      <span>${overlayTask["prio"]}</span>
+      <div id="prioField${i}"></div>
+    </div>
+  </div>
+  <div class="overlay-assigned font-overlay">
+    <span>Assigned To:</span>
+    <div class="d-flex">
+      <div id="contactsFieldBoard(${i})" class="column-gap-contacts"></div>
+      <div id="contactsFieldBoardFullName(${i})" class="column-gap-contacts"></div>
+    </div>
+  </div>
+  <div class="overlay-subtasks font-overlay">
+    <span>Subtasks</span>
+    <div id="subTasksField${i}" class="input-subtasks-overlay"></div>
+  </div>
+  <div class="last-section-overlay">
+    <div></div>
+    <div class="delete-edit-overlay">
+      <div onclick="deleteTask('${id}')" class="flex-center hover btn-hover-trash">
+        <div class="img-hover-trash"></div>
+        <span>Delete</span>
+      </div>
+      <img src="/img/Vector 3.png" alt="Vector">
+      <div onclick="editTaskOverlay('${i}')" class="flex-center hover btn-hover-edit">
+        <div class="img-hover-edit"></div>
+        <span>Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
