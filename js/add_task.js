@@ -74,6 +74,7 @@ function addedToBoard() {
 
 function resetInputFields() {
   let subTasks = document.getElementById("subTasks");
+  let subTasksArea = document.getElementById("newSubTaskField")
   let initialArea = document.getElementById("checkboxes");
   let newSubTaskField = document.getElementById("newSubTaskField");
   let initialen = document.getElementById("checkboxes");
@@ -83,6 +84,7 @@ function resetInputFields() {
   description.value = "";
   initialArea.innerHTML = "";
   subTasks.value = "";
+  subTasksArea.innerHTML = '';
   newSubTaskField.innerHTML = "";
   assignedBtn.innerHTML = "";
   checkedUsers = [];
@@ -115,29 +117,6 @@ function currentDate() {
   }
   let currentDate = year + "-" + month + "-" + day;
   inputDateField.value = currentDate;
-}
-
-function prioSelectAddTask(prioSelect) {
-  let urgent = document.getElementById(`urgent`);
-  let medium = document.getElementById(`medium`);
-  let low = document.getElementById(`Low`);
-
-  if (prioSelect == "urgent") {
-    urgent.src = "../img/urgent_highlight.png";
-    medium.src = "../img/medium.png";
-    low.src = "../img/low.png";
-    currentPrio = "urgent";
-  } else if (prioSelect == "medium") {
-    urgent.src = "../img/urgent.png";
-    medium.src = "../img/medium_highlight.png";
-    low.src = "../img/low.png";
-    currentPrio = "medium";
-  } else {
-    urgent.src = "../img/urgent.png";
-    medium.src = "../img/medium.png";
-    low.src = "../img/low_highlight.png";
-    currentPrio = "Low";
-  }
 }
 
 function changePrio(i) {
@@ -393,7 +372,7 @@ function searchContact() {
         searchContacts.push(contactComplete);
         renderContactsToField(searchContacts);
       } else {
-        checkbox.classList.add('vs-hidden')
+        // checkbox.classList.add('vs-hidden')
       }
     }
 }
@@ -411,10 +390,8 @@ function editSubtask(i) {
     subTaskField.classList.add("fill-border-bottom");
 
     if (ulSubtasks) {
-      // subTaskElement.classList.add('li-edit');
       subTaskElement.classList.add("pd-inline-start");
       ulSubtasks.classList.add("pd-inline-start");
-      // subTaskField.classList.add('fill-border-bottom');
 
       subTaskField.innerHTML = "";
       subTaskField.innerHTML = editSubtaskHtml(i, subTask);
@@ -468,18 +445,9 @@ function changeCategory(category) {
   categoryDropdown.innerHTML = "";
   categoryDropdown.innerHTML = clickedCategory;
 
-  taskCategory.push(clickedCategory);
+  taskCategory = clickedCategory;
+  // taskCategory.push(clickedCategory);
   containerCategory.classList.toggle("fill-border");
 
   showCategories(category);
-}
-
-function hoverPrioImage(prioImage) {
-  let currentImage = document.getElementById(prioImage);
-  currentImage.setAttribute("src", "../img/prio_low_hover.png");
-}
-
-function leaveHover(prioImage) {
-  let currentImage = document.getElementById(prioImage);
-  currentImage.setAttribute("src", "../img/low.png");
 }
