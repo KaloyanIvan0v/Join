@@ -1,6 +1,6 @@
 let currentDraggedElement;
 let checkedStatusSubtasks = false;
-
+//test comentar
 async function init_board() {
   await loadTasks();
   includeHTML();
