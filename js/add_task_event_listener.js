@@ -2,25 +2,25 @@ document.addEventListener('DOMContentLoaded', function() {
     let dateInput = document.getElementById('dueDate');
     let requiredDate = document.getElementById('requiredDate');
     let taskArea = document.getElementById('description');
-    // let assignedBtn = document.getElementById('inputToSearchContact');
+    let assignedBtn = document.getElementById('inputToSearchContact');
     let subTask = document.getElementById('subTasks');
     // let subTaskField = document.getElementById('inputFieldSubtasks')
     // let inputToSearchContact = document.getElementById("inputToSearchContact");
     let containerCategory = document.getElementById("containerCategory");
 
-
+    subTask.addEventListener('keydown', handleEnterKeyPress);
     dateInput.addEventListener('change', changeBorder);
     dateInput.addEventListener('keydown', changeBorder);
     dateInput.addEventListener('blur', function() {
         resetDateInput(dateInput, requiredDate);
     })
-    
-    // subTask.addEventListener('keypress', function(event) {
-    //     let x = event.code;
-    //     if(x == 'Enter') {
-    //         addNewSubTask();
-    //     }
-    // })
+
+    function handleEnterKeyPress(event) {
+        if (event.key === 'Enter') {
+            addNewSubTask();
+            subTask.blur();
+        }
+    }    
     
     function changeBorder() {
         dateInput.classList.remove('fill-border');
@@ -61,10 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
         containerCategory.classList.toggle('fill-border');
     })
 
-    // assignedBtn.addEventListener('blur', function(event) {
-    //     assignedBtn.classList.remove('fill-border');
-    //     showCheckboxes();
-    // })
+    assignedBtn.addEventListener('blur', function(event) {
+        assignedBtn.classList.remove('fill-border');
+        elseForshowCheckBoxes(assignedBtn);
+    })
 });
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -234,7 +234,7 @@ function showCheckboxes() {
     elseForshowCheckBoxes(assignedBtn);
   }
   assignedBtn.parentElement.classList.toggle("fill-border");
-  checkboxes.classList.toggle("d-flex-initials");
+  // checkboxes.classList.toggle("d-flex-initials");
   toggleDropDownArrow("dropDownArrow");
 }
 
@@ -246,6 +246,7 @@ function ifForshowCheckBoxes(checkboxes, assignedBtn) {
 }
 
 function elseForshowCheckBoxes(assignedBtn) {
+  checkboxes.classList.add("vs-hidden");
   assignedBtn.blur();
   divContacts = false;
   showInitials();
