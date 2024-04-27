@@ -446,4 +446,5 @@ function clearAddTaskForm() {
 function createTaskAtBoard() {
   addTask();
   closePopUp();
+  renderTasks(tasks);
 }
