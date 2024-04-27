@@ -147,6 +147,7 @@ async function addNewContact() {
     color: color,
     nameInitials: contactBadge,
     author: author,
+    checkbox: false,
   };
   contacts.push(contact);
   safeContacts();

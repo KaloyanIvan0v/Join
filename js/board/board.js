@@ -442,3 +442,8 @@ function clearAddTaskForm() {
   furtherResetField();
   closePopUp();
 }
+
+function createTaskAtBoard() {
+  addTask();
+  closePopUp();
+}

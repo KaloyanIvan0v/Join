@@ -11,19 +11,19 @@ let checkBoxContact = false;
 let arrowToggleCheck = false;
 
 function init() {
-    includeHTML();
-    setTimeout(loadFirstLettersFromSessionStorage, 200);
-    loadTasks();
-    loadContacts();
-    whichPriority();
-    loadUsers();
-    currentDate();
+  includeHTML();
+  setTimeout(loadFirstLettersFromSessionStorage, 200);
+  loadTasks();
+  loadContacts();
+  whichPriority();
+  loadUsers();
+  currentDate();
 }
 
 function createTask() {
-    addTask();
-    addedToBoard();
-    window.location.href = "board.html";
+  addTask();
+  addedToBoard();
+  window.location.href = "board.html";
 }
 
 async function addTask() {
@@ -49,7 +49,7 @@ async function addTask() {
   };
   tasks.push(task);
   await setItem("tasks", tasks);
-  resetInputFields();
+  //resetInputFields();
 }
 
 function increaseId() {
@@ -72,10 +72,10 @@ function addedToBoard() {
 }
 
 function resetInputFields() {
-    let subTasks =  document.getElementById('subTasks');
-    let initialArea = document.getElementById('checkboxes');
-    let newSubTaskField = document.getElementById('newSubTaskField');
-    let initialen = document.getElementById('checkboxes')
+  let subTasks = document.getElementById("subTasks");
+  let initialArea = document.getElementById("checkboxes");
+  let newSubTaskField = document.getElementById("newSubTaskField");
+  let initialen = document.getElementById("checkboxes");
 
   title.value = "";
   description.value = "";
@@ -88,10 +88,10 @@ function resetInputFields() {
 }
 
 function furtherResetField() {
-    currentDate();
-    changeCategory('Select task category');
-    setItem('subTasks', []);
-    // changePrio(1);
+  currentDate();
+  changeCategory("Select task category");
+  setItem("subTasks", []);
+  // changePrio(1);
 
   checkChangeIcons = true;
   changeIconsSubtask();
@@ -115,51 +115,51 @@ function currentDate() {
 }
 
 function prioSelectAddTask(prioSelect) {
-    let urgent = document.getElementById(`urgent`);
-    let medium = document.getElementById(`medium`);
-    let low = document.getElementById(`Low`);
-  
-    if(prioSelect == 'urgent') {
-      urgent.src = '../img/urgent_highlight.png';
-      medium.src = '../img/medium.png';
-      low.src = '../img/low.png';
-      currentPrio = 'urgent';
-    } else if(prioSelect == 'medium') {
-      urgent.src = '../img/urgent.png';
-      medium.src = '../img/medium_highlight.png';
-      low.src = '../img/low.png';
-      currentPrio = 'medium';
-    } else {
-      urgent.src = '../img/urgent.png';
-      medium.src = '../img/medium.png';
-      low.src = '../img/low_highlight.png';
-      currentPrio = 'Low';
-    }
+  let urgent = document.getElementById(`urgent`);
+  let medium = document.getElementById(`medium`);
+  let low = document.getElementById(`Low`);
+
+  if (prioSelect == "urgent") {
+    urgent.src = "../img/urgent_highlight.png";
+    medium.src = "../img/medium.png";
+    low.src = "../img/low.png";
+    currentPrio = "urgent";
+  } else if (prioSelect == "medium") {
+    urgent.src = "../img/urgent.png";
+    medium.src = "../img/medium_highlight.png";
+    low.src = "../img/low.png";
+    currentPrio = "medium";
+  } else {
+    urgent.src = "../img/urgent.png";
+    medium.src = "../img/medium.png";
+    low.src = "../img/low_highlight.png";
+    currentPrio = "Low";
   }
+}
 
 function changePrio(i) {
-    currentPrio = priorities[i]['text'];
-    priorities[i]['isPriority'] = true;
-    whichPriority();
+  currentPrio = priorities[i]["text"];
+  priorities[i]["isPriority"] = true;
+  whichPriority();
 }
 
 function whichPriority() {
-    let prioSelection = document.getElementById('prioSelection');
-    prioSelection.innerHTML = '';
+  let prioSelection = document.getElementById("prioSelection");
+  prioSelection.innerHTML = "";
 
-    for(i = 0; i < priorities.length; i++) {
-        priority = priorities[i];
-        checkBooleanForPriority(priority);
-    }
+  for (i = 0; i < priorities.length; i++) {
+    priority = priorities[i];
+    checkBooleanForPriority(priority);
+  }
 }
 
 function checkBooleanForPriority(priority) {
-    if(priority['isPriority'] == false) {
-        prioSelection.innerHTML += prioNormal(priority);
-    } else {
-        prioSelection.innerHTML += prioActive(priority);
-        priority['isPriority'] = false;
-    }
+  if (priority["isPriority"] == false) {
+    prioSelection.innerHTML += prioNormal(priority);
+  } else {
+    prioSelection.innerHTML += prioActive(priority);
+    priority["isPriority"] = false;
+  }
 }
 
 // <-------------Subtasks functions----------------->
@@ -222,32 +222,32 @@ function changeIconsSubtask() {
 }
 
 function showCheckboxes() {
-    let checkboxes = document.getElementById("checkboxes");
-    let assignedBtn = document.getElementById('inputToSearchContact');
+  let checkboxes = document.getElementById("checkboxes");
+  let assignedBtn = document.getElementById("inputToSearchContact");
 
-    toggleUserListInitials();
+  toggleUserListInitials();
 
-    if (divContacts == false) {
-        ifForshowCheckBoxes(checkboxes, assignedBtn)
-    } else {
-        elseForshowCheckBoxes(assignedBtn)
-    }
-    assignedBtn.parentElement.classList.toggle('fill-border');
-    checkboxes.classList.toggle('d-flex-initials');
-    toggleDropDownArrow("dropDownArrow");
+  if (divContacts == false) {
+    ifForshowCheckBoxes(checkboxes, assignedBtn);
+  } else {
+    elseForshowCheckBoxes(assignedBtn);
+  }
+  assignedBtn.parentElement.classList.toggle("fill-border");
+  checkboxes.classList.toggle("d-flex-initials");
+  toggleDropDownArrow("dropDownArrow");
 }
 
 function ifForshowCheckBoxes(checkboxes, assignedBtn) {
-    checkboxes.classList.remove('vs-hidden');
-    assignedBtn.placeholder = 'Search Contact';
-    renderContactsToField(contacts, checkboxes);
-    divContacts = true;
+  checkboxes.classList.remove("vs-hidden");
+  assignedBtn.placeholder = "Search Contact";
+  renderContactsToField(contacts, checkboxes);
+  divContacts = true;
 }
 
 function elseForshowCheckBoxes(assignedBtn) {
-    assignedBtn.blur();
-    divContacts = false;
-    showInitials();
+  assignedBtn.blur();
+  divContacts = false;
+  showInitials();
 }
 
 function toggleDropDownArrow(idImage) {
@@ -262,48 +262,50 @@ function toggleDropDownArrow(idImage) {
 }
 
 function toggleUserListInitials() {
-    let checkboxes = document.getElementById("checkboxes");
+  let checkboxes = document.getElementById("checkboxes");
 
   checkboxes.classList.toggle("user-list");
   checkboxes.classList.toggle("d-flex-initials");
 }
 
 function renderContactsToField(arrayToRender) {
-    let userCheckBox = document.getElementById("checkboxes");
-    userCheckBox.innerHTML = "";
-  
-    if (!userCheckBox.classList.contains("user-list")) {
-      toggleUserListInitials();
-    }
-  
-    for (i = 0; i < arrayToRender.length; i++) {
-      user = arrayToRender[i];
-      userCheckBox.innerHTML += returnHtmlSingleContact(user);
-      backgroundColorInitials(i, "none");
-    }
-  
-    if (checkedUsers.length > 0) {
-      for (i = 0; i < arrayToRender.length; i++) {
-        examineUser(i);
-      }
-    }
+  let userCheckBox = document.getElementById("checkboxes");
+  userCheckBox.innerHTML = "";
+
+  if (!userCheckBox.classList.contains("user-list")) {
+    toggleUserListInitials();
   }
 
-function examineUser(i) {
-    let currentName = contacts[i]["name"];
-    let index = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
-  
-    if (index != -1) {
-      toggleForCheckedUser(i);
+  for (i = 0; i < arrayToRender.length; i++) {
+    user = arrayToRender[i];
+    userCheckBox.innerHTML += returnHtmlSingleContact(user);
+    backgroundColorInitials(i, "none");
+  }
+
+  if (checkedUsers.length > 0) {
+    for (i = 0; i < arrayToRender.length; i++) {
+      examineUser(i);
     }
   }
+}
+
+function examineUser(i) {
+  let currentName = contacts[i]["name"];
+  let index = checkedUsers.findIndex(
+    (item) => JSON.stringify(item["name"]) === JSON.stringify(currentName)
+  );
+
+  if (index != -1) {
+    toggleForCheckedUser(i);
+  }
+}
 
 function toggleForCheckedUser(i) {
   let userField = document.getElementById(`userField${i}`);
   let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
 
-    userField.classList.toggle('hover-user-field');
-    paddingForChecked.classList.toggle('pd-right-16');
+  userField.classList.toggle("hover-user-field");
+  paddingForChecked.classList.toggle("pd-right-16");
 }
 
 function backgroundColorInitials(i, whichArea) {
@@ -324,14 +326,14 @@ function selectedUser(i) {
   let singleUser = contacts[i];
   let currentIndex = checkedUsers.indexOf(singleUser);
 
-    if(!checkedUsers.includes(singleUser, 0)) {
-        checkedUsers.push(singleUser);
-    } else {
-        checkedUsers.splice(currentIndex, 1);
-    }
-    toggleForCheckedUser(i);
-    toggleCheckbox(i);
-    return;
+  if (!checkedUsers.includes(singleUser, 0)) {
+    checkedUsers.push(singleUser);
+  } else {
+    checkedUsers.splice(currentIndex, 1);
+  }
+  toggleForCheckedUser(i);
+  toggleCheckbox(i);
+  return;
 }
 
 function toggleCheckbox(i) {
@@ -372,22 +374,22 @@ function searchContact() {
   ).value;
   inputSearchContact = inputSearchContact.toLowerCase();
 
-    searchContacts.splice(0, searchContacts.length);
-    if(inputSearchContact.length > 1) {
-        for(i = 0; i < contacts.length; i++) {
-            contact = contacts[i]['name'];
-            let contactComplete = contacts[i];
-            if(contact.toLowerCase().includes(inputSearchContact)) {
-                searchContacts.push(contactComplete);
-            }
-        }  renderContactsToField(searchContacts);
-
-    } else if(inputSearchContact.length == 1) {
-        renderContactsToField(contacts);
-    } else if(inputSearchContact.length == 1) {
-        renderAssignedToField(contacts);
+  searchContacts.splice(0, searchContacts.length);
+  if (inputSearchContact.length > 1) {
+    for (i = 0; i < contacts.length; i++) {
+      contact = contacts[i]["name"];
+      let contactComplete = contacts[i];
+      if (contact.toLowerCase().includes(inputSearchContact)) {
+        searchContacts.push(contactComplete);
+      }
+    }
+    renderContactsToField(searchContacts);
+  } else if (inputSearchContact.length == 1) {
+    renderContactsToField(contacts);
+  } else if (inputSearchContact.length == 1) {
+    renderAssignedToField(contacts);
     renderAssignedToField(searchContacts);
-  } 
+  }
 }
 
 function editSubtask(i) {
@@ -402,17 +404,17 @@ function editSubtask(i) {
     ulSubtasks.classList.add("pd-inline-start");
     subTaskField.classList.add("fill-border-bottom");
 
-    if(ulSubtasks) {
-        // subTaskElement.classList.add('li-edit');
-        subTaskElement.classList.add('pd-inline-start');
-        ulSubtasks.classList.add('pd-inline-start');
-        // subTaskField.classList.add('fill-border-bottom');
+    if (ulSubtasks) {
+      // subTaskElement.classList.add('li-edit');
+      subTaskElement.classList.add("pd-inline-start");
+      ulSubtasks.classList.add("pd-inline-start");
+      // subTaskField.classList.add('fill-border-bottom');
 
-        subTaskField.innerHTML = '';
-        subTaskField.innerHTML = editSubtaskHtml(i, subTask);
-        inputFocus(i);
+      subTaskField.innerHTML = "";
+      subTaskField.innerHTML = editSubtaskHtml(i, subTask);
+      inputFocus(i);
     }
-}
+  }
 }
 
 function deleteSubtask(i) {
@@ -438,19 +440,19 @@ function inputFocus(i) {
 }
 
 function showCategories(category) {
-    let categoriesField = document.getElementById('categories');
+  let categoriesField = document.getElementById("categories");
 
-    if(category != 'Select task category') {
-        toggleDropDownArrow('dropDownArrowCategory');
-        categoriesField.classList.toggle('vs-hidden');
-        giveFocus(categoriesField);
-    }
-}   
+  if (category != "Select task category") {
+    toggleDropDownArrow("dropDownArrowCategory");
+    categoriesField.classList.toggle("vs-hidden");
+    giveFocus(categoriesField);
+  }
+}
 
 function giveFocus(categoriesField) {
-    if(!categoriesField.classList.contains('vs-hidden')) {
-        categoriesField.focus();
-    }
+  if (!categoriesField.classList.contains("vs-hidden")) {
+    categoriesField.focus();
+  }
 }
 
 function changeCategory(category) {
@@ -463,15 +465,15 @@ function changeCategory(category) {
   taskCategory.push(clickedCategory);
   containerCategory.classList.toggle("fill-border");
 
-    showCategories(category);
+  showCategories(category);
 }
 
 function hoverPrioImage(prioImage) {
-    let currentImage = document.getElementById(prioImage);
-    currentImage.setAttribute('src', '../img/prio_low_hover.png');
+  let currentImage = document.getElementById(prioImage);
+  currentImage.setAttribute("src", "../img/prio_low_hover.png");
 }
 
 function leaveHover(prioImage) {
-    let currentImage = document.getElementById(prioImage);
-    currentImage.setAttribute('src', '../img/low.png');
+  let currentImage = document.getElementById(prioImage);
+  currentImage.setAttribute("src", "../img/low.png");
 }

@@ -155,25 +155,25 @@ function openTaskDetailViewHtml(overlayTask, i, id) {
       <span id="description(${i})">${overlayTask["description"]}</span>
     </div>
     <div class="overlay-date font-overlay">
-        <span>Due Date:</span>
+        <span class="task-detail-view-section-title">Due Date:</span>
         <span id="date(${i})">${overlayTask["dueDate"]}</span>
     </div>
     <div class="overlay-prio font-overlay">
-        <span>Priority:</span>
+        <span class="task-detail-view-section-title">Priority:</span>
         <div class="prio-name-image">
             <span>${overlayTask["prio"]}</span>
             <div id="prioField${i}"></div>
         </div>
     </div>
     <div class="overlay-assigned font-overlay">
-        <span>Assigned To:</span>
+        <span class="task-detail-view-section-title">Assigned To:</span>
         <div class="d-flex">
           <div id="contactsFieldBoard(${i})" class="column-gap-contacts"></div>
           <div id="contactsFieldBoardFullName(${i})" class="column-gap-contacts"></div>
         </div>
     </div>
     <div class="overlay-subtasks font-overlay">
-      <span>Subtasks</span>
+      <span class="task-detail-view-section-title">Subtasks</span>
       <div id="subTasksField${i}" class="input-subtasks-overlay"></div>
     </div>
     <div class="last-section-overlay">
