@@ -77,12 +77,14 @@ function resetInputFields() {
   let initialArea = document.getElementById("checkboxes");
   let newSubTaskField = document.getElementById("newSubTaskField");
   let initialen = document.getElementById("checkboxes");
+  let assignedBtn = document.getElementById("inputToSearchContact");
 
   title.value = "";
   description.value = "";
   initialArea.innerHTML = "";
   subTasks.value = "";
   newSubTaskField.innerHTML = "";
+  assignedBtn.innerHTML = "";
   checkedUsers = [];
   initialen.innerHTML = "";
   furtherResetField();
@@ -225,7 +227,8 @@ function changeIconsSubtask() {
 function showCheckboxes() {
   let checkboxes = document.getElementById("checkboxes");
   let assignedBtn = document.getElementById("inputToSearchContact");
-
+  assignedBtn.value = '';
+ 
   toggleUserListInitials();
 
   if (divContacts == false) {
@@ -246,7 +249,7 @@ function ifForshowCheckBoxes(checkboxes, assignedBtn) {
 }
 
 function elseForshowCheckBoxes(assignedBtn) {
-  checkboxes.classList.add("vs-hidden");
+  // checkboxes.classList.add("vs-hidden");
   assignedBtn.blur();
   divContacts = false;
   showInitials();
@@ -287,40 +290,27 @@ function renderContactsToField(arrayToRender) {
   if (checkedUsers.length > 0) {
     for (i = 0; i < arrayToRender.length; i++) {
       examineUser(i);
-
-    }}
-
-  function examineUser(i) {
-    let currentName = contacts[i]["name"];
-    let index = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
-
-    if (index != -1) {
-      toggleForCheckedUser(i);
-      toggleCheckbox(i);
     }
   }
 }
 
 function examineUser(i) {
-  let currentName = contacts[i]["name"];
-  let index = checkedUsers.findIndex(
-    (item) => JSON.stringify(item["name"]) === JSON.stringify(currentName)
-  );
+    let currentName = contacts[i]["name"];
+    let indexCheckedUsers = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
 
-  if (index != -1) {
-    toggleForCheckedUser(i);
-    toggleCheckbox(i);
-  }
+    if (indexCheckedUsers != -1) {
+      toggleForCheckedUser(i);
+      toggleCheckbox(i);
+    }
 }
 
 function examineUser(i) {
   let currentName = contacts[i]["name"];
-  let index = checkedUsers.findIndex(
-    (item) => JSON.stringify(item["name"]) === JSON.stringify(currentName)
-  );
+  let index = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
 
   if (index != -1) {
     toggleForCheckedUser(i);
+    toggleCheckbox(i);
   }
 }
 
@@ -391,27 +381,21 @@ function showInitials() {
 }
 
 function searchContact() {
-  let inputSearchContact = document.getElementById(
-    "inputToSearchContact"
-  ).value;
+  let inputSearchContact = document.getElementById("inputToSearchContact").value;
+  let checkbox = document.getElementById('checkboxes');
   inputSearchContact = inputSearchContact.toLowerCase();
 
   searchContacts.splice(0, searchContacts.length);
-  if (inputSearchContact.length > 1) {
     for (i = 0; i < contacts.length; i++) {
       contact = contacts[i]["name"];
       let contactComplete = contacts[i];
       if (contact.toLowerCase().includes(inputSearchContact)) {
         searchContacts.push(contactComplete);
+        renderContactsToField(searchContacts);
+      } else {
+        checkbox.classList.add('vs-hidden')
       }
     }
-    renderContactsToField(searchContacts);
-  } else if (inputSearchContact.length == 1) {
-    renderContactsToField(contacts);
-  } else if (inputSearchContact.length == 1) {
-    renderAssignedToField(contacts);
-    renderAssignedToField(searchContacts);
-  }
 }
 
 function editSubtask(i) {
