@@ -2,7 +2,7 @@
     <span class="headline-add-task-template">Add Task</span>
     <a onclick="closePopUp()"><img src="/img/close.png"></a>
 </div>
-<form onsubmit="addTask(); return false">
+<form onsubmit="createTaskAtBoard(); return false">
     <div class="test-container">
         <div class="leftside-add-task-template">
             <div class="d-flex-column-center">
@@ -120,13 +120,14 @@
         </div>
 
         <div class="buttons-clear-create">
-            <button class="btn-add-task-template border-cancel" onclick="clearAddTaskForm(); return false">
-                <span class="typography-clear">Cancel</span>
+            <button class="btn-add-task-template border-cancel join-button-empty"
+                onclick="clearAddTaskForm(); return false">
+                <span class="typography-clear ">Cancel</span>
                 <img src="/img/iconoir_cancel.png">
             </button>
 
-            <button class="btn-add-task-template bg-color-create" id="createBtn">
-                <span class="typography-create">Create Task</span>
+            <button class="btn-add-task-template bg-color-create join-button" id="createBtn">
+                <span class="typography-create ">Create Task</span>
                 <img src="/img/check.png">
             </button>
         </div>
