@@ -8,7 +8,7 @@ let searchContacts = [];
 let finishedSubTasks = [];
 let checkChangeIcons = false;
 let divContacts = false;
-let checkBoxContact = false;
+// let checkBoxContact = false;
 let arrowToggleCheck = false;
 
 function init() {
@@ -92,7 +92,7 @@ function furtherResetField() {
     currentDate();
     changeCategory('Select task category');
     setItem('subTasks', []);
-    // changePrio(1);
+    changePrio(1);
 
   checkChangeIcons = true;
   changeIconsSubtask();
@@ -295,7 +295,8 @@ function examineUser(i) {
     let index = checkedUsers.findIndex((item) => JSON.stringify(item["name"]) === JSON.stringify(currentName));
   
     if (index != -1) {
-      toggleForCheckedUser(i);
+        toggleForCheckedUser(i);
+        toggleCheckbox(i);
     }
   }
 
@@ -332,18 +333,20 @@ function selectedUser(i) {
     }
     toggleForCheckedUser(i);
     toggleCheckbox(i);
-    return;
 }
 
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkBox${i}`);
+  let checkBoxContact = contacts[i]['checkBoxContact'];
 
   if (checkBoxContact == true) {
     checkBox.src = "../img/box-unchecked.png";
-    checkBoxContact = false;
+    contacts[i]['checkBoxContact'] = false;
+    // checkBoxContact = false;
   } else {
     checkBox.src = "../img/Check button.png";
-    checkBoxContact = true;
+    contacts[i]['checkBoxContact'] = true;
+    // checkBoxContact = true;
   }
 }
 
