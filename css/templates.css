@@ -163,7 +163,8 @@ p.textColor{
 @media (max-width: 860px) {
   .header {
     height: 40px;
-    padding-left: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .headerText {
@@ -184,7 +185,7 @@ p.textColor{
     left: 0;
     right: 0;
     bottom: 0;
-    top: calc(100% - 80px);
+    top: calc(100% - 73.75px);
     width: 100%;
   }
 

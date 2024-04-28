@@ -31,3 +31,20 @@ function countStatements(index) {
   document.getElementById(`count${index}`).innerHTML = statementCounts;
 }
 
+function upCommingDeadline(){
+  let actuellDate = new Date();
+  let kürzesteZeit = Infinity;
+  let kürzesteDatum = null;
+
+  for (var i = 0; i < tasks.length; i++) {
+      var zeit = new Date(tasks[i].dueDate).getMilliseconds - actuellDate.getMilliseconds();
+      if (zeit > 0 && zeit < kürzesteZeit) {
+          kürzesteDatum = tasks[i].dueDate;
+      }
+  }
+
+  console.log(actuellDate);
+  console.log(kürzesteZeit);
+  console.log(kürzesteDatum);
+}
+

@@ -48,7 +48,9 @@ function loadFirstLettersFromSessionStorage() {
     let firstName = firstAndLastName[0];
     let lastName = firstAndLastName[1];
     setAbbreviationToUserIcon(firstName, lastName);
-    document.getElementById("name").innerHTML = `${firstName} ${lastName}`;
+    if (window.innerWidth > 1440) {
+      document.getElementById("name").innerHTML = `${firstName} ${lastName}`;
+    }
   } else {
     document.getElementById("abbreviation").innerHTML = "G";
   }
