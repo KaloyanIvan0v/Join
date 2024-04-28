@@ -1,6 +1,6 @@
 let currentDraggedElement;
 let checkedStatusSubtasks = false;
-//test comentar
+
 async function init_board() {
   await loadTasks();
   includeHTML();
@@ -239,6 +239,7 @@ function editTaskOverlay(i) {
 
   prioSelect(i, currentPrio);
   renderContactsBoardInitialen(i, false);
+  //changeIconsSubtask();
 }
 
 function closeCurrentTask() {
@@ -483,8 +484,16 @@ function renderTaskAssignedNames(i) {
   }
 }
 
-function closeTaskFormTemplate() {
+function closeTaskFormTemplate(event) {
+  if (event) {
+    event.preventDefault();
+  }
+  addTaskFormResetFields();
   closePopUp();
+}
+
+function addTaskFormResetFields() {
+  clearContactsChecked();
 }
 
 function toggleCheckboxSubTask(i, subTaskId) {

@@ -73,7 +73,7 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
       </div>
     </div>
     
-    <div class="overlay-date font-overlay">
+    <div class="overlay-date-edit font-overlay">
         <span clas="edit-task-headlines">Due date</span>
         <input class="input-edit-title" type="date" value="${overlayTask["dueDate"]}" id="date(${i})">
         <div class="vs-hidden">
@@ -126,7 +126,7 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
     <div class="last-section-overlay">
       <div></div>
       <div class="delete-edit-overlay">
-      <button class="btn-add-task" onclick="saveTaskChanges(${i}); return false">
+      <button class="btn-save-edit-task join-button" onclick="saveTaskChanges(${i}); return false">
         <span class="typography-clear">Ok</span>
         <img src="/img/check-white.png">
       </button>

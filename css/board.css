@@ -430,11 +430,19 @@ input:focus {
 .overlay-date {
   width: 100%;
   display: flex;
+  flex-direction: row;
+}
+
+.overlay-date-edit {
+  width: 100%;
+  display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .overlay-prio p {
   padding-bottom: 8px;
+  margin: 0px;
 }
 
 .prio-name-image {
@@ -500,7 +508,7 @@ input:focus {
   cursor: pointer;
 }
 
-.btn-add-task {
+.btn-add-task-board {
   display: flex;
   align-items: center;
   gap: 4px;
