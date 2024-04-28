@@ -23,6 +23,10 @@ h4 {
   background-color: #f6f7f8;
 }
 
+.summeryContentP{
+    font-size: 27px;
+}
+
 h1 {
   font-size: 61px;
 }
@@ -158,9 +162,14 @@ h1 {
   }
 
   .summeryContent {
-    padding-top: 85px;
+    padding-top: 92px;
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .summeryContentP{
+    margin-top: 8px;
+    margin-bottom: 8px;
   }
 
   .summeryTop {
@@ -204,6 +213,7 @@ h1 {
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 16px;
+    height: 100px;
   }
 
   .summeryInfo3{
