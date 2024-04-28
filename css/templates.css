@@ -219,6 +219,9 @@ p.textColor{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .popupHelp {
@@ -231,5 +234,7 @@ p.textColor{
 
   .menuPTag {
     margin-bottom: 0;
+    margin-top: 4px;
+    font-size: 14px;
   }
 }

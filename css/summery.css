@@ -3,6 +3,7 @@ html {
   margin: 0;
   font-family: "Inter";
   height: 100%;
+  background-color: #f6f7f8;
 }
 
 h4 {
@@ -20,7 +21,6 @@ h4 {
   padding-right: 98px;
   display: flex;
   flex-direction: column;
-  background-color: #f6f7f8;
 }
 
 .summeryContentP{
