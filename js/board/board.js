@@ -108,9 +108,9 @@ function openTaskDetailView(i, id) {
   popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[i], i, id);
   choosestatementColor(i);
   whichPriorityTaskCard(i, true);
-  //renderSubTasksBoard(i);
   handleHoverButtonDeleteEditTask();
   renderTaskAssignedNames(i);
+  renderSubTasksBoard(i);
 }
 
 function handleHoverButtonDeleteEditTask() {
@@ -136,25 +136,13 @@ function toggleBackgroundDialog() {
 }
 
 function renderSubTasksBoard(i) {
-  let subTasksField = document.getElementById(`subTasksField${i}`);
+  let subTasksField = document.getElementById(`subTasksField`);
   let subTasks = tasks[i]["subTasks"];
   subTasksField.innerHTML = "";
 
   for (j = 0; j < subTasks.length; j++) {
     let subTask = subTasks[j];
-    subTasksGlobal.push(subTask);
-    subTasksField.innerHTML += returnHtmlSubtasks(subTask, j);
-  }
-  //checkSubtaskBoardOverlayChecked();
-}
-
-function checkSubtaskBoardOverlayChecked() {
-  for (let i = 0; i < subTasksGlobal.length; i++) {
-    let subTask = subTasksGlobal[i];
-    if (finishedSubTasks.includes(subTask)) {
-      let imgCheck = document.getElementById(`checkEmptySubtask(${i})`);
-      imgCheck.src = "/img/box-checked.png";
-    }
+    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, j);
   }
 }
 
@@ -206,26 +194,6 @@ function backgroundColorInitialsBoard(i, j) {
   let bgColor = contactColor[colorNumber];
   initialArea.style.backgroundColor = bgColor;
   initialArea.removeAttribute("id");
-}
-
-function checkSubtaskBoardOverlay(j) {
-  let currentSubTask = subTasksGlobal[j];
-  let imgCheck = document.getElementById(`checkEmptySubtask(${j})`);
-
-  if (checkedStatusSubtasks == false) {
-    finishedSubTasks.push(currentSubTask);
-    imgCheck.src = "/img/box-checked.png";
-    checkedStatusSubtasks = true;
-    // updateLoadbar(i);
-  } else {
-    let index = finishedSubTasks.findIndex(
-      (subTask) => JSON.stringify(subTask) === JSON.stringify(currentSubTask)
-    );
-    // updateLoadbar(i);
-    finishedSubTasks.splice(index, 1);
-    imgCheck.src = "/img/check_empty.png";
-    checkedStatusSubtasks = false;
-  }
 }
 
 function editTaskOverlay(i) {
@@ -483,4 +451,8 @@ function renderTaskAssignedNames(i) {
 
 function closeTaskFormTemplate() {
   closePopUp();
+}
+
+function toggleCheckboxSubTask(i, j) {
+  console.log(i, j);
 }
