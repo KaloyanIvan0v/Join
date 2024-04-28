@@ -1,7 +1,8 @@
-let loggedInUser;
-let pswVisibility = false;
-let checkBoxState = false;
-
+/**
+ * Initializes the login process by setting the start screen image, loading user data,
+ * and configuring various event listeners. It also starts a timeout to initiate the start screen
+ * animation and sets session storage data.
+ */
 async function initLogin() {
   setStartScreenImgAndBackgroundcolor();
   await loadUsers();
@@ -17,14 +18,21 @@ async function initLogin() {
   handleInputOnFocusChangeParentElementBorderColor();
 }
 
+/**
+ * Starts the screen animation by adding the 'move' class to the moving image
+ * and hiding the opacity layer.
+ */
 function startScreen() {
   document.querySelector(".moving-img").classList.add("move");
   document.querySelector(".opacity-layer").classList.add("hidden");
 }
 
+/**
+ * Configures the start screen image and background color depending on the
+ * window's width.
+ */
 function setStartScreenImgAndBackgroundcolor() {
-  if (window.innerWidth > 860) {
-  } else {
+  if (window.innerWidth <= 860) {
     document.getElementById("id-logo-img").src = "../img/logo-light.svg";
     document.getElementById(
       "id-opacity-layer"
@@ -34,24 +42,35 @@ function setStartScreenImgAndBackgroundcolor() {
     }, 1200);
   }
 }
+
+/**
+ * Handles the login process by checking if the user exists and the provided password
+ * is correct. If the login is successful, redirects to the summary page. Otherwise,
+ * displays appropriate feedback messages.
+ */
 function login() {
-  let user = email.value;
+  const user = email.value;
   if (userExist(user) && passwordIsCorrect(user)) {
     setSesionStorage("loggedInUser", users[getUserIndex(user)]);
     resetForm();
     window.location.href = "../html/summery.html";
   } else {
     if (!userExist(user)) {
-      SetLoginFeedbackMsg("user does not exist!", 3000);
+      SetLoginFeedbackMsg("User does not exist!", 3000);
     } else if (!passwordIsCorrect(user)) {
-      SetLoginFeedbackMsg("password is incorrect!", 3000);
-    } else {
+      SetLoginFeedbackMsg("Password is incorrect!", 3000);
     }
   }
 }
 
+/**
+ * Displays a feedback message for a specified duration.
+ *
+ * @param {string} errMsg - The feedback message to display.
+ * @param {number} duration - The duration in milliseconds to display the message.
+ */
 function SetLoginFeedbackMsg(errMsg, duration) {
-  let feedbackField = document.getElementById("id-input-feedback");
+  const feedbackField = document.getElementById("id-input-feedback");
   feedbackField.innerHTML = setLoginFeedbackMsgHtml(errMsg);
 
   setTimeout(() => {
@@ -59,49 +78,78 @@ function SetLoginFeedbackMsg(errMsg, duration) {
   }, duration);
 }
 
+/**
+ * Generates the HTML for the login feedback message.
+ *
+ * @param {string} errMsg - The feedback message.
+ * @returns {string} The HTML for the feedback message.
+ */
 function setLoginFeedbackMsgHtml(errMsg) {
-  return /*html*/ `
-${errMsg}
-`;
+  return `${errMsg}`;
 }
 
+/**
+ * Clears the feedback message from the given element.
+ *
+ * @param {HTMLElement} divId - The HTML element to clear.
+ */
 function removeFeddbackMsg(divId) {
   divId.innerHTML = "";
 }
 
+/**
+ * Checks whether a user exists based on their email.
+ *
+ * @param {string} user - The email of the user to check.
+ * @returns {boolean} True if the user exists, false otherwise.
+ */
 function userExist(user) {
   for (let i = 0; i < users.length; i++) {
-    if (user == users[i].email) {
+    if (user === users[i].email) {
       return true;
     }
   }
   return false;
 }
 
+/**
+ * Checks whether the provided password is correct for a given user.
+ *
+ * @param {string} user - The email of the user.
+ * @returns {boolean} True if the password is correct, false otherwise.
+ */
 function passwordIsCorrect(user) {
-  let userPsw = users[getUserIndex(user)].password;
-  let inputPsw = document.getElementById("password0").value;
-  if (userPsw == inputPsw) {
-    return true;
-  } else {
-    return false;
-  }
+  const userPsw = users[getUserIndex(user)].password;
+  const inputPsw = document.getElementById("password0").value;
+  return userPsw === inputPsw;
 }
 
+/**
+ * Gets the index of a user in the users array based on their email.
+ *
+ * @param {string} user - The email of the user.
+ * @returns {number} The index of the user in the users array.
+ */
 function getUserIndex(user) {
   for (let i = 0; i < users.length; i++) {
-    if (users[i].email == user) {
+    if (users[i].email === user) {
       return i;
-    } else {
     }
   }
+  return -1; // User not found
 }
 
+/**
+ * Logs in as a guest user and redirects to the summary page.
+ */
 function guestLogIn() {
   loggedInUser = { name: "Guest", email: "guest@info.com", password: "guest" };
   window.location.href = "../html/summery.html";
 }
 
+/**
+ * Resets the login form inputs and disables the login button.
+ */
 function resetForm() {
   const loginBtn = document.getElementById("loginBtn");
   email.value = "";
@@ -109,9 +157,12 @@ function resetForm() {
   loginBtn.disabled = true;
 }
 
+/**
+ * Toggles the state of a checkbox and updates its visual representation.
+ */
 function toggleCheckbox() {
-  let checkBox = document.getElementById("id-checkbox-log-in");
-  if (checkBoxState == false) {
+  const checkBox = document.getElementById("id-checkbox-log-in");
+  if (checkBoxState === false) {
     checkBoxState = true;
     checkBox.src = "../img/box-checked.png";
   } else {
@@ -120,20 +171,33 @@ function toggleCheckbox() {
   }
 }
 
+/**
+ * Sets up event listeners for password input interactions.
+ */
 function setPwdInputEventListeners() {
   document.addEventListener("click", function (event) {
     inputClicked(event.target.id);
   });
 }
 
+/**
+ * Handles input click events to configure password visibility.
+ *
+ * @param {string} id - The ID of the clicked element.
+ */
 function inputClicked(id) {
   confingPwdVisibility(id);
 }
 
+/**
+ * Configures password visibility based on the clicked element ID.
+ *
+ * @param {string} id - The ID of the clicked element.
+ */
 function confingPwdVisibility(id) {
-  if (id != "password0-img") {
-    if (id == "password0") {
-      if (pswVisibility == false) {
+  if (id !== "password0-img") {
+    if (id === "password0") {
+      if (pswVisibility === false) {
         document.getElementById(id + "-img").src = "../img/visibility_off.png";
       } else {
         document.getElementById(id + "-img").src = "../img/visibility.png";
@@ -144,15 +208,23 @@ function confingPwdVisibility(id) {
   }
 }
 
+/**
+ * Hides the password input and changes its visual representation.
+ */
 function hidePasswordInput() {
   document.getElementById("password0-img").src = "../img/lock.svg";
   document.getElementById("password0").type = "password";
   pswVisibility = false;
 }
 
+/**
+ * Toggles the visibility of the password field.
+ *
+ * @param {string} id - The ID of the image element representing password visibility.
+ */
 function togglePswVisibility(id) {
-  let img = document.getElementById(id);
-  if (pswVisibility == false) {
+  const img = document.getElementById(id);
+  if (pswVisibility === false) {
     img.src = "../img/visibility.png";
     pswVisibility = true;
     document.getElementById("password0").type = "text";

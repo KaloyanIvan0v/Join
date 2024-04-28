@@ -165,46 +165,20 @@ function generateBadge(name) {
 }
 
 function renderContacts(contacts) {
-  let currentLetter = null;
   const contactList = document.getElementById("id-contact-inner-list");
-  let sortedContacts = sortListAlphabetically(contacts);
+  const sortedContacts = sortListAlphabetically(contacts);
   clearElementById("id-contact-inner-list");
-  for (let i = 0; i < sortedContacts.length; i++) {
-    const firstLetter = sortedContacts[i].name.charAt(0).toUpperCase();
+  let currentLetter = null;
+  sortedContacts.forEach((contact, i) => {
+    const { name, color } = contact;
+    const firstLetter = name.charAt(0).toUpperCase();
     if (firstLetter !== currentLetter) {
       contactList.innerHTML += renderLetterSectionHTML(firstLetter);
       currentLetter = firstLetter;
     }
-    renderContact(sortedContacts[i], contactList, i);
-    setElementBackgroundColor(
-      `id-contact-list-badges${i}`,
-      sortedContacts[i].color
-    );
-  }
-}
-
-function renderContacts(contacts) {
-  let sortedContacts = sortListAlphabetically(contacts);
-  clearElementById("id-contact-inner-list");
-  renderSortedContacts(sortedContacts);
-}
-
-function renderSortedContacts(sortedContacts) {
-  let currentLetter = null;
-  const contactList = document.getElementById("id-contact-inner-list");
-  for (let i = 0; i < sortedContacts.length; i++) {
-    const firstLetter = sortedContacts[i].name.charAt(0).toUpperCase();
-    if (firstLetter !== currentLetter) {
-      contactList.innerHTML += renderLetterSectionHTML(firstLetter);
-      currentLetter = firstLetter;
-    }
-    renderContact(sortedContacts[i], contactList, i);
-    setElementBackgroundColor(
-      `id-contact-list-badges${i}`,
-      sortedContacts[i].color
-    );
-  }
-  renderMobileAddContactButton();
+    renderContact(contact, contactList, i);
+    setElementBackgroundColor(`id-contact-list-badges${i}`, color);
+  });
 }
 
 function clearElementById(id) {
@@ -267,23 +241,12 @@ function getContactData(contactEmail) {
 }
 
 function renderContactFullMode(contact) {
-  let div = document.getElementById("id-contact-full-mode");
-  const contactName = contact.name;
-  const contactEmail = contact.email;
-  const contactPhone = contact.phone;
-  const contactBadges = contact.nameInitials;
-  const contactColor = contact.color;
-  div.innerHTML = renderContactFullModeHtml(
-    contactName,
-    contactEmail,
-    contactPhone,
-    contactBadges
-  );
-  setElementBackgroundColor("id-contact-full-mode-badges", contactColor);
+  const div = document.getElementById("id-contact-full-mode");
+  const { name, email, phone, nameInitials, color } = contact;
+  div.innerHTML = renderContactFullModeHtml(name, email, phone, nameInitials);
+  setElementBackgroundColor("id-contact-full-mode-badges", color);
+  setTimeout(setListenerForEditDeleteBtn, 25);
   div.innerHTML += renderContactEditMenuMobile();
-  setTimeout(function () {
-    setListenerForEditDeleteBtn();
-  }, 25);
 }
 
 function setListenerForEditDeleteBtn() {
@@ -393,8 +356,10 @@ function openContactEditMenu() {
 }
 
 function closeContactEditMenu() {
-  var element = document.getElementById("id-contact-full-mode-edit-mobile");
-  element.classList.add("hide");
+  if (window.widht < 1080) {
+    var element = document.getElementById("id-contact-full-mode-edit-mobile");
+    element.classList.add("hide");
+  }
 }
 
 function addClickListener() {
