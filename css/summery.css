@@ -18,7 +18,6 @@ h4 {
   padding-top: 140px;
   padding-left: 328px;
   padding-right: 98px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #f6f7f8;
@@ -42,10 +41,6 @@ h1 {
 
 .summeryinfoParent {
   display: flex;
-}
-
-.summeryInfo {
-  width: 560px;
 }
 
 .summeryInfo1 {
@@ -151,9 +146,19 @@ h1 {
   color: #29abe2;
 }
 
+.summeryIcon{
+  width: 69px;
+  height: 69px;
+  margin-right: 18px;
+}
+
 @media (max-width: 860px) {
+  h1{
+    font-size: 38px;
+  }
+
   .summeryContent {
-    padding-top: 110px;
+    padding-top: 85px;
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -178,4 +183,61 @@ h1 {
   .summeryinfoParent {
     justify-content: center;
   }
+
+  .summeryInfo1{
+    flex-wrap: wrap;
+  }
+
+  .summeryToDo{
+    width: 45%;
+    height: 100px;
+  }
+
+  .summeryDone{
+    width: 45%;
+    height: 100px;
+  }
+
+  .summeryInfo2{
+    width: calc(100% - 20px);
+    justify-content: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 16px;
+  }
+
+  .summeryInfo3{
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  .upcommingpartingLine{
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .summeryIcon{
+    margin-right: 10px;
+  }
+
+  .summeryTasksInBoard{
+    width: 96px;
+    height: 118px;
+  }
+
+  .summeryTasksInProgress{
+    width: 96px;
+    height: 118px;
+  }
+
+  .summeryAwaitingFeedback{
+    width: 96px;
+    height: 118px;
+  }
+}
+
+@media (max-width: 1440px) {
+    .greetings{
+      display: none;
+    }
 }
