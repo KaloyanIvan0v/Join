@@ -141,9 +141,21 @@ function renderSubTasksBoard(i) {
   subTasksField.innerHTML = "";
 
   for (j = 0; j < subTasks.length; j++) {
+    let imgSrc;
     let subTask = subTasks[j].subTask;
     let subTaskId = subTasks[j].id;
-    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, subTaskId);
+    let subTaskStatus = subTasks[j].status;
+    if (subTaskStatus == true) {
+      imgSrc = "/img/box-checked.png";
+    } else {
+      imgSrc = "/img/check_empty.png";
+    }
+    subTasksField.innerHTML += returnHtmlSubtasks(
+      subTask,
+      i,
+      subTaskId,
+      imgSrc
+    );
   }
 }
 
@@ -455,17 +467,17 @@ function closeTaskFormTemplate() {
 }
 
 function toggleCheckboxSubTask(i, subTaskId) {
-  if (getSubtaskStatus) {
-    let subTaskStatus =
-      tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)]
-        .status;
-    subTaskStatus = true;
+  if (getSubtaskStatus(i, subTaskId)) {
+    tasks[i].subTasks[
+      getIndexOfElmentById(subTaskId, tasks[i].subTasks)
+    ].status = false;
   } else {
-    let subTaskStatus =
-      tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)]
-        .status;
-    subTaskStatus = false;
+    tasks[i].subTasks[
+      getIndexOfElmentById(subTaskId, tasks[i].subTasks)
+    ].status = true;
   }
+  renderSubTasksBoard(i);
+  setItem("tasks", tasks);
 }
 
 function getSubtaskStatus(i, subTaskId) {
