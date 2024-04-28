@@ -298,6 +298,7 @@ function backgroundColorInitials(i, whichArea) {
 }
 
 function selectedUser(i) {
+  // event.stopPropagation();
   let singleUser = contacts[i];
   let currentIndex = checkedUsers.indexOf(singleUser);
 
@@ -309,6 +310,10 @@ function selectedUser(i) {
   toggleForCheckedUser(i);
   toggleCheckbox(i);
 }
+
+// function notClose(event) {
+//   event.stopPropagation();
+// }
 
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkBox${i}`);

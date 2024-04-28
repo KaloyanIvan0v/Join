@@ -42,6 +42,7 @@ function returnHtmlSingleContact(user) {
         </div>
     </div>`
 }
+
 function returnHtmlCheckAndClear() {
     return `
     <div id="activeInputSubtask" class="active-input-subtasks">
