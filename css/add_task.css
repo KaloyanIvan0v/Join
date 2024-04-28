@@ -35,9 +35,10 @@ input[type=date]:hover {
 }
 
 .over-div {
-    /* width: 976.25px; */
-    width: 100%;
-    padding: 206px 328px;
+    /* padding: 206px 328px; */
+    position: absolute;
+    left: 328px;
+    top: 206px;
 }
 
 textarea {
@@ -50,11 +51,9 @@ textarea {
 }
 
 .headline-area-template {
-    width: 440px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    /* padding-bottom: 32px; */
 }
 
 .headline-add-task-template {
@@ -78,14 +77,17 @@ h2 {
 
 .highlight-color-medium {
     background-color: #FFA800;
+    color: #FFFFFF;
 }
 
 .highlight-color-urgent {
     background-color: #FF3D00;
+    color: #FFFFFF;
 }
 
 .highlight-color-low {
     background-color: #7AE229;
+    color: #FFFFFF;
 }
 
 .bg-color-priority {
@@ -96,7 +98,8 @@ h2 {
     display: flex;
     flex-direction: column;
     padding-top: 48px;
-    width: 976.25px
+    padding-right: 26px;
+    /* width: 976.25px */
 }
 
 .hover-prio-btn:hover {
@@ -192,9 +195,6 @@ h2 {
 .add-icon {
     width: 14px;
     height: 14px;
-    /* position: absolute; */
-    right: 16px;
-    bottom: 5px;   
 }
 
 .d-flex {
@@ -216,10 +216,6 @@ h2 {
     /* line-height: 24px; */
     padding: 0;
 }
-
-/* .input-search-contacts::placeholder {
-    color: black;
-} */
 
 .required-field-description {
     width: 100%;
@@ -251,6 +247,11 @@ h2 {
 .description-textarea {
     top: 112px;
     height: 168px;
+}
+
+.add-icon {
+    display: flex;
+    align-items: center;
 }
 
 .input-description {
@@ -301,6 +302,7 @@ h2 {
     gap: 8px;
     border-radius: 10px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    flex: 1;
 }
 
 .selection-field:hover {
@@ -336,7 +338,7 @@ h2 {
 }
 
 .reuired-notice-cancel-create {
-    width: 976.25px;
+    /* width: 976.25px; */
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -404,13 +406,10 @@ h2 {
     z-index: 5;
 }
 
-/* .input-category:focus-within {
-    border: 1px solid #29ABE2;
-} */
-
 .new-subtask {
     display:flex;
-    flex-direction:row;
+    justify-content: space-between;
+    background-color: #FFFFFF;
 }
 
 .input-new-subtask {
@@ -426,10 +425,9 @@ h2 {
 }
 
 .icon-subtask-field {
-    height: 24px;
     display: flex;
     align-items: center;
-    padding: 12px 16px;
+    padding-right: 8px;
     background-color: #FFFFFF;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
@@ -439,10 +437,10 @@ h2 {
     cursor: pointer;
 }
 
-.list-element-subtasks {
+/* .list-element-subtasks {
     display: flex;
     justify-content: space-between;
-}
+} */
 
 .prio-area {
     display: flex;
@@ -665,15 +663,8 @@ select {
 
   @media(max-width: 860px) {
     .over-div {
-        padding: 128px 0;
-    }
-
-    .rightside-add-task {
-        padding: 0;
-    }
-
-    .leftside-add-task {
-        padding: 0;
+        flex-direction: column;
+        left: 26px;
     }
   }
 
@@ -683,10 +674,28 @@ select {
         justify-content: center;
     }
 
+    .over-div {
+        position: unset;
+        padding-top: 144px;
+    }
+
+    .add-task-informations {
+        padding: 0;
+        padding-top: 40px;
+    }
+
     .left-and-rightside {
+        width: auto;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
+    }
+
+    .leftside-add-task {
+        padding-right: 0;
+    }
+
+    .rightside-add-task {
+        padding-left: 0;
     }
 
     .parting-line-add-task {
@@ -694,20 +703,14 @@ select {
     }
 
     .reuired-notice-cancel-create {
-        width: 100%;
-        padding-top: 0;
         background-color: #F6F7F8;
         z-index: 20;
-        position: fixed;
+        /* position: fixed;
         right: 0;
         left: 0;
-        bottom: 80px;
+        bottom: 80px; */
         align-items: center;
         padding: 16px;
-    }
-
-    .test-container {
-        padding: 206px 10px;
     }
 
     .d-none-mobile {
@@ -717,14 +720,64 @@ select {
     .test-container {
         padding: 0;
     }
-
-    /* .left-and-rightside {
-        padding-bottom: 200px;
-    } */
   }
 
   @media(max-width: 500px) {
-    .d-flex-column-center {
+    /* .d-flex-column-center {
         flex: 1;
+    } */
+
+    input[type=text] {
+        font-size: 16px;
+    }
+
+    .headline-area-template {
+        padding-left: 16px;
+    }
+
+    .over-div {
+        top: 128px;
+    }
+
+    .leftside-add-task {
+        width: auto;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 16px;
+    }
+
+    .description-input {
+        width: auto;
+    }
+
+    .rightside-add-task {
+        width: auto;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 400px;
+    }
+
+    .fz-20 {
+        font-size: 16px;
+    }
+
+    .prio-image {
+        width: 14px;
+    }
+
+    .selection-field {
+        width: auto;
+    }
+
+    .categories-list {
+        width: auto;
+    }
+
+    .user-list {
+        width: auto;
+    }
+
+    .pd-inline-start {
+        width: auto;
     }
 }

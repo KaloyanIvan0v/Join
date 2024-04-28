@@ -42,6 +42,7 @@ function returnHtmlSingleContact(user) {
         </div>
     </div>`
 }
+
 function returnHtmlCheckAndClear() {
     return `
     <div id="activeInputSubtask" class="active-input-subtasks">
@@ -60,7 +61,7 @@ function prioNormal(priority) {
     return `
     <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field hover-prio-btn ${priority['bgColorFalse']}">
         <span class="fz-20">${priority['text']}</span>
-        <img id="imgUrgent" src="${priority['iconColor']}">
+        <img class="prio-image" id="imgUrgent" src="${priority['iconColor']}">
     </div>`
 }
 
@@ -68,7 +69,7 @@ function prioActive(priority) {
     return `
     <div id="prioUrgent" onclick="changePrio(${i})" class="selection-field ${priority['bgColorTrue']}">
         <span class="fz-20">${priority['text']}</span>
-        <img id="imgUrgent" src="${priority['iconWhite']}">
+        <img class="prio-image"  id="imgUrgent" src="${priority['iconWhite']}">
     </div>`
 }
 

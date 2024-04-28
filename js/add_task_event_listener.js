@@ -56,9 +56,10 @@ document.addEventListener('DOMContentLoaded', function() {
     taskArea.addEventListener('blur', function() {
         taskArea.classList.remove('fill-border');
     })
-    // assignedBtn.addEventListener('blur', function(event) {
+
+    // assignedBtn.addEventListener('blur', function() {
     //     assignedBtn.classList.remove('fill-border');
-    //     showCheckboxes()    
+    //     showCheckboxes();    
     // })
 });
 
