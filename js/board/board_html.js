@@ -201,10 +201,10 @@ function returnHtmlContactsInitialen(contactForTask, j) {
     </div>`;
 }
 
-function returnHtmlSubtasks(subTask, i, j) {
+function returnHtmlSubtasks(subTask, i, subTaskId) {
   return /*html*/ `
     <div class="subtasks-check-board">
-      <img id="checkEmptySubtask(${j})" src="/img/check_empty.png" onclick="toggleCheckboxSubTask(${i},${j})">
+      <img id="checkEmptySubtask(${j})" src="/img/check_empty.png" onclick="toggleCheckboxSubTask(${i},${subTaskId})">
       <span>${subTask}</span>
     </div>`;
 }

@@ -141,8 +141,9 @@ function renderSubTasksBoard(i) {
   subTasksField.innerHTML = "";
 
   for (j = 0; j < subTasks.length; j++) {
-    let subTask = subTasks[j];
-    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, j);
+    let subTask = subTasks[j].subTask;
+    let subTaskId = subTasks[j].id;
+    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, subTaskId);
   }
 }
 
@@ -453,6 +454,23 @@ function closeTaskFormTemplate() {
   closePopUp();
 }
 
-function toggleCheckboxSubTask(i, j) {
-  console.log(i, j);
+function toggleCheckboxSubTask(i, subTaskId) {
+  if (getSubtaskStatus) {
+    let subTaskStatus =
+      tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)]
+        .status;
+    subTaskStatus = true;
+  } else {
+    let subTaskStatus =
+      tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)]
+        .status;
+    subTaskStatus = false;
+  }
+}
+
+function getSubtaskStatus(i, subTaskId) {
+  let subTaskStatus =
+    tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)]
+      .status;
+  return subTaskStatus;
 }
