@@ -1,32 +1,48 @@
-function returnHtmlShowToDos(singleTask, i, id) {
+function returnHtmlShowToDos(
+  singleTask,
+  i,
+  id,
+  finshedSubtasksLenght,
+  subTasksLength
+) {
   return /*html*/ `
-    <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="openTaskDetailView(${i},${id})">
-        <div class="task-card-category">
-            <span id="statementField${i}" class="which-statement">
-                ${singleTask["category"]}
-            </span>
-        </div>
-        
-        <div class="header-area-card">
-            <div class="ft-weight-700">
-                ${singleTask["title"]}
-            </div>
-            <div class="task-msg">
-                ${singleTask["description"]}
-            </div>
-        </div>
-        <div class="subtasks-contacts">
-            <div class="subtasks-loadbar-number">
-                
-            </div>
+   <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})'
+    onclick="openTaskDetailView(${i},${id})">
+    <div class="task-card-category">
+        <span id="statementField${i}" class="which-statement">
+            ${singleTask["category"]}
+        </span>
+    </div>
 
-            <div class="contacts-area">
-                <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
-                <div id="prioField${i}" class="prio-field">
-                    ${singleTask["prio"]}
-                </div>
+    <div class="header-area-card">
+        <div class="ft-weight-700">
+            ${singleTask["title"]}
+        </div>
+        <div class="task-msg">
+            ${singleTask["description"]}
+        </div>
+        <div class="subtasks-loadstatus">
+            <div id="progressBar${id}" class="progerss-bar-container">
+                <div id="id-loadbar${id}" class="loadbar"></div>
             </div>
-        </div>`;
+            <div id="subtasks-progress-text${id}" class="subtasks-progress-text"></div>
+        </div>
+    </div>
+
+    <div class="subtasks-contacts">
+        <div class="subtasks-loadbar-number">
+
+        </div>
+
+        <div class="contacts-area">
+            <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
+            <div id="prioField${i}" class="prio-field">
+                ${singleTask["prio"]}
+            </div>
+        </div>
+    </div>
+</div>
+`;
 }
 
 function returnHtmlEditCurrentTask(overlayTask, i) {

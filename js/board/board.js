@@ -18,6 +18,7 @@ function openPopUp() {
 function closePopUp() {
   document.getElementById("id-shadow-layer").classList.add("visibility-hidden");
   document.getElementById("id-pop-up").innerHTML = "";
+  renderTasks(tasks);
 }
 
 function renderSubtaskProgressBar(id) {
@@ -51,8 +52,28 @@ async function renderTasks(taskList) {
       id
     );
     choosestatementColor(i);
+    renderSubtaskProgressBar(id);
   }
   checkIfTaskAreaIsEmpty();
+}
+
+function renderSubtaskProgressBar(id) {
+  let subTasksLength = tasks[getIndexOfElmentById(id, tasks)].subTasks.length;
+  let funishedSubTasks = getFinishedSubTasksLength(id);
+  if (subTasksLength == undefined) {
+    return;
+  }
+  let loadStatusText = document.getElementById(`subtasks-progress-text${id}`);
+  loadStatusText.innerHTML = `${funishedSubTasks}/${subTasksLength} Subtasks`;
+  let loadWidth = (funishedSubTasks / subTasksLength) * 100;
+  let loadBar = document.getElementById(`id-loadbar${id}`);
+  loadBar.style.width = `${loadWidth}%`;
+}
+
+function getFinishedSubTasksLength(id) {
+  let task = tasks[getIndexOfElmentById(id, tasks)];
+  let finishedSubTasks = task.subTasks.filter((subTask) => subTask.status);
+  return finishedSubTasks.length;
 }
 
 function sectionIdForTask(taskList) {

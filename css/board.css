@@ -323,7 +323,6 @@ input:focus {
 .subtasks-contacts {
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
 .header-area-card {
@@ -724,6 +723,29 @@ textarea {
   align-items: center;
   font-size: 19px;
   font-weight: 400;
+}
+
+.progerss-bar-container {
+  width: 128px;
+  height: 8px;
+  border-radius: 8px;
+  background-color: rgba(244, 244, 244, 1);
+}
+
+.loadbar {
+  height: 8px;
+  background-color: rgba(69, 137, 255, 1);
+  transition: width 1s;
+}
+
+.subtasks-loadstatus {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.subtasks-progress-text {
+  font-size: 12px;
 }
 
 @media (max-width: 1430px) {
