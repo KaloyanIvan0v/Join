@@ -97,6 +97,7 @@ function furtherResetField() {
   changePrio(1);
   checkChangeIcons = true;
   changeIconsSubtask();
+  clearContactsChecked()
 }
 
 function currentDate() {
@@ -144,11 +145,16 @@ function checkBooleanForPriority(priority) {
 // <-------------Subtasks functions----------------->
 
 function addNewSubTask() {
+  let id = subTasks.length;
   let singleNewTask = document.getElementById("subTasks");
   let singleNewTaskValue = singleNewTask.value;
 
   if (singleNewTaskValue.length >= 3) {
-    subTasks.push(singleNewTaskValue);
+    // subTasks.push(singleNewTaskValue);
+    subTasks.push({
+      'subTask': singleNewTaskValue,
+      'status': false,
+    })
   }
   renderSubTasks("newSubtask");
 }
@@ -167,7 +173,7 @@ function renderSubTasks(operator) {
   newTaskField.innerHTML = "";
 
   for (i = 0; i < subTasks.length; i++) {
-    let newSubTask = subTasks[i];
+    let newSubTask = subTasks[i]['subTask'];
     newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
   }
   checkIfNewSubTask(operator);
@@ -431,4 +437,10 @@ function changeCategory(category) {
 
   taskCategory = clickedCategory;
   showCategories(category);
+}
+
+function clearContactsChecked() {
+  for(i = 0; i < contacts.length; i++) {
+    contacts[i]['checkBoxContact'] = false;
+  }
 }
