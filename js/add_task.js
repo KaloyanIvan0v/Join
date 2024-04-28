@@ -28,7 +28,7 @@ function createTask() {
 }
 
 async function addTask() {
-  let idNumber = increaseId();
+  let idNumber = increaseId(tasks);
   let title = document.getElementById("title");
   let description = document.getElementById("description");
   let dueDate = document.getElementById("dueDate");
@@ -52,13 +52,13 @@ async function addTask() {
   await setItem("tasks", tasks);
 }
 
-function increaseId() {
-  let lastTaskofTasks = tasks.length - 1;
+function increaseId(array) {
+  let lastTaskofTasks = array.length - 1;
 
   if (lastTaskofTasks == -1) {
     return (currentId = 0);
   } else {
-    let currentId = tasks[lastTaskofTasks]["id"];
+    let currentId = array[lastTaskofTasks]["id"];
     currentId++;
     return currentId;
   }
@@ -145,15 +145,15 @@ function checkBooleanForPriority(priority) {
 // <-------------Subtasks functions----------------->
 
 function addNewSubTask() {
-  let id = subTasks.length;
+  let id = increaseId(subTasks);
   let singleNewTask = document.getElementById("subTasks");
   let singleNewTaskValue = singleNewTask.value;
 
   if (singleNewTaskValue.length >= 3) {
-    // subTasks.push(singleNewTaskValue);
     subTasks.push({
       'subTask': singleNewTaskValue,
       'status': false,
+      'id': id,
     })
   }
   renderSubTasks("newSubtask");
@@ -375,7 +375,7 @@ function searchContact() {
 
 function editSubtask(i) {
   let subTaskField = document.getElementById(`subTaskElement${i}`);
-  let subTask = subTasks[i];
+  let subTask = subTasks[i]['subTask'];
   let subTaskElement = document.getElementById(`subTaskElement${i}`);
   let ulSubtasks = document.getElementById(`ulSubtasks(${i})`);
 
@@ -404,7 +404,7 @@ function deleteSubtask(i) {
 
 async function changeSubtask(i) {
   let changedSubTask = document.getElementById(`inputField${i}`).value;
-  subTasks[i] = changedSubTask;
+  subTasks[i]['subTask'] = changedSubTask;
   await setItem("subTasks", subTasks);
   renderSubTasks();
 }
