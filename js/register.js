@@ -146,7 +146,7 @@ function togglePswVisibility(id) {
 function handleMsgBox() {
   let msgBox = document.getElementById("id-msg-box");
   let shadowLayer = document.getElementById("id-shadow-layer");
-  shadowLayer.classList.remove("hide");
+  shadowLayer.classList.remove("visibility-hidden");
   handleMsgBoxMovement();
 }
 

@@ -27,7 +27,7 @@ function loadAddContactTemplate(element) {
       .getElementById("id-contact-form-cancel")
       .classList.add("d-none-mobile-1300");
     handleInputOnFocusChangeParentElementBorderColor();
-  }, 25);
+  }, 50);
 }
 
 function loadEditContactTemplate(element) {
@@ -35,7 +35,7 @@ function loadEditContactTemplate(element) {
   setTimeout(function () {
     editContactFillForm();
     handleInputOnFocusChangeParentElementBorderColor();
-  }, 25);
+  }, 50);
 }
 
 function handleHoverButtonChangeImgDelayed() {
@@ -46,7 +46,7 @@ function handleHoverButtonChangeImgDelayed() {
       'url("/img/close.png")',
       'url("/img/close-blue.png")'
     );
-  }, 25);
+  }, 50);
 }
 
 function closeContactFrom(event) {

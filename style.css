@@ -83,3 +83,7 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
+
+.hide {
+  display: none;
+}

@@ -232,7 +232,7 @@ function backgroundColorInitialsBoard(i, j) {
 
 function editTaskOverlay(i) {
   let overlayTask = tasks[i];
-  let dialogField = document.getElementById("taskOverlay");
+  let dialogField = document.getElementById("id-pop-up");
   let currentPrio = tasks[i]["prio"];
   dialogField.innerHTML = "";
   dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i);
@@ -507,3 +507,9 @@ function getSubtaskStatus(i, subTaskId) {
       .status;
   return subTaskStatus;
 }
+
+function closeEditTaskPopUp() {
+  closePopUp();
+}
+
+function saveTaskChanges(i) {}

@@ -360,6 +360,7 @@ input:focus {
 
 .overlay-current-task {
   height: max-content;
+  max-height: 100vh;
   width: 445px;
   height: max-content;
   padding: 48px 40px;
@@ -429,14 +430,11 @@ input:focus {
 .overlay-date {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  gap: 25px;
+  flex-direction: column;
 }
 
-.overlay-prio {
-  display: flex;
-  align-items: center;
-  gap: 25px;
+.overlay-prio p {
+  padding-bottom: 8px;
 }
 
 .prio-name-image {
@@ -748,6 +746,11 @@ textarea {
   font-size: 12px;
 }
 
+.edit-task-headlines {
+  font-size: 20px;
+  color: rgba(42, 54, 71, 1);
+}
+
 @media (max-width: 1430px) {
   .board-distribution {
     top: 250px;
@@ -855,7 +858,7 @@ textarea {
 
   .overlay-current-task {
     height: max-content;
-    max-height: 100vh;
+    max-height: clac(100vh - 80px);
     box-sizing: border-box;
     width: 100%;
   }

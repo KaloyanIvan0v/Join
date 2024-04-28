@@ -212,10 +212,6 @@ footer a {
   z-index: 998;
 }
 
-.hide {
-  display: none;
-}
-
 @media (max-width: 860px) {
   .moving-img {
     top: 21px;
