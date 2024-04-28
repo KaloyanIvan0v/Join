@@ -174,7 +174,7 @@ function openTaskDetailViewHtml(overlayTask, i, id) {
     </div>
     <div class="overlay-subtasks font-overlay">
       <span class="task-detail-view-section-title">Subtasks</span>
-      <div id="subTasksField${i}" class="input-subtasks-overlay"></div>
+      <div id="subTasksField" class="input-subtasks-overlay"></div>
     </div>
     <div class="last-section-overlay">
       <div></div>
@@ -201,10 +201,10 @@ function returnHtmlContactsInitialen(contactForTask, j) {
     </div>`;
 }
 
-function returnHtmlSubtasks(subTask, j) {
+function returnHtmlSubtasks(subTask, i, j) {
   return /*html*/ `
-    <div onclick="checkSubtaskBoardOverlay(${j})" class="subtasks-check-board">
-      <img id="checkEmptySubtask(${j})" src="/img/check_empty.png">
+    <div class="subtasks-check-board">
+      <img id="checkEmptySubtask(${j})" src="/img/check_empty.png" onclick="toggleCheckboxSubTask(${i},${j})">
       <span>${subTask}</span>
     </div>`;
 }
