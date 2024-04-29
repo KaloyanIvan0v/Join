@@ -422,7 +422,7 @@ input[type=text]:not(:focus) {
     font-size: 20px;
     line-height: 24px;
     outline: none;
-    z-index: 3;
+    z-index: 2;
 }
 
 .new-subtask {
