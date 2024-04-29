@@ -1,6 +1,6 @@
 let currentDraggedElement;
 let checkedStatusSubtasks = false;
-//test comentar
+
 async function init_board() {
   await loadTasks();
   includeHTML();
@@ -18,6 +18,7 @@ function openPopUp() {
 function closePopUp() {
   document.getElementById("id-shadow-layer").classList.add("visibility-hidden");
   document.getElementById("id-pop-up").innerHTML = "";
+  renderTasks(tasks);
 }
 
 function renderSubtaskProgressBar(id) {
@@ -51,8 +52,28 @@ async function renderTasks(taskList) {
       id
     );
     choosestatementColor(i);
+    renderSubtaskProgressBar(id);
   }
   checkIfTaskAreaIsEmpty();
+}
+
+function renderSubtaskProgressBar(id) {
+  let subTasksLength = tasks[getIndexOfElmentById(id, tasks)].subTasks.length;
+  let funishedSubTasks = getFinishedSubTasksLength(id);
+  if (subTasksLength == undefined) {
+    return;
+  }
+  let loadStatusText = document.getElementById(`subtasks-progress-text${id}`);
+  loadStatusText.innerHTML = `${funishedSubTasks}/${subTasksLength} Subtasks`;
+  let loadWidth = (funishedSubTasks / subTasksLength) * 100;
+  let loadBar = document.getElementById(`id-loadbar${id}`);
+  loadBar.style.width = `${loadWidth}%`;
+}
+
+function getFinishedSubTasksLength(id) {
+  let task = tasks[getIndexOfElmentById(id, tasks)];
+  let finishedSubTasks = task.subTasks.filter((subTask) => subTask.status);
+  return finishedSubTasks.length;
 }
 
 function sectionIdForTask(taskList) {
@@ -141,8 +162,21 @@ function renderSubTasksBoard(i) {
   subTasksField.innerHTML = "";
 
   for (j = 0; j < subTasks.length; j++) {
-    let subTask = subTasks[j];
-    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, j);
+    let imgSrc;
+    let subTask = subTasks[j].subTask;
+    let subTaskId = subTasks[j].id;
+    let subTaskStatus = subTasks[j].status;
+    if (subTaskStatus == true) {
+      imgSrc = "/img/box-checked.png";
+    } else {
+      imgSrc = "/img/check_empty.png";
+    }
+    subTasksField.innerHTML += returnHtmlSubtasks(
+      subTask,
+      i,
+      subTaskId,
+      imgSrc
+    );
   }
 }
 
@@ -198,13 +232,14 @@ function backgroundColorInitialsBoard(i, j) {
 
 function editTaskOverlay(i) {
   let overlayTask = tasks[i];
-  let dialogField = document.getElementById("taskOverlay");
+  let dialogField = document.getElementById("id-pop-up");
   let currentPrio = tasks[i]["prio"];
   dialogField.innerHTML = "";
   dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i);
 
   prioSelect(i, currentPrio);
   renderContactsBoardInitialen(i, false);
+  //changeIconsSubtask();
 }
 
 function closeCurrentTask() {
@@ -449,10 +484,41 @@ function renderTaskAssignedNames(i) {
   }
 }
 
-function closeTaskFormTemplate() {
+function closeTaskFormTemplate(event) {
+  if (event) {
+    event.preventDefault();
+  }
+  addTaskFormResetFields();
   closePopUp();
 }
 
-function toggleCheckboxSubTask(i, j) {
-  console.log(i, j);
+function addTaskFormResetFields() {
+  clearContactsChecked();
 }
+
+function toggleCheckboxSubTask(i, subTaskId) {
+  if (getSubtaskStatus(i, subTaskId)) {
+    tasks[i].subTasks[
+      getIndexOfElmentById(subTaskId, tasks[i].subTasks)
+    ].status = false;
+  } else {
+    tasks[i].subTasks[
+      getIndexOfElmentById(subTaskId, tasks[i].subTasks)
+    ].status = true;
+  }
+  renderSubTasksBoard(i);
+  setItem("tasks", tasks);
+}
+
+function getSubtaskStatus(i, subTaskId) {
+  let subTaskStatus =
+    tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)]
+      .status;
+  return subTaskStatus;
+}
+
+function closeEditTaskPopUp() {
+  closePopUp();
+}
+
+function saveTaskChanges(i) {}

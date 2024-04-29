@@ -162,14 +162,14 @@ h1 {
   }
 
   .summeryContent {
-    padding-top: 92px;
+    padding-top: 96px;
     padding-left: 16px;
     padding-right: 16px;
   }
 
   .summeryContentP{
     margin-top: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
   .summeryTop {
@@ -191,6 +191,11 @@ h1 {
 
   .summeryinfoParent {
     justify-content: center;
+    width: 100%;
+  }
+
+  .summeryInfo{
+    width: 100%;
   }
 
   .summeryInfo1{
@@ -222,6 +227,7 @@ h1 {
   }
 
   .upcommingpartingLine{
+    height: 80px;
     margin-left: 8px;
     margin-right: 8px;
   }
@@ -231,18 +237,18 @@ h1 {
   }
 
   .summeryTasksInBoard{
-    width: 96px;
-    height: 118px;
+    width: 105px;
+    height: 100px;
   }
 
   .summeryTasksInProgress{
-    width: 96px;
-    height: 118px;
+    width: 105px;
+    height: 100px;
   }
 
   .summeryAwaitingFeedback{
-    width: 96px;
-    height: 118px;
+    width: 105px;
+    height: 100px;
   }
 }
 

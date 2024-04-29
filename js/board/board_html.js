@@ -1,32 +1,48 @@
-function returnHtmlShowToDos(singleTask, i, id) {
+function returnHtmlShowToDos(
+  singleTask,
+  i,
+  id,
+  finshedSubtasksLenght,
+  subTasksLength
+) {
   return /*html*/ `
-    <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})' onclick="openTaskDetailView(${i},${id})">
-        <div class="task-card-category">
-            <span id="statementField${i}" class="which-statement">
-                ${singleTask["category"]}
-            </span>
-        </div>
-        
-        <div class="header-area-card">
-            <div class="ft-weight-700">
-                ${singleTask["title"]}
-            </div>
-            <div class="task-msg">
-                ${singleTask["description"]}
-            </div>
-        </div>
-        <div class="subtasks-contacts">
-            <div class="subtasks-loadbar-number">
-                
-            </div>
+   <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})'
+    onclick="openTaskDetailView(${i},${id})">
+    <div class="task-card-category">
+        <span id="statementField${i}" class="which-statement">
+            ${singleTask["category"]}
+        </span>
+    </div>
 
-            <div class="contacts-area">
-                <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
-                <div id="prioField${i}" class="prio-field">
-                    ${singleTask["prio"]}
-                </div>
+    <div class="header-area-card">
+        <div class="ft-weight-700">
+            ${singleTask["title"]}
+        </div>
+        <div class="task-msg">
+            ${singleTask["description"]}
+        </div>
+        <div class="subtasks-loadstatus">
+            <div id="progressBar${id}" class="progerss-bar-container">
+                <div id="id-loadbar${id}" class="loadbar"></div>
             </div>
-        </div>`;
+            <div id="subtasks-progress-text${id}" class="subtasks-progress-text"></div>
+        </div>
+    </div>
+
+    <div class="subtasks-contacts">
+        <div class="subtasks-loadbar-number">
+
+        </div>
+
+        <div class="contacts-area">
+            <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
+            <div id="prioField${i}" class="prio-field">
+                ${singleTask["prio"]}
+            </div>
+        </div>
+    </div>
+</div>
+`;
 }
 
 function returnHtmlEditCurrentTask(overlayTask, i) {
@@ -34,12 +50,12 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
     <div id="id-overlay-current-task" class="overlay-current-task">
       <div id="categoryArea(${i})" class="overlay-first-row">
         <div></div>
-        <a onclick="closeCurrentTask()">X</a>
+        <a onclick="closeEditTaskPopUp()">X</a>
     </div>
     <div class="title-edit-board">
       <div class="input-description">
         <div class="title-headline">
-          <span>Title</span>
+          <span clas="edit-task-headlines">Title</span>
         </div>
       </div>
       <div>
@@ -51,24 +67,22 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
     </div>
     
     <div class="description-edit-board">
-      <span>Description</span>
+      <span clas="edit-task-headlines">Description</span>
       <div>
         <textarea id="description(${i})">${overlayTask["description"]}</textarea>
-        <div class="vs-hidden">
-         <span class="required-field-edit">This field is required</span>
-        </div>
       </div>
     </div>
     
-    <div class="overlay-date font-overlay">
-        <span>Due Date:</span>
+    <div class="overlay-date-edit font-overlay">
+        <span clas="edit-task-headlines">Due date</span>
         <input class="input-edit-title" type="date" value="${overlayTask["dueDate"]}" id="date(${i})">
         <div class="vs-hidden">
          <span class="required-field-edit">This field is required</span>
         </div>
     </div>
-    
-    <div class="prio-area" id="prioArea(${i})">
+    <div class="overlay-prio">
+      <p>Priority</p>
+       <div class="prio-area" id="prioArea(${i})">
       <div onclick="prioSelect(${i}, 'urgent')">
         <img id="urgent(${i})" src="/img/urgent.png">
       </div>
@@ -81,33 +95,38 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
         <img id="low(${i})" src="/img/low.png">
       </div>
     </div>
-
-    <div class="overlay-assigned">
-        <span>Assigned To:</span>
-        <div onclick="showCheckboxes(event)" class="add-contacts-edit-board">
-          <input onkeydown="searchContact()" tabindex="0" class="input-contacts-edit" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
-          <div class="dropdown-icon">
-            <img src="/img/arrow_drop_down.png" id="dropDownArrow">
-          </div>
-        </div>
-        <div class="contacts-edit-board">
-          <div id="contactsFieldBoard(${i})" class="contacts-edit-board"></div>
-        </div>
     </div>
+   
 
-    <div class="description-category d-flex-column-center">
-      <span class="input-description">Subtasks</span>
-        <div id="inputFieldSubtasks" class="input-field new-subtask normal-border">
-          <input onclick="changeIconsSubtask(event)" class="input-new-subtask" type="text" id="subTasks" placeholder="Add new subtask">
-          <a id="addIconSubtasks" class="icon-subtask-field"><img src="/img/add.png"></a>
-        </div>
-        <div id="newSubTaskField"></div>
-    </div>
+    <div class="d-flex-column-center" onclick="showCheckboxes(event)">
+                <span class="input-description">Assigned to</span>
+                <div class="input-category new-subtask normal-border hover blue-focus">
+                    <input onkeydown="searchContact()" tabindex="0"
+                        class="input-search-contacts normal-border pd-font-size" id="inputToSearchContact" type="text"
+                        placeholder="Select contacts to assign">
+                    <div class="dropdown-icon">
+                        <img src="/img/arrow_drop_down.png" id="dropDownArrow">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="user-list vs-hidden" id="checkboxes"></div>
+                <div id="initialArea"></div>
+            </div>
+    <div class="d-flex-column-center">
+                <span class="input-description">Subtasks</span>
+                <div id="inputFieldSubtasks" class="input-field subtasks-field normal-border">
+                    <input onclick="changeIconsSubtask(event)" class="input-new-subtask pd-font-size" type="text"
+                        id="subTasks" placeholder="Add new subtask">
+                    <a id="addIconSubtasks" class="icon-subtask-field"><img src="/img/add.png"></a>
+                </div>
+                <div id="newSubTaskField"></div>
+            </div>
 
     <div class="last-section-overlay">
       <div></div>
       <div class="delete-edit-overlay">
-      <button class="btn-add-task" onclick="resetInputFields(); return false">
+      <button class="btn-save-edit-task join-button" onclick="saveTaskChanges(${i}); return false">
         <span class="typography-clear">Ok</span>
         <img src="/img/check-white.png">
       </button>
@@ -201,10 +220,10 @@ function returnHtmlContactsInitialen(contactForTask, j) {
     </div>`;
 }
 
-function returnHtmlSubtasks(subTask, i, j) {
+function returnHtmlSubtasks(subTask, i, subTaskId, imgSrc) {
   return /*html*/ `
     <div class="subtasks-check-board">
-      <img id="checkEmptySubtask(${j})" src="/img/check_empty.png" onclick="toggleCheckboxSubTask(${i},${j})">
+      <img id="checkEmptySubtask(${j})" src="${imgSrc}" onclick="toggleCheckboxSubTask(${i},${subTaskId})">
       <span>${subTask}</span>
     </div>`;
 }
