@@ -36,6 +36,10 @@ h1 {
   align-items: center;
 }
 
+.summeryInfo{
+  width: 60%;
+}
+
 .partingLineTop {
   height: 45px;
   border: 1px solid #29abe2;
@@ -53,7 +57,7 @@ h1 {
 }
 
 .summeryToDo {
-  width: 264px;
+  width: 48%;
   height: 168px;
   background-color: #ffffff;
   border-radius: 30px;
@@ -63,7 +67,7 @@ h1 {
 }
 
 .summeryDone {
-  width: 264px;
+  width: 48%;
   height: 168px;
   background-color: #ffffff;
   border-radius: 30px;
@@ -102,7 +106,7 @@ h1 {
 }
 
 .summeryTasksInBoard {
-  width: 168px;
+  width: 30%;
   height: 168px;
   background-color: #ffffff;
   border-radius: 30px;
@@ -114,7 +118,7 @@ h1 {
 }
 
 .summeryTasksInProgress {
-  width: 168px;
+  width: 30%;
   height: 168px;
   background-color: #ffffff;
   border-radius: 30px;
@@ -126,7 +130,7 @@ h1 {
 }
 
 .summeryAwaitingFeedback {
-  width: 168px;
+  width: 30%;
   height: 168px;
   background-color: #ffffff;
   border-radius: 30px;
@@ -195,7 +199,7 @@ h1 {
   }
 
   .summeryInfo{
-    width: 100%;
+    min-width: 100% !important;
   }
 
   .summeryInfo1{
@@ -255,5 +259,9 @@ h1 {
 @media (max-width: 1440px) {
     .greetings{
       display: none;
+    }
+
+    .summeryInfo{
+      min-width: 480px;
     }
 }

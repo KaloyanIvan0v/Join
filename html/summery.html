@@ -28,16 +28,16 @@
         <div class="summeryinfoParent">
             <div class="summeryInfo">
                 <div class="summeryInfo1">
-                    <div class="summeryToDo shadow">
-                        <img class="summeryIcon" src="/img/toDo.png">
+                    <div onmouseenter="changeImageOnHover('toDoIcon', '/img/toDoWhite.png')" onmouseleave="changeImageOnUnHover('toDoIcon', '/img/toDo.png')" class="summeryToDo shadow">
+                        <img id="toDoIcon" class="summeryIcon" src="/img/toDo.png">
                         <div
                             style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                             <H1 id="counttoDo" style="margin: 0;"></H1>
                             <p style="margin: 0;">To-Do</p>
                         </div>
                     </div>
-                    <div class="summeryDone shadow">
-                        <img class="summeryIcon" src="/img/checkDark.png">
+                    <div onmouseenter="changeImageOnHover('doneIcon', '/img/doneWhite.png')" onmouseleave="changeImageOnUnHover('doneIcon', '/img/checkDark.png')" class="summeryDone shadow">
+                        <img id="doneIcon" class="summeryIcon" src="/img/checkDark.png">
                         <div
                             style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                             <H1 id="countdone" style="margin: 0;"></H1>
