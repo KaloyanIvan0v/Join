@@ -48,13 +48,12 @@ function returnHtmlCheckAndClear() {
     <div id="activeInputSubtask" class="active-input-subtasks">
         <a class="hover" onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
         <span class="height-24">|</span>
-        <a id="checkNewSubtask" class="hover" onkeydown="addNewSubTask(event)"><img src="/img/Property 1=check.png"></a>
+        <button id="checkNewSubtask" class="hover"onclick="addNewSubTask(event)"><img src="/img/Property 1=check.png"></button>
     </div>`
 }
 
 function returnHtmlAdd() {
-    return `
-    <a id="addIconSubtasks" onclick="addNewSubTask()" class="hover"><img src="/img/add.png"></a>`
+    return `<a id="addIconSubtasks" onclick="addNewSubTask()" class="hover"><img src="/img/add.png"></a>`
 }
 
 function prioNormal(priority) {
@@ -75,15 +74,13 @@ function prioActive(priority) {
 
 function returnHtmlNewSubtasks(newSubTask) {
     return `
-    <ul id="ulSubtasks(${i})" class="list-element-subtasks" onclick="editSubtask(${i})">
-        <li id="subTaskElement${i}">${newSubTask}</li>
-    </ul>`
+        <li class="" onclick="editSubtask(${i})" id="subTaskElement${i}">${newSubTask}</li>`
 }
 
 function editSubtaskHtml(i, subTask) {
     return `
     <form class="label-edit-subtask">
-        <input id="inputField${i}" class="edit-subtask" type="text" value="${subTask}">
+        <input id="inputField${i}" class="edit-subtask no-border" type="text" value="${subTask}">
         <div class="single-edit-subtask">
             <img class="hover" src="/img/trashbin.png" onclick="deleteSubtask(${i})">
             <span>|</span>

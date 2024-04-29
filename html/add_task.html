@@ -15,9 +15,9 @@
     <script src="/js/w3include.js"></script>
     <script src="/js/storage.js"></script>
     <script src="/script.js"></script>
-    <script src="/js/add_task.js"></script>
-    <script src="/js/add_task_html_templates.js"></script>
-    <!-- <script src="/js/add_task_event_listener.js"></script> -->
+    <script src="/js/add_task/add_task.js"></script>
+    <script src="/js/add_task/add_task_html_templates.js"></script>
+    <script src="/js/add_task/add_task_subtasks.js"></script>
     <script src="/js/templates.js"></script>
 
 </head>
@@ -67,7 +67,6 @@
                             </div>
                         </div>
                         <div class="container-input-required">
-                            <!-- <div class="d-flex-initials" id="contactsField"></div> -->
                             <div class="contacts-assigned" id="contactsField"></div>
                         </div>
                     </div>
@@ -85,12 +84,7 @@
                             </div>
                         </div>
                         <div class="container-input-required">
-<<<<<<< HEAD
                             <input required class="input-field option-value-disabled normal-border" id="dueDate" type="date" onclick="showOrHideRequiredField('dueDate' ,'requiredDate')" oninput="showOrHideRequiredField('dueDate' ,'requiredDate')">
-=======
-                            <input required class="input-field option-value-disabled normal-border" id="dueDate"
-                                type="date">
->>>>>>> a2581c3d5dff07ba4a2914a5157f06d87a4380d3
                             <div id="requiredDate" class="required-field-title vs-hidden">
                                 <span class="error">This field is required</span>
                             </div>
@@ -110,7 +104,7 @@
                             <span class="color-FF8190">*</span>
                         </div>
                         <div tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover"
-                            onclick="showCategories()">
+                            onclick="showCategories('none', event)">
                             <span id="categoryDropdown">Select task category</span>
                             <div class="dropdown-icon">
                                 <img src="/img/arrow_drop_down.png" id="dropDownArrowCategory">
@@ -126,13 +120,13 @@
                         </label>
                     </div>
 
-                    <div class="description-category position-subtasks d-flex-column-center">
+                    <div class="description-category d-flex-column-center pd-bottom-80">
                         <span class="input-description">Subtasks</span>
                         <div id="inputFieldSubtasks" class="input-field new-subtask normal-border">
-                            <input min="3" onclick="changeIconsSubtask(event)" class="input-new-subtask" type="text"
-                                id="subTasks" placeholder="Add new subtask">
-                            <a id="addIconSubtasks" class="icon-subtask-field"><img class="add-icon"
-                                    src="/img/add.png"></a>
+                            <input min="3" onclick="changeIconsSubtask(event)" class="input-new-subtask" type="text" id="subTasks" placeholder="Add new subtask">
+                            <div class="icon-subtask-field" id="addIconSubtasks">
+                                <a id="addIconSubtasks" class="icon-subtask-field"><img class="add-icon" src="/img/add.png"></a>
+                            </div>
                         </div>
                         <div id="newSubTaskField"></div>
                     </div>

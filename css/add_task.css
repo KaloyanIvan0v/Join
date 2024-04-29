@@ -16,7 +16,7 @@ input[type=text] {
 
 /* input[type=text]:focus-within {
     border: 1px solid #FF8190;
-}
+} */
 
 input[type=date]:invalid {
     border: 1px solid #FF8190;
@@ -24,7 +24,7 @@ input[type=date]:invalid {
 
 input[type=date]:focus-within {
     border: 1px solid #29ABE2;
-} */
+}
 
 .single-edit-subtask {
     display: flex;
@@ -38,19 +38,21 @@ input[type=date]:focus-within {
     justify-content: space-between;
     background-color: #FFFFFF;
     margin-top: -10px;
+    position: static;
+    z-index: 3;
+    max-height: 336px;
+    overflow-y: scroll;
 }
 
 .contacts-initialen {
     display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .edit-subtask {
     background-color: #FFFFFF;
-    border: none;
-    padding: 4px 16px;
-}
-
-.edit-subtask[type=text] {
+    border: none !important;
     padding: 4px 16px;
 }
 
@@ -63,7 +65,6 @@ input[type=date]:hover {
 }
 
 .over-div {
-    /* padding: 206px 328px; */
     position: absolute;
     left: 328px;
     top: 206px;
@@ -125,7 +126,6 @@ h2 {
     flex-direction: column;
     padding-top: 48px;
     padding-right: 26px;
-    /* width: 976.25px */
 }
 
 .hover-prio-btn:hover {
@@ -147,7 +147,6 @@ h2 {
 
 .parting-line-add-task {
     border: 1px solid #D1D1D1;
-    /* position: relative; */
     height: 424px;
     top: 231px;
     left: 376.25px;
@@ -157,13 +156,18 @@ h2 {
     display: flex;
 }
 
+.singleSubTaskElement {
+    position: relative;
+    z-index: 3;
+}
+
 .pd-inline-start {
     padding-inline-start: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 440px;
     background-color: #FFFFFF;
+    width: -webkit-fill-available;
 }
 
 .pd-inline-start:focus-within {
@@ -242,7 +246,6 @@ input[type=text]:not(:focus) {
     font-family: Inter;
     font-weight: 400;
     font-size: 20px;
-    /* line-height: 24px; */
     padding: 0;
 }
 
@@ -308,10 +311,6 @@ input[type=text]:not(:focus) {
     gap: 8px;
 }
 
-.option-value * {
-    padding: 24px;
-}
-
 .priority-selection {
     display: flex;
     gap: 16px;
@@ -361,13 +360,7 @@ input[type=text]:not(:focus) {
     position: fixed;
 }
 
-/* .required-field-notice {
-    display: flex;
-    height: 27px;
-} */
-
 .reuired-notice-cancel-create {
-    /* width: 976.25px; */
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -441,7 +434,7 @@ input[type=text]:not(:focus) {
 .input-new-subtask {
     padding: 12px 16px;
     flex-grow:2;
-    border: none;
+    border: none !important;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -451,6 +444,7 @@ input[type=text]:not(:focus) {
 }
 
 .icon-subtask-field {
+    position: relative;
     display: flex;
     align-items: center;
     padding-right: 8px;
@@ -463,10 +457,11 @@ input[type=text]:not(:focus) {
     cursor: pointer;
 }
 
-/* .list-element-subtasks {
+.list-element-subtasks {
     display: flex;
     justify-content: space-between;
-} */
+    background-color: #FFFF;
+}
 
 .prio-area {
     display: flex;
@@ -488,6 +483,7 @@ input[type=text]:not(:focus) {
 
 .bg-dialog {
     position: fixed;
+    z-index: 10;
     top: 0;
     left: 0;
     right: 0;
@@ -495,8 +491,7 @@ input[type=text]:not(:focus) {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    /* background-color: rgba(0, 0, 0, 0.4); */
-    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .added-to-board {
@@ -514,29 +509,12 @@ input[type=text]:not(:focus) {
     transition: all 900ms;
 }
 
-.user-list {
-    background-color: #FFFFFF;
-    border: 1px #dadada solid;
-    max-height: 336px;
-    overflow-y: scroll;
-    z-index: 2;
-    position: relative;
-    width: 440px;
-    box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
-    border-radius: 10px;
-    margin-top: -20px;
-    padding-top: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
 .categories-list {
     background-color: #FFFFFF;
     border: 1px #dadada solid;
     z-index: 2;
     position: relative;
-    width: 438px;
+    width: auto;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
     margin-top: -20px;
     padding-top: 10px;
@@ -627,7 +605,6 @@ input[type=text]:not(:focus) {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid #FFFFFF; */
 }
   
 .overSelect {
@@ -644,13 +621,6 @@ input[type=text]:not(:focus) {
 
 .custom-checkbox input[type="checkbox"] {
     display: none;
-}
-
-.bg-checked {
-    color: #FFFFFF;
-    background-image: url('/img/Check\ button.png');
-    background-repeat: no-repeat;
-    background-position: right center;
 }
 
 .pd-right-16:hover {
@@ -679,12 +649,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 18px;
     height: 20px;
     cursor: pointer;
-}
-
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
 }
 
 @media(max-width:1350px) {
@@ -729,6 +693,10 @@ select {
     .selection-field {
         padding: 16px 4px;
     }
+
+    /* .categories-list {
+        width: auto;
+    } */
 }
 
   @media(max-width: 1050px) {
@@ -763,12 +731,14 @@ select {
     .add-task-informations {
         padding: 0;
         padding-top: 40px;
+        gap: 16px;
     }
 
     .left-and-rightside {
         width: auto;
         flex-direction: column;
         justify-content: center;
+        gap: 16px;
     }
 
     .leftside-add-task {
@@ -786,10 +756,6 @@ select {
     .reuired-notice-cancel-create {
         background-color: #F6F7F8;
         z-index: 4;
-        position: fixed;
-        right: 0;
-        left: 0;
-        bottom: 80px;
         align-items: center;
         padding: 16px;
     }
@@ -801,21 +767,33 @@ select {
     .test-container {
         padding: 0;
     }
+    
+    .pd-bottom-80 {
+        padding-bottom: 80px;
+    }
   }
 
   @media(max-width: 860px) {
     .over-div {
         position: unset;
         padding-top: 144px;
+        padding-bottom: 40px;
     }
 
     .headline-area-template .add-task-informations {
         padding-left: 0;
     }
+
+    .reuired-notice-cancel-create {
+        position: sticky;
+        z-index: 2;
+        right: 0;
+        left: 0;
+        bottom: 74px;
+    }
 }
 
   @media(max-width: 500px) {
-
     input[type=text] {
         font-size: 16px;
     }
@@ -840,6 +818,10 @@ select {
         width: auto;
     }
 
+    .new-subtask {
+        max-width: 300px;
+    }
+
     .rightside-add-task {
         width: auto;
         padding-left: 16px;
@@ -856,10 +838,6 @@ select {
     }
 
     .selection-field {
-        width: auto;
-    }
-
-    .categories-list {
         width: auto;
     }
 
