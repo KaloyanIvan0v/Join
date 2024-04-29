@@ -31,16 +31,26 @@ function countStatements(index) {
   document.getElementById(`count${index}`).innerHTML = statementCounts;
 }
 
-function upCommingDeadline(){
+function changeImageOnHover(element, image) {
+  let newImage = image;
+  document.getElementById(element).setAttribute('src', newImage);
+}
+
+function changeImageOnUnHover(element, image) {
+  let newImage = image;
+  document.getElementById(element).setAttribute('src', newImage);
+}
+
+function upCommingDeadline() {
   let actuellDate = new Date();
   let kürzesteZeit = Infinity;
   let kürzesteDatum = null;
 
   for (var i = 0; i < tasks.length; i++) {
-      var zeit = new Date(tasks[i].dueDate).getMilliseconds - actuellDate.getMilliseconds();
-      if (zeit > 0 && zeit < kürzesteZeit) {
-          kürzesteDatum = tasks[i].dueDate;
-      }
+    var zeit = new Date(tasks[i].dueDate).getMilliseconds - actuellDate.getMilliseconds();
+    if (zeit > 0 && zeit < kürzesteZeit) {
+      kürzesteDatum = tasks[i].dueDate;
+    }
   }
 
   console.log(actuellDate);
