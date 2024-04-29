@@ -32,7 +32,6 @@ async function addTask() {
   let title = document.getElementById("title");
   let description = document.getElementById("description");
   let dueDate = document.getElementById("dueDate");
-  // let subTaskForTask = renderSubTasks();
   let checkedUsersForTask = checkedUsers;
 
   let task = {
@@ -61,6 +60,17 @@ function increaseId(array) {
     let currentId = array[lastTaskofTasks]["id"];
     currentId++;
     return currentId;
+  }
+}
+
+function toggleDropDownArrow(idImage) {
+  let arrow = document.getElementById(idImage);
+  if (arrowToggleCheck == false) {
+    arrow.src = "../img/arrow_drop_down_up.png";
+    arrowToggleCheck = true;
+  } else {
+    arrow.src = "../img/arrow_drop_down.png";
+    arrowToggleCheck = false;
   }
 }
 
@@ -144,49 +154,6 @@ function checkBooleanForPriority(priority) {
 
 // <-------------Subtasks functions----------------->
 
-function addNewSubTask() {
-  let id = increaseId(subTasks);
-  let singleNewTask = document.getElementById("subTasks");
-  let singleNewTaskValue = singleNewTask.value;
-
-  if (singleNewTaskValue.length >= 3) {
-    subTasks.push({
-      'subTask': singleNewTaskValue,
-      'status': false,
-      'id': id,
-    })
-  }
-  renderSubTasks("newSubtask");
-}
-
-function resetAddNewSubtask() {
-  let subTasks = document.getElementById("subTasks");
-  subTasks.value = "";
-  checkChangeIcons = true;
-  changeIconsSubtask();
-}
-
-function renderSubTasks(operator) {
-  let newTaskField = document.getElementById("newSubTaskField");
-  let singleNewTask = document.getElementById("subTasks");
-  singleNewTask.value = "";
-  newTaskField.innerHTML = "";
-
-  for (i = 0; i < subTasks.length; i++) {
-    let newSubTask = subTasks[i]['subTask'];
-    newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
-  }
-  checkIfNewSubTask(operator);
-}
-
-async function checkIfNewSubTask(operator) {
-  if (operator == "newSubtask") {
-    checkChangeIcons = true;
-    changeIconsSubtask();
-    await setItem("subTasks", subTasks);
-  }
-}
-
 function changeIconsSubtask() {
   let addIconSubtasks = document.getElementById("addIconSubtasks");
   let subTask = document.getElementById("inputFieldSubtasks");
@@ -206,53 +173,71 @@ function changeIconsSubtask() {
   renderSubTasks();
 }
 
-function showCheckboxes() {
-  let checkboxes = document.getElementById("checkboxes");
-  let assignedBtn = document.getElementById("inputToSearchContact");
-  assignedBtn.value = '';
- 
-  toggleUserListInitials();
+function addNewSubTask(event) {
+if(event.key === 'Enter'){
+  let id = increaseId(subTasks);
+  let singleNewTask = document.getElementById("subTasks");
+  let singleNewTaskValue = singleNewTask.value;
 
-  if (divContacts == false) {
-    ifForshowCheckBoxes(checkboxes, assignedBtn);
-    assignedBtn.focus();
-  } else {
-    elseForshowCheckBoxes(assignedBtn);
+  if (singleNewTaskValue.length >= 3) {
+      subTasks.push({
+      'subTask': singleNewTaskValue,
+      'status': false,
+      'id': id,
+    })
   }
-  assignedBtn.parentElement.classList.toggle("fill-border");
-  toggleDropDownArrow("dropDownArrow");
+  renderSubTasks("newSubtask");
+}
 }
 
-function ifForshowCheckBoxes(checkboxes, assignedBtn) {
-  checkboxes.classList.remove("vs-hidden");
-  assignedBtn.placeholder = "Search Contact";
-  renderContactsToField(contacts, checkboxes);
-  divContacts = true;
+function deleteSubtask(i) {
+  subTasks.splice(i, 1);
+  setItem("subTasks", subTasks);
+  renderSubTasks();
 }
 
-function elseForshowCheckBoxes(assignedBtn) {
-  // checkboxes.classList.add("vs-hidden");
-  assignedBtn.blur();
-  divContacts = false;
-  showInitials();
+async function changeSubtask(i) {
+  let changedSubTask = document.getElementById(`inputField${i}`).value;
+  subTasks[i]['subTask'] = changedSubTask;
+  await setItem("subTasks", subTasks);
+  renderSubTasks();
 }
 
-function toggleDropDownArrow(idImage) {
-  let arrow = document.getElementById(idImage);
-  if (arrowToggleCheck == false) {
-    arrow.src = "../img/arrow_drop_down_up.png";
-    arrowToggleCheck = true;
-  } else {
-    arrow.src = "../img/arrow_drop_down.png";
-    arrowToggleCheck = false;
+function inputFocus(i) {
+  let inputField = document.getElementById(`inputField${i}`);
+  inputField.focus();
+  inputField.setSelectionRange(
+    inputField.value.length,
+    inputField.value.length
+  );
+}
+
+function renderSubTasks(operator) {
+  let newTaskField = document.getElementById("newSubTaskField");
+  let singleNewTask = document.getElementById("subTasks");
+  singleNewTask.value = "";
+  newTaskField.innerHTML = "";
+
+  for (i = 0; i < subTasks.length; i++) {
+    let newSubTask = subTasks[i]['subTask'];
+    newTaskField.innerHTML += returnHtmlNewSubtasks(newSubTask);
   }
+  checkIfNewSubTask(operator);
 }
 
-function toggleUserListInitials() {
-  let checkboxes = document.getElementById("checkboxes");
+function resetAddNewSubtask() {
+  let subTasks = document.getElementById("subTasks");
+  subTasks.value = "";
+  checkChangeIcons = true;
+  changeIconsSubtask();
+}
 
-  checkboxes.classList.toggle("user-list");
-  checkboxes.classList.toggle("d-flex-initials");
+async function checkIfNewSubTask(operator) {
+  if (operator == "newSubtask") {
+    checkChangeIcons = true;
+    changeIconsSubtask();
+    await setItem("subTasks", subTasks);
+  }
 }
 
 function renderContactsToField(arrayToRender) {
@@ -267,11 +252,11 @@ function renderContactsToField(arrayToRender) {
     user = arrayToRender[i];
     userCheckBox.innerHTML += returnHtmlSingleContact(user);
     backgroundColorInitials(i, "none");
-    checkIfChecked(i);
+    checkIfContactChecked(i);
   }
 }
 
-function checkIfChecked(i) {
+function checkIfContactChecked(i) {
     let testCheckbox = contacts[i]['checkBoxContact'];
     
     if(testCheckbox == true) {
@@ -298,13 +283,13 @@ function backgroundColorInitials(i, whichArea) {
   } else {
     let currentColor = contacts[i]["color"];
     let bgColorContacts = contactColor[currentColor];
-    let bgInitials = document.getElementById(`bgInitials${i}`);
+    let bgInitials = document.getElementById(`initialArea${i}`);
     bgInitials.style.backgroundColor = bgColorContacts;
   }
 }
 
-function selectedUser(i) {
-  // event.stopPropagation();
+function selectedUser(i, event) {
+  event.stopPropagation();
   let singleUser = contacts[i];
   let currentIndex = checkedUsers.indexOf(singleUser);
 
@@ -316,10 +301,6 @@ function selectedUser(i) {
   toggleForCheckedUser(i);
   toggleCheckbox(i);
 }
-
-// function notClose(event) {
-//   event.stopPropagation();
-// }
 
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkBox${i}`);
@@ -334,29 +315,8 @@ function toggleCheckbox(i) {
   }
 }
 
-function showInitials() {
-  let initialsArea = document.getElementById("checkboxes");
-  initialsArea.innerHTML = "";
-
-  for (i = 0; i < checkedUsers.length; i++) {
-    let singleUser = checkedUsers[i]["name"];
-    let nameParts = singleUser.split(" ");
-    let firstLetter = nameParts[0].substring(0, 1);
-    if (nameParts.length == 2) {
-      let secondLetter = nameParts[1].substring(0, 1);
-      let nameInitial = firstLetter + secondLetter;
-      initial = nameInitial;
-    } else {
-      initial = firstLetter;
-    }
-    initialsArea.innerHTML += loadInitial(i, initial);
-    backgroundColorInitials(i, "showInitial");
-  }
-}
-
 function searchContact() {
   let inputSearchContact = document.getElementById("inputToSearchContact").value;
-  // let checkbox = document.getElementById('checkboxes');
   inputSearchContact = inputSearchContact.toLowerCase();
 
   searchContacts.splice(0, searchContacts.length);
@@ -366,7 +326,6 @@ function searchContact() {
       if (contact.toLowerCase().includes(inputSearchContact)) {
         searchContacts.push(contactComplete);
       } else {
-        // checkbox.classList.add('vs-hidden')
       }
     }
     renderContactsToField(searchContacts);
@@ -387,35 +346,13 @@ function editSubtask(i) {
 
     if (ulSubtasks) {
       subTaskElement.classList.add("pd-inline-start");
-      ulSubtasks.classList.add("pd-inline-start");
+      // ulSubtasks.classList.add("pd-inline-start");
 
       subTaskField.innerHTML = "";
       subTaskField.innerHTML = editSubtaskHtml(i, subTask);
       inputFocus(i);
     }
   }
-}
-
-function deleteSubtask(i) {
-  subTasks.splice(i, 1);
-  setItem("subTasks", subTasks);
-  renderSubTasks();
-}
-
-async function changeSubtask(i) {
-  let changedSubTask = document.getElementById(`inputField${i}`).value;
-  subTasks[i]['subTask'] = changedSubTask;
-  await setItem("subTasks", subTasks);
-  renderSubTasks();
-}
-
-function inputFocus(i) {
-  let inputField = document.getElementById(`inputField${i}`);
-  inputField.focus();
-  inputField.setSelectionRange(
-    inputField.value.length,
-    inputField.value.length
-  );
 }
 
 function showCategories(category) {
@@ -444,3 +381,118 @@ function clearContactsChecked() {
     contacts[i]['checkBoxContact'] = false;
   }
 }
+
+function closeDiv(event) {
+  if(arrowToggleCheck == true) {
+    showOrHideContacts(event);
+  }
+}
+
+function showOrHideRequiredField(idParent, idToggle) {
+  let input = document.getElementById(idParent)
+  let inputValue = input.value;
+  let element = document.getElementById(idToggle);
+
+  if(inputValue.length == 0) {
+    element.classList.remove('vs-hidden');
+    input.classList.add('error-border')
+  } else if(inputValue.length > 0) {
+    element.classList.add('vs-hidden');
+    input.classList.remove('error-border')
+  }
+}
+
+// <-----------Assigned to Field --------------->
+
+function showOrHideContacts(event) {
+  event.stopPropagation();
+  toggleDropDownArrow("dropDownArrow");
+
+  let contactsField = document.getElementById('contactsField');
+  contactsField.innerHTML = '';
+
+  if(arrowToggleCheck == true) {
+      contactsField.classList.add('contacts-assigned');
+      showContactsToSelect(contactsField);
+  } else {
+      showContactsInitial(contactsField);
+  }
+}
+
+function showContactsToSelect(contactsField) {
+  for(i = 0; i < contacts.length; i++) {
+    contact = contacts[i];
+    contactsField.innerHTML += returnHtmlSingleContact(contact);
+    checkIfContactChecked(i);
+  }
+}
+
+function showContactsInitial(contactsField) {
+  for(i = 0; i < contacts.length; i++) {
+    let contact = contacts[i];
+    let checkBoxStatus = contacts[i]['checkBoxContact'];
+    if(checkBoxStatus == true) {
+      contactsField.classList.remove('contacts-assigned');
+      contactsField.classList.add('contacts-initialen');      
+      contactsField.innerHTML += loadInitial(i, contact);
+      backgroundColorInitials(i, "none");
+    }
+  }
+}
+// function showCheckboxes(event) {
+//   event.stopPropagation();
+//   let checkboxes = document.getElementById("checkboxes");
+//   let assignedBtn = document.getElementById("inputToSearchContact");
+//   assignedBtn.value = '';
+ 
+//   toggleUserListInitials();
+
+//   if (divContacts == false) {
+//     ifForshowCheckBoxes(checkboxes, assignedBtn);
+//     assignedBtn.focus();
+//   } else {
+//     elseForshowCheckBoxes(assignedBtn);
+//   }
+//   assignedBtn.parentElement.classList.toggle("fill-border");
+//   toggleDropDownArrow("dropDownArrow");
+// }
+
+// function toggleUserListInitials() {
+//   let checkboxes = document.getElementById("checkboxes");
+
+//   checkboxes.classList.toggle("user-list");
+//   checkboxes.classList.toggle("d-flex-initials");
+// }
+
+// function ifForshowCheckBoxes(checkboxes, assignedBtn) {
+//   checkboxes.classList.remove("vs-hidden");
+//   assignedBtn.placeholder = "Search Contact";
+//   renderContactsToField(contacts, checkboxes);
+//   divContacts = true;
+// }
+
+// function elseForshowCheckBoxes(assignedBtn) {
+//   assignedBtn.blur();
+//   divContacts = false;
+//   showInitials();
+// }
+
+// function showInitials() {
+  //   let initialsArea = document.getElementById("checkboxes");
+  //   initialsArea.innerHTML = "";
+  
+  //   for (i = 0; i < checkedUsers.length; i++) {
+  //     let singleUser = checkedUsers[i]["name"];
+  //     let nameParts = singleUser.split(" ");
+  //     let firstLetter = nameParts[0].substring(0, 1);
+  //     if (nameParts.length == 2) {
+  //       let secondLetter = nameParts[1].substring(0, 1);
+  //       let nameInitial = firstLetter + secondLetter;
+  //       initial = nameInitial;
+  //     } else {
+  //       initial = firstLetter;
+  //     }
+  //     initialsArea.innerHTML += loadInitial(i, initial);
+  //     backgroundColorInitials(i, "showInitial");
+  //   }
+  // }

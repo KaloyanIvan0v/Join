@@ -6,14 +6,42 @@ body {
     background-color: #F6F7F8;
 }
 
+input[type=text]:valid {
+    border: 1px solid #29ABE2;
+}
+
 input[type=text] {
     font-size: 20px;
 }
+
+/* input[type=text]:focus-within {
+    border: 1px solid #FF8190;
+}
+
+input[type=date]:invalid {
+    border: 1px solid #FF8190;
+}
+
+input[type=date]:focus-within {
+    border: 1px solid #29ABE2;
+} */
 
 .single-edit-subtask {
     display: flex;
     align-items: center;
     gap: 4px;
+}
+
+.contacts-assigned {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    margin-top: -10px;
+}
+
+.contacts-initialen {
+    display: flex;
 }
 
 .edit-subtask {
@@ -66,8 +94,6 @@ textarea:focus {
 }
 
 h2 {
-    /* position: absolute; */
-    /* position: relative; */
     margin: 0;
     top: 206px;
     left: 328px;
@@ -107,7 +133,7 @@ h2 {
 }
 
 .border-none[type=text] {
-    border: none;
+    border: none !important;
     width: 100%;
 }
 
@@ -167,7 +193,10 @@ h2 {
 .error {
     color: #FF8190;
     font-size: 12px;
-    line-height: 14.4px;
+}
+
+input[type=text]:not(:focus) {
+    border: 1px solid #D1D1D1;
 }
 
 .error-border {
@@ -658,22 +687,77 @@ select {
     appearance: none;
 }
 
-  @media(max-width: 860px) {
+@media(max-width:1350px) {
+    .leftside-add-task {
+        width: 350px;
+    }
+
+    .description-input {
+        width: 350px;
+    }
+
+    .rightside-add-task {
+        width: 350px;
+    }
+
+    .fz-20 {
+        font-size: 18px;
+    }
+}
+
+@media(max-width: 1150px) {
+    .headline-area-template .add-task-informations {
+        padding-left: 328px;
+    }
+
+    .leftside-add-task {
+        width: 300px;
+    }
+
+    .description-input {
+        width: 300px;
+    }
+
+    .rightside-add-task {
+        width: 300px;
+    }
+
+    .fz-20 {
+        font-size: 16px;
+    }
+
+    .selection-field {
+        padding: 16px 4px;
+    }
+}
+
+  @media(max-width: 1050px) {
+    .leftside-add-task {
+        width: 440px;
+    }
+
+    .description-input {
+        width: 440px;
+    }
+
+    .rightside-add-task {
+        width: 440px;
+    }
+
+    .fz-20 {
+        font-size: 20px;
+    }
+
+    .selection-field {
+        padding: 16px 4px;
+    }
     .over-div {
         flex-direction: column;
-        left: 26px;
     }
-  }
 
-  @media(max-width: 700px) {
     body {
         display: flex;
         justify-content: center;
-    }
-
-    .over-div {
-        position: unset;
-        padding-top: 144px;
     }
 
     .add-task-informations {
@@ -701,7 +785,7 @@ select {
 
     .reuired-notice-cancel-create {
         background-color: #F6F7F8;
-        z-index: 20;
+        z-index: 4;
         position: fixed;
         right: 0;
         left: 0;
@@ -719,10 +803,18 @@ select {
     }
   }
 
+  @media(max-width: 860px) {
+    .over-div {
+        position: unset;
+        padding-top: 144px;
+    }
+
+    .headline-area-template .add-task-informations {
+        padding-left: 0;
+    }
+}
+
   @media(max-width: 500px) {
-    /* .d-flex-column-center {
-        flex: 1;
-    } */
 
     input[type=text] {
         font-size: 16px;
@@ -734,6 +826,7 @@ select {
 
     .over-div {
         top: 128px;
+        width: 100%;
     }
 
     .leftside-add-task {
@@ -755,7 +848,7 @@ select {
     }
 
     .fz-20 {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .prio-image {

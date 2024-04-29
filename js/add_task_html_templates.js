@@ -26,7 +26,7 @@ let priorities = [
 
 function returnHtmlSingleContact(user) {
     return `
-    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i})">
+    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i}, event)">
         <div class="user-field hover-user-field" id="userField${i}">
             <div class="single-user">
                 <div class="initials-assigned initials" id="bgInitials${i}">
@@ -48,7 +48,7 @@ function returnHtmlCheckAndClear() {
     <div id="activeInputSubtask" class="active-input-subtasks">
         <a class="hover" onclick="resetAddNewSubtask()"><img src="/img/close.png"></a>
         <span class="height-24">|</span>
-        <a id="checkNewSubtask" class="hover" onclick="addNewSubTask()"><img src="/img/Property 1=check.png"></a>
+        <a id="checkNewSubtask" class="hover" onkeydown="addNewSubTask(event)"><img src="/img/Property 1=check.png"></a>
     </div>`
 }
 
@@ -93,5 +93,5 @@ function editSubtaskHtml(i, subTask) {
 }
 
 function loadInitial(i, initial) {
-    return `<div id="initialArea${i}" class="initial-area initials">${initial}</div>`
+    return `<div id="initialArea${i}" class="initial-area initials">${initial['nameInitials']}</div>`
 }
