@@ -125,3 +125,15 @@ function getIndexOfElmentById(id, list) {
     }
   }
 }
+
+function increaseId(array) {
+  let lastTaskofTasks = array.length - 1;
+
+  if (lastTaskofTasks == -1) {
+    return (currentId = 0);
+  } else {
+    let currentId = array[lastTaskofTasks]["id"];
+    currentId++;
+    return currentId;
+  }
+}
