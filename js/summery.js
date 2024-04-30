@@ -14,11 +14,14 @@ function writeNumberOfAllTasks() {
 }
 
 function filterHighestPrio() {
-  let highestPrio = "Urgent";
-  let count = tasks.reduce(function (acc, tasks) {
-    return tasks.prio === highestPrio ? acc + 1 : acc;
-  }, 0);
+  let count = 0;
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i]['prio'] === 'Urgent') {
+        count++;
+      }
+    }
   document.getElementById("highestPrio").innerHTML = count;
+  //console.log(count);
 }
 
 function countStatements(index) {
