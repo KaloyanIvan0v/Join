@@ -385,6 +385,7 @@ input:focus {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  background-color: #FFFF;
 }
 
 .overlay-first-row {

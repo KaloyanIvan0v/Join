@@ -6,6 +6,7 @@ let subTaskStatus = [];
 let checkedUsers = [];
 let findContactsAtSearch = [];
 let finishedSubTasks = [];
+let checkedContactsId = [];
 let checkChangeIcons = false;
 let checkBoxContact = false;
 let arrowToggleCheck = false;
@@ -17,8 +18,8 @@ async function init_add_task() {
   loadTasks();
   loadContacts();
   loadUsers();
-  setTimeout(selectPriority, 300);
-  setTimeout(currentDate, 300);
+  setTimeout(selectPriority, 200);
+  setTimeout(currentDate, 200);
 }
 
 function loadHtmlTaskTemplate() {
@@ -67,18 +68,6 @@ function addedToBoard() {
 
   bgDialog.classList.remove("vs-hidden");
   bgDialog.classList.add("align-center");
-}
-
-function increaseId(array) {
-  let lastTaskofTasks = array.length - 1;
-
-  if (lastTaskofTasks == -1) {
-    return (currentId = 0);
-  } else {
-    let currentId = array[lastTaskofTasks]["id"];
-    currentId++;
-    return currentId;
-  }
 }
 
 function toggleDropDownArrowInputField(idImage) {
@@ -293,8 +282,10 @@ function filterContacts(contact, inputSearchContact) {
   }
 }
 
-function selectedUser(i, event) {
+function selectedUser(i, event, id) {
   event.stopPropagation();
+
+  checkedContactsId.push(id);
   let singleUser = contacts[i];
   let currentIndex = checkedUsers.indexOf(singleUser);
   let inputField = document.getElementById('inputToSearchContact');
@@ -331,11 +322,20 @@ function toggleCheckbox(i) {
 }
 
 function checkIfContactChecked(i) {
-  let testCheckbox = contacts[i]['checkBoxContact'];
-  
-  if(testCheckbox == true) {
-    toggleBackgroundForCheckedUser(i);
-    contacts[i]['checkBoxContact'] = false;
-    toggleCheckbox(i);
+  let currentContactId = contacts[i]['id'];
+
+  for(j = 0; j < checkedContactsId.length; j++) {
+    let checkedContact = checkedContactsId[j];
+    if(checkedContact.includes(currentContactId)) {
+      toggleBackgroundForCheckedUser(i);
+      toggleCheckbox(i);
+    }
   }
+  // let testCheckbox = contacts[i]['checkBoxContact'];
+  
+  // if(testCheckbox == true) {
+  //   toggleBackgroundForCheckedUser(i);
+  //   contacts[i]['checkBoxContact'] = false;
+  //   toggleCheckbox(i);
+  // }
 }

@@ -1,4 +1,4 @@
-function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButton) {
+function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText) {
 return /*html*/` 
 <div class="over-div">
 <div class="close" onclick="closeDiv(event)">
@@ -115,7 +115,7 @@ return /*html*/`
                 <div class="buttons-clear-create">
                     <button class="btn-add-task-template border-cancel join-button-empty"
                         onclick="${leftButtonFunction}(event); return false">
-                        <span class="typography-clear ">${leftButton}</span>
+                        <span class="typography-clear ">${leftButtonText}</span>
                         <img src="/img/iconoir_cancel.png">
                     </button>
 

@@ -26,7 +26,7 @@ let priorities = [
 
 function returnHtmlSingleContact(user) {
     return `
-    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i}, event)">
+    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i}, event, ${user['id']})">
         <div class="user-field hover-user-field" id="userField${i}">
             <div class="single-user">
                 <div class="initials-assigned initials" id="bgInitials${i}">
