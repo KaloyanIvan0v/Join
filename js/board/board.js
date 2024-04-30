@@ -11,9 +11,7 @@ async function init_board() {
 }
 
 function openPopUp() {
-  document
-    .getElementById("id-shadow-layer")
-    .classList.remove("visibility-hidden");
+  document.getElementById("id-shadow-layer").classList.remove("visibility-hidden");
 }
 function closePopUp() {
   document.getElementById("id-shadow-layer").classList.add("visibility-hidden");
@@ -26,10 +24,10 @@ function renderSubtaskProgressBar(id) {
   if (subTasksLength == 0) {
     return;
   }
-  let loadbar = document.getElementById("loadBar");
-  loadbar.innerHTML = renderSubtaskProgressBarHtml(finishedSubTasks, subTasks);
+  let loadBar = document.getElementById("loadBar");
+  loadBar.innerHTML = renderSubtaskProgressBarHtml(finishedSubTasks, subTasks);
   let progress = (finishedSubTasks.length / subTasksLength.length) * 100;
-  loadbar.style.width = progress + "%";
+  loadBar.style.width = progress + "%";
 }
 
 function initTaskAreas() {
@@ -46,11 +44,7 @@ async function renderTasks(taskList) {
   for (i = 0; i < taskList.length; i++) {
     let singleTask = taskList[i];
     let id = taskList[i]["id"];
-    taskAreas[sectionIdForTask(taskList)].innerHTML += returnHtmlShowToDos(
-      singleTask,
-      i,
-      id
-    );
+    taskAreas[sectionIdForTask(taskList)].innerHTML += returnHtmlShowToDos(singleTask, i, id);
     choosestatementColor(i);
     renderSubtaskProgressBar(id);
   }
@@ -111,14 +105,11 @@ function whichPriorityTaskCard(i, renderFull) {
   let singleTaskPrio = tasks[i]["prio"];
   prioField.innerHTML = "";
   if (singleTaskPrio == "Low") {
-    prioField.innerHTML =
-      '<img src="' + "/img/low_green.png" + '" alt="Bildbeschreibung">';
+    prioField.innerHTML = '<img src="' + "/img/low_green.png" + '" alt="Bildbeschreibung">';
   } else if (singleTaskPrio == "medium") {
-    prioField.innerHTML =
-      '<img src="' + "/img/medium_orange.png" + '" alt="Bildbeschreibung">';
+    prioField.innerHTML = '<img src="' + "/img/medium_orange.png" + '" alt="Bildbeschreibung">';
   } else {
-    prioField.innerHTML =
-      '<img src="' + "/img/urgent_red.png" + '" alt="Bildbeschreibung">';
+    prioField.innerHTML = '<img src="' + "/img/urgent_red.png" + '" alt="Bildbeschreibung">';
   }
   renderContactsBoardInitialen(i, renderFull);
 }
@@ -171,12 +162,7 @@ function renderSubTasksBoard(i) {
     } else {
       imgSrc = "/img/check_empty.png";
     }
-    subTasksField.innerHTML += returnHtmlSubtasks(
-      subTask,
-      i,
-      subTaskId,
-      imgSrc
-    );
+    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, subTaskId, imgSrc);
   }
 }
 
@@ -187,10 +173,7 @@ function renderContactsBoardInitialen(i, renderFull) {
   for (j = 0; j < contactsForTask.length; j++) {
     if (j < 3 || renderFull == true) {
       let contactForTask = contactsForTask[j];
-      contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(
-        contactForTask,
-        j
-      );
+      contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(contactForTask, j);
       backgroundColorInitialsBoard(i, j);
     } else {
       let restAmount = contactsForTask.length - 3;
@@ -211,9 +194,7 @@ function returnMoreContactsPreview(restAmount) {
 function renderFullName(i, contactsForTask) {
   let backgroundDialog = document.getElementById("backgroundDialog");
   if (backgroundDialog.classList.contains("background-dialog")) {
-    let contactsFieldBoard = document.getElementById(
-      `contactsFieldBoardFullName(${i})`
-    );
+    let contactsFieldBoard = document.getElementById(`contactsFieldBoardFullName(${i})`);
     contactsFieldBoard.innerHTML = "";
     for (j = 0; j < contactsForTask.length; j++) {
       fullName = contactsForTask[j];
@@ -369,12 +350,8 @@ function getTaskStatementIndex(id) {
 }
 
 function getDragedElementWidthAndHeigth() {
-  let width = document.getElementById(
-    `taskCard${currentDraggedElement}`
-  ).offsetWidth;
-  let height = document.getElementById(
-    `taskCard${currentDraggedElement}`
-  ).offsetHeight;
+  let width = document.getElementById(`taskCard${currentDraggedElement}`).offsetWidth;
+  let height = document.getElementById(`taskCard${currentDraggedElement}`).offsetHeight;
   return [width, height];
 }
 
@@ -399,9 +376,7 @@ function filterTaskListener() {
 }
 
 function getFilteredTasks() {
-  var inputValue = document
-    .getElementById("id-find-task-input")
-    .value.toLowerCase();
+  var inputValue = document.getElementById("id-find-task-input").value.toLowerCase();
   var filteredTasks = tasks.filter(function (task) {
     return (
       task.title.toLowerCase().includes(inputValue) ||
@@ -498,22 +473,16 @@ function addTaskFormResetFields() {
 
 function toggleCheckboxSubTask(i, subTaskId) {
   if (getSubtaskStatus(i, subTaskId)) {
-    tasks[i].subTasks[
-      getIndexOfElmentById(subTaskId, tasks[i].subTasks)
-    ].status = false;
+    tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)].status = false;
   } else {
-    tasks[i].subTasks[
-      getIndexOfElmentById(subTaskId, tasks[i].subTasks)
-    ].status = true;
+    tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)].status = true;
   }
   renderSubTasksBoard(i);
   setItem("tasks", tasks);
 }
 
 function getSubtaskStatus(i, subTaskId) {
-  let subTaskStatus =
-    tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)]
-      .status;
+  let subTaskStatus = tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)].status;
   return subTaskStatus;
 }
 

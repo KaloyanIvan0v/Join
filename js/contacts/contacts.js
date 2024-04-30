@@ -23,9 +23,7 @@ function loadAddContactTemplate(element) {
   handleHoverButtonChangeImgDelayed();
   element.innerHTML = `<div class="contact-form" w3-include-html="/templates/add-contact.html"></div>`;
   setTimeout(function () {
-    document
-      .getElementById("id-contact-form-cancel")
-      .classList.add("d-none-mobile-1300");
+    document.getElementById("id-contact-form-cancel").classList.add("d-none-mobile-1300");
     handleInputOnFocusChangeParentElementBorderColor();
   }, 50);
 }
@@ -80,9 +78,7 @@ function safeContacts() {
 }
 
 function getActualContactEmail() {
-  let email = document.getElementById(
-    "id-contact-full-mode-data-email"
-  ).textContent;
+  let email = document.getElementById("id-contact-full-mode-data-email").textContent;
 
   return email;
 }
@@ -96,19 +92,15 @@ function getContactIndex(email) {
 }
 
 function editContactFillForm() {
-  let contactIndex = getContactIndex(getActualContactEmail());
-  if (contactIndex != undefined) {
-    let name = contacts[contactIndex].name;
-    let email = contacts[contactIndex].email;
-    let phone = contacts[contactIndex].phone;
-    let badge = contacts[contactIndex].nameInitials;
-    let colorId = contacts[contactIndex].color;
+  const contactIndex = getContactIndex(getActualContactEmail());
+  if (contactIndex !== undefined) {
+    const { name, email, phone, nameInitials: badge, color } = contacts[contactIndex];
     document.getElementById("id-edit-contact-input-name").value = name;
     document.getElementById("id-edit-contact-input-email").value = email;
     document.getElementById("id-edit-contact-input-phone").value = phone;
-    setBadge(badge, colorId);
+    setBadge(badge, color);
+    currentEditingContactId = contactIndex;
   }
-  currentEditingContactId = contactIndex;
 }
 
 function setBadge(badge, colorId) {
@@ -134,24 +126,16 @@ function SaveEditedContact() {
 }
 
 async function addNewContact() {
-  let name = document.getElementById("id-add-contact-name").value;
-  let email = document.getElementById("id-add-contact-email").value;
-  let phone = document.getElementById("id-add-contact-phone").value;
-  let color = Math.floor(Math.random() * 14) + 1;
-  let contactBadge = generateBadge(name);
-  let author = "Günter";
-  let contact = {
-    name: name,
-    email: email,
-    phone: phone,
-    color: color,
-    nameInitials: contactBadge,
-    author: author,
-    checkbox: false,
-  };
+  const name = document.getElementById("id-add-contact-name").value;
+  const email = document.getElementById("id-add-contact-email").value;
+  const phone = document.getElementById("id-add-contact-phone").value;
+  const color = Math.floor(Math.random() * 14) + 1;
+  const nameInitials = generateBadge(name);
+  const author = "Günter";
+  const contact = { name, email, phone, color, nameInitials, author, checkbox: false };
   contacts.push(contact);
   safeContacts();
-  closeContactFrom();
+  closeContactForm();
   renderContacts(contacts);
 }
 
@@ -179,6 +163,7 @@ function renderContacts(contacts) {
     renderContact(contact, contactList, i);
     setElementBackgroundColor(`id-contact-list-badges${i}`, color);
   });
+  renderMobileAddContactButton();
 }
 
 function clearElementById(id) {
@@ -190,36 +175,12 @@ function sortListAlphabetically(list) {
   return sortedList;
 }
 
-function renderLetterSectionHTML(firstLetter) {
-  return /*html*/ `
-  <div class="contact-list-first-letter">${firstLetter}</div>
-  <div class="contact-list-letter-parting-line"></div>
-  `;
-}
-
 function renderContact(contact, divId, i) {
   const contactBadges = contact.nameInitials;
   const contactName = contact.name;
   const contactEmail = contact.email;
   const contactColor = contact.color;
-  divId.innerHTML += renderContactHtml(
-    contactBadges,
-    contactName,
-    contactEmail,
-    i
-  );
-}
-
-function renderContactHtml(contactBadges, contactName, contactEmail, i) {
-  return /*html*/ `
-  <div id="id-contact-list-item${i}" class="contact-list-item" onclick="openContact('${contactEmail}')">
-    <div id="id-contact-list-badges${i}" class="contact-list-badges">${contactBadges}</div>
-    <div id="id-contact-list-name-email${i}" class="contact-list-name-email">
-      <div id="id-contact-list-name${i}" class="contact-list-name">${contactName}</div>
-      <div id="id-contact-list-email${i}" class="contact-list-email">${contactEmail}</div>
-    </div>
-  </div>
-  `;
+  divId.innerHTML += renderContactHtml(contactBadges, contactName, contactEmail, i);
 }
 
 function setElementBackgroundColor(elementId, colorId) {
@@ -264,46 +225,6 @@ function setListenerForEditDeleteBtn() {
   );
 }
 
-function renderContactFullModeHtml(
-  contactName,
-  contactEmail,
-  contactPhone,
-  contactBadges
-) {
-  return /*html*/ `
-    <div class="contact-full-mode-header">
-      <div id="id-mobile-dot-menu" class="mobile-dot-menu join-button" onclick="openContactEditMenu()">
-    <img id="dot-menu-img" src="/img/dot-menu.svg" alt="">
-    </div>
-    <div id="id-contacts-arrow-exit" class="contacts-arrow-exit" onclick="HideFullViewShowContactList()">
-    <img src="/img/arrow-left-line.svg" alt="">
-  </div>
-      <div id="id-contact-full-mode-badges" class="contact-full-mode-badges">${contactBadges}</div>
-      <div class="contact-full-mode-name-edit-section">
-        <div class="contact-full-mode-name">${contactName}</div>
-        <div class="contact-full-mode-edit">
-          <button class="contact-full-mode-edit-contact" onclick="openContactForm('editContact')">
-            <div class="edit-btn-img"></div>
-            <div>Edit</div>
-          </button>
-        <button class="contact-full-mode-delete-contact" onclick="deleteContact()">
-            <div class="delete-btn-img" ></div>
-            <div>Delete</div>
-          </button>
-        </div>
-      </div>
-    </div>
-      <div class="contact-full-mode-data">
-        <div class="contact-full-mode-data-headline">Contact Information</div>
-        <div class="contact-full-mode-data-email-headline">Email</div>
-        <div id="id-contact-full-mode-data-email" class="contact-full-mode-data-email">${contactEmail}</div>
-        <div class="contact-full-mode-data-phone-headline">Phone</div>
-        <div class="contact-full-mode-data-phone">${contactPhone}</div>
-      </div>
-  
-  `;
-}
-
 function HideContactsListShowFullView() {
   let contactList = document.getElementById("id-contacts-list");
   let contactSingleView = document.getElementById("id-contacts-single-view");
@@ -336,27 +257,13 @@ function removeShadowLayer() {
   shadowLayer.classList.add("hide");
 }
 
-function renderContactEditMenuMobile() {
-  return /*html*/ `
-  <div id="id-contact-full-mode-edit-mobile" class="contact-full-mode-edit-mobile hide">
-          <button class="contact-full-mode-edit-contact" onclick="openContactForm('editContact')">
-            <div class="edit-btn-img"></div>
-            <div>Edit</div>
-          </button>
-        <button class="contact-full-mode-delete-contact" onclick="deleteContact()">
-            <div class="delete-btn-img" ></div>
-            <div>Delete</div>
-          </button>
-        </div>`;
-}
-
 function openContactEditMenu() {
   var element = document.getElementById("id-contact-full-mode-edit-mobile");
   element.classList.remove("hide");
 }
 
 function closeContactEditMenu() {
-  if (window.widht < 1080) {
+  if (window.width < 1080) {
     var element = document.getElementById("id-contact-full-mode-edit-mobile");
     element.classList.add("hide");
   }
@@ -365,10 +272,7 @@ function closeContactEditMenu() {
 function addClickListener() {
   var element = document.getElementById("id-contacts-single-view");
   element.addEventListener("click", function (event) {
-    if (
-      event.target.id !== "id-mobile-dot-menu" &&
-      event.target.id !== "dot-menu-img"
-    ) {
+    if (event.target.id !== "id-mobile-dot-menu" && event.target.id !== "dot-menu-img") {
       closeContactEditMenu();
     }
   });

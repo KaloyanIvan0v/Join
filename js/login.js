@@ -4,7 +4,7 @@
  * animation and sets session storage data.
  */
 async function initLogin() {
-  setStartScreenImgAndBackgroundcolor();
+  setStartScreenImgAndBackgroundColor();
   await loadUsers();
   await loadContacts();
   await loadTasks();
@@ -31,12 +31,10 @@ function startScreen() {
  * Configures the start screen image and background color depending on the
  * window's width.
  */
-function setStartScreenImgAndBackgroundcolor() {
+function setStartScreenImgAndBackgroundColor() {
   if (window.innerWidth <= 860) {
     document.getElementById("id-logo-img").src = "../img/logo-light.svg";
-    document.getElementById(
-      "id-opacity-layer"
-    ).style.backgroundColor = `var(--primary-color)`;
+    document.getElementById("id-opacity-layer").style.backgroundColor = `var(--primary-color)`;
     setTimeout(() => {
       document.getElementById("id-logo-img").src = "../img/logo-dark.svg";
     }, 1200);
@@ -74,7 +72,7 @@ function SetLoginFeedbackMsg(errMsg, duration) {
   feedbackField.innerHTML = setLoginFeedbackMsgHtml(errMsg);
 
   setTimeout(() => {
-    removeFeddbackMsg(feedbackField);
+    removeFeedbackMsg(feedbackField);
   }, duration);
 }
 
@@ -93,7 +91,7 @@ function setLoginFeedbackMsgHtml(errMsg) {
  *
  * @param {HTMLElement} divId - The HTML element to clear.
  */
-function removeFeddbackMsg(divId) {
+function removeFeedbackMsg(divId) {
   divId.innerHTML = "";
 }
 
@@ -186,7 +184,7 @@ function setPwdInputEventListeners() {
  * @param {string} id - The ID of the clicked element.
  */
 function inputClicked(id) {
-  confingPwdVisibility(id);
+  configPwdVisibility(id);
 }
 
 /**
@@ -194,7 +192,7 @@ function inputClicked(id) {
  *
  * @param {string} id - The ID of the clicked element.
  */
-function confingPwdVisibility(id) {
+function configPwdVisibility(id) {
   if (id !== "password0-img") {
     if (id === "password0") {
       if (pswVisibility === false) {
