@@ -490,7 +490,7 @@ input[type=text]:not(:focus) {
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -504,15 +504,15 @@ input[type=text]:not(:focus) {
     z-index: 999;
 }
 
-.align-center {
-    align-items: center;
-    transition: all 900ms;
+.hover-subtask:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .categories-list {
     background-color: #FFFFFF;
     border: 1px #dadada solid;
-    z-index: 2;
+    z-index: 1;
     position: relative;
     width: auto;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
@@ -710,6 +710,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     .rightside-add-task {
         width: 440px;
+        gap: 16px;
     }
 
     .fz-20 {
@@ -816,10 +817,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     .description-input {
         width: auto;
-    }
-
-    .new-subtask {
-        max-width: 300px;
     }
 
     .rightside-add-task {

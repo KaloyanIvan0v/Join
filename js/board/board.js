@@ -3,7 +3,7 @@ let checkedStatusSubtasks = false;
 
 async function init_board() {
   await loadTasks();
-  includeHTML();
+  await includeHTML();
   renderTasks(tasks);
   loadContacts();
   filterTaskListener();
@@ -13,6 +13,22 @@ async function init_board() {
 function openPopUp() {
   document.getElementById("id-shadow-layer").classList.remove("visibility-hidden");
 }
+
+function openAddTaskTemplate() {
+  openPopUp();
+
+  let idPopUp = document.getElementById('id-pop-up');
+  let createTask = 'createTask';
+  let leftButtonFunction = 'closePopUp';
+  let leftButtonText = 'Cancel';
+
+  idPopUp.innerHTML += returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText);
+  // setTimeout(selectPriority, 300);
+  // setTimeout(currentDate, 300);
+  selectPriority();
+  currentDate();
+}
+
 function closePopUp() {
   document.getElementById("id-shadow-layer").classList.add("visibility-hidden");
   document.getElementById("id-pop-up").innerHTML = "";

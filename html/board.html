@@ -11,20 +11,18 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/css/templates.css">
     <link rel="stylesheet" href="/css/board.css">
-    <link rel="stylesheet" href="/css/add_task_template.css">
     <link rel="stylesheet" href="/css/add_task.css">
-    <script src="/js/add_task_html_templates.js"></script>
-
 
     <script src="/js/templates.js"></script>
     <script src="/js/w3include.js"></script>
     <script src="/js/storage.js"></script>
     <script src="/script.js"></script>
-    <script src="/js/add_task.js"></script>
-    <!-- <script src="/js/add_task_html_templates.js"></script> -->
     <script src="/js/board/board_html.js"></script>
     <script src="/js/board/board.js"></script>
-
+    <script src="/js/add_task/add_task.js"></script>
+    <script src="/js/add_task/add_task_html_templates.js"></script>
+    <script src="/js/add_task/add_task_subtasks.js"></script>
+    <script src="/js/add_task/add_task_formular_template.js"></script>
 
 </head>
 
@@ -49,7 +47,7 @@
                     <img src="/img/line_with_searchicon.png">
                 </form>
                 <button
-                    onclick="openPopUpW3Include('/templates/add_task_formular_template.html','add_task_formular_template')"
+                    onclick="openAddTaskTemplate()"
                     class="btn-add-task-board hover join-button">
                     <span class="typography-create hide1040">Add Task</span>
                     <div class="plus-icon">

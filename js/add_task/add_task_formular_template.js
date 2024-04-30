@@ -1,39 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Add Task</title>
-
-    <link rel="icon" type="image/x-icon" href="/img/logoDark.png">
-
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="/css/add_task.css">
-    <link rel="stylesheet" href="/css/templates.css">
-
-    <script src="/js/w3include.js"></script>
-    <script src="/js/storage.js"></script>
-    <script src="/script.js"></script>
-    <script src="/js/add_task/add_task.js"></script>
-    <script src="/js/add_task/add_task_html_templates.js"></script>
-    <script src="/js/add_task/add_task_subtasks.js"></script>
-    <script src="/js/add_task/add_task_formular_template.js"></script>
-    <script src="/js/templates.js"></script>
-
-</head>
-
-<body id="body" onload="init_add_task()">
-    <div w3-include-html="/templates/header.html" class="header"></div>
-    <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
-    <!-- <div id="addTaskFormular"></div> -->
-<!-- 
-    <div class="close" onclick="closeDiv(event)">
-    <div class="over-div">
+function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButton) {
+return /*html*/` 
+<div class="over-div">
+<div class="close" onclick="closeDiv(event)">
         <div class="headline-area-template">
             <span class="headline-add-task-template">Add Task</span>
         </div>
-        <form onsubmit="createTask(); return false" class="add-task-informations">
+        <form onsubmit="${createTask}(); return false" class="add-task-informations">
             <div class="left-and-rightside">
                 <div class="leftside-add-task">
                     <div class="description-input d-flex-column-center">
@@ -141,8 +113,9 @@
                     <span class="color-FF8190">*</span>
                 </div>
                 <div class="buttons-clear-create">
-                    <button class="btn-add-task d-none-mobile" onclick="resetInputFields(); return false">
-                        <span class="typography-clear">Clear</span>
+                    <button class="btn-add-task-template border-cancel join-button-empty"
+                        onclick="${leftButtonFunction}(event); return false">
+                        <span class="typography-clear ">${leftButton}</span>
                         <img src="/img/iconoir_cancel.png">
                     </button>
 
@@ -160,14 +133,5 @@
             </div>
         </div>
     </div>
-    </div>
-</body>
-
-</html> -->
-
-
-
-
-
-
-<!-- add-task-informations width runter setzen und alles wird responsive!!! -->
+</div>`
+}

@@ -79,10 +79,10 @@ function renderSubTasks(operator) {
     let subTask = subTasks[i]['subTask'];
 
     subTaskField.classList.add('list-element-subtasks');
+    subTaskField.classList.remove('hover-subtask');
     subTaskField.innerHTML = editSubtaskHtml(i, subTask);
     inputFocus(i);
-    // let subTaskElement = document.getElementById(`subTaskElement${i}`);
-    // let ulSubtasks = document.getElementById(`ulSubtasks(${i})`);
+
   }
 
   function inputFocus(i) {

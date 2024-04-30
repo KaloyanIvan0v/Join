@@ -74,7 +74,7 @@ function prioActive(priority) {
 
 function returnHtmlNewSubtasks(newSubTask) {
     return `
-        <li class="" onclick="editSubtask(${i})" id="subTaskElement${i}">${newSubTask}</li>`
+        <li class="hover-subtask" onclick="editSubtask(${i})" id="subTaskElement${i}">${newSubTask}</li>`
 }
 
 function editSubtaskHtml(i, subTask) {

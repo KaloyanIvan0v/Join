@@ -55,14 +55,3 @@ function loadFirstLettersFromSessionStorage() {
     document.getElementById("abbreviation").innerHTML = "G";
   }
 }
-
-function openPopUpW3Include(path, elementClass) {
-  document
-    .getElementById("id-shadow-layer")
-    .classList.remove("visibility-hidden");
-  document.getElementById("id-pop-up").innerHTML = `
-  <div w3-include-html="${path}"
-    class="${elementClass}">
-  </div>`;
-  includeHTML();
-}
