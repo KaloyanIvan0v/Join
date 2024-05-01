@@ -47,7 +47,7 @@ function handleHoverButtonChangeImgDelayed() {
   }, 50);
 }
 
-function closeContactFrom(event) {
+function closeContactForm(event) {
   let contactForm = document.getElementById("id-contact-form");
   if (event) {
     event.preventDefault();
@@ -61,7 +61,7 @@ async function deleteContact(event) {
   if (event) {
     event.preventDefault();
   }
-  closeContactFrom();
+  closeContactForm();
   HideFullViewShowContactList();
   let contactIndex = getContactIndex(getActualContactEmail());
   if (contactIndex != undefined) {
@@ -120,7 +120,7 @@ function SaveEditedContact() {
     "id-edit-contact-input-phone"
   ).value;
   safeContacts();
-  closeContactFrom();
+  closeContactForm();
   renderContacts(contacts);
   renderContactFullMode(contacts[currentEditingContactId]);
 }
@@ -132,7 +132,8 @@ async function addNewContact() {
   const color = Math.floor(Math.random() * 14) + 1;
   const nameInitials = generateBadge(name);
   const author = "Günter";
-  const contact = { name, email, phone, color, nameInitials, author, checkbox: false };
+  const id = increaseId(contacts);
+  const contact = { id, name, email, phone, color, nameInitials, author, checkbox: false };
   contacts.push(contact);
   safeContacts();
   closeContactForm();
