@@ -113,7 +113,7 @@ return /*html*/`
                     <span class="color-FF8190">*</span>
                 </div>
                 <div class="buttons-clear-create">
-                    <button class="btn-add-task-template border-cancel join-button-empty"
+                    <button class="btn-add-task d-none-mobile"
                         onclick="${leftButtonFunction}(event); return false">
                         <span class="typography-clear ">${leftButtonText}</span>
                         <img src="/img/iconoir_cancel.png">

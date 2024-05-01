@@ -24,21 +24,21 @@ let priorities = [
     }
 ]
 
-function returnHtmlSingleContact(user) {
+function returnHtmlSingleContact(contact) {
     return `
-    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i}, event, ${user['id']})">
+    <div class="" id="paddingForChecked${i}" onclick="selectedUser(${i}, event, ${contact['id']})">
         <div class="user-field hover-user-field" id="userField${i}">
             <div class="single-user">
                 <div class="initials-assigned initials" id="bgInitials${i}">
-                    ${user['nameInitials']}
+                    ${contact['nameInitials']}
                 </div>
-                <span class="typography-contacts-assigned">${user['name']}</span>
+                <span class="typography-contacts-assigned">${contact['name']}</span>
             </div>
             <label class="custom-checkbox" for="box${i}">
-            <input type="checkbox" />
-            <div id="" class="">
-                <img src="../img/box-unchecked.png" id="checkBox${i}"></span>
-            </div>
+                <input type="checkbox" />
+                <div id="" class="">
+                    <img src="../img/box-unchecked.png" id="checkBox${i}"></span>
+                </div>
         </div>
     </div>`
 }
