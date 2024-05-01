@@ -1,7 +1,7 @@
 function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText) {
 return /*html*/` 
 <div class="over-div">
-<div class="close" onclick="closeDiv(event)">
+<div class="close" onclick="closeContactsField(event)">
         <div class="headline-area-template">
             <span class="headline-add-task-template">Add Task</span>
         </div>
@@ -79,7 +79,7 @@ return /*html*/`
                             <span class="color-FF8190">*</span>
                         </div>
                         <div tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover"
-                            onclick="showCategories('none', event)">
+                            onclick="showOrHideCategoriesField('none', event)">
                             <span id="categoryDropdown">Select task category</span>
                             <div class="dropdown-icon">
                                 <img src="/img/arrow_drop_down.png" id="dropDownArrowCategory">

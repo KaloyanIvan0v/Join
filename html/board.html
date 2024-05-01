@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/css/templates.css">
     <link rel="stylesheet" href="/css/board.css">
-    <link rel="stylesheet" href="/css/add_task.css">
+    <link rel="stylesheet" href="/css/add_task/add_task_part1.css">
+    <link rel="stylesheet" href="/css/add_task/add_task_part2.css">
+    <link rel="stylesheet" href="/css/add_task/media_query.css">
 
     <script src="/js/templates.js"></script>
     <script src="/js/w3include.js"></script>
@@ -19,23 +21,19 @@
     <script src="/script.js"></script>
     <script src="/js/board/board_html.js"></script>
     <script src="/js/board/board.js"></script>
+    <script src="/js/add_task/add_task_subtasks.js"></script>
     <script src="/js/add_task/add_task.js"></script>
     <script src="/js/add_task/add_task_html_templates.js"></script>
-    <script src="/js/add_task/add_task_subtasks.js"></script>
     <script src="/js/add_task/add_task_formular_template.js"></script>
 
 </head>
 
 <body onload="init_board()">
+    <div w3-include-html="/templates/header.html" class="header"></div>
+    <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
     <div id="id-shadow-layer" class="shadow-layer visibility-hidden">
         <div id="id-pop-up" class="pop-up"></div>
     </div>
-
-
-
-    <div w3-include-html="/templates/header.html" class="header"></div>
-    <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
-
 
     <div class="headline-area-board">
         <div class="headline-search-add">

@@ -1,0 +1,243 @@
+input[type=text]:valid {
+    border: 1px solid #29ABE2;
+}
+
+input[type=text] {
+    font-size: 20px;
+}
+
+input[type=date]:invalid {
+    border: 1px solid #FF8190;
+}
+
+input[type=date]:focus-within {
+    border: 1px solid #29ABE2;
+}
+
+.highlight-color-medium {
+    background-color: #FFA800;
+    color: #FFFFFF;
+}
+
+.highlight-color-urgent {
+    background-color: #FF3D00;
+    color: #FFFFFF;
+}
+
+.highlight-color-low {
+    background-color: #7AE229;
+    color: #FFFFFF;
+}
+
+.bg-color-priority {
+    background-color: #FFFFFF;
+}
+
+.normal-border {
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+}
+
+.error {
+    color: #FF8190;
+    font-size: 12px;
+}
+
+input[type=text]:not(:focus) {
+    border: 1px solid #D1D1D1;
+}
+
+.error-border {
+    border: 1px solid #FF8190;
+}
+
+.fill-border {
+    border: 1px solid #29ABE2;
+}
+
+.fill-border-bottom {
+    border-bottom: 1px solid #29ABE2;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url('/img/calender_icon.png'); 
+    background-size: cover;
+    width: 18px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.user-list::-webkit-scrollbar {
+    border-radius: 8px;
+    width: 8px;
+}
+
+.user-list::-webkit-scrollbar-thumb {
+    background-color: rgba(168, 168, 168, 1);
+}
+
+textarea:focus-visible {
+    outline: none;
+}
+
+::placeholder {
+    height: 24px;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    padding: 0;
+}
+
+.height-24 {
+    height: 24px;
+    color: #D1D1D1;
+}
+
+.bg-dialog {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.added-to-board {
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 999;
+}
+
+.hover-subtask:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.categories-list {
+    background-color: #FFFFFF;
+    border: 1px #dadada solid;
+    z-index: 1;
+    position: relative;
+    width: auto;
+    box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+    margin-top: -20px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.pd-12-16 {
+    padding: 12px 16px;
+}
+
+.mg-top--4 {
+    margin-top: -4px;
+}
+
+.d-flex-initials {
+    display: flex;
+    gap: 8px;
+}
+
+.select-btn {
+    z-index: 10;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.single-user {
+    display: flex;
+    gap: 16px
+}
+
+.user-field {
+    padding: 7px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.initials-assigned {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typography-contacts-assigned {
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.input-search-contacts {
+    width: 408px;
+    border-radius: 10px;
+    z-index: 5;
+}
+
+.input-search-contacts:hover {
+    cursor: pointer;
+}
+
+.hover:hover {
+    cursor: pointer;
+}
+
+.initials {
+    font-size: 12px;
+    line-height: 14.4px;
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#initialArea {
+    display: flex;
+    gap: 10px;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.pd-right-16:hover {
+    background-color: #091931;
+    cursor: pointer;
+}
+
+.pd-right-16 {
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: #FFFFFF;
+}
+
+.hover-user-field:hover {
+    background-color: #EEEE;
+    cursor: pointer;
+}
+
+.option-value-disabled {
+    padding: 12px 16px;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}

@@ -1,27 +1,6 @@
-let currentPrio = ["medium"];
-let taskCategory = [];
-let idNumber = [];
-let subTasks = [];
-let subTaskStatus = [];
-let checkedUsers = [];
-let findContactsAtSearch = [];
-let finishedSubTasks = [];
-let checkedContactsId = [];
-let checkChangeIcons = false;
-let checkBoxContact = false;
-let arrowToggleCheck = false;
-
-async function init_add_task() {
-  await includeHTML();
-  loadHtmlTaskTemplate();
-  setTimeout(loadFirstLettersFromSessionStorage, 200);
-  loadTasks();
-  loadContacts();
-  loadUsers();
-  setTimeout(selectPriority, 200);
-  setTimeout(currentDate, 200);
-}
-
+/**
+ * Loads the HTML task template with specific variables into the document body.
+ */
 function loadHtmlTaskTemplate() {
   let body = document.getElementById('body');
   let createTask = 'createTask';
@@ -31,39 +10,7 @@ function loadHtmlTaskTemplate() {
   body.innerHTML += returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText);
 }
 
-function createTask() {
-  addTask();
-  addedToBoard();
-  setTimeout(function() {
-    window.location.href = "board.html";
-  }, 900);
-}
-
-async function addTask() {
-  let idNumber = increaseId(tasks);
-  let title = document.getElementById("title");
-  let description = document.getElementById("description");
-  let dueDate = document.getElementById("dueDate");
-  let checkedUsersForTask = checkedUsers;
-
-  let task = {
-    title: title.value,
-    description: description.value,
-    assignedTo: checkedUsers,
-    dueDate: dueDate.value,
-    prio: currentPrio,
-    category: taskCategory,
-    subTasks: subTasks,
-    finishedSubTasks: finishedSubTasks,
-    checkedUsers: checkedUsersForTask,
-    statement: "toDo",
-    id: idNumber,
-  };
-  tasks.push(task);
-  await setItem("tasks", tasks);
-}
-
-function addedToBoard() {
+function addedToBoardPopUp() {
   let bgDialog = document.getElementById("bgDialog");
 
   bgDialog.classList.remove("vs-hidden");
@@ -81,7 +28,29 @@ function toggleDropDownArrowInputField(idImage) {
   }
 }
 
+/**
+ * Resets input fields and other variables to their default state.
+ */
 function resetInputFields() {
+  checkedUsers = [];
+  subTasks = [];
+
+  checkChangeIcons = true;
+
+  renderSubTasks('none');
+  currentDate();
+  changeCategory("Select task category");
+  changePrio(1);
+  changeIconsSubtask();
+  clearContactsChecked()
+
+  clearInnerHtmlInputFields();
+}
+
+/**
+ * Clears the inner HTML content of input fields.
+ */
+function clearInnerHtmlInputFields() {
   let subTasks = document.getElementById("subTasks");
   let subTasksArea = document.getElementById("newSubTaskField")
   let contactsField = document.getElementById("contactsField");
@@ -93,21 +62,11 @@ function resetInputFields() {
   subTasks.value = "";
   subTasksArea.innerHTML = '';
   assignedBtn.innerHTML = "";
-  checkedUsers = [];
-  furtherResetField();
 }
 
-function furtherResetField() {
-  subTasks = [];
-  renderSubTasks('none');
-  currentDate();
-  changeCategory("Select task category");
-  changePrio(1);
-  checkChangeIcons = true;
-  changeIconsSubtask();
-  // clearContactsChecked()
-}
-
+/**
+ * Sets the current date as the value of the specified date input field.
+ */
 function currentDate() {
   let inputDateField = document.getElementById("dueDate");
   let todayDate = new Date();
@@ -125,12 +84,20 @@ function currentDate() {
   inputDateField.value = currentDate;
 }
 
+/**
+ * Changes the priority of a task and updates the priority selection options.
+ * 
+ * @param {number} i - The index of the priority to change.
+ */
 function changePrio(i) {
   currentPrio = priorities[i]["text"];
   priorities[i]["isPriority"] = true;
   selectPriority();
 }
 
+/**
+ * Updates the priority selection options based on the priority data.
+ */
 function selectPriority() {
   let prioSelection = document.getElementById("prioSelection");
   prioSelection.innerHTML = "";
@@ -141,6 +108,12 @@ function selectPriority() {
   }
 }
 
+/**
+ * Checks the boolean value for priority and updates the priority selection options.
+ * 
+ * @param {Object} priority - The priority object to check.
+ * @param {HTMLElement} prioSelection - The HTML element to update with the priority options.
+ */
 function checkBooleanForPriority(priority) {
   if (priority["isPriority"] == false) {
     prioSelection.innerHTML += prioNormal(priority);
@@ -150,7 +123,13 @@ function checkBooleanForPriority(priority) {
   }
 }
 
-function showCategories(category, event) {
+/**
+ * Shows or hides the task categories dropdown menu.
+ * 
+ * @param {string} category - The selected category.
+ * @param {Event} event - The click event.
+ */
+function showOrHideCategoriesField(category, event) {
   let categoriesField = document.getElementById("categories");
 
   toggleDropDownArrowInputField("dropDownArrowCategory");
@@ -164,6 +143,11 @@ function showCategories(category, event) {
   }
 }
 
+/**
+ * Changes the selected category for the task.
+ * 
+ * @param {string} category - The new category.
+ */
 function changeCategory(category) {
   let clickedCategory = category;
 
@@ -176,18 +160,32 @@ function changeCategory(category) {
   showCategories(category);
 }
 
+/**
+ * Clears the checked state of all contacts.
+ */
 function clearContactsChecked() {
   for(i = 0; i < contacts.length; i++) {
     contacts[i]['checkBoxContact'] = false;
   }
 }
 
-function closeDiv(event) {
+/**
+ * Closes the popup div and resets contacts if the arrow toggle is active.
+ * 
+ * @param {Event} event - The click event.
+ */
+function closeContactsField(event) {
   if(arrowToggleCheck == true) {
     showOrHideContacts(event);
   }
 }
 
+/**
+ * Shows or hides the required field indicator based on the input value.
+ * 
+ * @param {string} idParent - The ID of the parent input field.
+ * @param {string} idToggle - The ID of the element to toggle.
+ */
 function showOrHideRequiredField(idParent, idToggle) {
   let input = document.getElementById(idParent)
   let inputValue = input.value;
@@ -202,6 +200,11 @@ function showOrHideRequiredField(idParent, idToggle) {
   }
 }
 
+/**
+ * Shows or hides the contacts dropdown based on the arrow toggle state.
+ * 
+ * @param {Event} event - The click event.
+ */
 function showOrHideContacts(event) {
   event.stopPropagation();
   toggleDropDownArrowInputField("dropDownArrow");
@@ -220,6 +223,12 @@ function showOrHideContacts(event) {
   }
 }
 
+/**
+ * Renders contacts to the select dropdown field.
+ * 
+ * @param {HTMLElement} contactsField - The HTML element to render contacts into.
+ * @param {Array} arrayToRender - The array of contacts to render.
+ */
 function renderContactsToSelect(contactsField, arrayToRender) {
   contactsField.innerHTML = '';
 
@@ -231,6 +240,11 @@ function renderContactsToSelect(contactsField, arrayToRender) {
   }
 }
 
+/**
+ * Shows the initial contacts in the contacts dropdown.
+ * 
+ * @param {HTMLElement} contactsField - The HTML element to render initial contacts into.
+ */
 function showContactsInitial(contactsField) {
   contactsField.innerHTML = '';
 
@@ -247,6 +261,12 @@ function showContactsInitial(contactsField) {
   }
 }
 
+/**
+ * Sets the background color of the initials area based on the specified area.
+ * 
+ * @param {number} i - The index of the contact.
+ * @param {string} whichArea - The area to set the background color for.
+ */
 function backgroundColorInitials(i, whichArea) {
   let currentColor = contacts[i]["color"];
   let bgColorCheckedUser = contactColor[currentColor];
@@ -260,6 +280,9 @@ function backgroundColorInitials(i, whichArea) {
   }
 }
 
+/**
+ * Searches for contacts based on the input value and updates the contacts dropdown accordingly.
+ */
 function searchContact() {
   let inputSearchContact = document.getElementById("inputToSearchContact").value;
 
@@ -277,12 +300,25 @@ function searchContact() {
   }
 }
 
+/**
+ * Filters contacts based on the input search value.
+ * 
+ * @param {Object} contact - The contact object.
+ * @param {string} inputSearchContact - The search value.
+ */
 function filterContacts(contact, inputSearchContact) {
   if (contact.name.toLowerCase().includes(inputSearchContact)) {
     findContactsAtSearch.push(contact); 
   }
 }
 
+/**
+ * Handles the selection of a user.
+ * 
+ * @param {number} i - The index of the contact.
+ * @param {Event} event - The click event.
+ * @param {string} id - The ID of the contact.
+ */
 function selectedUser(i, event, id) {
   event.stopPropagation();
 
@@ -301,6 +337,11 @@ function selectedUser(i, event, id) {
   inputField.focus();
 }
 
+/**
+ * Toggles the background color for the checked user.
+ * 
+ * @param {number} i - The index of the contact.
+ */
 function toggleBackgroundForCheckedUser(i) {
   let userField = document.getElementById(`userField${i}`);
   let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
@@ -309,11 +350,16 @@ function toggleBackgroundForCheckedUser(i) {
   paddingForChecked.classList.toggle("pd-right-16");
 }
 
+/**
+ * Toggles the checkbox status of the contact.
+ * 
+ * @param {number} i - The index of the contact.
+ */
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkBox${i}`);
   let checkBoxStatus = contacts[i]["checkbox"];
 
-  if (checkBoxStatus == true) {
+  if (checkBoxStatus == true){
     checkBox.src = "../img/box-unchecked.png";
     contacts[i]["checkBoxContact"] = false;
   } else {
@@ -322,6 +368,11 @@ function toggleCheckbox(i) {
   }
 }
 
+/**
+ * Checks if the contact is checked and updates the UI accordingly.
+ * 
+ * @param {number} i - The index of the contact.
+ */
 function checkIfContactChecked(i) {
   let currentContactId = contacts[i]['id'];
 
