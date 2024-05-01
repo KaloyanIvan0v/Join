@@ -816,6 +816,11 @@ textarea {
 }
 
 @media (max-width: 860px) {
+  
+  .over-div {
+    padding-top: 60px !important;
+  }
+
   .board-distribution {
     left: 0px;
     width: 100%;

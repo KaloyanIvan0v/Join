@@ -208,7 +208,6 @@ function showOrHideContacts(event) {
 
   let contactsField = document.getElementById('contactsField');
   let inputField = document.getElementById('inputToSearchContact');
-  contactsField.innerHTML = '';
 
   if(arrowToggleCheck == true) {
       contactsField.classList.add('contacts-assigned');
@@ -233,6 +232,8 @@ function renderContactsToSelect(contactsField, arrayToRender) {
 }
 
 function showContactsInitial(contactsField) {
+  contactsField.innerHTML = '';
+
   for(i = 0; i < contacts.length; i++) {
     let contact = contacts[i];
     let checkBoxStatus = contacts[i]['checkBoxContact'];
@@ -310,7 +311,7 @@ function toggleBackgroundForCheckedUser(i) {
 
 function toggleCheckbox(i) {
   let checkBox = document.getElementById(`checkBox${i}`);
-  let checkBoxStatus = contacts[i]["checkBoxContact"];
+  let checkBoxStatus = contacts[i]["checkbox"];
 
   if (checkBoxStatus == true) {
     checkBox.src = "../img/box-unchecked.png";
@@ -326,16 +327,9 @@ function checkIfContactChecked(i) {
 
   for(j = 0; j < checkedContactsId.length; j++) {
     let checkedContact = checkedContactsId[j];
-    if(checkedContact.includes(currentContactId)) {
+    if(checkedContact === currentContactId) {
       toggleBackgroundForCheckedUser(i);
       toggleCheckbox(i);
     }
   }
-  // let testCheckbox = contacts[i]['checkBoxContact'];
-  
-  // if(testCheckbox == true) {
-  //   toggleBackgroundForCheckedUser(i);
-  //   contacts[i]['checkBoxContact'] = false;
-  //   toggleCheckbox(i);
-  // }
 }
