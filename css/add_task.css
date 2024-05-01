@@ -850,3 +850,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         font-size: 47px;
     }
 }
+
+@media(max-width: 400px) {
+    .leftside-add-task {
+        width: 280px;
+      }
+
+    .rightside-add-task {
+        width: 280px;
+    }
+}

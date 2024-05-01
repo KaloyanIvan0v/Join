@@ -416,7 +416,6 @@ input:focus {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 7px 16px;
 }
 
 .overlay-title {
@@ -895,12 +894,23 @@ textarea {
   }
 }
 
-@media (max-width: 400px) {
-  .overlay-current-task {
+@media(max-width: 580px) {
+  .over-div {
+    padding: 32px;
   }
+}
 
+@media (max-width: 400px) {
   .overlay-title {
     font-size: 36px;
+  }
+
+  .over-div {
+    padding: 1px;
+  }
+
+  .leftside-add-task {
+    width: 280px;
   }
 
   .font-overlay {
