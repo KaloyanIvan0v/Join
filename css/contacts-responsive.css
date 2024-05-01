@@ -1,0 +1,164 @@
+@media (max-width: 1360px) {
+  .default-slogan {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .default-slogan-middle {
+    order: 3;
+    height: 3px;
+    width: 90px;
+    margin: 0px;
+    margin-top: 16px;
+  }
+
+  .default-slogan-left {
+    font-size: 47px;
+    font-weight: 700;
+  }
+
+  .default-slogan-right {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .contact-full-mode-badges {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+  }
+
+  .contact-full-mode-badges {
+    font-size: 27px;
+  }
+
+  .contact-full-mode-name {
+    font-size: 36px;
+    max-width: 300px;
+  }
+
+  .contact-full-mode-header {
+    width: max-content;
+  }
+}
+
+@media (max-width: 1080px) {
+  .contact-full-mode-edit {
+    display: none;
+  }
+
+  .d-none-mobile {
+    display: none;
+  }
+
+  .contacts-list {
+    max-width: 100%;
+  }
+
+  .contacts-inner-list {
+    align-items: start;
+  }
+
+  .contact-list-letter-parting-line {
+    width: 98%;
+  }
+
+  .add-contact-button {
+    display: none;
+  }
+  .contact-list-item {
+    min-width: 100%;
+  }
+
+  .mobile-add-contact {
+    visibility: visible;
+  }
+
+  .mobile-dot-menu {
+    visibility: visible;
+  }
+
+  .contacts-single-view {
+    margin-left: 232px;
+    min-width: 230px;
+  }
+
+  .contacts-arrow-exit {
+    visibility: visible;
+  }
+}
+
+@media (max-width: 860px) {
+  .contacts-single-view {
+    margin-left: 0px;
+    margin-top: 80px;
+  }
+
+  .contacts-list {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  .default-slogan {
+    flex-direction: column;
+    align-items: start;
+    left: 16px;
+  }
+
+  .default-slogan-middle {
+    order: 3;
+    height: 3px;
+    width: 90px;
+    margin: 0px;
+    margin-top: 16px;
+  }
+
+  .default-slogan-left {
+    font-size: 47px;
+    font-weight: 700;
+  }
+
+  .default-slogan-right {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .contact-full-mode {
+    left: 16px;
+  }
+
+  .contact-full-mode-badges {
+    width: 70px;
+    height: 70px;
+    margin-right: 20px;
+  }
+
+  .contact-full-mode-badges {
+    font-size: 27px;
+  }
+
+  .contact-full-mode-name {
+    font-size: 24px;
+    max-width: 180px;
+  }
+
+  .contact-full-mode-header {
+    width: max-content;
+  }
+}
+
+@media (min-width: 1080px) {
+  .contact-full-mode-edit-mobile {
+    visibility: hidden;
+  }
+}
+
+@media (max-height: 760px) {
+  .default-slogan {
+    top: 12px;
+  }
+  .contact-full-mode {
+    top: 30px;
+  }
+}

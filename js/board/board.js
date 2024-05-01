@@ -17,10 +17,10 @@ function openPopUp() {
 function openAddTaskTemplate() {
   openPopUp();
 
-  let idPopUp = document.getElementById('id-pop-up');
-  let createTask = 'createTask';
-  let leftButtonFunction = 'closePopUp';
-  let leftButtonText = 'Cancel';
+  let idPopUp = document.getElementById("id-pop-up");
+  let createTask = "createTask";
+  let leftButtonFunction = "closePopUp";
+  let leftButtonText = "Cancel";
 
   idPopUp.innerHTML += returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText);
   // setTimeout(selectPriority, 300);
@@ -61,7 +61,7 @@ async function renderTasks(taskList) {
     let singleTask = taskList[i];
     let id = taskList[i]["id"];
     taskAreas[sectionIdForTask(taskList)].innerHTML += returnHtmlShowToDos(singleTask, i, id);
-    choosestatementColor(i);
+    choosestatementColor(i, taskList);
     renderSubtaskProgressBar(id);
   }
   checkIfTaskAreaIsEmpty();
@@ -105,20 +105,20 @@ function clearBoard(element) {
   }
 }
 
-function choosestatementColor(i) {
+function choosestatementColor(i, list) {
   let statementField = document.getElementById(`statementField${i}`);
-  let singleTaskstatement = tasks[i]["category"];
+  let singleTaskstatement = list[i]["category"];
   if (singleTaskstatement == "Technical Task") {
     statementField.classList.add("bg-color-technical-task");
   } else {
     statementField.classList.add("bg-color-user-story");
   }
-  whichPriorityTaskCard(i, false);
+  whichPriorityTaskCard(i, false, list);
 }
 
-function whichPriorityTaskCard(i, renderFull) {
+function whichPriorityTaskCard(i, renderFull, list) {
   let prioField = document.getElementById(`prioField${i}`);
-  let singleTaskPrio = tasks[i]["prio"];
+  let singleTaskPrio = list[i]["prio"];
   prioField.innerHTML = "";
   if (singleTaskPrio == "Low") {
     prioField.innerHTML = '<img src="' + "/img/low_green.png" + '" alt="Bildbeschreibung">';
@@ -127,7 +127,7 @@ function whichPriorityTaskCard(i, renderFull) {
   } else {
     prioField.innerHTML = '<img src="' + "/img/urgent_red.png" + '" alt="Bildbeschreibung">';
   }
-  renderContactsBoardInitialen(i, renderFull);
+  renderContactsBoardInitialen(i, renderFull, list);
 }
 
 function openTaskDetailView(i, id) {
@@ -182,15 +182,15 @@ function renderSubTasksBoard(i) {
   }
 }
 
-function renderContactsBoardInitialen(i, renderFull) {
+function renderContactsBoardInitialen(i, renderFull, list) {
   let contactsFieldBoard = document.getElementById(`contactsFieldBoard(${i})`);
-  let contactsForTask = tasks[i]["assignedTo"];
+  let contactsForTask = list[i]["assignedTo"];
   contactsFieldBoard.innerHTML = "";
   for (j = 0; j < contactsForTask.length; j++) {
     if (j < 3 || renderFull == true) {
       let contactForTask = contactsForTask[j];
       contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(contactForTask, j);
-      backgroundColorInitialsBoard(i, j);
+      backgroundColorInitialsBoard(i, j, list);
     } else {
       let restAmount = contactsForTask.length - 3;
       contactsFieldBoard.innerHTML += returnMoreContactsPreview(restAmount);
@@ -219,9 +219,9 @@ function renderFullName(i, contactsForTask) {
   }
 }
 
-function backgroundColorInitialsBoard(i, j) {
+function backgroundColorInitialsBoard(i, j, list) {
   let initialArea = document.getElementById(`initialArea${j}`);
-  let colorNumber = tasks[i]["checkedUsers"][j]["color"];
+  let colorNumber = list[i]["checkedUsers"][j]["color"];
   let bgColor = contactColor[colorNumber];
   initialArea.style.backgroundColor = bgColor;
   initialArea.removeAttribute("id");

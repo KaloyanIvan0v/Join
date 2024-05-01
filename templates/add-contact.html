@@ -11,13 +11,13 @@
     </div>
   </div>
   <div id="id-mask-contact-info" class="mask-contact-info">
-    <button class="contact-form-exit-x" onclick="closeContactFrom(event)">
+    <button class="contact-form-exit-x" onclick="exitContactForm(event)">
       <img src="../img/close.png" alt="">
     </button>
-    <button id="id-close-contact-mask" class="close-contact-mask" onclick="closeContactFrom(event)">
+    <button id="id-close-contact-mask" class="close-contact-mask" onclick="exitContactForm(event)">
       <img src="../img/close-white.svg" alt="">
     </button>
-    <form onsubmit="addNewContact(); return false;">
+    <form onsubmit="createContactAndCloseForm(); return false;">
       <div class="contact-form-input-div">
         <input id="id-add-contact-name" required placeholder="Name" type="text">
         <img src="../img/person-grey.png" alt="">
@@ -32,7 +32,7 @@
       </div>
       <div class="contact-mask-btn">
         <button id="id-contact-form-cancel" class="contact-form-cancel-btn  join-button-empty"
-          onclick="closeContactFrom(event)">
+          onclick="exitContactForm(event)">
           <div> Cancel </div>
           <div class="img-close-contact-form"></div>
         </button>

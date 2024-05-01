@@ -81,13 +81,14 @@ body {
 
 .contact-form {
   position: fixed;
-  top: calc(50% - 296px);
-  left: calc(50% - 606px);
+  top: calc(50% - 296px); /* Zentriert das Formular vertikal */
+  right: -1212px; /* Startet das Formular außerhalb des Bildschirms nach rechts */
   width: 1212px;
   height: 592px;
   display: flex;
   border-radius: 30px;
   z-index: 999;
+  transition: right 0.5s ease-in-out; /* Animiert die right-Eigenschaft */
 }
 
 .hide {
@@ -125,9 +126,22 @@ body {
 }
 
 .contact-list-item:hover {
+  background-image: linear-gradient(to bottom, rgba(249, 249, 249, 1), rgba(240, 240, 240, 1));
+  border-radius: 10px;
+  color: black;
+}
+
+.selected {
   background-color: rgba(42, 54, 71, 1);
   border-radius: 10px;
   color: white;
+}
+
+.selected:hover {
+  background-color: rgba(42, 54, 71, 1);
+  border-radius: 10px;
+  color: white;
+  background-image: none;
 }
 
 .contact-list-badges {
@@ -177,13 +191,13 @@ body {
 .contact-full-mode {
   position: relative;
   top: 155px;
-  left: 55px;
+  right: -100vw; /* Startposition außerhalb des sichtbaren Bereichs */
   display: flex;
   flex-direction: column;
   align-items: left;
-
   width: max-content;
   height: 364px;
+  transition: right 0.5s ease-in-out;
 }
 
 .contact-full-mode-header {
@@ -369,157 +383,14 @@ body {
   gap: 16px;
 }
 
-@media (max-width: 1360px) {
-  .default-slogan {
-    flex-direction: column;
-    align-items: start;
-  }
-
-  .default-slogan-middle {
-    order: 3;
-    height: 3px;
-    width: 90px;
-    margin: 0px;
-    margin-top: 16px;
-  }
-
-  .default-slogan-left {
-    font-size: 47px;
-    font-weight: 700;
-  }
-
-  .default-slogan-right {
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  .contact-full-mode-badges {
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
-  }
-
-  .contact-full-mode-badges {
-    font-size: 27px;
-  }
-
-  .contact-full-mode-name {
-    font-size: 36px;
-    max-width: 300px;
-  }
-
-  .contact-full-mode-header {
-    width: max-content;
-  }
+.contact-form-visible {
+  right: calc(50% - 606px); /* Bewegt das Formular in die Mitte des Bildschirms */
 }
 
-@media (max-width: 1080px) {
-  .contact-full-mode-edit {
-    display: none;
-  }
-
-  .d-none-mobile {
-    display: none;
-  }
-
-  .contacts-list {
-    max-width: 100%;
-  }
-
-  .contacts-inner-list {
-    align-items: start;
-  }
-
-  .contact-list-letter-parting-line {
-    width: 98%;
-  }
-
-  .add-contact-button {
-    display: none;
-  }
-  .contact-list-item {
-    min-width: 100%;
-  }
-
-  .mobile-add-contact {
-    visibility: visible;
-  }
-
-  .mobile-dot-menu {
-    visibility: visible;
-  }
-
-  .contacts-single-view {
-    margin-left: 232px;
-    min-width: 230px;
-  }
-
-  .contacts-arrow-exit {
-    visibility: visible;
-  }
+.contact-form-hidden {
+  right: -1212px; /* Bewegt das Formular wieder nach rechts außerhalb des Bildschirms */
 }
 
-@media (max-width: 860px) {
-  .contacts-single-view {
-    margin-left: 0px;
-  }
-
-  .contacts-list {
-    margin-left: 0px;
-  }
-}
-
-@media (max-width: 480px) {
-  .default-slogan {
-    flex-direction: column;
-    align-items: start;
-    left: 16px;
-  }
-
-  .default-slogan-middle {
-    order: 3;
-    height: 3px;
-    width: 90px;
-    margin: 0px;
-    margin-top: 16px;
-  }
-
-  .default-slogan-left {
-    font-size: 47px;
-    font-weight: 700;
-  }
-
-  .default-slogan-right {
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  .contact-full-mode {
-    left: 16px;
-  }
-
-  .contact-full-mode-badges {
-    width: 70px;
-    height: 70px;
-    margin-right: 20px;
-  }
-
-  .contact-full-mode-badges {
-    font-size: 27px;
-  }
-
-  .contact-full-mode-name {
-    font-size: 24px;
-    max-width: 180px;
-  }
-
-  .contact-full-mode-header {
-    width: max-content;
-  }
-}
-
-@media (min-width: 1080px) {
-  .contact-full-mode-edit-mobile {
-    visibility: hidden;
-  }
+.contact-full-mode-right-0 {
+  right: -55px;
 }
