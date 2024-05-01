@@ -229,13 +229,18 @@ function setElementBackgroundColor(elementId, colorId) {
 }
 
 function openContact(contactEmail, divId) {
-  document.getElementById("id-contact-full-mode").classList.remove("slide-in");
-  document.getElementById("id-contact-full-mode").classList.add("slide-out");
-  renderContactFullMode(getContactData(contactEmail));
-  HideContactsListShowFullView();
   selectContact(divId);
-  document.getElementById("id-contact-full-mode").classList.remove("slide-in");
-  document.getElementById("id-contact-full-mode").classList.add("slide-out");
+  HideContactsListShowFullView();
+  const contactDiv = document.getElementById("id-contact-full-mode-badges");
+  let timeout = 0;
+  if (contactDiv) {
+    timeout = 500;
+    toggleContactFullMode();
+  }
+  setTimeout(function () {
+    renderContactFullMode(getContactData(contactEmail));
+    toggleContactFullMode();
+  }, timeout);
 }
 
 function getContactData(contactEmail) {
@@ -346,4 +351,9 @@ function toggleContactForm() {
     form.classList.remove("contact-form-hidden");
     form.classList.add("contact-form-visible");
   }
+}
+
+function toggleContactFullMode() {
+  var element = document.getElementById("id-contact-full-mode");
+  element.classList.toggle("contact-full-mode-right-0");
 }

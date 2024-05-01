@@ -191,20 +191,13 @@ body {
 .contact-full-mode {
   position: relative;
   top: 155px;
-  left: 55px;
+  right: -100vw; /* Startposition außerhalb des sichtbaren Bereichs */
   display: flex;
   flex-direction: column;
   align-items: left;
   width: max-content;
   height: 364px;
-  transition: right 1s ease-in-out;
-}
-
-.slide-in {
-  right: 300px;
-}
-.slide-out {
-  right: -1000px;
+  transition: right 0.5s ease-in-out;
 }
 
 .contact-full-mode-header {
@@ -396,4 +389,8 @@ body {
 
 .contact-form-hidden {
   right: -1212px; /* Bewegt das Formular wieder nach rechts außerhalb des Bildschirms */
+}
+
+.contact-full-mode-right-0 {
+  right: -55px;
 }
