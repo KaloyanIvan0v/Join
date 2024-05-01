@@ -225,9 +225,7 @@ form {
   }
 
   .contact-form {
-    position: fixed;
     top: calc(50% - 400px);
-    left: calc(50% - 198px);
     width: 396px;
     height: 800px;
     display: flex;
@@ -235,7 +233,18 @@ form {
     border-radius: 30px;
     z-index: 999;
     box-sizing: border-box;
+    position: fixed;
+    right: -396px; /* Startet das Formular außerhalb des Bildschirms nach rechts */
+    transition: right 0.5s ease-in-out; /
   }
+
+  .contact-form-visible {
+  right: calc(50% - 198px); /* Bewegt das Formular in die Mitte des Bildschirms */
+}
+
+.contact-form-hidden {
+  right: -396px; /* Bewegt das Formular wieder nach rechts außerhalb des Bildschirms */
+}
 
   .contact-mask-workbench {
     display: flex;
@@ -248,9 +257,7 @@ form {
     flex-direction: column;
     justify-content: left;
   }
-
-  .mask-contact-img {
-  }
+  
 
   .contact-mask-title {
     border-radius: 0px;
@@ -349,3 +356,5 @@ form {
     height: 41px;
   }
 }
+
+

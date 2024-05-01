@@ -8,6 +8,7 @@ async function initContacts() {
 }
 
 function openContactForm(form) {
+  addShadowLayer();
   let contactForm = document.getElementById("id-contact-form");
   if (form === "addContact") {
     loadAddContactTemplate(contactForm);
@@ -15,8 +16,9 @@ function openContactForm(form) {
     loadEditContactTemplate(contactForm);
   }
   includeHTML();
-  contactForm.classList.remove("hide");
-  addShadowLayer();
+  setTimeout(function () {
+    toggleContactForm();
+  }, 100);
 }
 
 function loadAddContactTemplate(element) {
@@ -48,13 +50,16 @@ function handleHoverButtonChangeImgDelayed() {
 }
 
 function closeContactForm(event) {
-  let contactForm = document.getElementById("id-contact-form");
-  if (event) {
-    event.preventDefault();
-  }
-  contactForm.classList.add("hide");
-  contactForm.innerHTML = "";
-  removeShadowLayer();
+  toggleContactForm();
+  setTimeout(function () {
+    let contactForm = document.getElementById("id-contact-form");
+    if (event) {
+      event.preventDefault();
+    }
+    // contactForm.classList.add("hide");
+    contactForm.innerHTML = "";
+    removeShadowLayer();
+  }, 500);
 }
 
 async function deleteContact(event) {
@@ -62,14 +67,16 @@ async function deleteContact(event) {
     event.preventDefault();
   }
   closeContactForm();
-  HideFullViewShowContactList();
-  let contactIndex = getContactIndex(getActualContactEmail());
-  if (contactIndex != undefined) {
-    contacts.splice(contactIndex, 1);
-    document.getElementById("id-contact-full-mode").innerHTML = "";
-    renderContacts(contacts);
-    safeContacts();
-  }
+  setTimeout(function () {
+    HideFullViewShowContactList();
+    let contactIndex = getContactIndex(getActualContactEmail());
+    if (contactIndex != undefined) {
+      contacts.splice(contactIndex, 1);
+      document.getElementById("id-contact-full-mode").innerHTML = "";
+      renderContacts(contacts);
+      safeContacts();
+    }
+  }, 500);
 }
 
 function safeContacts() {
@@ -121,8 +128,10 @@ function SaveEditedContact() {
   ).value;
   safeContacts();
   closeContactForm();
-  renderContacts(contacts);
-  renderContactFullMode(contacts[currentEditingContactId]);
+  setTimeout(function () {
+    renderContacts(contacts);
+    renderContactFullMode(contacts[currentEditingContactId]);
+  }, 500);
 }
 
 async function addNewContact() {
@@ -189,9 +198,14 @@ function setElementBackgroundColor(elementId, colorId) {
   div.style.backgroundColor = contactColor[colorId];
 }
 
-function openContact(contactEmail) {
+function openContact(contactEmail, divId) {
+  document.getElementById("id-contact-full-mode").classList.remove("slide-in");
+  document.getElementById("id-contact-full-mode").classList.add("slide-out");
   renderContactFullMode(getContactData(contactEmail));
   HideContactsListShowFullView();
+  selectContact(divId);
+  document.getElementById("id-contact-full-mode").classList.remove("slide-in");
+  document.getElementById("id-contact-full-mode").classList.add("slide-out");
 }
 
 function getContactData(contactEmail) {
@@ -277,4 +291,25 @@ function addClickListener() {
       closeContactEditMenu();
     }
   });
+}
+
+function selectContact(selectedDiv) {
+  const element = document.getElementById(`id-contact-list-item${selectedDiv}`);
+  const contacts = document.querySelectorAll(".contact-list-item");
+  contacts.forEach((contact) => {
+    contact.classList.remove("selected");
+  });
+  element.classList.add("selected");
+}
+
+function toggleContactForm() {
+  const form = document.querySelector(".contact-form");
+  // Prüfen, ob das Formular gerade sichtbar ist
+  if (form.classList.contains("contact-form-visible")) {
+    form.classList.remove("contact-form-visible");
+    form.classList.add("contact-form-hidden");
+  } else {
+    form.classList.remove("contact-form-hidden");
+    form.classList.add("contact-form-visible");
+  }
 }

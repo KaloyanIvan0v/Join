@@ -1,9 +1,4 @@
-function renderContactFullModeHtml(
-  contactName,
-  contactEmail,
-  contactPhone,
-  contactBadges
-) {
+function renderContactFullModeHtml(contactName, contactEmail, contactPhone, contactBadges) {
   return /*html*/ `
     <div class="contact-full-mode-header">
       <div id="id-mobile-dot-menu" class="mobile-dot-menu join-button" onclick="openContactEditMenu()">
@@ -47,7 +42,7 @@ function renderLetterSectionHTML(firstLetter) {
 
 function renderContactHtml(contactBadges, contactName, contactEmail, i) {
   return /*html*/ `
-  <div id="id-contact-list-item${i}" class="contact-list-item" onclick="openContact('${contactEmail}')">
+  <div id="id-contact-list-item${i}" class="contact-list-item" onclick="openContact('${contactEmail}',${i})">
     <div id="id-contact-list-badges${i}" class="contact-list-badges">${contactBadges}</div>
     <div id="id-contact-list-name-email${i}" class="contact-list-name-email">
       <div id="id-contact-list-name${i}" class="contact-list-name">${contactName}</div>
