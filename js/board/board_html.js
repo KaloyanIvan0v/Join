@@ -1,10 +1,4 @@
-function returnHtmlShowToDos(
-  singleTask,
-  i,
-  id,
-  finshedSubtasksLenght,
-  subTasksLength
-) {
+function returnHtmlShowToDos(singleTask, i, id, finshedSubtasksLenght, subTasksLength) {
   return /*html*/ `
    <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})'
     onclick="openTaskDetailView(${i},${id})">
@@ -21,7 +15,7 @@ function returnHtmlShowToDos(
         <div class="task-msg">
             ${singleTask["description"]}
         </div>
-        <div class="subtasks-loadstatus">
+        <div id="id-subtasks-progress-section${id}" class="subtasks-progress-section hide">
             <div id="progressBar${id}" class="progerss-bar-container">
                 <div id="id-loadbar${id}" class="loadbar"></div>
             </div>
@@ -69,7 +63,7 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
     <div class="description-edit-board">
       <span clas="edit-task-headlines">Description</span>
       <div>
-        <textarea id="description(${i})">${overlayTask["description"]}</textarea>
+        <textarea id="description(${i})" class="edit-task-description">${overlayTask["description"]}</textarea>
       </div>
     </div>
     
@@ -98,30 +92,28 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
     </div>
    
 
-    <div class="d-flex-column-center" onclick="showCheckboxes(event)">
-                <span class="input-description">Assigned to</span>
-                <div class="input-category new-subtask normal-border hover blue-focus">
-                    <input onkeydown="searchContact()" tabindex="0"
-                        class="input-search-contacts normal-border pd-font-size" id="inputToSearchContact" type="text"
-                        placeholder="Select contacts to assign">
-                    <div class="dropdown-icon">
-                        <img src="/img/arrow_drop_down.png" id="dropDownArrow">
+    <div class="assigned-to d-flex-column-center">
+                        <span class="input-description">Assigned to</span>
+                        <div onclick="showOrHideContacts(event)" class="input-category new-subtask normal-border hover">
+                            <input onkeydown="searchContact()" tabindex="0" class="border-none hover" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
+                            <div class="dropdown-icon">
+                                <img src="/img/arrow_drop_down.png" id="dropDownArrow">
+                            </div>
+                        </div>
+                        <div class="container-input-required">
+                            <div class="contacts-assigned" id="contactsField"></div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div>
-                <div class="user-list vs-hidden" id="checkboxes"></div>
-                <div id="initialArea"></div>
-            </div>
-    <div class="d-flex-column-center">
-                <span class="input-description">Subtasks</span>
-                <div id="inputFieldSubtasks" class="input-field subtasks-field normal-border">
-                    <input onclick="changeIconsSubtask(event)" class="input-new-subtask pd-font-size" type="text"
-                        id="subTasks" placeholder="Add new subtask">
-                    <a id="addIconSubtasks" class="icon-subtask-field"><img src="/img/add.png"></a>
-                </div>
-                <div id="newSubTaskField"></div>
-            </div>
+    <div class="description-category d-flex-column-center pd-bottom-80">
+                        <span class="input-description">Subtasks</span>
+                        <div id="inputFieldSubtasks" class="input-field new-subtask normal-border">
+                            <input min="3" onclick="changeIconsSubtask(event)" class="input-new-subtask" type="text" id="subTasks" placeholder="Add new subtask">
+                            <div class="icon-subtask-field" id="addIconSubtasks">
+                                <a id="addIconSubtasks" class="icon-subtask-field"><img class="add-icon" src="/img/add.png"></a>
+                            </div>
+                        </div>
+                        <div id="newSubTaskField"></div>
+                    </div>
 
     <div class="last-section-overlay">
       <div></div>
