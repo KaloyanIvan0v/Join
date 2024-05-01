@@ -7,6 +7,12 @@ async function initContacts() {
   addClickListener();
 }
 
+/**
+ * Opens the contact form and loads the corresponding template based on the given form type.
+ *
+ * @param {string} form - The type of form ("addContact" for adding, otherwise assumed to be editing).
+ * @returns {void}
+ */
 function openContactForm(form) {
   addShadowLayer();
   let contactForm = document.getElementById("id-contact-form");
@@ -49,33 +55,50 @@ function handleHoverButtonChangeImgDelayed() {
   }, 50);
 }
 
-function closeContactForm(event) {
-  toggleContactForm();
-  setTimeout(function () {
-    let contactForm = document.getElementById("id-contact-form");
-    if (event) {
-      event.preventDefault();
-    }
-    // contactForm.classList.add("hide");
-    contactForm.innerHTML = "";
-    removeShadowLayer();
-  }, 500);
-}
-
-async function deleteContact(event) {
+function exitContactForm(event) {
   if (event) {
     event.preventDefault();
   }
-  closeContactForm();
+  toggleContactForm();
   setTimeout(function () {
-    HideFullViewShowContactList();
-    let contactIndex = getContactIndex(getActualContactEmail());
-    if (contactIndex != undefined) {
-      contacts.splice(contactIndex, 1);
-      document.getElementById("id-contact-full-mode").innerHTML = "";
-      renderContacts(contacts);
-      safeContacts();
-    }
+    closeContactForm();
+  }, 500);
+}
+
+function closeContactForm() {
+  let contactForm = document.getElementById("id-contact-form");
+  contactForm.innerHTML = "";
+  removeShadowLayer();
+}
+
+function closeContactForm(event) {
+  let contactForm = document.getElementById("id-contact-form");
+  if (event) {
+    event.preventDefault();
+  }
+  contactForm.innerHTML = "";
+  removeShadowLayer();
+}
+
+async function deleteContact(event) {
+  closeContactForm();
+  HideFullViewShowContactList();
+  let contactIndex = getContactIndex(getActualContactEmail());
+  if (contactIndex != undefined) {
+    contacts.splice(contactIndex, 1);
+    document.getElementById("id-contact-full-mode").innerHTML = "";
+    renderContacts(contacts);
+    safeContacts();
+  }
+}
+
+function deleteContactFromForm(event) {
+  if (event) {
+    event.preventDefault();
+  }
+  toggleContactForm();
+  setTimeout(function () {
+    deleteContact();
   }, 500);
 }
 
@@ -126,14 +149,23 @@ function SaveEditedContact() {
   contacts[currentEditingContactId].phone = document.getElementById(
     "id-edit-contact-input-phone"
   ).value;
-  safeContacts();
-  closeContactForm();
+  toggleContactForm();
   setTimeout(function () {
+    safeContacts();
+    closeContactForm();
     renderContacts(contacts);
     renderContactFullMode(contacts[currentEditingContactId]);
   }, 500);
 }
 
+function createContactAndCloseForm() {
+  addNewContact();
+  toggleContactForm();
+  setTimeout(function () {
+    closeContactForm();
+    renderContacts(contacts);
+  }, 500);
+}
 async function addNewContact() {
   const name = document.getElementById("id-add-contact-name").value;
   const email = document.getElementById("id-add-contact-email").value;
@@ -145,8 +177,6 @@ async function addNewContact() {
   const contact = { id, name, email, phone, color, nameInitials, author, checkbox: false };
   contacts.push(contact);
   safeContacts();
-  closeContactForm();
-  renderContacts(contacts);
 }
 
 function generateBadge(name) {
@@ -302,9 +332,13 @@ function selectContact(selectedDiv) {
   element.classList.add("selected");
 }
 
+/**
+ * Toggles the visibility of the contact form between visible and hidden.
+ *
+ * @return {void} No return value.
+ */
 function toggleContactForm() {
   const form = document.querySelector(".contact-form");
-  // Prüfen, ob das Formular gerade sichtbar ist
   if (form.classList.contains("contact-form-visible")) {
     form.classList.remove("contact-form-visible");
     form.classList.add("contact-form-hidden");

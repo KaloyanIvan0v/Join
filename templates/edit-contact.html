@@ -11,10 +11,10 @@
     </div>
   </div>
   <div id="id-mask-contact-info" class="mask-contact-info">
-    <button class="contact-form-exit-x" onclick="closeContactForm(event)">
+    <button class="contact-form-exit-x" onclick="exitContactForm(event)">
       <img src="../img/close.png" alt="">
     </button>
-    <button class="close-contact-mask" onclick="closeContactForm(event)">
+    <button class="close-contact-mask" onclick="exitContactForm(event)">
       <img src="../img/close-white.svg" alt="">
     </button>
     <form onsubmit="SaveEditedContact(); return false;">
@@ -31,7 +31,7 @@
         <img src="../img/call-grey.png" alt="">
       </div>
       <div class="contact-mask-btn">
-        <button class="contact-form-cancel-btn  join-button-empty" onclick="deleteContact(event)">
+        <button class="contact-form-cancel-btn  join-button-empty" onclick="deleteContactFromForm(event)">
           <div> Delete </div>
         </button>
         <button class="contact-form-create-contact-btn join-button" type="submit">
