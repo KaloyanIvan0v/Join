@@ -381,11 +381,17 @@ input:focus {
   color: red;
 }
 
+.over-div {
+  padding: 64px;
+  background-color: white;
+  position: unset !important;
+  border-radius: 30px;
+}
+
 .pop-up {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #FFFF;
 }
 
 .overlay-first-row {
@@ -755,9 +761,20 @@ textarea {
   font-size: 12px;
 }
 
+.input-search-contacts {
+  border: none !important;
+}
 .edit-task-headlines {
   font-size: 20px;
   color: rgba(42, 54, 71, 1);
+}
+
+.input-find-task input {
+  border: none !important;
+}
+
+.add-task-informations {
+  padding: 0px !important;
 }
 
 @media (max-width: 1430px) {
@@ -850,10 +867,10 @@ textarea {
     top: 330px;
   }
 
-  .btn-add-task {
+  .btn-add-task-board {
     position: absolute;
-    top: 7px;
-    right: 10px;
+    bottom: 18px;
+    right: 0px;
   }
 
   .input-find-task {
