@@ -4,7 +4,7 @@ let checkedStatusSubtasks = false;
 async function init_board() {
   await loadTasks();
   await includeHTML();
-  renderTasks(tasks);
+  renderTasks(getFilteredTasks());
   loadContacts();
   filterTaskListener();
   setSearchFieldBorderListener();
@@ -16,13 +16,15 @@ function openPopUp() {
 
 function openAddTaskTemplate() {
   openPopUp();
-
   let idPopUp = document.getElementById("id-pop-up");
   let createTask = "createTask";
   let leftButtonFunction = "closePopUp";
   let leftButtonText = "Cancel";
-
-  idPopUp.innerHTML += returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText);
+  idPopUp.innerHTML += returnHtmlTaskTemplate(
+    "createTaskAtBoard",
+    "closeTaskFormTemplate",
+    "cancle"
+  );
   // setTimeout(selectPriority, 300);
   // setTimeout(currentDate, 300);
   selectPriority();
@@ -32,18 +34,7 @@ function openAddTaskTemplate() {
 function closePopUp() {
   document.getElementById("id-shadow-layer").classList.add("visibility-hidden");
   document.getElementById("id-pop-up").innerHTML = "";
-  renderTasks(tasks);
-}
-
-function renderSubtaskProgressBar(id) {
-  let subTasksLength = tasks[getIndexOfElmentById(id, tasks)].subTasks.length;
-  if (subTasksLength == 0) {
-    return;
-  }
-  let loadBar = document.getElementById("loadBar");
-  loadBar.innerHTML = renderSubtaskProgressBarHtml(finishedSubTasks, subTasks);
-  let progress = (finishedSubTasks.length / subTasksLength.length) * 100;
-  loadBar.style.width = progress + "%";
+  renderTasks(getFilteredTasks());
 }
 
 function initTaskAreas() {
@@ -70,9 +61,11 @@ async function renderTasks(taskList) {
 function renderSubtaskProgressBar(id) {
   let subTasksLength = tasks[getIndexOfElmentById(id, tasks)].subTasks.length;
   let funishedSubTasks = getFinishedSubTasksLength(id);
-  if (subTasksLength == undefined) {
+  if (subTasksLength == 0) {
     return;
   }
+  let progressSection = document.getElementById(`id-subtasks-progress-section${id}`);
+  progressSection.classList.remove("hide");
   let loadStatusText = document.getElementById(`subtasks-progress-text${id}`);
   loadStatusText.innerHTML = `${funishedSubTasks}/${subTasksLength} Subtasks`;
   let loadWidth = (funishedSubTasks / subTasksLength) * 100;
@@ -134,8 +127,8 @@ function openTaskDetailView(i, id) {
   openPopUp();
   let popUpDiv = document.getElementById("id-pop-up");
   popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[i], i, id);
-  choosestatementColor(i);
-  whichPriorityTaskCard(i, true);
+  choosestatementColor(i, getFilteredTasks());
+  whichPriorityTaskCard(i, true, getFilteredTasks());
   handleHoverButtonDeleteEditTask();
   renderTaskAssignedNames(i);
   renderSubTasksBoard(i);
@@ -241,7 +234,7 @@ function editTaskOverlay(i) {
 
 function closeCurrentTask() {
   toggleBackgroundDialog();
-  renderTasks(tasks);
+  renderTasks(getFilteredTasks());
 }
 
 function checkBooleanForPriority(priority, prioSelection, i) {
@@ -291,7 +284,7 @@ function allowDrop(event) {
 
 function moveElementTo(newstatement) {
   tasks[getIndexOfElement(currentDraggedElement)].statement = newstatement;
-  renderTasks(tasks);
+  renderTasks(getFilteredTasks());
   setSesionStorage("tasks", tasks);
   setItem("tasks", JSON.stringify(tasks));
 }
@@ -417,7 +410,7 @@ function deleteTask(taskId) {
   tasks.splice(getIndexOfElmentById(taskId, tasks), 1);
   closePopUp();
   setSesionStorage("tasks", tasks);
-  renderTasks(tasks);
+  renderTasks(getFilteredTasks());
   setItem("tasks", JSON.stringify(tasks));
 }
 
@@ -442,7 +435,7 @@ function createTaskAtBoard() {
   if (checkCategoryInput()) {
     addTask();
     closePopUp();
-    renderTasks(tasks);
+    renderTasks(getFilteredTasks());
   } else {
     setBorderColorForTimePeriod("containerCategory");
   }
