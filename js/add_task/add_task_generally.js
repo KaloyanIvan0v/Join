@@ -217,7 +217,7 @@ function showOrHideContacts(event) {
       contactsField.classList.remove('contacts-initialen');
       renderContactsToSelect(contactsField, contacts);
   } else {
-      showContactsInitial(contactsField, contacts);
+      showContactsInitial(contactsField);
       inputField.blur();
       inputField.value = '';
   }
@@ -233,31 +233,11 @@ function renderContactsToSelect(contactsField, arrayToRender) {
   contactsField.innerHTML = '';
 
   for(i = 0; i < arrayToRender.length; i++) {
-    contact = arrayToRender[i];
+    let contact = arrayToRender[i];
+    let contactId = arrayToRender[i]['id'];
     contactsField.innerHTML += returnHtmlSingleContact(contact);
-    checkIfContactChecked(i);
-    backgroundColorInitials(i, "showInitial");
-  }
-}
-
-/**
- * Shows the initial contacts in the contacts dropdown.
- * 
- * @param {HTMLElement} contactsField - The HTML element to render initial contacts into.
- */
-function showContactsInitial(contactsField) {
-  contactsField.innerHTML = '';
-
-  for(i = 0; i < contacts.length; i++) {
-    let contact = contacts[i];
-    let checkBoxStatus = contacts[i]['checkBoxContact'];
-
-    if(checkBoxStatus == true) {
-      contactsField.classList.remove('contacts-assigned');
-      contactsField.classList.add('contacts-initialen');      
-      contactsField.innerHTML += loadInitial(i, contact);
-      backgroundColorInitials(i, "none");
-    }
+      backgroundColorInitialsById(i, contactId, "showInitial");
+      checkIfContactChecked(i);
   }
 }
 
@@ -267,8 +247,10 @@ function showContactsInitial(contactsField) {
  * @param {number} i - The index of the contact.
  * @param {string} whichArea - The area to set the background color for.
  */
-function backgroundColorInitials(i, whichArea) {
-  let currentColor = contacts[i]["color"];
+function backgroundColorInitialsById(i, contactId, whichArea) {
+  let indexOfId = contacts.findIndex(item => item.id === contactId);
+
+  let currentColor = contacts[indexOfId]["color"];
   let bgColorCheckedUser = contactColor[currentColor];
 
   if (whichArea == "showInitial") {
@@ -281,6 +263,28 @@ function backgroundColorInitials(i, whichArea) {
 }
 
 /**
+ * Shows the initial contacts in the contacts dropdown.
+ * 
+ * @param {HTMLElement} contactsField - The HTML element to render initial contacts into.
+ */
+function showContactsInitial(contactsField) {
+  contactsField.innerHTML = '';
+
+  for(i = 0; i < checkedUsers.length; i++) {
+    let contact = checkedUsers[i];
+    let contactId = checkedUsers[i]['id'];
+    let checkBoxStatus = checkedUsers[i]['checkbox'];
+
+    if(checkBoxStatus == true) {
+      contactsField.classList.remove('contacts-assigned');
+      contactsField.classList.add('contacts-initialen');      
+      contactsField.innerHTML += loadInitial(i, contact);
+      backgroundColorInitialsById(i, contactId, "initialArea");
+    }
+  }
+}
+
+/**
  * Searches for contacts based on the input value and updates the contacts dropdown accordingly.
  */
 function searchContact() {
@@ -289,7 +293,7 @@ function searchContact() {
   inputSearchContact = inputSearchContact.toLowerCase();
 
   findContactsAtSearch.splice(0, findContactsAtSearch.length);
-  if(inputSearchContact.length >= 0) {
+  if(inputSearchContact.length >= 3) {
     for (i = 0; i < contacts.length; i++) {
       contact = contacts[i];
       filterContacts(contact, inputSearchContact);
@@ -306,9 +310,9 @@ function searchContact() {
  * @param {Object} contact - The contact object.
  * @param {string} inputSearchContact - The search value.
  */
-function filterContacts(contact, inputSearchContact) {
+function filterContacts(contact, inputSearchContact) {  
   if (contact.name.toLowerCase().includes(inputSearchContact)) {
-    findContactsAtSearch.push(contact); 
+    findContactsAtSearch.push(contact);
   }
 }
 
@@ -319,11 +323,13 @@ function filterContacts(contact, inputSearchContact) {
  * @param {Event} event - The click event.
  * @param {string} id - The ID of the contact.
  */
-function selectedUser(i, event, id) {
+function selectedUser(i, event, contactId) {
   event.stopPropagation();
 
-  checkedContactsId.push(id);
-  let singleUser = contacts[i];
+  checkedContactsId.push(contactId);
+  let indexOfId = contacts.findIndex(item => item.id === contactId);
+
+  let singleUser = contacts[indexOfId];
   let currentIndex = checkedUsers.indexOf(singleUser);
   let inputField = document.getElementById('inputToSearchContact');
 
@@ -333,7 +339,7 @@ function selectedUser(i, event, id) {
     checkedUsers.splice(currentIndex, 1);
   }
   toggleBackgroundForCheckedUser(i);
-  toggleCheckbox(i);
+  toggleCheckbox(i, indexOfId);
   inputField.focus();
 }
 
@@ -355,16 +361,16 @@ function toggleBackgroundForCheckedUser(i) {
  * 
  * @param {number} i - The index of the contact.
  */
-function toggleCheckbox(i) {
+function toggleCheckbox(i, indexOfId) {
   let checkBox = document.getElementById(`checkBox${i}`);
-  let checkBoxStatus = contacts[i]["checkbox"];
+  let checkBoxStatus = contacts[indexOfId]["checkbox"];
 
   if (checkBoxStatus == true){
     checkBox.src = "../img/box-unchecked.png";
-    contacts[i]["checkBoxContact"] = false;
+    contacts[indexOfId]["checkbox"] = false;
   } else {
     checkBox.src = "../img/Check button.png";
-    contacts[i]["checkBoxContact"] = true
+    contacts[indexOfId]["checkbox"] = true
   }
 }
 
@@ -380,7 +386,7 @@ function checkIfContactChecked(i) {
     let checkedContact = checkedContactsId[j];
     if(checkedContact === currentContactId) {
       toggleBackgroundForCheckedUser(i);
-      toggleCheckbox(i);
+      toggleCheckbox(i, currentContactId);
     }
   }
 }
