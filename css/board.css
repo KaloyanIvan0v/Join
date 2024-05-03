@@ -277,8 +277,9 @@ input:focus {
   font-size: 16px;
   line-height: 19.2px;
   font-weight: 400;
-  /* box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08); */
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+  width: 252px;
+  box-sizing: border-box;
 }
 
 .task-card-category {
@@ -599,7 +600,8 @@ input:focus {
   padding: 12px 21px;
   font-size: 20px;
   font-family: "inter";
-  width: 403px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .vs-hidden {
@@ -775,6 +777,17 @@ textarea {
   padding: 0px !important;
 }
 
+.exit-cross {
+  position: relative;
+  top: 0px;
+  right: 0px;
+}
+
+.edit-task-description {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 @media (max-width: 1430px) {
   .board-distribution {
     top: 250px;
@@ -831,7 +844,6 @@ textarea {
 }
 
 @media (max-width: 860px) {
-  
   .over-div {
     padding-top: 60px !important;
   }
@@ -893,7 +905,7 @@ textarea {
   }
 }
 
-@media(max-width: 580px) {
+@media (max-width: 580px) {
   .over-div {
     padding: 32px;
   }

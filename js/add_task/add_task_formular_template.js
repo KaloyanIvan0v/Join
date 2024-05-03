@@ -1,8 +1,8 @@
 function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText) {
-return /*html*/` 
-<div class="over-div">
+  return /*html*/ ` 
+<div id="id-over-div" class="over-div">
 <div class="close" onclick="closeContactsField(event)">
-        <div class="headline-area-template">
+        <div id="id-headline-area" class="headline-area-template">
             <span class="headline-add-task-template">Add Task</span>
         </div>
         <form onsubmit="${createTask}(); return false" class="add-task-informations">
@@ -133,5 +133,5 @@ return /*html*/`
             </div>
         </div>
     </div>
-</div>`
+</div>`;
 }

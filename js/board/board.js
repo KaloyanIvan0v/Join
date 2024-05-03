@@ -17,18 +17,14 @@ function openPopUp() {
 function openAddTaskTemplate() {
   openPopUp();
   let idPopUp = document.getElementById("id-pop-up");
-  let createTask = "createTask";
-  let leftButtonFunction = "closePopUp";
-  let leftButtonText = "Cancel";
   idPopUp.innerHTML += returnHtmlTaskTemplate(
     "createTaskAtBoard",
     "closeTaskFormTemplate",
     "cancle"
   );
-  // setTimeout(selectPriority, 300);
-  // setTimeout(currentDate, 300);
   selectPriority();
   currentDate();
+  renderExitCross("id-headline-area");
 }
 
 function closePopUp() {
@@ -228,7 +224,7 @@ function editTaskOverlay(i) {
   dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i);
 
   prioSelect(i, currentPrio);
-  renderContactsBoardInitialen(i, false);
+  renderContactsBoardInitialen(i, false, getFilteredTasks());
   //changeIconsSubtask();
 }
 
@@ -499,4 +495,17 @@ function closeEditTaskPopUp() {
   closePopUp();
 }
 
-function saveTaskChanges(i) {}
+function renderExitCross(elementId) {
+  let div = document.getElementById(elementId);
+  div.innerHTML += returnExitCrossHtml();
+}
+
+function returnExitCrossHtml() {
+  return /*html*/ `
+  <div class="exit-cross" onclick="closeEditTaskPopUp()">
+    <img src="/img/close-dark.svg">
+  </div>
+  `;
+}
+
+function saveTaskChanges(id) {}
