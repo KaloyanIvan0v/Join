@@ -25,6 +25,7 @@ function openAddTaskTemplate() {
   selectPriority();
   currentDate();
   renderExitCross("id-headline-area");
+  changePrio(1);
 }
 
 function closePopUp() {
@@ -48,7 +49,7 @@ async function renderTasks(taskList) {
     let singleTask = taskList[i];
     let id = taskList[i]["id"];
     taskAreas[sectionIdForTask(taskList)].innerHTML += returnHtmlShowToDos(singleTask, i, id);
-    choosestatementColor(i, taskList);
+    choosestatementColor(i, taskList, id);
     renderSubtaskProgressBar(id);
   }
   checkIfTaskAreaIsEmpty();
@@ -94,7 +95,7 @@ function clearBoard(element) {
   }
 }
 
-function choosestatementColor(i, list) {
+function choosestatementColor(i, list, id) {
   let statementField = document.getElementById(`statementField${i}`);
   let singleTaskstatement = list[i]["category"];
   if (singleTaskstatement == "Technical Task") {
@@ -102,12 +103,12 @@ function choosestatementColor(i, list) {
   } else {
     statementField.classList.add("bg-color-user-story");
   }
-  whichPriorityTaskCard(i, false, list);
+  whichPriorityTaskCard(i, false, list, id);
 }
 
-function whichPriorityTaskCard(i, renderFull, list) {
+function whichPriorityTaskCard(i, renderFull, list, id) {
   let prioField = document.getElementById(`prioField${i}`);
-  let singleTaskPrio = list[i]["prio"];
+  let singleTaskPrio = tasks[getIndexOfElmentById(id, tasks)]["prio"];
   prioField.innerHTML = "";
   if (singleTaskPrio == "Low") {
     prioField.innerHTML = '<img src="' + "/img/low_green.png" + '" alt="Bildbeschreibung">';
@@ -122,12 +123,12 @@ function whichPriorityTaskCard(i, renderFull, list) {
 function openTaskDetailView(i, id) {
   openPopUp();
   let popUpDiv = document.getElementById("id-pop-up");
-  popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[i], i, id);
-  choosestatementColor(i, getFilteredTasks());
-  whichPriorityTaskCard(i, true, getFilteredTasks());
+  popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[getIndexOfElmentById(id, tasks)], i, id);
+  choosestatementColor(i, getFilteredTasks(), id);
+  whichPriorityTaskCard(i, true, getFilteredTasks(), id);
   handleHoverButtonDeleteEditTask();
-  renderTaskAssignedNames(i);
-  renderSubTasksBoard(i);
+  renderTaskAssignedNames(i, id);
+  renderSubTasksBoard(i, id);
 }
 
 function handleHoverButtonDeleteEditTask() {
@@ -152,9 +153,9 @@ function toggleBackgroundDialog() {
   backgroundDialog.classList.toggle("background-dialog");
 }
 
-function renderSubTasksBoard(i) {
+function renderSubTasksBoard(i, id) {
   let subTasksField = document.getElementById(`subTasksField`);
-  let subTasks = tasks[i]["subTasks"];
+  let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
   subTasksField.innerHTML = "";
 
   for (j = 0; j < subTasks.length; j++) {
@@ -216,17 +217,44 @@ function backgroundColorInitialsBoard(i, j, list) {
   initialArea.removeAttribute("id");
 }
 
-function editTaskOverlay(i) {
-  let overlayTask = tasks[i];
+function editTaskOverlay(i, id) {
+  let overlayTask = tasks[getIndexOfElmentById(id, tasks)];
   let dialogField = document.getElementById("id-pop-up");
-  let currentPrio = tasks[i]["prio"];
+  let currentPrio = overlayTask["prio"];
   dialogField.innerHTML = "";
   dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i);
 
   prioSelect(i, currentPrio);
   renderContactsBoardInitialen(i, false, getFilteredTasks());
   //changeIconsSubtask();
+  //renderSubTasksIntoEditTask(id);
 }
+
+// function renderSubTasksIntoEditTask(id) {
+//   let subTasksField = document.getElementById(`newSubTaskField`);
+//   let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
+//   subTasksField.innerHTML = "";
+
+//   for (j = 0; j < subTasks.length; j++) {
+//     let subTask = subTasks[j].subTask;
+//     let subTaskId = subTasks[j].id;
+//     subTasksField.innerHTML += returnHtmlSubtasks(subTask, j, subTaskId, id);
+//   }
+// }
+
+// function returnHtmlSubtasks(subTask, i, subTaskId, id) {
+//   return /*html*/ `
+//     <li class="hover-subtask" onclick="editSubtaskBoard(${subTaskId},${i},${id})" id="subTaskElement${i}">${subTask}</li>`;
+// }
+
+// function editSubtaskBoard(subTaksId, i, id) {
+//   let subTasksField = document.getElementById(`newSubTaskField`);
+//   let subTask = tasks[getIndexOfElmentById(id, tasks)]["subTask"];
+//   subTasksField.classList.add("list-element-subtasks");
+//   subTasksField.classList.remove("hover-subtask");
+//   subTasksField.innerHTML = editSubtaskHtml(i, subTask);
+//   inputFocus(i);
+// }
 
 function closeCurrentTask() {
   toggleBackgroundDialog();
@@ -246,9 +274,7 @@ function prioSelect(i, prioSelect) {
   let urgent = document.getElementById(`urgent(${i})`);
   let medium = document.getElementById(`medium(${i})`);
   let low = document.getElementById(`low(${i})`);
-  tasks[i]["prio"] = prioSelect;
   setItem("tasks", tasks);
-
   if (prioSelect == "urgent") {
     urgent.src = "/img/urgent_highlight.png";
     medium.src = "/img/medium.png";
@@ -455,9 +481,9 @@ function setBorderColorForTimePeriod(elementId) {
   }, 2000);
 }
 
-function renderTaskAssignedNames(i) {
+function renderTaskAssignedNames(i, id) {
   let nameArea = document.getElementById("contactsFieldBoardFullName");
-  let checkedContacts = tasks[i].checkedUsers;
+  let checkedContacts = tasks[getIndexOfElmentById(id, tasks)].checkedUsers;
   for (let i = 0; i < checkedContacts.length; i++) {
     let chekedContact = checkedContacts[i].name;
     nameArea.innerHTML += renturnTaksAssignetContactNameHtml(chekedContact);
@@ -476,13 +502,13 @@ function addTaskFormResetFields() {
   clearContactsChecked();
 }
 
-function toggleCheckboxSubTask(i, subTaskId) {
+function toggleCheckboxSubTask(i, subTaskId, id) {
   if (getSubtaskStatus(i, subTaskId)) {
     tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)].status = false;
   } else {
     tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)].status = true;
   }
-  renderSubTasksBoard(i);
+  renderSubTasksBoard(i, id);
   setItem("tasks", tasks);
 }
 
@@ -492,7 +518,12 @@ function getSubtaskStatus(i, subTaskId) {
 }
 
 function closeEditTaskPopUp() {
-  closePopUp();
+  setTimeout(closePopUp, 20);
+}
+
+function closeAddTaskPopUp() {
+  resetInputFields();
+  setTimeout(closePopUp, 20);
 }
 
 function renderExitCross(elementId) {
@@ -502,7 +533,7 @@ function renderExitCross(elementId) {
 
 function returnExitCrossHtml() {
   return /*html*/ `
-  <div class="exit-cross" onclick="closeEditTaskPopUp()">
+  <div class="exit-cross" onclick="closeAddTaskPopUp()">
     <img src="/img/close-dark.svg">
   </div>
   `;

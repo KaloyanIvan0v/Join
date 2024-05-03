@@ -113,13 +113,13 @@ function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText) 
                     <span class="color-FF8190">*</span>
                 </div>
                 <div class="buttons-clear-create">
-                    <button class="btn-add-task d-none-mobile"
+                    <button class="btn-add-task d-none-mobile join-button-empty"
                         onclick="${leftButtonFunction}(event); return false">
                         <span class="typography-clear ">${leftButtonText}</span>
                         <img src="/img/iconoir_cancel.png">
                     </button>
 
-                    <button class="btn-add-task bg-color-create" id="createBtn">
+                    <button class="btn-add-task bg-color-create join-button" id="createBtn">
                         <span class="typography-create">Create Task</span>
                         <img src="/img/check.png">
                     </button>

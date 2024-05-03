@@ -44,7 +44,7 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
     <div id="id-overlay-current-task" class="overlay-current-task">
       <div id="categoryArea(${i})" class="overlay-first-row">
         <div></div>
-        <a onclick="closeEditTaskPopUp()">X</a>
+        <a class="exit-cross" onclick="closeEditTaskPopUp()">X</a>
     </div>
     <div class="title-edit-board">
       <div class="input-description">
@@ -104,7 +104,7 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
                             <div class="contacts-assigned" id="contactsField"></div>
                         </div>
                     </div>
-    <div class="description-category d-flex-column-center pd-bottom-80">
+   <div class="description-category d-flex-column-center pd-bottom-80">
                         <span class="input-description">Subtasks</span>
                         <div id="inputFieldSubtasks" class="input-field new-subtask normal-border">
                             <input min="3" onclick="changeIconsSubtask(event)" class="input-new-subtask" type="text" id="subTasks" placeholder="Add new subtask">
@@ -157,7 +157,7 @@ function openTaskDetailViewHtml(overlayTask, i, id) {
   <div class="overlay-current-task">
     <div id="categoryArea(${i})" class="overlay-first-row">
         <div class="overlay-category" id="statementField${i}">${overlayTask["category"]}</div>
-        <a onclick="closePopUp()">X</a>
+        <a class="exit-cross" onclick="closePopUp()">X</a>
     </div>
     <div class="overlay-title">
         <span id="title(${i})">${overlayTask["title"]}</span>
@@ -195,7 +195,7 @@ function openTaskDetailViewHtml(overlayTask, i, id) {
           <span>Delete</span>
         </div>
         <img src="/img/Vector 3.png">
-        <div onclick="editTaskOverlay(${i})" class="flex-center hover  btn-hover-edit">
+        <div onclick="editTaskOverlay(${i},${id})" class="flex-center hover  btn-hover-edit">
          <div class="img-hover-edit"></div>
           <span>Edit</span>
         </div>

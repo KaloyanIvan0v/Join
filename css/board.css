@@ -779,9 +779,20 @@ textarea {
 }
 
 .exit-cross {
+  width: 24px;
+  height: 24px;
   position: relative;
   top: 0px;
   right: 0px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exit-cross:hover {
+  background-color: gainsboro;
+  border-radius: 50%;
 }
 
 .edit-task-description {
