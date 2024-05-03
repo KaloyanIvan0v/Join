@@ -16,7 +16,7 @@ function writeNumberOfAllTasks() {
 function filterHighestPrio() {
   let count = 0;
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i]['prio'] === 'Urgent') {
+      if (tasks[i]['prio'] === 'urgent') {
         count++;
       }
     }
@@ -45,19 +45,6 @@ function changeImageOnUnHover(element, image) {
 }
 
 function upCommingDeadline() {
-  let actuellDate = new Date();
-  let kürzesteZeit = Infinity;
-  let kürzesteDatum = null;
 
-  for (var i = 0; i < tasks.length; i++) {
-    var zeit = new Date(tasks[i].dueDate).getMilliseconds - actuellDate.getMilliseconds();
-    if (zeit > 0 && zeit < kürzesteZeit) {
-      kürzesteDatum = tasks[i].dueDate;
-    }
-  }
-
-  console.log(actuellDate);
-  console.log(kürzesteZeit);
-  console.log(kürzesteDatum);
 }
 
