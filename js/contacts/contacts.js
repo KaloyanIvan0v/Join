@@ -89,6 +89,7 @@ async function deleteContact(event) {
     document.getElementById("id-contact-full-mode").innerHTML = "";
     renderContacts(contacts);
     safeContacts();
+    toggleContactFullMode();
   }
 }
 

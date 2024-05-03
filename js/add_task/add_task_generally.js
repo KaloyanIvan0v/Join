@@ -2,10 +2,10 @@
  * Loads the HTML task template with specific variables into the document body.
  */
 function loadHtmlTaskTemplate() {
-  let body = document.getElementById('body');
-  let createTask = 'createTask';
-  let leftButtonFunction = 'resetInputFields';
-  let leftButtonText = 'Clear';
+  let body = document.getElementById("body");
+  let createTask = "createTask";
+  let leftButtonFunction = "resetInputFields";
+  let leftButtonText = "Clear";
 
   body.innerHTML += returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText);
 }
@@ -37,12 +37,12 @@ function resetInputFields() {
 
   checkChangeIcons = true;
 
-  renderSubTasks('none');
+  renderSubTasks("none");
   currentDate();
   changeCategory("Select task category");
   changePrio(1);
   changeIconsSubtask();
-  clearContactsChecked()
+  clearContactsChecked();
 
   clearInnerHtmlInputFields();
 }
@@ -52,7 +52,7 @@ function resetInputFields() {
  */
 function clearInnerHtmlInputFields() {
   let subTasks = document.getElementById("subTasks");
-  let subTasksArea = document.getElementById("newSubTaskField")
+  let subTasksArea = document.getElementById("newSubTaskField");
   let contactsField = document.getElementById("contactsField");
   let assignedBtn = document.getElementById("inputToSearchContact");
 
@@ -60,7 +60,7 @@ function clearInnerHtmlInputFields() {
   description.value = "";
   contactsField.innerHTML = "";
   subTasks.value = "";
-  subTasksArea.innerHTML = '';
+  subTasksArea.innerHTML = "";
   assignedBtn.innerHTML = "";
 }
 
@@ -86,7 +86,7 @@ function currentDate() {
 
 /**
  * Changes the priority of a task and updates the priority selection options.
- * 
+ *
  * @param {number} i - The index of the priority to change.
  */
 function changePrio(i) {
@@ -110,7 +110,7 @@ function selectPriority() {
 
 /**
  * Checks the boolean value for priority and updates the priority selection options.
- * 
+ *
  * @param {Object} priority - The priority object to check.
  * @param {HTMLElement} prioSelection - The HTML element to update with the priority options.
  */
@@ -125,7 +125,7 @@ function checkBooleanForPriority(priority) {
 
 /**
  * Shows or hides the task categories dropdown menu.
- * 
+ *
  * @param {string} category - The selected category.
  * @param {Event} event - The click event.
  */
@@ -134,18 +134,18 @@ function showOrHideCategoriesField(category, event) {
 
   toggleDropDownArrowInputField("dropDownArrowCategory");
 
-  if(category == 'none') {
+  if (category == "none") {
     event.stopPropagation();
-  } 
+  }
 
-  if(category != "Select task category") {
+  if (category != "Select task category") {
     categoriesField.classList.toggle("vs-hidden");
   }
 }
 
 /**
  * Changes the selected category for the task.
- * 
+ *
  * @param {string} category - The new category.
  */
 function changeCategory(category) {
@@ -157,98 +157,98 @@ function changeCategory(category) {
   categoryDropdown.innerHTML = clickedCategory;
 
   taskCategory = clickedCategory;
-  showCategories(category);
+  showOrHideCategoriesField(category);
 }
 
 /**
  * Clears the checked state of all contacts.
  */
 function clearContactsChecked() {
-  for(i = 0; i < contacts.length; i++) {
-    contacts[i]['checkBoxContact'] = false;
+  for (i = 0; i < contacts.length; i++) {
+    contacts[i]["checkBoxContact"] = false;
   }
 }
 
 /**
  * Closes the popup div and resets contacts if the arrow toggle is active.
- * 
+ *
  * @param {Event} event - The click event.
  */
 function closeContactsField(event) {
-  if(arrowToggleCheck == true) {
+  if (arrowToggleCheck == true) {
     showOrHideContacts(event);
   }
 }
 
 /**
  * Shows or hides the required field indicator based on the input value.
- * 
+ *
  * @param {string} idParent - The ID of the parent input field.
  * @param {string} idToggle - The ID of the element to toggle.
  */
 function showOrHideRequiredField(idParent, idToggle) {
-  let input = document.getElementById(idParent)
+  let input = document.getElementById(idParent);
   let inputValue = input.value;
   let element = document.getElementById(idToggle);
 
-  if(inputValue.length == 0) {
-    element.classList.remove('vs-hidden');
-    input.classList.add('error-border')
-  } else if(inputValue.length > 0) {
-    element.classList.add('vs-hidden');
-    input.classList.remove('error-border')
+  if (inputValue.length == 0) {
+    element.classList.remove("vs-hidden");
+    input.classList.add("error-border");
+  } else if (inputValue.length > 0) {
+    element.classList.add("vs-hidden");
+    input.classList.remove("error-border");
   }
 }
 
 /**
  * Shows or hides the contacts dropdown based on the arrow toggle state.
- * 
+ *
  * @param {Event} event - The click event.
  */
 function showOrHideContacts(event) {
   event.stopPropagation();
   toggleDropDownArrowInputField("dropDownArrow");
 
-  let contactsField = document.getElementById('contactsField');
-  let inputField = document.getElementById('inputToSearchContact');
+  let contactsField = document.getElementById("contactsField");
+  let inputField = document.getElementById("inputToSearchContact");
 
-  if(arrowToggleCheck == true) {
-      contactsField.classList.add('contacts-assigned');
-      contactsField.classList.remove('contacts-initialen');
-      renderContactsToSelect(contactsField, contacts);
+  if (arrowToggleCheck == true) {
+    contactsField.classList.add("contacts-assigned");
+    contactsField.classList.remove("contacts-initialen");
+    renderContactsToSelect(contactsField, contacts);
   } else {
-      showContactsInitial(contactsField);
-      inputField.blur();
-      inputField.value = '';
+    showContactsInitial(contactsField);
+    inputField.blur();
+    inputField.value = "";
   }
 }
 
 /**
  * Renders contacts to the select dropdown field.
- * 
+ *
  * @param {HTMLElement} contactsField - The HTML element to render contacts into.
  * @param {Array} arrayToRender - The array of contacts to render.
  */
 function renderContactsToSelect(contactsField, arrayToRender) {
-  contactsField.innerHTML = '';
+  contactsField.innerHTML = "";
 
-  for(i = 0; i < arrayToRender.length; i++) {
+  for (i = 0; i < arrayToRender.length; i++) {
     let contact = arrayToRender[i];
-    let contactId = arrayToRender[i]['id'];
+    let contactId = arrayToRender[i]["id"];
     contactsField.innerHTML += returnHtmlSingleContact(contact);
-      backgroundColorInitialsById(i, contactId, "showInitial");
-      checkIfContactChecked(i);
+    backgroundColorInitialsById(i, contactId, "showInitial");
+    checkIfContactChecked(i);
   }
 }
 
 /**
  * Sets the background color of the initials area based on the specified area.
- * 
+ *
  * @param {number} i - The index of the contact.
  * @param {string} whichArea - The area to set the background color for.
  */
 function backgroundColorInitialsById(i, contactId, whichArea) {
-  let indexOfId = contacts.findIndex(item => item.id === contactId);
+  let indexOfId = contacts.findIndex((item) => item.id === contactId);
 
   let currentColor = contacts[indexOfId]["color"];
   let bgColorCheckedUser = contactColor[currentColor];
@@ -264,20 +264,20 @@ function backgroundColorInitialsById(i, contactId, whichArea) {
 
 /**
  * Shows the initial contacts in the contacts dropdown.
- * 
+ *
  * @param {HTMLElement} contactsField - The HTML element to render initial contacts into.
  */
 function showContactsInitial(contactsField) {
-  contactsField.innerHTML = '';
+  contactsField.innerHTML = "";
 
-  for(i = 0; i < checkedUsers.length; i++) {
+  for (i = 0; i < checkedUsers.length; i++) {
     let contact = checkedUsers[i];
-    let contactId = checkedUsers[i]['id'];
-    let checkBoxStatus = checkedUsers[i]['checkbox'];
+    let contactId = checkedUsers[i]["id"];
+    let checkBoxStatus = checkedUsers[i]["checkbox"];
 
-    if(checkBoxStatus == true) {
-      contactsField.classList.remove('contacts-assigned');
-      contactsField.classList.add('contacts-initialen');      
+    if (checkBoxStatus == true) {
+      contactsField.classList.remove("contacts-assigned");
+      contactsField.classList.add("contacts-initialen");
       contactsField.innerHTML += loadInitial(i, contact);
       backgroundColorInitialsById(i, contactId, "initialArea");
     }
@@ -293,7 +293,7 @@ function searchContact() {
   inputSearchContact = inputSearchContact.toLowerCase();
 
   findContactsAtSearch.splice(0, findContactsAtSearch.length);
-  if(inputSearchContact.length >= 3) {
+  if (inputSearchContact.length >= 3) {
     for (i = 0; i < contacts.length; i++) {
       contact = contacts[i];
       filterContacts(contact, inputSearchContact);
@@ -306,11 +306,11 @@ function searchContact() {
 
 /**
  * Filters contacts based on the input search value.
- * 
+ *
  * @param {Object} contact - The contact object.
  * @param {string} inputSearchContact - The search value.
  */
-function filterContacts(contact, inputSearchContact) {  
+function filterContacts(contact, inputSearchContact) {
   if (contact.name.toLowerCase().includes(inputSearchContact)) {
     findContactsAtSearch.push(contact);
   }
@@ -318,7 +318,7 @@ function filterContacts(contact, inputSearchContact) {
 
 /**
  * Handles the selection of a user.
- * 
+ *
  * @param {number} i - The index of the contact.
  * @param {Event} event - The click event.
  * @param {string} id - The ID of the contact.
@@ -327,11 +327,11 @@ function selectedUser(i, event, contactId) {
   event.stopPropagation();
 
   checkedContactsId.push(contactId);
-  let indexOfId = contacts.findIndex(item => item.id === contactId);
+  let indexOfId = contacts.findIndex((item) => item.id === contactId);
 
   let singleUser = contacts[indexOfId];
   let currentIndex = checkedUsers.indexOf(singleUser);
-  let inputField = document.getElementById('inputToSearchContact');
+  let inputField = document.getElementById("inputToSearchContact");
 
   if (!checkedUsers.includes(singleUser, 0)) {
     checkedUsers.push(singleUser);
@@ -345,7 +345,7 @@ function selectedUser(i, event, contactId) {
 
 /**
  * Toggles the background color for the checked user.
- * 
+ *
  * @param {number} i - The index of the contact.
  */
 function toggleBackgroundForCheckedUser(i) {
@@ -358,33 +358,33 @@ function toggleBackgroundForCheckedUser(i) {
 
 /**
  * Toggles the checkbox status of the contact.
- * 
+ *
  * @param {number} i - The index of the contact.
  */
 function toggleCheckbox(i, indexOfId) {
   let checkBox = document.getElementById(`checkBox${i}`);
   let checkBoxStatus = contacts[indexOfId]["checkbox"];
 
-  if (checkBoxStatus == true){
+  if (checkBoxStatus == true) {
     checkBox.src = "../img/box-unchecked.png";
     contacts[indexOfId]["checkbox"] = false;
   } else {
     checkBox.src = "../img/Check button.png";
-    contacts[indexOfId]["checkbox"] = true
+    contacts[indexOfId]["checkbox"] = true;
   }
 }
 
 /**
  * Checks if the contact is checked and updates the UI accordingly.
- * 
+ *
  * @param {number} i - The index of the contact.
  */
 function checkIfContactChecked(i) {
-  let currentContactId = contacts[i]['id'];
+  let currentContactId = contacts[i]["id"];
 
-  for(j = 0; j < checkedContactsId.length; j++) {
+  for (j = 0; j < checkedContactsId.length; j++) {
     let checkedContact = checkedContactsId[j];
-    if(checkedContact === currentContactId) {
+    if (checkedContact === currentContactId) {
       toggleBackgroundForCheckedUser(i);
       toggleCheckbox(i, currentContactId);
     }
