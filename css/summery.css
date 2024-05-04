@@ -211,6 +211,10 @@ h1 {
     height: 100px;
   }
 
+  .summeryToDo:hover{
+    background-color: #2a3647;
+  }
+
   .summeryDone{
     width: 45%;
     height: 100px;
