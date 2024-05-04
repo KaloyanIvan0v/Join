@@ -1,4 +1,4 @@
-function returnHtmlShowToDos(singleTask, i, id, finshedSubtasksLenght, subTasksLength) {
+function returnHtmlShowToDos(singleTask, i, id) {
   return /*html*/ `
    <div id="taskCard${id}" class="task-card" draggable="true" ondragstart='startDragging(${id})'
     onclick="openTaskDetailView(${i},${id})">
@@ -29,7 +29,7 @@ function returnHtmlShowToDos(singleTask, i, id, finshedSubtasksLenght, subTasksL
         </div>
 
         <div class="contacts-area">
-            <div id="contactsFieldBoard(${i})" class="contacts-board"></div>
+            <div id="contactsFieldBoard(${id})" class="contacts-board"></div>
             <div id="prioField${i}" class="prio-field">
                 ${singleTask["prio"]}
             </div>
@@ -39,7 +39,7 @@ function returnHtmlShowToDos(singleTask, i, id, finshedSubtasksLenght, subTasksL
 `;
 }
 
-function returnHtmlEditCurrentTask(overlayTask, i) {
+function returnHtmlEditCurrentTask(overlayTask, i, id) {
   return /*html*/ `
     <div id="id-overlay-current-task" class="overlay-current-task">
       <div id="categoryArea(${i})" class="overlay-first-row">
@@ -103,6 +103,7 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
                         <div class="container-input-required">
                             <div class="contacts-assigned" id="contactsField"></div>
                         </div>
+                        
                     </div>
    <div class="description-category d-flex-column-center pd-bottom-80">
                         <span class="input-description">Subtasks</span>
@@ -111,7 +112,7 @@ function returnHtmlEditCurrentTask(overlayTask, i) {
                             <div class="icon-subtask-field" id="addIconSubtasks">
                                 <a id="addIconSubtasks" class="icon-subtask-field"><img class="add-icon" src="/img/add.png"></a>
                             </div>
-                        </div>
+                        </div> 
                         <div id="newSubTaskField"></div>
                     </div>
 
@@ -179,7 +180,7 @@ function openTaskDetailViewHtml(overlayTask, i, id) {
     <div class="overlay-assigned font-overlay">
         <span class="task-detail-view-section-title">Assigned To:</span>
         <div class="d-flex">
-          <div id="contactsFieldBoard(${i})" class="column-gap-contacts"></div>
+          <div id="contactsFieldBoard(${id})" class="column-gap-contacts"></div>
           <div id="contactsFieldBoardFullName" class="column-gap-contacts"></div>
         </div>
     </div>
@@ -212,10 +213,10 @@ function returnHtmlContactsInitialen(contactForTask, j) {
     </div>`;
 }
 
-function returnHtmlSubtasks(subTask, i, subTaskId, imgSrc) {
+function returnHtmlSubtasks(subTask, i, subTaskId, imgSrc, taksId) {
   return /*html*/ `
     <div class="subtasks-check-board">
-      <img id="checkEmptySubtask(${j})" src="${imgSrc}" onclick="toggleCheckboxSubTask(${i},${subTaskId})">
+      <img id="checkEmptySubtask(${j})" src="${imgSrc}" onclick="toggleCheckboxSubTask(${i},${subTaskId},${taksId})">
       <span>${subTask}</span>
     </div>`;
 }

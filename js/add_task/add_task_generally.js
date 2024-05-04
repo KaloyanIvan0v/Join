@@ -237,7 +237,7 @@ function renderContactsToSelect(contactsField, arrayToRender) {
     let contactId = arrayToRender[i]["id"];
     contactsField.innerHTML += returnHtmlSingleContact(contact);
     backgroundColorInitialsById(i, contactId, "showInitial");
-    checkIfContactChecked(i);
+    checkIfContactChecked(contactId);
   }
 }
 
@@ -323,7 +323,7 @@ function filterContacts(contact, inputSearchContact) {
  * @param {Event} event - The click event.
  * @param {string} id - The ID of the contact.
  */
-function selectedUser(i, event, contactId) {
+function selectedUser(event, contactId) {
   event.stopPropagation();
 
   checkedContactsId.push(contactId);
@@ -338,8 +338,8 @@ function selectedUser(i, event, contactId) {
   } else {
     checkedUsers.splice(currentIndex, 1);
   }
-  toggleBackgroundForCheckedUser(i);
-  toggleCheckbox(i, indexOfId);
+  toggleBackgroundForCheckedUser(contactId);
+  toggleCheckbox(contactId);
   inputField.focus();
 }
 
@@ -348,9 +348,9 @@ function selectedUser(i, event, contactId) {
  *
  * @param {number} i - The index of the contact.
  */
-function toggleBackgroundForCheckedUser(i) {
-  let userField = document.getElementById(`userField${i}`);
-  let paddingForChecked = document.getElementById(`paddingForChecked${i}`);
+function toggleBackgroundForCheckedUser(id) {
+  let userField = document.getElementById(`userField${id}`);
+  let paddingForChecked = document.getElementById(`paddingForChecked${id}`);
 
   userField.classList.toggle("hover-user-field");
   paddingForChecked.classList.toggle("pd-right-16");
@@ -361,16 +361,16 @@ function toggleBackgroundForCheckedUser(i) {
  *
  * @param {number} i - The index of the contact.
  */
-function toggleCheckbox(i, indexOfId) {
-  let checkBox = document.getElementById(`checkBox${i}`);
-  let checkBoxStatus = contacts[indexOfId]["checkbox"];
+function toggleCheckbox(id) {
+  let checkBox = document.getElementById(`checkBox${id}`);
+  let checkBoxStatus = contacts[getIndexOfElmentById(id, contacts)]["checkbox"];
 
   if (checkBoxStatus == true) {
-    checkBox.src = "../img/box-unchecked.png";
-    contacts[indexOfId]["checkbox"] = false;
+    checkBox.src = "/img/box-unchecked.png";
+    contacts[getIndexOfElmentById(id, contacts)]["checkbox"] = false;
   } else {
-    checkBox.src = "../img/Check button.png";
-    contacts[indexOfId]["checkbox"] = true;
+    checkBox.src = "/img/Check button.png";
+    contacts[getIndexOfElmentById(id, contacts)]["checkbox"] = true;
   }
 }
 
@@ -379,14 +379,14 @@ function toggleCheckbox(i, indexOfId) {
  *
  * @param {number} i - The index of the contact.
  */
-function checkIfContactChecked(i) {
-  let currentContactId = contacts[i]["id"];
+function checkIfContactChecked(id) {
+  let currentContactId = id;
 
   for (j = 0; j < checkedContactsId.length; j++) {
     let checkedContact = checkedContactsId[j];
     if (checkedContact === currentContactId) {
-      toggleBackgroundForCheckedUser(i);
-      toggleCheckbox(i, currentContactId);
+      toggleBackgroundForCheckedUser(currentContactId);
+      toggleCheckbox(id);
     }
   }
 }

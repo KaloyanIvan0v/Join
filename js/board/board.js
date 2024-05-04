@@ -117,7 +117,7 @@ function whichPriorityTaskCard(i, renderFull, list, id) {
   } else {
     prioField.innerHTML = '<img src="' + "/img/urgent_red.png" + '" alt="Bildbeschreibung">';
   }
-  renderContactsBoardInitialen(i, renderFull, list);
+  renderContactsBoardInitialen(renderFull, id, `contactsFieldBoard(${id})`);
 }
 
 function openTaskDetailView(i, id) {
@@ -127,7 +127,7 @@ function openTaskDetailView(i, id) {
   choosestatementColor(i, getFilteredTasks(), id);
   whichPriorityTaskCard(i, true, getFilteredTasks(), id);
   handleHoverButtonDeleteEditTask();
-  renderTaskAssignedNames(i, id);
+  renderTaskAssignedNames(id);
   renderSubTasksBoard(i, id);
 }
 
@@ -168,26 +168,25 @@ function renderSubTasksBoard(i, id) {
     } else {
       imgSrc = "/img/check_empty.png";
     }
-    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, subTaskId, imgSrc);
+    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, subTaskId, imgSrc, id);
   }
 }
 
-function renderContactsBoardInitialen(i, renderFull, list) {
-  let contactsFieldBoard = document.getElementById(`contactsFieldBoard(${i})`);
-  let contactsForTask = list[i]["assignedTo"];
+function renderContactsBoardInitialen(renderFull, id, targetElementId) {
+  let contactsFieldBoard = document.getElementById(targetElementId);
+  let contactsForTask = tasks[getIndexOfElmentById(id, tasks)]["assignedTo"];
   contactsFieldBoard.innerHTML = "";
   for (j = 0; j < contactsForTask.length; j++) {
     if (j < 3 || renderFull == true) {
       let contactForTask = contactsForTask[j];
       contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(contactForTask, j);
-      backgroundColorInitialsBoard(i, j, list);
+      backgroundColorInitialsBoard(j, id);
     } else {
       let restAmount = contactsForTask.length - 3;
       contactsFieldBoard.innerHTML += returnMoreContactsPreview(restAmount);
       return;
     }
   }
-  //if (status == "fullName") renderFullName(i, contactsForTask);
 }
 
 function returnMoreContactsPreview(restAmount) {
@@ -209,9 +208,9 @@ function renderFullName(i, contactsForTask) {
   }
 }
 
-function backgroundColorInitialsBoard(i, j, list) {
+function backgroundColorInitialsBoard(j, id) {
   let initialArea = document.getElementById(`initialArea${j}`);
-  let colorNumber = list[i]["checkedUsers"][j]["color"];
+  let colorNumber = tasks[getIndexOfElmentById(id, tasks)]["checkedUsers"][j]["color"];
   let bgColor = contactColor[colorNumber];
   initialArea.style.backgroundColor = bgColor;
   initialArea.removeAttribute("id");
@@ -222,25 +221,26 @@ function editTaskOverlay(i, id) {
   let dialogField = document.getElementById("id-pop-up");
   let currentPrio = overlayTask["prio"];
   dialogField.innerHTML = "";
-  dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i);
+  dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i, id);
 
   prioSelect(i, currentPrio);
-  renderContactsBoardInitialen(i, false, getFilteredTasks());
+  // renderContactsBoardInitialen(true, id, `contactsFieldBoard(${id})`);
+  // renderTaskAssignedNames(id);
   //changeIconsSubtask();
   //renderSubTasksIntoEditTask(id);
 }
 
-// function renderSubTasksIntoEditTask(id) {
-//   let subTasksField = document.getElementById(`newSubTaskField`);
-//   let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
-//   subTasksField.innerHTML = "";
+function renderSubTasksIntoEditTask(id) {
+  let subTasksField = document.getElementById(`newSubTaskField`);
+  let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
+  subTasksField.innerHTML = "";
 
-//   for (j = 0; j < subTasks.length; j++) {
-//     let subTask = subTasks[j].subTask;
-//     let subTaskId = subTasks[j].id;
-//     subTasksField.innerHTML += returnHtmlSubtasks(subTask, j, subTaskId, id);
-//   }
-// }
+  for (j = 0; j < subTasks.length; j++) {
+    let subTask = subTasks[j].subTask;
+    let subTaskId = subTasks[j].id;
+    subTasksField.innerHTML += returnHtmlSubtasks(subTask, j, subTaskId, id);
+  }
+}
 
 // function returnHtmlSubtasks(subTask, i, subTaskId, id) {
 //   return /*html*/ `
@@ -481,7 +481,7 @@ function setBorderColorForTimePeriod(elementId) {
   }, 2000);
 }
 
-function renderTaskAssignedNames(i, id) {
+function renderTaskAssignedNames(id) {
   let nameArea = document.getElementById("contactsFieldBoardFullName");
   let checkedContacts = tasks[getIndexOfElmentById(id, tasks)].checkedUsers;
   for (let i = 0; i < checkedContacts.length; i++) {

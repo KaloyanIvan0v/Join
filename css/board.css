@@ -778,6 +778,10 @@ textarea {
   padding: 0px !important;
 }
 
+.edit-assigned-contacts {
+  gap: 8px;
+}
+
 .exit-cross {
   width: 24px;
   height: 24px;
