@@ -64,9 +64,12 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: width 175ms;
 }
 
 .summeryToDo:hover{
+  position: relative;
+  width: 50%;
   background-color: #2a3647;
   color: white;
 }

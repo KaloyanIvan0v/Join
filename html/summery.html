@@ -28,7 +28,7 @@
         <div class="summeryinfoParent">
             <div class="summeryInfo">
                 <div class="summeryInfo1">
-                    <div onmouseenter="changeImageOnHover('toDoIcon', '/img/toDoWhite.png')" onmouseleave="changeImageOnUnHover('toDoIcon', '/img/toDo.png')" class="summeryToDo shadow">
+                    <div onclick="loadBoardHTML()" onmouseenter="changeImageOnHover('toDoIcon', '/img/toDoWhite.png')" onmouseleave="changeImageOnUnHover('toDoIcon', '/img/toDo.png')" class="summeryToDo shadow">
                         <img id="toDoIcon" class="summeryIcon" src="/img/toDo.png">
                         <div
                             style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -36,7 +36,7 @@
                             <p style="margin: 0;">To-Do</p>
                         </div>
                     </div>
-                    <div onmouseenter="changeImageOnHover('doneIcon', '/img/doneWhite.png')" onmouseleave="changeImageOnUnHover('doneIcon', '/img/checkDark.png')" class="summeryDone shadow">
+                    <div onclick="loadBoardHTML()" onmouseenter="changeImageOnHover('doneIcon', '/img/doneWhite.png')" onmouseleave="changeImageOnUnHover('doneIcon', '/img/checkDark.png')" class="summeryDone shadow">
                         <img id="doneIcon" class="summeryIcon" src="/img/checkDark.png">
                         <div
                             style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="summeryInfo2 shadow">
+                <div onclick="loadBoardHTML()" class="summeryInfo2 shadow">
                     <div class="upcomming1">
                         <img class="summeryIcon" src="/img/prioCircle.png">
                         <div
@@ -61,15 +61,15 @@
                     </div>
                 </div>
                 <div class="summeryInfo3">
-                    <div class="summeryTasksInBoard shadow">
+                    <div onclick="loadBoardHTML()" class="summeryTasksInBoard shadow">
                         <h1 id="numberOfTasksInBoard" style="margin: 0;"></h1>
                         <p style="margin: 0;">Tasks in <br> Board</p>
                     </div>
-                    <div class="summeryTasksInProgress shadow">
+                    <div onclick="loadBoardHTML()" class="summeryTasksInProgress shadow">
                         <h1 id="countinProgress" style="margin: 0;"></h1>
                         <p style="margin: 0;">Tasks in <br> Progress</p>
                     </div>
-                    <div class="summeryAwaitingFeedback shadow">
+                    <div onclick="loadBoardHTML()" class="summeryAwaitingFeedback shadow">
                         <h1 id="countawaitFeedback" style="margin: 0;"></h1>
                         <p style="margin: 0;">Awaiting <br> Feedback</p>
                     </div>

@@ -63,3 +63,7 @@ function upCommingDeadline() {
   document.getElementById('deadlineH3').innerHTML = `${deadlineDateToString}`;
 }
 
+function loadBoardHTML(){
+  window.location.assign('/html/board.html');
+}
+
