@@ -64,7 +64,6 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 5px #0000001a;
 }
 
 .summeryToDo:hover{
