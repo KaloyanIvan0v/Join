@@ -16,7 +16,7 @@ const contactColor = {
 };
 
 let tasks = [];
-let conatacts = [];
+let contacts = [];
 let users = [];
 let geLoggedInUser;
 

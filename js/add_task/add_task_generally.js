@@ -34,16 +34,13 @@ function toggleDropDownArrowInputField(idImage) {
 function resetInputFields() {
   checkedUsers = [];
   subTasks = [];
-
   checkChangeIcons = true;
-
   renderSubTasks("none");
   currentDate();
   changeCategory("Select task category");
   changePrio(1);
   changeIconsSubtask();
   clearContactsChecked();
-
   clearInnerHtmlInputFields();
 }
 
@@ -206,7 +203,9 @@ function showOrHideRequiredField(idParent, idToggle) {
  * @param {Event} event - The click event.
  */
 function showOrHideContacts(event) {
-  event.stopPropagation();
+  if (event) {
+    event.stopPropagation();
+  }
   toggleDropDownArrowInputField("dropDownArrow");
 
   let contactsField = document.getElementById("contactsField");
@@ -324,8 +323,9 @@ function filterContacts(contact, inputSearchContact) {
  * @param {string} id - The ID of the contact.
  */
 function selectedUser(event, contactId) {
-  event.stopPropagation();
-
+  if (event) {
+    event.stopPropagation();
+  }
   checkedContactsId.push(contactId);
   let indexOfId = contacts.findIndex((item) => item.id === contactId);
 

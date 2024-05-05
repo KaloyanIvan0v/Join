@@ -3,9 +3,9 @@ let checkedStatusSubtasks = false;
 
 async function init_board() {
   await loadTasks();
+  await loadContacts();
   await includeHTML();
   renderTasks(getFilteredTasks());
-  loadContacts();
   filterTaskListener();
   setSearchFieldBorderListener();
 }
@@ -177,15 +177,31 @@ function renderContactsBoardInitialen(renderFull, id, targetElementId) {
   let contactsForTask = tasks[getIndexOfElmentById(id, tasks)]["assignedTo"];
   contactsFieldBoard.innerHTML = "";
   for (j = 0; j < contactsForTask.length; j++) {
-    if (j < 3 || renderFull == true) {
-      let contactForTask = contactsForTask[j];
-      contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(contactForTask, j);
-      backgroundColorInitialsBoard(j, id);
-    } else {
-      let restAmount = contactsForTask.length - 3;
-      contactsFieldBoard.innerHTML += returnMoreContactsPreview(restAmount);
-      return;
+    if (contactExists(contactsForTask[j])) {
+      if (j < 3 || renderFull == true) {
+        let contactForTask = contactsForTask[j];
+        contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(contactForTask, j);
+        backgroundColorInitialsBoard(j, id);
+      } else {
+        let restAmount = contactsForTask.length - 3;
+        contactsFieldBoard.innerHTML += returnMoreContactsPreview(restAmount);
+        return;
+      }
     }
+  }
+}
+
+function contactExists(assignedContact) {
+  let contactsIds = [];
+  let assignedContactId = assignedContact.id;
+  contacts.forEach((contact) => {
+    contactsIds.push(contact.id);
+  });
+
+  if (contactsIds.includes(assignedContactId)) {
+    return true;
+  } else {
+    return false;
   }
 }
 
@@ -220,14 +236,11 @@ function editTaskOverlay(i, id) {
   let overlayTask = tasks[getIndexOfElmentById(id, tasks)];
   let dialogField = document.getElementById("id-pop-up");
   let currentPrio = overlayTask["prio"];
+  let contactsField = document.getElementById("contactsField");
   dialogField.innerHTML = "";
   dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i, id);
-
   prioSelect(i, currentPrio);
-  // renderContactsBoardInitialen(true, id, `contactsFieldBoard(${id})`);
-  // renderTaskAssignedNames(id);
-  //changeIconsSubtask();
-  //renderSubTasksIntoEditTask(id);
+  setUsersForEditTask(id);
 }
 
 function renderSubTasksIntoEditTask(id) {
@@ -242,19 +255,36 @@ function renderSubTasksIntoEditTask(id) {
   }
 }
 
-// function returnHtmlSubtasks(subTask, i, subTaskId, id) {
-//   return /*html*/ `
-//     <li class="hover-subtask" onclick="editSubtaskBoard(${subTaskId},${i},${id})" id="subTaskElement${i}">${subTask}</li>`;
-// }
+function setUsersForEditTask(taksId) {
+  let assignedToIds = retrieveIdsFromTwoLevelNestedArrayById(taksId, tasks, "assignedTo");
+  showOrHideContacts(event);
+  for (i = 0; i < contacts.length; i++) {
+    contactId = contacts[i]["id"];
+    if (assignedToIds.includes(contactId)) {
+      selectedUser(event, contactId);
+    }
+  }
+  showOrHideContacts(event);
+}
 
-// function editSubtaskBoard(subTaksId, i, id) {
-//   let subTasksField = document.getElementById(`newSubTaskField`);
-//   let subTask = tasks[getIndexOfElmentById(id, tasks)]["subTask"];
-//   subTasksField.classList.add("list-element-subtasks");
-//   subTasksField.classList.remove("hover-subtask");
-//   subTasksField.innerHTML = editSubtaskHtml(i, subTask);
-//   inputFocus(i);
-// }
+function retrieveIdsFromTwoLevelNestedArrayById(id, arrayLevelOne, ArrayLevelTwo) {
+  let secondLevelArrayIds = [];
+  let secondLevelArray = arrayLevelOne[getIndexOfElmentById(id, arrayLevelOne)][ArrayLevelTwo];
+  for (i = 0; i < secondLevelArray.length; i++) {
+    secondLevelArrayIds.push(secondLevelArray[i].id);
+  }
+  return secondLevelArrayIds;
+}
+
+function retrieveIdsFromOneLevelArrayById(arrayName) {
+  let idArray = [];
+  for (i = 0; i < arrayName.length; i++) {
+    idArray.push(arrayName[i].id);
+  }
+  return idArray;
+}
+
+function clearUserField() {}
 
 function closeCurrentTask() {
   toggleBackgroundDialog();
@@ -485,8 +515,10 @@ function renderTaskAssignedNames(id) {
   let nameArea = document.getElementById("contactsFieldBoardFullName");
   let checkedContacts = tasks[getIndexOfElmentById(id, tasks)].checkedUsers;
   for (let i = 0; i < checkedContacts.length; i++) {
-    let chekedContact = checkedContacts[i].name;
-    nameArea.innerHTML += renturnTaksAssignetContactNameHtml(chekedContact);
+    if (contactExists(checkedContacts[i])) {
+      let chekedContact = checkedContacts[i].name;
+      nameArea.innerHTML += renturnTaksAssignetContactNameHtml(chekedContact);
+    }
   }
 }
 

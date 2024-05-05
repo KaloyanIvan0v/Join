@@ -1,5 +1,4 @@
 let currentEditingContactId;
-let contacts;
 async function initContacts() {
   includeHTML();
   await loadContacts();
