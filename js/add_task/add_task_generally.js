@@ -339,6 +339,7 @@ function selectedUser(event, contactId) {
     checkedUsers.splice(currentIndex, 1);
   }
   toggleBackgroundForCheckedUser(contactId);
+  toggleCheckboxStatus(contactId);
   toggleCheckbox(contactId);
   inputField.focus();
 }
@@ -364,13 +365,19 @@ function toggleBackgroundForCheckedUser(id) {
 function toggleCheckbox(id) {
   let checkBox = document.getElementById(`checkBox${id}`);
   let checkBoxStatus = contacts[getIndexOfElmentById(id, contacts)]["checkbox"];
-
-  if (checkBoxStatus == true) {
+  if (checkBoxStatus == false) {
     checkBox.src = "/img/box-unchecked.png";
-    contacts[getIndexOfElmentById(id, contacts)]["checkbox"] = false;
   } else {
-    checkBox.src = "/img/Check button.png";
+    checkBox.src = "/img/Check-button.png";
+  }
+}
+
+function toggleCheckboxStatus(id) {
+  let checkBoxStatus = contacts[getIndexOfElmentById(id, contacts)]["checkbox"];
+  if (checkBoxStatus == false) {
     contacts[getIndexOfElmentById(id, contacts)]["checkbox"] = true;
+  } else {
+    contacts[getIndexOfElmentById(id, contacts)]["checkbox"] = false;
   }
 }
 
@@ -386,7 +393,7 @@ function checkIfContactChecked(id) {
     let checkedContact = checkedContactsId[j];
     if (checkedContact === currentContactId) {
       toggleBackgroundForCheckedUser(currentContactId);
-      toggleCheckbox(id);
+      toggleCheckbox(currentContactId);
     }
   }
 }
