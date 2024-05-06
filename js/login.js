@@ -1,3 +1,5 @@
+let checkBoxState = false;
+
 /**
  * Initializes the login process by setting the start screen image, loading user data,
  * and configuring various event listeners. It also starts a timeout to initiate the start screen
