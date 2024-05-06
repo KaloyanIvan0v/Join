@@ -303,11 +303,11 @@ function prioSelect(i, prioSelect) {
   let medium = document.getElementById(`medium(${i})`);
   let low = document.getElementById(`low(${i})`);
   setItem("tasks", tasks);
-  if (prioSelect == "urgent") {
+  if (prioSelect == "Urgent") {
     urgent.src = "/img/urgent_highlight.png";
     medium.src = "/img/medium.png";
     low.src = "/img/low.png";
-  } else if (prioSelect == "medium") {
+  } else if (prioSelect == "Medium") {
     urgent.src = "/img/urgent.png";
     medium.src = "/img/medium_highlight.png";
     low.src = "/img/low.png";
