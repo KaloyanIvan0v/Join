@@ -17,7 +17,7 @@ function writeNumberOfAllTasks() {
 function filterHighestPrio() {
   let count = 0;
   for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i]['prio'] === 'urgent') {
+    if (tasks[i]['prio'] === 'Urgent') {
       count++;
     }
   }
