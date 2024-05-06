@@ -42,6 +42,7 @@ function changeBackgroundColorOfLink() {
 function loadFirstLettersFromSessionStorage() {
   //load first letters of first and last Name!
   let loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+  let activeSite = sessionStorage.getItem("activeSite");
   if (loggedInUser) {
     let nameOfUser = loggedInUser.name;
     let firstAndLastName = nameOfUser.split(" ");
@@ -49,7 +50,9 @@ function loadFirstLettersFromSessionStorage() {
     let lastName = firstAndLastName[1];
     setAbbreviationToUserIcon(firstName, lastName);
     if (window.innerWidth > 1440) {
-      document.getElementById("name").innerHTML = `${firstName} ${lastName}`;
+      if (activeSite == 'summery') {
+        document.getElementById("name").innerHTML = `${firstName} ${lastName}`;
+      }
     }
   } else {
     document.getElementById("abbreviation").innerHTML = "G";
