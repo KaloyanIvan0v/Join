@@ -258,6 +258,7 @@ function renderSubTasksIntoEditTask(id) {
 function setUsersForEditTask(taksId) {
   let assignedToIds = retrieveIdsFromTwoLevelNestedArrayById(taksId, tasks, "assignedTo");
   showOrHideContacts(event);
+  showOrHideContacts(event);
   for (i = 0; i < contacts.length; i++) {
     contactId = contacts[i]["id"];
     if (assignedToIds.includes(contactId)) {
@@ -283,8 +284,6 @@ function retrieveIdsFromOneLevelArrayById(arrayName) {
   }
   return idArray;
 }
-
-function clearUserField() {}
 
 function closeCurrentTask() {
   toggleBackgroundDialog();
@@ -486,6 +485,7 @@ function clearAddTaskForm() {
 function createTaskAtBoard() {
   if (checkCategoryInput()) {
     addTask();
+    resetInputFields();
     closePopUp();
     renderTasks(getFilteredTasks());
   } else {
@@ -550,6 +550,7 @@ function getSubtaskStatus(i, subTaskId) {
 }
 
 function closeEditTaskPopUp() {
+  clearAssignedSection();
   setTimeout(closePopUp, 20);
 }
 

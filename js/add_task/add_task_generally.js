@@ -32,6 +32,7 @@ function toggleDropDownArrowInputField(idImage) {
  * Resets input fields and other variables to their default state.
  */
 function resetInputFields() {
+  clearAssignedSection();
   checkedUsers = [];
   subTasks = [];
   checkChangeIcons = true;
@@ -40,8 +41,22 @@ function resetInputFields() {
   changeCategory("Select task category");
   changePrio(1);
   changeIconsSubtask();
-  clearContactsChecked();
+  //clearContactsChecked();
   clearInnerHtmlInputFields();
+}
+
+function clearAssignedSection() {
+  let contactBox = document.getElementById("contactsField");
+  if (contactBox.classList.contains("contacts-initialen")) {
+    showOrHideContacts(event);
+  }
+  for (let index = 0; index < contacts.length; index++) {
+    if (contacts[index].checkbox == true) {
+      let id = contacts[index].id;
+      selectedUser(event, id);
+    }
+  }
+  showOrHideContacts(event);
 }
 
 /**
@@ -162,7 +177,7 @@ function changeCategory(category) {
  */
 function clearContactsChecked() {
   for (i = 0; i < contacts.length; i++) {
-    contacts[i]["checkBoxContact"] = false;
+    contacts[i]["checkbox"] = false;
   }
 }
 
@@ -336,7 +351,7 @@ function selectedUser(event, contactId) {
   if (!checkedUsers.includes(singleUser, 0)) {
     checkedUsers.push(singleUser);
   } else {
-    checkedUsers.splice(currentIndex, 1);
+    //checkedUsers.splice(currentIndex, 1);
   }
   toggleBackgroundForCheckedUser(contactId);
   toggleCheckboxStatus(contactId);

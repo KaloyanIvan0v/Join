@@ -387,6 +387,7 @@ input:focus {
   background-color: white;
   position: unset !important;
   border-radius: 30px;
+  box-sizing: border-box;
 }
 
 .pop-up {

@@ -18,9 +18,8 @@ body {
   justify-content: space-between;
   background-color: #ffffff;
   margin-top: -10px;
-  position: static;
   z-index: 3;
-  max-height: 336px;
+  max-height: 236px;
   overflow-y: scroll;
 }
 
@@ -283,7 +282,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding-top: 160px;
+  margin-top: 160px;
 }
 
 .color-FF8190 {
