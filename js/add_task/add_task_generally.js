@@ -41,7 +41,7 @@ function resetInputFields() {
   changeCategory("Select task category");
   changePrio(1);
   changeIconsSubtask();
-  //clearContactsChecked();
+  clearContactsChecked();
   clearInnerHtmlInputFields();
 }
 
@@ -57,6 +57,7 @@ function clearAssignedSection() {
     }
   }
   showOrHideContacts(event);
+  arrowToggleCheck = true;
 }
 
 /**
@@ -351,7 +352,7 @@ function selectedUser(event, contactId) {
   if (!checkedUsers.includes(singleUser, 0)) {
     checkedUsers.push(singleUser);
   } else {
-    //checkedUsers.splice(currentIndex, 1);
+    checkedUsers.splice(currentIndex, 1);
   }
   toggleBackgroundForCheckedUser(contactId);
   toggleCheckboxStatus(contactId);
@@ -367,7 +368,6 @@ function selectedUser(event, contactId) {
 function toggleBackgroundForCheckedUser(id) {
   let userField = document.getElementById(`userField${id}`);
   let paddingForChecked = document.getElementById(`paddingForChecked${id}`);
-
   userField.classList.toggle("hover-user-field");
   paddingForChecked.classList.toggle("pd-right-16");
 }

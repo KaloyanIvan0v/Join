@@ -258,7 +258,6 @@ function renderSubTasksIntoEditTask(id) {
 function setUsersForEditTask(taksId) {
   let assignedToIds = retrieveIdsFromTwoLevelNestedArrayById(taksId, tasks, "assignedTo");
   showOrHideContacts(event);
-  showOrHideContacts(event);
   for (i = 0; i < contacts.length; i++) {
     contactId = contacts[i]["id"];
     if (assignedToIds.includes(contactId)) {
@@ -482,11 +481,13 @@ function clearAddTaskForm() {
   closePopUp();
 }
 
-function createTaskAtBoard() {
+async function createTaskAtBoard() {
   if (checkCategoryInput()) {
     addTask();
+    await setSesionStorage("tasks", tasks);
     resetInputFields();
     closePopUp();
+    tasks = JSON.parse(sessionStorage.getItem("tasks"));
     renderTasks(getFilteredTasks());
   } else {
     setBorderColorForTimePeriod("containerCategory");

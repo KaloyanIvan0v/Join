@@ -72,7 +72,7 @@ async function setSesionStorage(key, value) {
   } catch (error) {}
 }
 
-async function getFromSessionStorage(key) {
+function getFromSessionStorage(key) {
   try {
     const serializedValue = sessionStorage.getItem(key);
     if (serializedValue === null) {
