@@ -63,13 +63,13 @@ function returnHtmlEditCurrentTask(overlayTask, i, id) {
     <div class="description-edit-board">
       <span clas="edit-task-headlines">Description</span>
       <div>
-        <textarea id="description(${i})" class="edit-task-description">${overlayTask["description"]}</textarea>
+        <textarea id="description" class="edit-task-description">${overlayTask["description"]}</textarea>
       </div>
     </div>
     
     <div class="overlay-date-edit font-overlay">
         <span clas="edit-task-headlines">Due date</span>
-        <input class="input-edit-title" type="date" value="${overlayTask["dueDate"]}" id="date(${i})">
+        <input class="input-edit-title" type="date" value="${overlayTask["dueDate"]}" id="dueDate">
         <div class="vs-hidden">
          <span class="required-field-edit">This field is required</span>
         </div>
@@ -77,11 +77,11 @@ function returnHtmlEditCurrentTask(overlayTask, i, id) {
     <div class="overlay-prio">
       <p>Priority</p>
        <div class="prio-area" id="prioArea(${i})">
-      <div onclick="prioSelect(${i}, 'urgent')">
+      <div onclick="prioSelect(${i}, 'Urgent')">
         <img id="urgent(${i})" src="/img/urgent.png">
       </div>
 
-      <div onclick="prioSelect(${i}, 'medium')">
+      <div onclick="prioSelect(${i}, 'Medium')">
         <img id="medium(${i})" src="/img/medium_highlight.png">
       </div>
 
@@ -119,7 +119,7 @@ function returnHtmlEditCurrentTask(overlayTask, i, id) {
     <div class="last-section-overlay">
       <div></div>
       <div class="delete-edit-overlay">
-      <button class="btn-save-edit-task join-button" onclick="saveTaskChanges(${i}); return false">
+      <button class="btn-save-edit-task join-button" onclick="saveTaskChanges(${id}); return false">
         <span class="typography-clear">Ok</span>
         <img src="/img/check-white.png">
       </button>

@@ -226,7 +226,7 @@ function renderFullName(i, contactsForTask) {
 
 function backgroundColorInitialsBoard(j, id) {
   let initialArea = document.getElementById(`initialArea${j}`);
-  let colorNumber = tasks[getIndexOfElmentById(id, tasks)]["checkedUsers"][j]["color"];
+  let colorNumber = tasks[getIndexOfElmentById(id, tasks)]["assignedTo"][j]["color"];
   let bgColor = contactColor[colorNumber];
   initialArea.style.backgroundColor = bgColor;
   initialArea.removeAttribute("id");
@@ -303,11 +303,11 @@ function prioSelect(i, prioSelect) {
   let medium = document.getElementById(`medium(${i})`);
   let low = document.getElementById(`low(${i})`);
   setItem("tasks", tasks);
-  if (prioSelect == "urgent") {
+  if (prioSelect == "Urgent") {
     urgent.src = "/img/urgent_highlight.png";
     medium.src = "/img/medium.png";
     low.src = "/img/low.png";
-  } else if (prioSelect == "medium") {
+  } else if (prioSelect == "Medium") {
     urgent.src = "/img/urgent.png";
     medium.src = "/img/medium_highlight.png";
     low.src = "/img/low.png";
@@ -514,7 +514,7 @@ function setBorderColorForTimePeriod(elementId) {
 
 function renderTaskAssignedNames(id) {
   let nameArea = document.getElementById("contactsFieldBoardFullName");
-  let checkedContacts = tasks[getIndexOfElmentById(id, tasks)].checkedUsers;
+  let checkedContacts = tasks[getIndexOfElmentById(id, tasks)].assignedTo;
   for (let i = 0; i < checkedContacts.length; i++) {
     if (contactExists(checkedContacts[i])) {
       let chekedContact = checkedContacts[i].name;
@@ -553,6 +553,7 @@ function getSubtaskStatus(i, subTaskId) {
 function closeEditTaskPopUp() {
   clearAssignedSection();
   setTimeout(closePopUp, 20);
+  arrowToggleCheck = false;
 }
 
 function closeAddTaskPopUp() {
@@ -573,4 +574,18 @@ function returnExitCrossHtml() {
   `;
 }
 
-function saveTaskChanges(id) {}
+function saveTaskChanges(id) {
+  let title = document.getElementById("title").value;
+  let description = document.getElementById("description").value;
+  let dueDate = document.getElementById("dueDate").value;
+  let assignedTo = checkedUsers;
+  tasks[getIndexOfElmentById(id, tasks)].title = title;
+  tasks[getIndexOfElmentById(id, tasks)].description = description;
+  tasks[getIndexOfElmentById(id, tasks)].dueDate = dueDate;
+  tasks[getIndexOfElmentById(id, tasks)].assignedTo = assignedTo;
+  setSesionStorage("tasks", tasks);
+  setItem("tasks", tasks);
+  closeEditTaskPopUp();
+  tasks = JSON.parse(sessionStorage.getItem("tasks"));
+  renderTasks(getFilteredTasks());
+}
