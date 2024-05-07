@@ -83,7 +83,7 @@ function editSubtaskHtml(i, subTask) {
     <form class="label-edit-subtask">
         <input id="inputField${i}" class="edit-subtask no-border" type="text" value="${subTask}">
         <div class="single-edit-subtask">
-            <img class="hover" src="/img/trashbin.png" onclick="deleteSubtask(${i})">
+            <img class="hover test-delete" src="/img/trashbin.png" onclick="deleteSubtask(event,${i})">
             <span>|</span>
             <img class="hover" src="/img/Property 1=check.png" onclick="changeSubtask(${i})">
         </div>
