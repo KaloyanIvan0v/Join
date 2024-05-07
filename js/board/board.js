@@ -62,7 +62,7 @@ function renderSubtaskProgressBar(id) {
     return;
   }
   let progressSection = document.getElementById(`id-subtasks-progress-section${id}`);
-  progressSection.classList.remove("hide");
+  progressSection.classList.remove("visibility-hidden");
   let loadStatusText = document.getElementById(`subtasks-progress-text${id}`);
   loadStatusText.innerHTML = `${funishedSubTasks}/${subTasksLength} Subtasks`;
   let loadWidth = (funishedSubTasks / subTasksLength) * 100;
@@ -239,19 +239,18 @@ function editTaskOverlay(i, id) {
   let contactsField = document.getElementById("contactsField");
   dialogField.innerHTML = "";
   dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i, id);
-  prioSelect(i, currentPrio);
+  prioSelect(id, currentPrio);
   setUsersForEditTask(id);
+  renderSubTasksEdit(id);
 }
 
-function renderSubTasksIntoEditTask(id) {
-  let subTasksField = document.getElementById(`newSubTaskField`);
+function renderSubTasksEdit(id) {
+  let input = document.getElementById("subTasks");
   let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
-  subTasksField.innerHTML = "";
-
   for (j = 0; j < subTasks.length; j++) {
-    let subTask = subTasks[j].subTask;
-    let subTaskId = subTasks[j].id;
-    subTasksField.innerHTML += returnHtmlSubtasks(subTask, j, subTaskId, id);
+    input.value = subTasks[j].subTask;
+    addNewSubTask(event);
+    input.value = "";
   }
 }
 
@@ -298,10 +297,10 @@ function checkBooleanForPriority(priority, prioSelection, i) {
   }
 }
 
-function prioSelect(i, prioSelect) {
-  let urgent = document.getElementById(`urgent(${i})`);
-  let medium = document.getElementById(`medium(${i})`);
-  let low = document.getElementById(`low(${i})`);
+function prioSelect(id, prioSelect) {
+  let urgent = document.getElementById(`Urgent(${id})`);
+  let medium = document.getElementById(`Medium(${id})`);
+  let low = document.getElementById(`Low(${id})`);
   setItem("tasks", tasks);
   if (prioSelect == "Urgent") {
     urgent.src = "/img/urgent_highlight.png";
@@ -316,6 +315,7 @@ function prioSelect(i, prioSelect) {
     medium.src = "/img/medium.png";
     low.src = "/img/low_highlight.png";
   }
+  tasks[getIndexOfElmentById(id, tasks)]["prio"] = prioSelect;
 }
 
 //###################################################################################
@@ -554,6 +554,7 @@ function closeEditTaskPopUp() {
   clearAssignedSection();
   setTimeout(closePopUp, 20);
   arrowToggleCheck = false;
+  subTasks = [];
 }
 
 function closeAddTaskPopUp() {
@@ -574,7 +575,7 @@ function returnExitCrossHtml() {
   `;
 }
 
-function saveTaskChanges(id) {
+function safeTaskChanges(id) {
   let title = document.getElementById("title").value;
   let description = document.getElementById("description").value;
   let dueDate = document.getElementById("dueDate").value;
@@ -583,9 +584,11 @@ function saveTaskChanges(id) {
   tasks[getIndexOfElmentById(id, tasks)].description = description;
   tasks[getIndexOfElmentById(id, tasks)].dueDate = dueDate;
   tasks[getIndexOfElmentById(id, tasks)].assignedTo = assignedTo;
+  tasks[getIndexOfElmentById(id, tasks)].subTasks = subTasks;
   setSesionStorage("tasks", tasks);
   setItem("tasks", tasks);
   closeEditTaskPopUp();
+  subTasks = [];
   tasks = JSON.parse(sessionStorage.getItem("tasks"));
   renderTasks(getFilteredTasks());
 }

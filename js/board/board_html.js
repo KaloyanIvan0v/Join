@@ -15,7 +15,7 @@ function returnHtmlShowToDos(singleTask, i, id) {
         <div class="task-msg">
             ${singleTask["description"]}
         </div>
-        <div id="id-subtasks-progress-section${id}" class="subtasks-progress-section hide">
+        <div id="id-subtasks-progress-section${id}" class="subtasks-progress-section visibility-hidden">
             <div id="progressBar${id}" class="progerss-bar-container">
                 <div id="id-loadbar${id}" class="loadbar"></div>
             </div>
@@ -76,17 +76,17 @@ function returnHtmlEditCurrentTask(overlayTask, i, id) {
     </div>
     <div class="overlay-prio">
       <p>Priority</p>
-       <div class="prio-area" id="prioArea(${i})">
-      <div onclick="prioSelect(${i}, 'Urgent')">
-        <img id="urgent(${i})" src="/img/urgent.png">
+       <div class="prio-area" id="prioArea(${id})">
+      <div onclick="prioSelect(${id}, 'Urgent')">
+        <img id="Urgent(${id})" src="/img/urgent.png">
       </div>
 
-      <div onclick="prioSelect(${i}, 'Medium')">
-        <img id="medium(${i})" src="/img/medium_highlight.png">
+      <div onclick="prioSelect(${id}, 'Medium')">
+        <img id="Medium(${id})" src="/img/medium_highlight.png">
       </div>
 
-      <div onclick="prioSelect(${i}, 'Low')">
-        <img id="low(${i})" src="/img/low.png">
+      <div onclick="prioSelect(${id}, 'Low')">
+        <img id="Low(${id})" src="/img/low.png">
       </div>
     </div>
     </div>
@@ -119,7 +119,7 @@ function returnHtmlEditCurrentTask(overlayTask, i, id) {
     <div class="last-section-overlay">
       <div></div>
       <div class="delete-edit-overlay">
-      <button class="btn-save-edit-task join-button" onclick="saveTaskChanges(${id}); return false">
+      <button class="btn-save-edit-task join-button" onclick="safeTaskChanges(${id}); return false">
         <span class="typography-clear">Ok</span>
         <img src="/img/check-white.png">
       </button>
