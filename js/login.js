@@ -17,6 +17,7 @@ async function initLogin() {
   setSesionStorage("contacts", contacts);
   setSesionStorage("tasks", tasks);
   sessionStorage.setItem("activeSite", "summery");
+  LoadLoginFromLocalStorage();
   handleInputOnFocusChangeParentElementBorderColor();
 }
 
@@ -49,6 +50,9 @@ function setStartScreenImgAndBackgroundColor() {
  * displays appropriate feedback messages.
  */
 function login() {
+  if (checkBoxState == true) {
+    saveLoginToLocalStorage();
+  }
   const user = email.value;
   if (userExist(user) && passwordIsCorrect(user)) {
     setSesionStorage("loggedInUser", users[getUserIndex(user)]);
@@ -168,6 +172,7 @@ function toggleCheckbox() {
   } else {
     checkBoxState = false;
     checkBox.src = "../img/box-unchecked.png";
+    clearLocalStorage();
   }
 }
 
@@ -234,3 +239,27 @@ function togglePswVisibility(id) {
     document.getElementById("password0").type = "password";
   }
 }
+
+function saveLoginToLocalStorage(){
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password0').value;
+  localStorage.setItem("rememberMeE-mail", email);
+  localStorage.setItem("rememberMePW", password);
+ }
+
+ function LoadLoginFromLocalStorage(){
+  let email = localStorage.getItem("rememberMeE-mail");
+  let password = localStorage.getItem("rememberMePW");
+  if (email) {
+    toggleCheckbox();
+  }
+  document.getElementById('email').value = email;
+  document.getElementById('password0').value = password;
+ }
+
+ function clearLocalStorage(){
+  localStorage.removeItem("rememberMeE-mail");
+  localStorage.removeItem("rememberMePW");
+  document.getElementById('email').value = '';
+  document.getElementById('password0').value = '';
+ }
