@@ -107,9 +107,9 @@ function addNewSubTask() {
  * @param {number} i - The index of the subtask.
  */
 function deleteSubtask(i) {
-  subTasks.splice(i, 1);
-  setItem("subTasks", subTasks);
-  renderSubTasks();
+    subTasks.splice(i, 1);
+    setItem("subTasks", subTasks);
+    renderSubTasks();
 }
 
 /**
