@@ -172,7 +172,7 @@ function toggleCheckbox() {
   } else {
     checkBoxState = false;
     checkBox.src = "../img/box-unchecked.png";
-    clearLocalStorage();
+    clearUserDataFromLocalStorage();
   }
 }
 
@@ -240,26 +240,24 @@ function togglePswVisibility(id) {
   }
 }
 
-function saveLoginToLocalStorage(){
+function saveLoginToLocalStorage() {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password0').value;
   localStorage.setItem("rememberMeE-mail", email);
   localStorage.setItem("rememberMePW", password);
- }
+}
 
- function LoadLoginFromLocalStorage(){
+function LoadLoginFromLocalStorage() {
   let email = localStorage.getItem("rememberMeE-mail");
   let password = localStorage.getItem("rememberMePW");
   if (email) {
     toggleCheckbox();
+    document.getElementById('email').value = email;
+    document.getElementById('password0').value = password;
   }
-  document.getElementById('email').value = email;
-  document.getElementById('password0').value = password;
- }
+}
 
- function clearLocalStorage(){
+function clearUserDataFromLocalStorage() {
   localStorage.removeItem("rememberMeE-mail");
   localStorage.removeItem("rememberMePW");
-  document.getElementById('email').value = '';
-  document.getElementById('password0').value = '';
- }
+}
