@@ -106,7 +106,8 @@ function addNewSubTask() {
  *
  * @param {number} i - The index of the subtask.
  */
-function deleteSubtask(i) {
+function deleteSubtask(event, i) {
+  event.stopPropagation();
   subTasks.splice(i, 1);
   setItem("subTasks", subTasks);
   renderSubTasks();
