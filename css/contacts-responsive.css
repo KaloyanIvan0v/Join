@@ -57,6 +57,8 @@
 
   .contacts-inner-list {
     align-items: start;
+    margin-bottom: 44px;
+    margin-top: 5px;
   }
 
   .contact-list-letter-parting-line {
@@ -96,6 +98,7 @@
 
   .contacts-list {
     margin-left: 0px;
+    padding-top: 0;
   }
 }
 

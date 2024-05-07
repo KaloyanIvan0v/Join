@@ -38,6 +38,7 @@ h1 {
 
 .summeryInfo{
   width: 60%;
+  margin-top: 8px;
 }
 
 .partingLineTop {
@@ -82,9 +83,12 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: width 175ms;
 }
 
 .summeryDone:hover{
+  position: relative;
+  width: 50%;
   background-color: #2a3647;
   color: white;
 }
@@ -133,9 +137,12 @@ h1 {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: width 175ms;
 }
 
 .summeryTasksInBoard:hover{
+  position: relative;
+  width: 35%;
   background-color: #2a3647;
   color: white;
 }
@@ -150,9 +157,12 @@ h1 {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: width 175ms;
 }
 
 .summeryTasksInProgress:hover{
+  position: relative;
+  width: 35%;
   background-color: #2a3647;
   color: white;
 }
@@ -167,9 +177,12 @@ h1 {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: width 175ms;
 }
 
 .summeryAwaitingFeedback:hover{
+  position: relative;
+  width: 35%;
   background-color: #2a3647;
   color: white;
 }

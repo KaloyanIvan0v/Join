@@ -64,6 +64,7 @@ function upCommingDeadline() {
 }
 
 function loadBoardHTML(){
+  setActiveSite('board');
   window.location.assign('/html/board.html');
 }
 
