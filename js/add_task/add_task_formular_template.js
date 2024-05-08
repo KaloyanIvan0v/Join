@@ -1,11 +1,11 @@
-function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText) {
+function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText, statement) {
   return /*html*/ ` 
 <div id="id-over-div" class="over-div">
 <div class="close" onclick="closeContactsField(event)">
         <div id="id-headline-area" class="headline-area-template">
             <span class="headline-add-task-template">Add Task</span>
         </div>
-        <form onsubmit="${createTask}(); return false" class="add-task-informations">
+        <form onsubmit="${createTask}('${statement}'); return false" class="add-task-informations">
             <div class="left-and-rightside">
                 <div class="leftside-add-task">
                     <div class="description-input d-flex-column-center">

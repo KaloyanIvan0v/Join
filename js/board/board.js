@@ -14,13 +14,14 @@ function openPopUp() {
   document.getElementById("id-shadow-layer").classList.remove("visibility-hidden");
 }
 
-function openAddTaskTemplate() {
+function openAddTaskTemplate(statement) {
   openPopUp();
   let idPopUp = document.getElementById("id-pop-up");
   idPopUp.innerHTML += returnHtmlTaskTemplate(
     "createTaskAtBoard",
     "closeTaskFormTemplate",
-    "cancle"
+    "cancle",
+    statement
   );
   selectPriority();
   currentDate();
@@ -481,9 +482,13 @@ function clearAddTaskForm() {
   closePopUp();
 }
 
-async function createTaskAtBoard() {
+async function createTaskAtBoard(statement) {
   if (checkCategoryInput()) {
     addTask();
+    if (statement != "undefined") {
+      tasks[tasks.length - 1].statement = statement;
+      setItem("tasks", tasks);
+    }
     await setSesionStorage("tasks", tasks);
     resetInputFields();
     closePopUp();
