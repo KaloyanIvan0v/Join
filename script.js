@@ -103,8 +103,8 @@ function handleHoverButtonChangeImg(
   imgUrl,
   imgUrlHover
 ) {
-  var hoverElements = document.querySelectorAll(hoverClassName);
-  var elementsToChange = document.querySelectorAll(elementsToChangeClassName);
+  let hoverElements = document.querySelectorAll(hoverClassName);
+  let elementsToChange = document.querySelectorAll(elementsToChangeClassName);
 
   hoverElements.forEach(function (hoverElement, index) {
     hoverElement.addEventListener("mouseover", function () {
@@ -133,4 +133,24 @@ function increaseId(array) {
     const ids = array.map((item) => item.id);
     return Math.max(...ids) + 1;
   }
+}
+
+/**
+ * Clears the content of an element identified by either its ID or name.
+ *
+ * @param {string|HTMLElement} elementIdOrName - The ID or name of the element to clear.
+ * @return {void} This function does not return a value.
+ */
+function clearElement(elementIdOrName) {
+  if (typeof elementIdOrName === "string") {
+    document.getElementById(elementIdOrName).innerHTML = "";
+  } else {
+    elementIdOrName.innerHTML = "";
+  }
+}
+function addClassListTo(targetElementId, className) {
+  document.getElementById(targetElementId).classList.add(className);
+}
+function removeClassListTo(targetElementId, className) {
+  document.getElementById(targetElementId).classList.remove(className);
 }

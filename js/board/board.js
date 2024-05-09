@@ -1,5 +1,5 @@
 let currentDraggedElement;
-let checkedStatusSubtasks = false;
+//let checkedStatusSubtasks = false;
 
 async function init_board() {
   await loadTasks();
@@ -15,24 +15,9 @@ function openPopUp() {
 }
 
 function closePopUp() {
-  document.getElementById("id-shadow-layer").classList.add("visibility-hidden");
-  document.getElementById("id-pop-up").innerHTML = "";
+  addClassListTo("id-shadow-layer", "visibility-hidden");
+  clearElement("id-pop-up");
   renderTasks(getFilteredTasks());
-}
-
-function openAddTaskTemplate(statement) {
-  openPopUp();
-  let idPopUp = document.getElementById("id-pop-up");
-  idPopUp.innerHTML += returnHtmlTaskTemplate(
-    "createTaskAtBoard",
-    "closeTaskFormTemplate",
-    "cancle",
-    statement
-  );
-  selectPriority();
-  currentDate();
-  renderExitCross("id-headline-area");
-  changePrio(1);
 }
 
 function initTaskAreas() {
@@ -47,25 +32,53 @@ async function renderTasks(taskList) {
   let taskAreas = initTaskAreas();
   clearBoard(taskAreas);
   for (i = 0; i < taskList.length; i++) {
-    let singleTask = taskList[i];
-    let id = taskList[i]["id"];
-    taskAreas[sectionIdForTask(taskList)].innerHTML += returnHtmlShowToDos(singleTask, i, id);
-    choosestatementColor(i, taskList, id);
+    renderSigleTask(taskList, taskAreas, i);
+  }
+  ifTaskAreaIsEmptySetEmptyInfoBox();
+}
+
+function renderSigleTask(taskList, taskAreas, i) {
+  let singleTask = taskList[i];
+  let id = taskList[i]["id"];
+  taskAreas[sectionIdForTask(taskList)].innerHTML += returnHtmlShowToDos(singleTask, i, id);
+  setCategoryColor(i, taskList, id);
+  setPriorityTaskCard(i, id);
+  renderContactsBoardInitialen(false, id, `contactsFieldBoard(${id})`);
+  handleSubtasksProgressbar(id);
+}
+
+function handleSubtasksProgressbar(id) {
+  if (noSubtasksExist(id)) {
+    return;
+  } else {
     renderSubtaskProgressBar(id);
   }
-  checkIfTaskAreaIsEmpty();
+}
+
+function noSubtasksExist(id) {
+  let subTasksLength = tasks[getIndexOfElmentById(id, tasks)].subTasks.length;
+  if (subTasksLength == 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function renderSubtaskProgressBar(id) {
   let subTasksLength = tasks[getIndexOfElmentById(id, tasks)].subTasks.length;
   let funishedSubTasks = getFinishedSubTasksLength(id);
-  if (subTasksLength == 0) {
-    return;
-  }
   let progressSection = document.getElementById(`id-subtasks-progress-section${id}`);
   progressSection.classList.remove("visibility-hidden");
-  let loadStatusText = document.getElementById(`subtasks-progress-text${id}`);
-  loadStatusText.innerHTML = `${funishedSubTasks}/${subTasksLength} Subtasks`;
+  renderPorgressBarText(id, subTasksLength, funishedSubTasks);
+  renderProgressBar(id, subTasksLength, funishedSubTasks);
+}
+
+function renderPorgressBarText(id, subTasksLength, funishedSubTasks) {
+  let progresTextArea = document.getElementById(`subtasks-progress-text${id}`);
+  progresTextArea.innerHTML = `${funishedSubTasks}/${subTasksLength} Subtasks`;
+}
+
+function renderProgressBar(id, subTasksLength, funishedSubTasks) {
   let loadWidth = (funishedSubTasks / subTasksLength) * 100;
   let loadBar = document.getElementById(`id-loadbar${id}`);
   loadBar.style.width = `${loadWidth}%`;
@@ -92,11 +105,11 @@ function sectionIdForTask(taskList) {
 
 function clearBoard(element) {
   for (i = 0; i < element.length; i++) {
-    element[i].innerHTML = "";
+    clearElement(element[i]);
   }
 }
 
-function choosestatementColor(i, list, id) {
+function setCategoryColor(i, list) {
   let statementField = document.getElementById(`statementField${i}`);
   let singleTaskstatement = list[i]["category"];
   if (singleTaskstatement == "Technical Task") {
@@ -104,13 +117,12 @@ function choosestatementColor(i, list, id) {
   } else {
     statementField.classList.add("bg-color-user-story");
   }
-  whichPriorityTaskCard(i, false, list, id);
 }
 
-function whichPriorityTaskCard(i, renderFull, list, id) {
+function setPriorityTaskCard(i, id) {
   let prioField = document.getElementById(`prioField${i}`);
   let singleTaskPrio = tasks[getIndexOfElmentById(id, tasks)]["prio"];
-  prioField.innerHTML = "";
+  clearElement(prioField);
   if (singleTaskPrio == "Low") {
     prioField.innerHTML = '<img src="' + "/img/low_green.png" + '" alt="Bildbeschreibung">';
   } else if (singleTaskPrio == "Medium") {
@@ -118,18 +130,6 @@ function whichPriorityTaskCard(i, renderFull, list, id) {
   } else {
     prioField.innerHTML = '<img src="' + "/img/urgent_red.png" + '" alt="Bildbeschreibung">';
   }
-  renderContactsBoardInitialen(renderFull, id, `contactsFieldBoard(${id})`);
-}
-
-function openTaskDetailView(i, id) {
-  openPopUp();
-  let popUpDiv = document.getElementById("id-pop-up");
-  popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[getIndexOfElmentById(id, tasks)], i, id);
-  choosestatementColor(i, getFilteredTasks(), id);
-  whichPriorityTaskCard(i, true, getFilteredTasks(), id);
-  handleHoverButtonDeleteEditTask();
-  renderTaskAssignedNames(id);
-  renderSubTasksBoard(i, id);
 }
 
 function handleHoverButtonDeleteEditTask() {
@@ -154,29 +154,9 @@ function toggleBackgroundDialog() {
   backgroundDialog.classList.toggle("background-dialog");
 }
 
-function renderSubTasksBoard(i, id) {
-  let subTasksField = document.getElementById(`subTasksField`);
-  let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
-  subTasksField.innerHTML = "";
-
-  for (j = 0; j < subTasks.length; j++) {
-    let imgSrc;
-    let subTask = subTasks[j].subTask;
-    let subTaskId = subTasks[j].id;
-    let subTaskStatus = subTasks[j].status;
-    if (subTaskStatus == true) {
-      imgSrc = "/img/box-checked.png";
-    } else {
-      imgSrc = "/img/check_empty.png";
-    }
-    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, subTaskId, imgSrc, id);
-  }
-}
-
 function renderContactsBoardInitialen(renderFull, id, targetElementId) {
   let contactsFieldBoard = document.getElementById(targetElementId);
   let contactsForTask = tasks[getIndexOfElmentById(id, tasks)]["assignedTo"];
-  contactsFieldBoard.innerHTML = "";
   for (j = 0; j < contactsForTask.length; j++) {
     if (contactExists(contactsForTask[j])) {
       if (j < 3 || renderFull == true) {
@@ -192,6 +172,10 @@ function renderContactsBoardInitialen(renderFull, id, targetElementId) {
   }
 }
 
+function ifRenderFullIsTrue() {}
+
+function renderContactInitial() {}
+
 function contactExists(assignedContact) {
   let contactsIds = [];
   let assignedContactId = assignedContact.id;
@@ -206,88 +190,12 @@ function contactExists(assignedContact) {
   }
 }
 
-function returnMoreContactsPreview(restAmount) {
-  return /*html*/ `
-    <div id="initialArea${j}" class="contact-board mg-left-8" style="background-color: rgb(42, 54, 71)">
-      <span>+${restAmount}</span>
-    </div>`;
-}
-
-function renderFullName(i, contactsForTask) {
-  let backgroundDialog = document.getElementById("backgroundDialog");
-  if (backgroundDialog.classList.contains("background-dialog")) {
-    let contactsFieldBoard = document.getElementById(`contactsFieldBoardFullName(${i})`);
-    contactsFieldBoard.innerHTML = "";
-    for (j = 0; j < contactsForTask.length; j++) {
-      fullName = contactsForTask[j];
-      contactsFieldBoard.innerHTML += returnHtmlContactsFullName(fullName);
-    }
-  }
-}
-
 function backgroundColorInitialsBoard(j, id) {
   let initialArea = document.getElementById(`initialArea${j}`);
   let colorNumber = tasks[getIndexOfElmentById(id, tasks)]["assignedTo"][j]["color"];
   let bgColor = contactColor[colorNumber];
   initialArea.style.backgroundColor = bgColor;
   initialArea.removeAttribute("id");
-}
-
-function editTaskOverlay(i, id) {
-  let overlayTask = tasks[getIndexOfElmentById(id, tasks)];
-  let dialogField = document.getElementById("id-pop-up");
-  let currentPrio = overlayTask["prio"];
-  let contactsField = document.getElementById("contactsField");
-  dialogField.innerHTML = "";
-  dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i, id);
-  prioSelect(id, currentPrio);
-  setUsersForEditTask(id);
-  renderSubTasksEdit(id);
-}
-
-function renderSubTasksEdit(id) {
-  let input = document.getElementById("subTasks");
-  let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
-  for (j = 0; j < subTasks.length; j++) {
-    input.value = subTasks[j].subTask;
-    let subTaskState = subTasks[j].status;
-    addNewSubTaskBoard(subTaskState);
-    input.value = "";
-  }
-}
-
-function addNewSubTaskBoard(subTaskState) {
-  let id = increaseId(subTasks);
-  let subTaskStatus;
-  let singleNewTask = document.getElementById("subTasks");
-  let singleNewTaskValue = singleNewTask.value;
-
-  if (singleNewTaskValue.length >= 3) {
-    if (subTaskState == true) {
-      subTaskStatus = true;
-    } else {
-      subTaskStatus = false;
-    }
-    subTasks.push({
-      subTask: singleNewTaskValue,
-      status: subTaskStatus,
-      id: id,
-    });
-  }
-  singleNewTask.blur();
-  renderSubTasks("newSubtask");
-}
-
-function setUsersForEditTask(taksId) {
-  let assignedToIds = retrieveIdsFromTwoLevelNestedArrayById(taksId, tasks, "assignedTo");
-  showOrHideContacts(event);
-  for (i = 0; i < contacts.length; i++) {
-    contactId = contacts[i]["id"];
-    if (assignedToIds.includes(contactId)) {
-      selectedUser(event, contactId);
-    }
-  }
-  showOrHideContacts(event);
 }
 
 function retrieveIdsFromTwoLevelNestedArrayById(id, arrayLevelOne, ArrayLevelTwo) {
@@ -342,10 +250,6 @@ function prioSelect(id, prioSelect) {
   tasks[getIndexOfElmentById(id, tasks)]["prio"] = prioSelect;
 }
 
-//###################################################################################
-//*********************Kaloyan's Code fängt hier an!!!*******************************
-//###################################################################################
-
 function startDragging(id) {
   currentDraggedElement = id;
   rotateTaksCard(id);
@@ -357,23 +261,13 @@ function allowDrop(event) {
 }
 
 function moveElementTo(newstatement) {
-  tasks[getIndexOfElement(currentDraggedElement)].statement = newstatement;
+  tasks[getIndexOfElmentById(currentDraggedElement, tasks)].statement = newstatement;
   renderTasks(getFilteredTasks());
   setSesionStorage("tasks", tasks);
   setItem("tasks", JSON.stringify(tasks));
 }
 
-function getIndexOfElement(id) {
-  let index = 0;
-  for (i = 0; i < tasks.length; i++) {
-    if (tasks[i]["id"] == id) {
-      index = i;
-    }
-  }
-  return index;
-}
-
-function checkIfTaskAreaIsEmpty() {
+function ifTaskAreaIsEmptySetEmptyInfoBox() {
   let taskAreas = initTaskAreas();
   for (i = 0; i < taskAreas.length; i++) {
     if (taskAreas[i].innerHTML == "") {
@@ -400,36 +294,34 @@ function rotateTaksCard(id) {
 }
 
 function previewDrop(id) {
-  let taskAreas = initTaskAreas();
-  let previewAreasPosition = getPreviewAreas(id);
-  if (previewAreasPosition[0] > -1) {
-    taskAreas[previewAreasPosition[0]].innerHTML += previewElementHtml("left");
-    setPreviewElementwidthAndHeightLeft();
+  if (previewElementIsNotFarLeft(id)) {
+    renderPreviewElements(id, 0, "left");
+    setPreviewElementwidthAndHeight(".preview-element-left");
   }
-  if (previewAreasPosition[1] < 4) {
-    taskAreas[previewAreasPosition[1]].innerHTML += previewElementHtml("right");
-    setPreviewElementwidthAndHeightRight();
+  if (previewElementIsNotFarRight(id)) {
+    renderPreviewElements(id, 1, "right");
+    setPreviewElementwidthAndHeight(".preview-element-right");
   }
 }
 
-function getPreviewAreas(id) {
+function previewElementIsNotFarLeft(id) {
+  return calculatePreviewAreasPosition(id)[0] > -1;
+}
+
+function previewElementIsNotFarRight(id) {
+  return calculatePreviewAreasPosition(id)[1] < 4;
+}
+
+function renderPreviewElements(id, position, side) {
+  let taskAreas = initTaskAreas();
+  let previewAreasPosition = calculatePreviewAreasPosition(id);
+  taskAreas[previewAreasPosition[position]].innerHTML += previewElementHtml(side);
+}
+
+function calculatePreviewAreasPosition(id) {
   let taskAreaPosition = getTaskStatementIndex(id);
   let previewTaskAreas = [taskAreaPosition - 1, taskAreaPosition + 1];
   return previewTaskAreas;
-}
-
-function getTaskStatementIndex(id) {
-  let statement = tasks[getIndexOfElement(id)].statement;
-  switch (statement) {
-    case "toDo":
-      return 0;
-    case "inProgress":
-      return 1;
-    case "awaitFeedback":
-      return 2;
-    case "done":
-      return 3;
-  }
 }
 
 function getDragedElementWidthAndHeigth() {
@@ -438,18 +330,22 @@ function getDragedElementWidthAndHeigth() {
   return [width, height];
 }
 
-function setPreviewElementwidthAndHeightLeft() {
+function setPreviewElementwidthAndHeight(targerElement) {
   let widthAndHeight = getDragedElementWidthAndHeigth();
-  let previewElementLeft = document.querySelector(".preview-element-left");
-  previewElementLeft.style.width = `${widthAndHeight[0]}px`;
-  previewElementLeft.style.height = `${widthAndHeight[1]}px`;
-}
-
-function setPreviewElementwidthAndHeightRight() {
-  let widthAndHeight = getDragedElementWidthAndHeigth();
-  let previewElementRight = document.querySelector(".preview-element-right");
+  let previewElementRight = document.querySelector(targerElement);
   previewElementRight.style.width = `${widthAndHeight[0]}px`;
   previewElementRight.style.height = `${widthAndHeight[1]}px`;
+}
+
+function getTaskStatementIndex(id) {
+  const statementIndices = {
+    toDo: 0,
+    inProgress: 1,
+    awaitFeedback: 2,
+    done: 3,
+  };
+  const statement = tasks[getIndexOfElmentById(id, tasks)].statement;
+  return statementIndices.hasOwnProperty(statement) ? statementIndices[statement] : -1;
 }
 
 function filterTaskListener() {
@@ -459,8 +355,8 @@ function filterTaskListener() {
 }
 
 function getFilteredTasks() {
-  var inputValue = document.getElementById("id-find-task-input").value.toLowerCase();
-  var filteredTasks = tasks.filter(function (task) {
+  let inputValue = document.getElementById("id-find-task-input").value.toLowerCase();
+  let filteredTasks = tasks.filter(function (task) {
     return (
       task.title.toLowerCase().includes(inputValue) ||
       task.description.toLowerCase().includes(inputValue)
@@ -480,143 +376,10 @@ function setSearchFieldBorderListener() {
   });
 }
 
-function deleteTask(taskId) {
-  tasks.splice(getIndexOfElmentById(taskId, tasks), 1);
-  closePopUp();
-  setSesionStorage("tasks", tasks);
-  renderTasks(getFilteredTasks());
-  setItem("tasks", JSON.stringify(tasks));
-}
-
-function clearAddTaskForm() {
-  let subTasks = document.getElementById("subTasks");
-  let initialArea = document.getElementById("initialArea");
-  let newSubTaskField = document.getElementById("newSubTaskField");
-  let initialen = document.getElementById("checkboxes");
-
-  title.value = "";
-  description.value = "";
-  initialArea.innerHTML = "";
-  subTasks.value = "";
-  newSubTaskField.innerHTML = "";
-  checkedUsers = [];
-  initialen.innerHTML = "";
-  furtherResetField();
-  closePopUp();
-}
-
-async function createTaskAtBoard(statement) {
-  if (checkCategoryInput()) {
-    addTask();
-    if (statement != "undefined") {
-      tasks[tasks.length - 1].statement = statement;
-      setItem("tasks", tasks);
-    }
-    await setSesionStorage("tasks", tasks);
-    resetInputFields();
-    closePopUp();
-    tasks = JSON.parse(sessionStorage.getItem("tasks"));
-    renderTasks(getFilteredTasks());
-  } else {
-    setBorderColorForTimePeriod("containerCategory");
-  }
-}
-
-function checkCategoryInput() {
-  let inputCategory = document.getElementById("categoryDropdown");
-  let categoryValue = inputCategory.textContent;
-  if (categoryValue === "Select task category") {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function setBorderColorForTimePeriod(elementId) {
-  let div = document.getElementById(elementId);
+function setErrorBorderColor(elementId, timePeriod) {
+  const div = document.getElementById(elementId);
   div.style.borderColor = "red";
   setTimeout(() => {
     div.style.borderColor = "grey";
-  }, 2000);
-}
-
-function renderTaskAssignedNames(id) {
-  let nameArea = document.getElementById("contactsFieldBoardFullName");
-  let checkedContacts = tasks[getIndexOfElmentById(id, tasks)].assignedTo;
-  for (let i = 0; i < checkedContacts.length; i++) {
-    if (contactExists(checkedContacts[i])) {
-      let chekedContact = checkedContacts[i].name;
-      nameArea.innerHTML += renturnTaksAssignetContactNameHtml(chekedContact);
-    }
-  }
-}
-
-function closeTaskFormTemplate(event) {
-  if (event) {
-    event.preventDefault();
-  }
-  addTaskFormResetFields();
-  closePopUp();
-}
-
-function addTaskFormResetFields() {
-  clearContactsChecked();
-}
-
-function toggleCheckboxSubTask(i, subTaskId, id) {
-  if (getSubtaskStatus(i, subTaskId)) {
-    tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)].status = false;
-  } else {
-    tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)].status = true;
-  }
-  renderSubTasksBoard(i, id);
-  setItem("tasks", tasks);
-}
-
-function getSubtaskStatus(i, subTaskId) {
-  let subTaskStatus = tasks[i].subTasks[getIndexOfElmentById(subTaskId, tasks[i].subTasks)].status;
-  return subTaskStatus;
-}
-
-function closeEditTaskPopUp() {
-  clearAssignedSection();
-  setTimeout(closePopUp, 20);
-  arrowToggleCheck = false;
-  subTasks = [];
-}
-
-function closeAddTaskPopUp() {
-  resetInputFields();
-  setTimeout(closePopUp, 20);
-}
-
-function renderExitCross(elementId) {
-  let div = document.getElementById(elementId);
-  div.innerHTML += returnExitCrossHtml();
-}
-
-function returnExitCrossHtml() {
-  return /*html*/ `
-  <div class="exit-cross" onclick="closeAddTaskPopUp()">
-    <img src="/img/close-dark.svg">
-  </div>
-  `;
-}
-
-function safeTaskChanges(id) {
-  let title = document.getElementById("title").value;
-  let description = document.getElementById("description").value;
-  let dueDate = document.getElementById("dueDate").value;
-  let assignedTo = checkedUsers;
-  tasks[getIndexOfElmentById(id, tasks)].title = title;
-  tasks[getIndexOfElmentById(id, tasks)].description = description;
-  tasks[getIndexOfElmentById(id, tasks)].dueDate = dueDate;
-  tasks[getIndexOfElmentById(id, tasks)].assignedTo = assignedTo;
-  tasks[getIndexOfElmentById(id, tasks)].subTasks = subTasks;
-  setSesionStorage("tasks", tasks);
-  setItem("tasks", tasks);
-  closeEditTaskPopUp();
-  subTasks = [];
-  tasks = JSON.parse(sessionStorage.getItem("tasks"));
-  renderTasks(getFilteredTasks());
+  }, timePeriod);
 }

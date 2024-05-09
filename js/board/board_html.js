@@ -241,3 +241,18 @@ function renturnTaksAssignetContactNameHtml(name) {
   <div class="task-assignet-contact-name">${name}</div>
  `;
 }
+
+function returnMoreContactsPreview(restAmount) {
+  return /*html*/ `
+    <div id="initialArea${j}" class="contact-board mg-left-8" style="background-color: rgb(42, 54, 71)">
+      <span>+${restAmount}</span>
+    </div>`;
+}
+
+function returnExitCrossHtml() {
+  return /*html*/ `
+  <div class="exit-cross" onclick="closeAddTaskPopUp()">
+    <img src="/img/close-dark.svg">
+  </div>
+  `;
+}
