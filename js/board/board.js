@@ -14,6 +14,12 @@ function openPopUp() {
   document.getElementById("id-shadow-layer").classList.remove("visibility-hidden");
 }
 
+function closePopUp() {
+  document.getElementById("id-shadow-layer").classList.add("visibility-hidden");
+  document.getElementById("id-pop-up").innerHTML = "";
+  renderTasks(getFilteredTasks());
+}
+
 function openAddTaskTemplate(statement) {
   openPopUp();
   let idPopUp = document.getElementById("id-pop-up");
@@ -27,12 +33,6 @@ function openAddTaskTemplate(statement) {
   currentDate();
   renderExitCross("id-headline-area");
   changePrio(1);
-}
-
-function closePopUp() {
-  document.getElementById("id-shadow-layer").classList.add("visibility-hidden");
-  document.getElementById("id-pop-up").innerHTML = "";
-  renderTasks(getFilteredTasks());
 }
 
 function initTaskAreas() {
@@ -250,9 +250,32 @@ function renderSubTasksEdit(id) {
   let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
   for (j = 0; j < subTasks.length; j++) {
     input.value = subTasks[j].subTask;
-    addNewSubTask(event);
+    let subTaskState = subTasks[j].status;
+    addNewSubTaskBoard(subTaskState);
     input.value = "";
   }
+}
+
+function addNewSubTaskBoard(subTaskState) {
+  let id = increaseId(subTasks);
+  let subTaskStatus;
+  let singleNewTask = document.getElementById("subTasks");
+  let singleNewTaskValue = singleNewTask.value;
+
+  if (singleNewTaskValue.length >= 3) {
+    if (subTaskState == true) {
+      subTaskStatus = true;
+    } else {
+      subTaskStatus = false;
+    }
+    subTasks.push({
+      subTask: singleNewTaskValue,
+      status: subTaskStatus,
+      id: id,
+    });
+  }
+  singleNewTask.blur();
+  renderSubTasks("newSubtask");
 }
 
 function setUsersForEditTask(taksId) {
