@@ -1,5 +1,5 @@
 function editTaskOverlay(i, id) {
-  const overlayTask = tasks[getIndexOfElmentById(id, tasks)];
+  const overlayTask = tasks[getIndexOfElementById(id, tasks)];
   const dialogField = document.getElementById("id-pop-up");
   let currentPrio = overlayTask["prio"];
   clearElement(dialogField);
@@ -15,7 +15,7 @@ function renderEditTaskOverlay(targetElement, i, id, overlayTask) {
 
 function renderSubTasksEdit(id) {
   let input = document.getElementById("subTasks");
-  let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
+  let subTasks = tasks[getIndexOfElementById(id, tasks)]["subTasks"];
   for (j = 0; j < subTasks.length; j++) {
     renderSubtask(input, subTasks);
   }
@@ -55,7 +55,7 @@ function subTaskLongEnough(element) {
 
 function renderSubTasksBoard(i, id) {
   let subTasksField = document.getElementById(`subTasksField`);
-  let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
+  let subTasks = tasks[getIndexOfElementById(id, tasks)]["subTasks"];
   subTasksField.innerHTML = "";
   for (j = 0; j < subTasks.length; j++) {
     let imgSrc;
@@ -75,12 +75,12 @@ function safeTaskChanges(id) {
   let description = document.getElementById("description").value;
   let dueDate = document.getElementById("dueDate").value;
   let assignedTo = checkedUsers;
-  tasks[getIndexOfElmentById(id, tasks)].title = title;
-  tasks[getIndexOfElmentById(id, tasks)].description = description;
-  tasks[getIndexOfElmentById(id, tasks)].dueDate = dueDate;
-  tasks[getIndexOfElmentById(id, tasks)].assignedTo = assignedTo;
-  tasks[getIndexOfElmentById(id, tasks)].subTasks = subTasks;
-  setSesionStorage("tasks", tasks);
+  tasks[getIndexOfElementById(id, tasks)].title = title;
+  tasks[getIndexOfElementById(id, tasks)].description = description;
+  tasks[getIndexOfElementById(id, tasks)].dueDate = dueDate;
+  tasks[getIndexOfElementById(id, tasks)].assignedTo = assignedTo;
+  tasks[getIndexOfElementById(id, tasks)].subTasks = subTasks;
+  setSessionStorage("tasks", tasks);
   setItem("tasks", tasks);
   closeEditTaskPopUp();
   subTasks = [];
@@ -109,7 +109,7 @@ function setUsersForEditTask(taksId) {
 
 function renderTaskAssignedNames(id) {
   let nameArea = document.getElementById("contactsFieldBoardFullName");
-  let checkedContacts = tasks[getIndexOfElmentById(id, tasks)].assignedTo;
+  let checkedContacts = tasks[getIndexOfElementById(id, tasks)].assignedTo;
   for (let i = 0; i < checkedContacts.length; i++) {
     if (contactExists(checkedContacts[i])) {
       let chekedContact = checkedContacts[i].name;

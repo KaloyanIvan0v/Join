@@ -1,3 +1,8 @@
+/**
+ * Opens the 'Add Task' template popup, initializes priority selection, sets current date, and adds an exit cross.
+ *
+ * @param {string} statement - The initial statement to be prefilled in the task form.
+ */
 function openAddTaskTemplate(statement) {
   openPopUp();
   renderAddTaskTemplate(statement);
@@ -7,24 +12,33 @@ function openAddTaskTemplate(statement) {
   changePrio(1);
 }
 
+/**
+ * Adds the 'Add Task' form template to the pop-up element.
+ *
+ * @param {string} statement - The statement that should be pre-filled in the task form.
+ */
 function renderAddTaskTemplate(statement) {
   let popUpElement = document.getElementById("id-pop-up");
   popUpElement.innerHTML += returnHtmlTaskTemplate(
     "createTaskAtBoard",
     "closeTaskFormTemplate",
-    "cancle",
+    "cancel",
     statement
   );
 }
 
+/**
+ * Adds a new task to the board after validating that a category is selected.
+ * Updates session storage and renders the updated tasks.
+ *
+ * @param {string} statement - The statement of the task that will be added.
+ * @returns {Promise<void>}
+ */
 async function createTaskAtBoard(statement) {
   if (categorySelected()) {
     addTask();
-    if (statement != "undefined") {
-      tasks[tasks.length - 1].statement = statement;
-      setItem("tasks", tasks);
-    }
-    await setSesionStorage("tasks", tasks);
+    setStatement(statement);
+    await setSessionStorage("tasks", tasks);
     resetInputFields();
     closePopUp();
     tasks = JSON.parse(sessionStorage.getItem("tasks"));
@@ -34,22 +48,52 @@ async function createTaskAtBoard(statement) {
   }
 }
 
+/**
+ * Updates the statement of the most recently added task if the provided statement is not undefined.
+ *
+ * @param {string} statement - The statement to be set for the most recently added task.
+ */
+function setStatement(statement) {
+  if (statement != "undefined") {
+    tasks[tasks.length - 1].statement = statement;
+    setItem("tasks", tasks);
+  }
+}
+
+/**
+ * Checks if a category has been selected from the dropdown.
+ *
+ * @returns {boolean} - True if a category is selected, false otherwise.
+ */
 function categorySelected() {
   let inputCategory = document.getElementById("categoryDropdown");
   let categoryValue = inputCategory.textContent;
   return categoryValue !== "Select task category";
 }
 
+/**
+ * Renders an exit cross in the specified element.
+ *
+ * @param {string} elementId - The ID of the element where the exit cross will be added.
+ */
 function renderExitCross(elementId) {
   let div = document.getElementById(elementId);
   div.innerHTML += returnExitCrossHtml();
 }
 
+/**
+ * Closes the 'Add Task' pop-up after resetting the input fields.
+ */
 function closeAddTaskPopUp() {
   resetInputFields();
   setTimeout(closePopUp, 20);
 }
 
+/**
+ * Handles the closure of the task form template, preventing the default event and clearing any checked contacts.
+ *
+ * @param {Event} event - The event triggered by the form submission or closure.
+ */
 function closeTaskFormTemplate(event) {
   if (event) {
     event.preventDefault();
@@ -57,20 +101,3 @@ function closeTaskFormTemplate(event) {
   clearContactsChecked();
   closePopUp();
 }
-
-// function clearAddTaskForm() {
-//   let subTasks = document.getElementById("subTasks");
-//   let initialArea = document.getElementById("initialArea");
-//   let newSubTaskField = document.getElementById("newSubTaskField");
-//   let initialen = document.getElementById("checkboxes");
-
-//   title.value = "";
-//   description.value = "";
-//   initialArea.innerHTML = "";
-//   subTasks.value = "";
-//   newSubTaskField.innerHTML = "";
-//   checkedUsers = [];
-//   initialen.innerHTML = "";
-//   furtherResetField();
-//   closePopUp();
-// }

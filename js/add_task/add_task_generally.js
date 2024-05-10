@@ -379,7 +379,7 @@ function toggleBackgroundForCheckedUser(id) {
  */
 function toggleCheckbox(id) {
   let checkBox = document.getElementById(`checkBox${id}`);
-  let checkBoxStatus = contacts[getIndexOfElmentById(id, contacts)]["checkbox"];
+  let checkBoxStatus = contacts[getIndexOfElementById(id, contacts)]["checkbox"];
   if (checkBoxStatus == false) {
     checkBox.src = "/img/box-unchecked.png";
   } else {
@@ -388,11 +388,11 @@ function toggleCheckbox(id) {
 }
 
 function toggleCheckboxStatus(id) {
-  let checkBoxStatus = contacts[getIndexOfElmentById(id, contacts)]["checkbox"];
+  let checkBoxStatus = contacts[getIndexOfElementById(id, contacts)]["checkbox"];
   if (checkBoxStatus == false) {
-    contacts[getIndexOfElmentById(id, contacts)]["checkbox"] = true;
+    contacts[getIndexOfElementById(id, contacts)]["checkbox"] = true;
   } else {
-    contacts[getIndexOfElmentById(id, contacts)]["checkbox"] = false;
+    contacts[getIndexOfElementById(id, contacts)]["checkbox"] = false;
   }
 }
 

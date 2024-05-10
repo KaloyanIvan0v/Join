@@ -98,7 +98,7 @@ function deleteContactFromForm(event) {
 
 function safeContacts() {
   setItem("contacts", contacts);
-  setSesionStorage("contacts", contacts);
+  setSessionStorage("contacts", contacts);
 }
 
 function getActualContactEmail() {

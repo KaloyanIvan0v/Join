@@ -146,7 +146,7 @@ function renderSubtaskProgressBarHtml(singleTask, finishedSubTasks) {
   `;
 }
 
-function returnMoreContactsPreview(restAmount) {
+function returnMoreContactsPreview(restAmount, j) {
   return /*html*/ `
     <div id="initialArea${j}" class="contact-board mg-left-8" style="background-color: rgb(42, 54, 71)">
       <span>+${restAmount}</span>
@@ -242,7 +242,7 @@ function renturnTaksAssignetContactNameHtml(name) {
  `;
 }
 
-function returnMoreContactsPreview(restAmount) {
+function returnMoreContactsPreview(restAmount, j) {
   return /*html*/ `
     <div id="initialArea${j}" class="contact-board mg-left-8" style="background-color: rgb(42, 54, 71)">
       <span>+${restAmount}</span>

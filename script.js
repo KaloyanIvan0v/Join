@@ -1,3 +1,7 @@
+/**
+ * Color map for contacts with predefined RGB values.
+ * @type {Object<number, string>}
+ */
 const contactColor = {
   1: "rgb(255, 187, 44)",
   2: "rgb(255, 70, 70)",
@@ -15,32 +19,55 @@ const contactColor = {
   14: "rgb(255, 122, 1)",
 };
 
+/** @type {Array<Object>} */
 let tasks = [];
+/** @type {Array<Object>} */
 let contacts = [];
+/** @type {Array<Object>} */
 let users = [];
-let geLoggedInUser;
+/** @type {Object|null} */
+let geLoggedInUser = null;
 
+/**
+ * Sets the currently logged-in user in local storage.
+ * @param {Object} user - The user object to be stored.
+ */
 function setLoggedInUser(user) {
   saveToLocalStorage("loggedInUser", user);
 }
 
+/**
+ * Retrieves the currently logged-in user from local storage.
+ * @returns {Object|null} The user object or null if not found.
+ */
 function getLoggedInUser() {
   return getFromLocalStorage("loggedInUser");
 }
 
+/**
+ * Saves a value to local storage with the specified key.
+ * @param {string} key - The key under which the value should be saved.
+ * @param {Object} value - The value to be saved.
+ */
 function saveToLocalStorage(key, value) {
   value = JSON.stringify(value);
   localStorage.setItem(key, value);
 }
 
+/**
+ * Retrieves a value from local storage with the specified key.
+ * @param {string} key - The key of the value to be retrieved.
+ * @returns {Object|null} The parsed value from storage or null if not found.
+ */
 function getFromLocalStorage(key) {
-  value = localStorage.getItem(key);
-  valueAsJSON = JSON.parse(value);
-  if (valueAsJSON) {
-    return valueAsJSON;
-  }
+  const value = localStorage.getItem(key);
+  const valueAsJSON = JSON.parse(value);
+  return valueAsJSON || null;
 }
 
+/**
+ * Loads user data from an external source and stores it in the `users` array.
+ */
 async function loadUsers() {
   try {
     users = JSON.parse(await getItem("users"));
@@ -49,6 +76,9 @@ async function loadUsers() {
   }
 }
 
+/**
+ * Loads contact data from an external source and stores it in the `contacts` array.
+ */
 async function loadContacts() {
   try {
     contacts = JSON.parse(await getItem("contacts"));
@@ -57,6 +87,9 @@ async function loadContacts() {
   }
 }
 
+/**
+ * Loads task data from an external source and stores it in the `tasks` array.
+ */
 async function loadTasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
@@ -65,28 +98,43 @@ async function loadTasks() {
   }
 }
 
-async function setSesionStorage(key, value) {
+/**
+ * Sets a value in session storage.
+ * @param {string} key - The key under which to store the value.
+ * @param {Object} value - The value to store.
+ */
+async function setSessionStorage(key, value) {
   try {
     const serializedValue = JSON.stringify(value);
     sessionStorage.setItem(key, serializedValue);
-  } catch (error) {}
+  } catch (error) {
+    console.error("Session Storage error:", error);
+  }
 }
 
+/**
+ * Retrieves a value from session storage by its key.
+ * @param {string} key - The key of the value to be retrieved.
+ * @returns {Object|null} The parsed value from session storage or null if not found.
+ */
 function getFromSessionStorage(key) {
   try {
     const serializedValue = sessionStorage.getItem(key);
     if (serializedValue === null) {
       return null;
     }
-    const value = JSON.parse(serializedValue);
-    return value;
+    return JSON.parse(serializedValue);
   } catch (error) {
+    console.error("Session Storage retrieval error:", error);
     return null;
   }
 }
 
+/**
+ * Changes the parent element's border color when an input gains or loses focus.
+ */
 function handleInputOnFocusChangeParentElementBorderColor() {
-  let inputs = document.querySelectorAll("input");
+  const inputs = document.querySelectorAll("input");
   inputs.forEach(function (input) {
     input.addEventListener("focus", function () {
       input.parentElement.style.borderColor = "var(--accent-color)";
@@ -97,14 +145,21 @@ function handleInputOnFocusChangeParentElementBorderColor() {
   });
 }
 
+/**
+ * Handles changing the background image of an element on hover.
+ * @param {string} hoverClassName - The class name of elements that will trigger the change.
+ * @param {string} elementsToChangeClassName - The class name of elements that will have their image changed.
+ * @param {string} imgUrl - The URL of the original background image.
+ * @param {string} imgUrlHover - The URL of the hover background image.
+ */
 function handleHoverButtonChangeImg(
   hoverClassName,
   elementsToChangeClassName,
   imgUrl,
   imgUrlHover
 ) {
-  let hoverElements = document.querySelectorAll(hoverClassName);
-  let elementsToChange = document.querySelectorAll(elementsToChangeClassName);
+  const hoverElements = document.querySelectorAll(hoverClassName);
+  const elementsToChange = document.querySelectorAll(elementsToChangeClassName);
 
   hoverElements.forEach(function (hoverElement, index) {
     hoverElement.addEventListener("mouseover", function () {
@@ -116,16 +171,26 @@ function handleHoverButtonChangeImg(
   });
 }
 
-function getIndexOfElmentById(id, list) {
-  let index = 0;
-  for (i = 0; i < list.length; i++) {
+/**
+ * Finds the index of an object within an array by its ID property.
+ * @param {number|string} id - The ID to search for.
+ * @param {Array<Object>} list - The array in which to search.
+ * @returns {number} The index of the found element, or `0` if not found.
+ */
+function getIndexOfElementById(id, list) {
+  for (let i = 0; i < list.length; i++) {
     if (list[i]["id"] == id) {
-      index = i;
-      return index;
+      return i;
     }
   }
+  return 0;
 }
 
+/**
+ * Increases the ID by one from the maximum value found in the array.
+ * @param {Array<Object>} array - The array from which to find the maximum ID.
+ * @returns {number} The next incremented ID or `0` if the array is empty.
+ */
 function increaseId(array) {
   if (array.length === 0) {
     return 0;
@@ -136,10 +201,8 @@ function increaseId(array) {
 }
 
 /**
- * Clears the content of an element identified by either its ID or name.
- *
- * @param {string|HTMLElement} elementIdOrName - The ID or name of the element to clear.
- * @return {void} This function does not return a value.
+ * Clears the content of an HTML element identified by either its ID or name.
+ * @param {string|HTMLElement} elementIdOrName - The ID, name, or HTMLElement object to be cleared.
  */
 function clearElement(elementIdOrName) {
   if (typeof elementIdOrName === "string") {
@@ -148,9 +211,21 @@ function clearElement(elementIdOrName) {
     elementIdOrName.innerHTML = "";
   }
 }
+
+/**
+ * Adds a CSS class to an HTML element identified by its ID.
+ * @param {string} targetElementId - The ID of the target element.
+ * @param {string} className - The class name to be added.
+ */
 function addClassListTo(targetElementId, className) {
   document.getElementById(targetElementId).classList.add(className);
 }
+
+/**
+ * Removes a CSS class from an HTML element identified by its ID.
+ * @param {string} targetElementId - The ID of the target element.
+ * @param {string} className - The class name to be removed.
+ */
 function removeClassListTo(targetElementId, className) {
   document.getElementById(targetElementId).classList.remove(className);
 }

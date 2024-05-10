@@ -14,8 +14,8 @@ async function initLogin() {
   setTimeout(() => {
     startScreen();
   }, 375);
-  setSesionStorage("contacts", contacts);
-  setSesionStorage("tasks", tasks);
+  setSessionStorage("contacts", contacts);
+  setSessionStorage("tasks", tasks);
   sessionStorage.setItem("activeSite", "summery");
   LoadLoginFromLocalStorage();
   handleInputOnFocusChangeParentElementBorderColor();
@@ -55,7 +55,7 @@ function login() {
   }
   const user = email.value;
   if (userExist(user) && passwordIsCorrect(user)) {
-    setSesionStorage("loggedInUser", users[getUserIndex(user)]);
+    setSessionStorage("loggedInUser", users[getUserIndex(user)]);
     resetForm();
     window.location.href = "../html/summery.html";
   } else {
@@ -241,8 +241,8 @@ function togglePswVisibility(id) {
 }
 
 function saveLoginToLocalStorage() {
-  let email = document.getElementById('email').value;
-  let password = document.getElementById('password0').value;
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password0").value;
   localStorage.setItem("rememberMeE-mail", email);
   localStorage.setItem("rememberMePW", password);
 }
@@ -252,8 +252,8 @@ function LoadLoginFromLocalStorage() {
   let password = localStorage.getItem("rememberMePW");
   if (email) {
     toggleCheckbox();
-    document.getElementById('email').value = email;
-    document.getElementById('password0').value = password;
+    document.getElementById("email").value = email;
+    document.getElementById("password0").value = password;
   }
 }
 
