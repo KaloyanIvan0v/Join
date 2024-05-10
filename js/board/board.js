@@ -7,7 +7,7 @@ async function init_board() {
   await loadTasks();
   await loadContacts();
   await includeHTML();
-  renderTasks(getFilteredTasks());
+  renderTasks(tasks);
   filterTaskListener();
   setSearchFieldBorderListener();
 }
@@ -167,6 +167,21 @@ function clearBoard(element) {
 }
 
 /**
+ * Sets the category color for a task based on its category.
+ * @param {number} i - The index of the task.
+ * @param {Object[]} list - The list of tasks.
+ */
+function setCategoryColor(i, list) {
+  let statementField = document.getElementById(`statementField${i}`);
+  let singleTaskStatement = list[i]["category"];
+  if (singleTaskStatement == "Technical Task") {
+    statementField.classList.add("bg-color-technical-task");
+  } else {
+    statementField.classList.add("bg-color-user-story");
+  }
+}
+
+/**
  * Sets the priority task card image based on the priority of the task.
  * @param {number} i - The index of the task.
  * @param {string} id - The ID of the task.
@@ -182,6 +197,24 @@ function setPriorityTaskCard(i, id) {
   } else {
     prioField.innerHTML = '<img src="/img/urgent_red.png" alt="Urgent Priority">';
   }
+}
+
+/**
+ * Handles the hover effect for delete and edit task buttons by changing their image.
+ */
+function handleHoverButtonDeleteEditTask() {
+  handleHoverButtonChangeImg(
+    ".btn-hover-trash",
+    ".img-hover-trash",
+    "url('/img/trashbin.png')",
+    "url('/img/trash-light-blue.png')"
+  );
+  handleHoverButtonChangeImg(
+    ".btn-hover-edit",
+    ".img-hover-edit",
+    "url('/img/edit-pencil.png')",
+    "url('/img/edit-pencil-light-blue.png')"
+  );
 }
 
 /**
@@ -313,6 +346,38 @@ function checkBooleanForPriority(priority, prioSelection, i) {
 }
 
 /**
+ * Handles the selection of task priority.
+ * @param {string} id - The ID of the task.
+ * @param {string} prioSelect - The priority selection.
+ */
+function prioSelect(id, prioSelect) {
+  let urgent = document.getElementById(`Urgent(${id})`);
+  let medium = document.getElementById(`Medium(${id})`);
+  let low = document.getElementById(`Low(${id})`);
+  setPrioSelectDefaultState(urgent, medium, low);
+  if (prioSelect == "Urgent") {
+    urgent.src = "/img/urgent_highlight.png";
+  } else if (prioSelect == "Medium") {
+    medium.src = "/img/medium_highlight.png";
+  } else {
+    low.src = "/img/low_highlight.png";
+  }
+  tasks[getIndexOfElementById(id, tasks)]["prio"] = prioSelect;
+}
+
+/**
+ * Sets the default state of the priority selection buttons.
+ * @param {HTMLElement} urgent - The urgent priority button.
+ * @param {HTMLElement} medium - The medium priority button.
+ * @param {HTMLElement} low - The low priority button.
+ */
+function setPrioSelectDefaultState(urgent, medium, low) {
+  urgent.src = "/img/urgent.png";
+  medium.src = "/img/medium.png";
+  low.src = "/img/low.png";
+}
+
+/**
  * Checks if any task area is empty and sets an empty info box.
  */
 function ifTaskAreaIsEmptySetEmptyInfoBox() {
@@ -391,4 +456,17 @@ function setSearchFieldBorderListener() {
   inputElement.addEventListener("blur", function () {
     formElement.style.border = "1px solid  rgba(168, 168, 168, 1)";
   });
+}
+
+/**
+ * Sets the error border color for an element for a specified time period.
+ * @param {string} elementId - The ID of the element.
+ * @param {number} timePeriod - The time period in milliseconds.
+ */
+function setErrorBorderColor(elementId, timePeriod) {
+  const div = document.getElementById(elementId);
+  div.style.borderColor = "red";
+  setTimeout(() => {
+    div.style.borderColor = "grey";
+  }, timePeriod);
 }

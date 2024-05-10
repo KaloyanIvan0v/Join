@@ -55,41 +55,47 @@ function handleHoverButtonChangeImgDelayed() {
 }
 
 function exitContactForm(event) {
-  event?.preventDefault();
+  if (event) {
+    event.preventDefault();
+  }
   toggleContactForm();
   setTimeout(function () {
     closeContactForm();
   }, 500);
 }
 
+function closeContactForm() {
+  let contactForm = document.getElementById("id-contact-form");
+  contactForm.innerHTML = "";
+  removeShadowLayer();
+}
+
 function closeContactForm(event) {
-  event?.preventDefault();
-  clearElement("id-contact-form");
+  let contactForm = document.getElementById("id-contact-form");
+  if (event) {
+    event.preventDefault();
+  }
+  contactForm.innerHTML = "";
   removeShadowLayer();
 }
 
 async function deleteContact(event) {
   closeContactForm();
   HideFullViewShowContactList();
-  if (contactExistsByEmail(getActualContactEmail())) {
-    contacts.splice(getContactIndex(getActualContactEmail(), 1));
-    clearElement("id-contact-full-mode");
+  let contactIndex = getContactIndex(getActualContactEmail());
+  if (contactIndex != undefined) {
+    contacts.splice(contactIndex, 1);
+    document.getElementById("id-contact-full-mode").innerHTML = "";
     renderContacts(contacts);
     safeContacts();
     toggleContactFullMode();
   }
 }
 
-function contactExistsByEmail(email) {
-  let contactsIds = [];
-  contacts.forEach((contact) => {
-    contactsIds.push(contact.email);
-  });
-  return contactsIds.includes(email);
-}
-
 function deleteContactFromForm(event) {
-  event?.preventDefault();
+  if (event) {
+    event.preventDefault();
+  }
   toggleContactForm();
   setTimeout(function () {
     deleteContact();
@@ -103,6 +109,7 @@ function safeContacts() {
 
 function getActualContactEmail() {
   let email = document.getElementById("id-contact-full-mode-data-email").textContent;
+
   return email;
 }
 
@@ -133,7 +140,15 @@ function setBadge(badge, colorId) {
 }
 
 function SaveEditedContact() {
-  getEditFormInputValues();
+  contacts[currentEditingContactId].name = document.getElementById(
+    "id-edit-contact-input-name"
+  ).value;
+  contacts[currentEditingContactId].email = document.getElementById(
+    "id-edit-contact-input-email"
+  ).value;
+  contacts[currentEditingContactId].phone = document.getElementById(
+    "id-edit-contact-input-phone"
+  ).value;
   toggleContactForm();
   setTimeout(function () {
     safeContacts();
@@ -141,13 +156,6 @@ function SaveEditedContact() {
     renderContacts(contacts);
     renderContactFullMode(contacts[currentEditingContactId]);
   }, 500);
-}
-
-function getEditFormInputValues() {
-  const contact = contacts[currentEditingContactId];
-  contact.name = document.getElementById("id-edit-contact-input-name").value;
-  contact.email = document.getElementById("id-edit-contact-input-email").value;
-  contact.phone = document.getElementById("id-edit-contact-input-phone").value;
 }
 
 function createContactAndCloseForm() {
@@ -159,26 +167,16 @@ function createContactAndCloseForm() {
   }, 500);
 }
 async function addNewContact() {
-  const { name, email, phone } = getAndNewContactInputValues();
-  const color = generateContactColor();
+  const name = document.getElementById("id-add-contact-name").value;
+  const email = document.getElementById("id-add-contact-email").value;
+  const phone = document.getElementById("id-add-contact-phone").value;
+  const color = Math.floor(Math.random() * 14) + 1;
   const nameInitials = generateBadge(name);
   const author = "Günter";
   const id = increaseId(contacts);
   const contact = { id, name, email, phone, color, nameInitials, author, checkbox: false };
   contacts.push(contact);
   safeContacts();
-}
-
-function getAndNewContactInputValues() {
-  const name = document.getElementById("id-add-contact-name").value;
-  const email = document.getElementById("id-add-contact-email").value;
-  const phone = document.getElementById("id-add-contact-phone").value;
-  return { name, email, phone };
-}
-
-function generateContactColor() {
-  const color = Math.floor(Math.random() * 14) + 1;
-  return color;
 }
 
 function generateBadge(name) {
@@ -193,23 +191,23 @@ function generateBadge(name) {
 function renderContacts(contacts) {
   const contactList = document.getElementById("id-contact-inner-list");
   const sortedContacts = sortListAlphabetically(contacts);
-  clearElement("id-contact-inner-list");
+  clearElementById("id-contact-inner-list");
   let currentLetter = null;
   sortedContacts.forEach((contact, i) => {
     const { name, color } = contact;
-    handleLetterSection(name, currentLetter, contactList);
+    const firstLetter = name.charAt(0).toUpperCase();
+    if (firstLetter !== currentLetter) {
+      contactList.innerHTML += renderLetterSectionHTML(firstLetter);
+      currentLetter = firstLetter;
+    }
     renderContact(contact, contactList, i);
     setElementBackgroundColor(`id-contact-list-badges${i}`, color);
   });
   renderMobileAddContactButton();
 }
 
-function handleLetterSection(name, currentLetter, contactList) {
-  const firstLetter = name.charAt(0).toUpperCase();
-  if (firstLetter !== currentLetter) {
-    contactList.innerHTML += renderLetterSectionHTML(firstLetter);
-    currentLetter = firstLetter;
-  }
+function clearElementById(id) {
+  document.getElementById(id).innerHTML = "";
 }
 
 function sortListAlphabetically(list) {
@@ -221,6 +219,7 @@ function renderContact(contact, divId, i) {
   const contactBadges = contact.nameInitials;
   const contactName = contact.name;
   const contactEmail = contact.email;
+  const contactColor = contact.color;
   divId.innerHTML += renderContactHtml(contactBadges, contactName, contactEmail, i);
 }
 
