@@ -78,3 +78,18 @@ function deleteTask(taskId) {
   renderTasks(getFilteredTasks());
   setItem("tasks", tasks);
 }
+
+/**
+ * Sets the category color for a task based on its category.
+ * @param {number} i - The index of the task.
+ * @param {Object[]} list - The list of tasks.
+ */
+function setCategoryColor(i, list) {
+  let statementField = document.getElementById(`statementField${i}`);
+  let singleTaskStatement = list[i]["category"];
+  if (singleTaskStatement == "Technical Task") {
+    statementField.classList.add("bg-color-technical-task");
+  } else {
+    statementField.classList.add("bg-color-user-story");
+  }
+}

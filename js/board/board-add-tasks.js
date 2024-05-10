@@ -101,3 +101,16 @@ function closeTaskFormTemplate(event) {
   clearContactsChecked();
   closePopUp();
 }
+
+/**
+ * Sets the error border color for an element for a specified time period.
+ * @param {string} elementId - The ID of the element.
+ * @param {number} timePeriod - The time period in milliseconds.
+ */
+function setErrorBorderColor(elementId, timePeriod) {
+  const div = document.getElementById(elementId);
+  div.style.borderColor = "red";
+  setTimeout(() => {
+    div.style.borderColor = "grey";
+  }, timePeriod);
+}

@@ -117,3 +117,53 @@ function renderTaskAssignedNames(id) {
     }
   }
 }
+
+/**
+ * Handles the hover effect for delete and edit task buttons by changing their image.
+ */
+function handleHoverButtonDeleteEditTask() {
+  handleHoverButtonChangeImg(
+    ".btn-hover-trash",
+    ".img-hover-trash",
+    "url('/img/trashbin.png')",
+    "url('/img/trash-light-blue.png')"
+  );
+  handleHoverButtonChangeImg(
+    ".btn-hover-edit",
+    ".img-hover-edit",
+    "url('/img/edit-pencil.png')",
+    "url('/img/edit-pencil-light-blue.png')"
+  );
+}
+
+/**
+ * Handles the selection of task priority.
+ * @param {string} id - The ID of the task.
+ * @param {string} prioSelect - The priority selection.
+ */
+function prioSelect(id, prioSelect) {
+  let urgent = document.getElementById(`Urgent(${id})`);
+  let medium = document.getElementById(`Medium(${id})`);
+  let low = document.getElementById(`Low(${id})`);
+  setPrioSelectDefaultState(urgent, medium, low);
+  if (prioSelect == "Urgent") {
+    urgent.src = "/img/urgent_highlight.png";
+  } else if (prioSelect == "Medium") {
+    medium.src = "/img/medium_highlight.png";
+  } else {
+    low.src = "/img/low_highlight.png";
+  }
+  tasks[getIndexOfElementById(id, tasks)]["prio"] = prioSelect;
+}
+
+/**
+ * Sets the default state of the priority selection buttons.
+ * @param {HTMLElement} urgent - The urgent priority button.
+ * @param {HTMLElement} medium - The medium priority button.
+ * @param {HTMLElement} low - The low priority button.
+ */
+function setPrioSelectDefaultState(urgent, medium, low) {
+  urgent.src = "/img/urgent.png";
+  medium.src = "/img/medium.png";
+  low.src = "/img/low.png";
+}
