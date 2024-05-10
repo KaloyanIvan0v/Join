@@ -1,6 +1,4 @@
 let currentDraggedElement;
-//let checkedStatusSubtasks = false;
-
 async function init_board() {
   await loadTasks();
   await loadContacts();
@@ -43,11 +41,11 @@ function renderSigleTask(taskList, taskAreas, i) {
   taskAreas[sectionIdForTask(taskList)].innerHTML += returnHtmlShowToDos(singleTask, i, id);
   setCategoryColor(i, taskList, id);
   setPriorityTaskCard(i, id);
-  renderContactsBoardInitialen(false, id, `contactsFieldBoard(${id})`);
-  handleSubtasksProgressbar(id);
+  renderContactsBoardInitials(false, id, `contactsFieldBoard(${id})`);
+  handleSubtasksProgressBar(id);
 }
 
-function handleSubtasksProgressbar(id) {
+function handleSubtasksProgressBar(id) {
   if (noSubtasksExist(id)) {
     return;
   } else {
@@ -57,11 +55,7 @@ function handleSubtasksProgressbar(id) {
 
 function noSubtasksExist(id) {
   let subTasksLength = tasks[getIndexOfElmentById(id, tasks)].subTasks.length;
-  if (subTasksLength == 0) {
-    return true;
-  } else {
-    return false;
-  }
+  return subTasksLength == 0;
 }
 
 function renderSubtaskProgressBar(id) {
@@ -148,33 +142,37 @@ function handleHoverButtonDeleteEditTask() {
 }
 
 function toggleBackgroundDialog() {
-  let dialogField = document.getElementById("taskOverlay");
-  dialogField.innerHTML = "";
+  clearElement("taskOverlay");
   let backgroundDialog = document.getElementById("backgroundDialog");
   backgroundDialog.classList.toggle("background-dialog");
 }
 
-function renderContactsBoardInitialen(renderFull, id, targetElementId) {
+function renderContactsBoardInitials(renderFull, id, targetElementId) {
   let contactsFieldBoard = document.getElementById(targetElementId);
   let contactsForTask = tasks[getIndexOfElmentById(id, tasks)]["assignedTo"];
   for (j = 0; j < contactsForTask.length; j++) {
     if (contactExists(contactsForTask[j])) {
       if (j < 3 || renderFull == true) {
-        let contactForTask = contactsForTask[j];
-        contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(contactForTask, j);
-        backgroundColorInitialsBoard(j, id);
+        renderContactInitial(contactsFieldBoard, contactsForTask, id);
       } else {
-        let restAmount = contactsForTask.length - 3;
-        contactsFieldBoard.innerHTML += returnMoreContactsPreview(restAmount);
-        return;
+        renderMoreContactsPreview(contactsFieldBoard, contactsForTask);
+        break;
       }
     }
   }
 }
 
-function ifRenderFullIsTrue() {}
+function renderContactInitial(contactsFieldBoard, contactsForTask, id) {
+  let contactForTask = contactsForTask[j];
+  contactsFieldBoard.innerHTML += returnHtmlContactsInitialen(contactForTask, j);
+  backgroundColorInitialsBoard(j, id);
+}
 
-function renderContactInitial() {}
+function renderMoreContactsPreview(contactsFieldBoard, contactsForTask) {
+  let restAmount = contactsForTask.length - 3;
+  contactsFieldBoard.innerHTML += returnMoreContactsPreview(restAmount);
+  return;
+}
 
 function contactExists(assignedContact) {
   let contactsIds = [];
@@ -182,12 +180,7 @@ function contactExists(assignedContact) {
   contacts.forEach((contact) => {
     contactsIds.push(contact.id);
   });
-
-  if (contactsIds.includes(assignedContactId)) {
-    return true;
-  } else {
-    return false;
-  }
+  return contactsIds.includes(assignedContactId);
 }
 
 function backgroundColorInitialsBoard(j, id) {
@@ -233,38 +226,21 @@ function prioSelect(id, prioSelect) {
   let urgent = document.getElementById(`Urgent(${id})`);
   let medium = document.getElementById(`Medium(${id})`);
   let low = document.getElementById(`Low(${id})`);
-  setItem("tasks", tasks);
+  setPrioSelectDefaultState(urgent, medium, low);
   if (prioSelect == "Urgent") {
     urgent.src = "/img/urgent_highlight.png";
-    medium.src = "/img/medium.png";
-    low.src = "/img/low.png";
   } else if (prioSelect == "Medium") {
-    urgent.src = "/img/urgent.png";
     medium.src = "/img/medium_highlight.png";
-    low.src = "/img/low.png";
   } else {
-    urgent.src = "/img/urgent.png";
-    medium.src = "/img/medium.png";
     low.src = "/img/low_highlight.png";
   }
   tasks[getIndexOfElmentById(id, tasks)]["prio"] = prioSelect;
 }
 
-function startDragging(id) {
-  currentDraggedElement = id;
-  rotateTaksCard(id);
-  previewDrop(id);
-}
-
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-function moveElementTo(newstatement) {
-  tasks[getIndexOfElmentById(currentDraggedElement, tasks)].statement = newstatement;
-  renderTasks(getFilteredTasks());
-  setSesionStorage("tasks", tasks);
-  setItem("tasks", JSON.stringify(tasks));
+function setPrioSelectDefaultState(urgent, medium, low) {
+  urgent.src = "/img/urgent.png";
+  medium.src = "/img/medium.png";
+  low.src = "/img/low.png";
 }
 
 function ifTaskAreaIsEmptySetEmptyInfoBox() {
@@ -284,57 +260,7 @@ function getStatementByTaskI(i) {
     2: "Await Feedback",
     3: "Done",
   };
-
   return TaskAreaStatements[i];
-}
-
-function rotateTaksCard(id) {
-  let taskCard = document.getElementById(`taskCard${id}`);
-  taskCard.style.transform = "rotate(5deg)";
-}
-
-function previewDrop(id) {
-  if (previewElementIsNotFarLeft(id)) {
-    renderPreviewElements(id, 0, "left");
-    setPreviewElementwidthAndHeight(".preview-element-left");
-  }
-  if (previewElementIsNotFarRight(id)) {
-    renderPreviewElements(id, 1, "right");
-    setPreviewElementwidthAndHeight(".preview-element-right");
-  }
-}
-
-function previewElementIsNotFarLeft(id) {
-  return calculatePreviewAreasPosition(id)[0] > -1;
-}
-
-function previewElementIsNotFarRight(id) {
-  return calculatePreviewAreasPosition(id)[1] < 4;
-}
-
-function renderPreviewElements(id, position, side) {
-  let taskAreas = initTaskAreas();
-  let previewAreasPosition = calculatePreviewAreasPosition(id);
-  taskAreas[previewAreasPosition[position]].innerHTML += previewElementHtml(side);
-}
-
-function calculatePreviewAreasPosition(id) {
-  let taskAreaPosition = getTaskStatementIndex(id);
-  let previewTaskAreas = [taskAreaPosition - 1, taskAreaPosition + 1];
-  return previewTaskAreas;
-}
-
-function getDragedElementWidthAndHeigth() {
-  let width = document.getElementById(`taskCard${currentDraggedElement}`).offsetWidth;
-  let height = document.getElementById(`taskCard${currentDraggedElement}`).offsetHeight;
-  return [width, height];
-}
-
-function setPreviewElementwidthAndHeight(targerElement) {
-  let widthAndHeight = getDragedElementWidthAndHeigth();
-  let previewElementRight = document.querySelector(targerElement);
-  previewElementRight.style.width = `${widthAndHeight[0]}px`;
-  previewElementRight.style.height = `${widthAndHeight[1]}px`;
 }
 
 function getTaskStatementIndex(id) {

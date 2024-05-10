@@ -4,7 +4,7 @@ function openTaskDetailView(i, id) {
   popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[getIndexOfElmentById(id, tasks)], i, id);
   setCategoryColor(i, getFilteredTasks(), id);
   setPriorityTaskCard(i, id);
-  renderContactsBoardInitialen(true, id, `contactsFieldBoard(${id})`);
+  renderContactsBoardInitials(true, id, `contactsFieldBoard(${id})`);
   handleHoverButtonDeleteEditTask();
   renderTaskAssignedNames(id);
   renderSubTasksBoard(i, id);

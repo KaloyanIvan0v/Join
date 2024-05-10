@@ -1,46 +1,56 @@
 function editTaskOverlay(i, id) {
-  let overlayTask = tasks[getIndexOfElmentById(id, tasks)];
-  let dialogField = document.getElementById("id-pop-up");
+  const overlayTask = tasks[getIndexOfElmentById(id, tasks)];
+  const dialogField = document.getElementById("id-pop-up");
   let currentPrio = overlayTask["prio"];
-  let contactsField = document.getElementById("contactsField");
-  dialogField.innerHTML = "";
-  dialogField.innerHTML = returnHtmlEditCurrentTask(overlayTask, i, id);
+  clearElement(dialogField);
+  renderEditTaskOverlay(dialogField, i, id, overlayTask);
   prioSelect(id, currentPrio);
   setUsersForEditTask(id);
   renderSubTasksEdit(id);
+}
+
+function renderEditTaskOverlay(targetElement, i, id, overlayTask) {
+  targetElement.innerHTML = returnHtmlEditCurrentTask(overlayTask, i, id);
 }
 
 function renderSubTasksEdit(id) {
   let input = document.getElementById("subTasks");
   let subTasks = tasks[getIndexOfElmentById(id, tasks)]["subTasks"];
   for (j = 0; j < subTasks.length; j++) {
-    input.value = subTasks[j].subTask;
-    let subTaskState = subTasks[j].status;
-    addNewSubTaskBoard(subTaskState);
-    input.value = "";
+    renderSubtask(input, subTasks);
   }
 }
 
-function addNewSubTaskBoard(subTaskState) {
-  let id = increaseId(subTasks);
-  let subTaskStatus;
-  let singleNewTask = document.getElementById("subTasks");
-  let singleNewTaskValue = singleNewTask.value;
+function renderSubtask(input, subTasks) {
+  input.value = subTasks[j].subTask;
+  let subTaskState = subTasks[j].status;
+  addNewSubTaskBoard(subTaskState);
+  input.value = "";
+}
 
-  if (singleNewTaskValue.length >= 3) {
-    if (subTaskState == true) {
-      subTaskStatus = true;
-    } else {
-      subTaskStatus = false;
-    }
+function addNewSubTaskBoard(subTaskState) {
+  let singleNewTaskValue = document.getElementById("subTasks").value;
+  if (subTaskLongEnough(singleNewTaskValue)) {
     subTasks.push({
       subTask: singleNewTaskValue,
-      status: subTaskStatus,
-      id: id,
+      status: subTaskState,
+      id: increaseId(subTasks),
     });
   }
-  singleNewTask.blur();
+  removeFocusFrom("subTasks");
   renderSubTasks("newSubtask");
+}
+
+function removeFocusFrom(elementId) {
+  document.getElementById(elementId).blur();
+}
+
+function subTaskLongEnough(element) {
+  if (element.length >= 3) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function renderSubTasksBoard(i, id) {

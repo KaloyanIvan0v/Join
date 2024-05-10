@@ -1,20 +1,24 @@
 function openAddTaskTemplate(statement) {
   openPopUp();
-  let idPopUp = document.getElementById("id-pop-up");
-  idPopUp.innerHTML += returnHtmlTaskTemplate(
-    "createTaskAtBoard",
-    "closeTaskFormTemplate",
-    "cancle",
-    statement
-  );
+  renderAddTaskTemplate(statement);
   selectPriority();
   currentDate();
   renderExitCross("id-headline-area");
   changePrio(1);
 }
 
+function renderAddTaskTemplate(statement) {
+  let popUpElement = document.getElementById("id-pop-up");
+  popUpElement.innerHTML += returnHtmlTaskTemplate(
+    "createTaskAtBoard",
+    "closeTaskFormTemplate",
+    "cancle",
+    statement
+  );
+}
+
 async function createTaskAtBoard(statement) {
-  if (checkCategoryInput()) {
+  if (categorySelected()) {
     addTask();
     if (statement != "undefined") {
       tasks[tasks.length - 1].statement = statement;
@@ -30,14 +34,10 @@ async function createTaskAtBoard(statement) {
   }
 }
 
-function checkCategoryInput() {
+function categorySelected() {
   let inputCategory = document.getElementById("categoryDropdown");
   let categoryValue = inputCategory.textContent;
-  if (categoryValue === "Select task category") {
-    return false;
-  } else {
-    return true;
-  }
+  return categoryValue !== "Select task category";
 }
 
 function renderExitCross(elementId) {
@@ -54,27 +54,23 @@ function closeTaskFormTemplate(event) {
   if (event) {
     event.preventDefault();
   }
-  addTaskFormResetFields();
-  closePopUp();
-}
-
-function addTaskFormResetFields() {
   clearContactsChecked();
-}
-
-function clearAddTaskForm() {
-  let subTasks = document.getElementById("subTasks");
-  let initialArea = document.getElementById("initialArea");
-  let newSubTaskField = document.getElementById("newSubTaskField");
-  let initialen = document.getElementById("checkboxes");
-
-  title.value = "";
-  description.value = "";
-  initialArea.innerHTML = "";
-  subTasks.value = "";
-  newSubTaskField.innerHTML = "";
-  checkedUsers = [];
-  initialen.innerHTML = "";
-  furtherResetField();
   closePopUp();
 }
+
+// function clearAddTaskForm() {
+//   let subTasks = document.getElementById("subTasks");
+//   let initialArea = document.getElementById("initialArea");
+//   let newSubTaskField = document.getElementById("newSubTaskField");
+//   let initialen = document.getElementById("checkboxes");
+
+//   title.value = "";
+//   description.value = "";
+//   initialArea.innerHTML = "";
+//   subTasks.value = "";
+//   newSubTaskField.innerHTML = "";
+//   checkedUsers = [];
+//   initialen.innerHTML = "";
+//   furtherResetField();
+//   closePopUp();
+// }
