@@ -304,14 +304,14 @@ body {
 
 .edit-btn-img {
   margin-right: 8px;
-  background-image: url("../img/edit-pencil.png");
+  background-image: url("/img/edit-pencil.png");
   width: 24px;
   height: 24px;
 }
 
 .delete-btn-img {
   margin-right: 8px;
-  background-image: url("../img/trash-blue.png");
+  background-image: url("/img/trash-blue.png");
   width: 24px;
   height: 24px;
 }
