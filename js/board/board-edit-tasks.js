@@ -1,3 +1,9 @@
+/**
+ * Displays an overlay to edit a task.
+ *
+ * @param {number} i - Index of the task.
+ * @param {string} id - ID of the task.
+ */
 function editTaskOverlay(i, id) {
   const overlayTask = tasks[getIndexOfElementById(id, tasks)];
   const dialogField = document.getElementById("id-pop-up");
@@ -9,25 +15,49 @@ function editTaskOverlay(i, id) {
   renderSubTasksEdit(id);
 }
 
+/**
+ * Renders the edit task overlay.
+ *
+ * @param {HTMLElement} targetElement - The HTML element to render the overlay into.
+ * @param {number} i - Index of the task.
+ * @param {string} id - ID of the task.
+ * @param {Object} overlayTask - The task object to be edited.
+ */
 function renderEditTaskOverlay(targetElement, i, id, overlayTask) {
   targetElement.innerHTML = returnHtmlEditCurrentTask(overlayTask, i, id);
 }
 
+/**
+ * Renders the subtasks for editing.
+ *
+ * @param {string} id - ID of the task.
+ */
 function renderSubTasksEdit(id) {
   let input = document.getElementById("subTasks");
   let subTasks = tasks[getIndexOfElementById(id, tasks)]["subTasks"];
-  for (j = 0; j < subTasks.length; j++) {
-    renderSubtask(input, subTasks);
+  for (let j = 0; j < subTasks.length; j++) {
+    renderSubtask(input, subTasks[j]);
   }
 }
 
-function renderSubtask(input, subTasks) {
-  input.value = subTasks[j].subTask;
-  let subTaskState = subTasks[j].status;
+/**
+ * Renders a single subtask for editing.
+ *
+ * @param {HTMLElement} input - The input field to render the subtask into.
+ * @param {Object} subTask - The subtask object to be rendered.
+ */
+function renderSubtask(input, subTask) {
+  input.value = subTask.subTask;
+  let subTaskState = subTask.status;
   addNewSubTaskBoard(subTaskState);
   input.value = "";
 }
 
+/**
+ * Adds a new subtask to the task board.
+ *
+ * @param {string} subTaskState - The state of the subtask.
+ */
 function addNewSubTaskBoard(subTaskState) {
   let singleNewTaskValue = document.getElementById("subTasks").value;
   if (subTaskLongEnough(singleNewTaskValue)) {
@@ -41,10 +71,21 @@ function addNewSubTaskBoard(subTaskState) {
   renderSubTasks("newSubtask");
 }
 
+/**
+ * Removes focus from an element.
+ *
+ * @param {string} elementId - ID of the element to remove focus from.
+ */
 function removeFocusFrom(elementId) {
   document.getElementById(elementId).blur();
 }
 
+/**
+ * Checks if a subtask is long enough.
+ *
+ * @param {string} element - The subtask text to check.
+ * @returns {boolean} - Returns true if the subtask is long enough, false otherwise.
+ */
 function subTaskLongEnough(element) {
   if (element.length >= 3) {
     return true;
@@ -53,33 +94,53 @@ function subTaskLongEnough(element) {
   }
 }
 
+/**
+ * Renders the subtasks board.
+ *
+ * @param {number} i - The index of the task.
+ * @param {string} id - The ID of the parent task.
+ * @returns {void}
+ */
 function renderSubTasksBoard(i, id) {
-  let subTasksField = document.getElementById(`subTasksField`);
-  let subTasks = tasks[getIndexOfElementById(id, tasks)]["subTasks"];
+  const subTasksField = document.getElementById(`subTasksField`);
+  const subTasks = tasks[getIndexOfElementById(id, tasks)]["subTasks"];
   subTasksField.innerHTML = "";
-  for (j = 0; j < subTasks.length; j++) {
-    let imgSrc;
-    let subTask = subTasks[j].subTask;
-    let subTaskId = subTasks[j].id;
-    let subTaskStatus = subTasks[j].status;
-    if (subTaskStatus == true) {
-      imgSrc = "/img/box-checked.png";
-    } else {
-      imgSrc = "/img/check_empty.png";
-    }
-    subTasksField.innerHTML += returnHtmlSubtasks(subTask, i, subTaskId, imgSrc, id);
-  }
+  subTasks.forEach((subTask, j) => {
+    renderSubTask(i, id, subTasksField, subTask, j);
+  });
 }
+
+/**
+ * Renders a subtask.
+ *
+ * @param {number} i - The index of the task.
+ * @param {string} id - The ID of the parent task.
+ * @param {HTMLElement} subTasksField - The container for subtasks.
+ * @param {Object} subTask - The subtask object.
+ * @param {number} j - The index of the subtask.
+ * @returns {void}
+ */
+/**
+ * Renders a subtask.
+ *
+ * @param {number} i - Index of the task.
+ * @param {string} id - ID of the task.
+ * @param {HTMLElement} subTasksField - The HTML element to render the subtasks into.
+ * @param {Object} subTask - The subtask object to render.
+ * @param {number} j - Index of the subtask.
+ */
+function renderSubTask(i, id, subTasksField, subTask, j) {
+  const imgSrc = subTask.status ? "/img/box-checked.png" : "/img/check_empty.png";
+  subTasksField.innerHTML += returnHtmlSubtasks(subTask.subTask, i, subTask.id, imgSrc, id, j);
+}
+
+/**
+ * Safely applies changes to tasks.
+ *
+ * @param {string} id - ID of the task.
+ */
 function safeTaskChanges(id) {
-  let title = document.getElementById("title").value;
-  let description = document.getElementById("description").value;
-  let dueDate = document.getElementById("dueDate").value;
-  let assignedTo = checkedUsers;
-  tasks[getIndexOfElementById(id, tasks)].title = title;
-  tasks[getIndexOfElementById(id, tasks)].description = description;
-  tasks[getIndexOfElementById(id, tasks)].dueDate = dueDate;
-  tasks[getIndexOfElementById(id, tasks)].assignedTo = assignedTo;
-  tasks[getIndexOfElementById(id, tasks)].subTasks = subTasks;
+  safeChangesToTasks(id);
   setSessionStorage("tasks", tasks);
   setItem("tasks", tasks);
   closeEditTaskPopUp();
@@ -88,6 +149,27 @@ function safeTaskChanges(id) {
   renderTasks(getFilteredTasks());
 }
 
+/**
+ * Safely applies changes to the specified task.
+ *
+ * @param {string} id - ID of the task.
+ */
+function safeChangesToTasks(id) {
+  let title = document.getElementById("title").value;
+  let description = document.getElementById("description").value;
+  let dueDate = document.getElementById("dueDate").value;
+  let assignedTo = checkedUsers;
+  let task = tasks[getIndexOfElementById(id, tasks)];
+  task.title = title;
+  task.description = description;
+  task.dueDate = dueDate;
+  task.assignedTo = assignedTo;
+  task.subTasks = subTasks;
+}
+
+/**
+ * Closes the edit task popup.
+ */
 function closeEditTaskPopUp() {
   clearAssignedSection();
   setTimeout(closePopUp, 20);
@@ -95,10 +177,15 @@ function closeEditTaskPopUp() {
   subTasks = [];
 }
 
-function setUsersForEditTask(taksId) {
-  let assignedToIds = retrieveIdsFromTwoLevelNestedArrayById(taksId, tasks, "assignedTo");
+/**
+ * Sets users for the edit task.
+ *
+ * @param {string} taskId - ID of the task.
+ */
+function setUsersForEditTask(taskId) {
+  let assignedToIds = retrieveIdsFromTwoLevelNestedArrayById(taskId, tasks, "assignedTo");
   showOrHideContacts(event);
-  for (i = 0; i < contacts.length; i++) {
+  for (let i = 0; i < contacts.length; i++) {
     contactId = contacts[i]["id"];
     if (assignedToIds.includes(contactId)) {
       selectedUser(event, contactId);
@@ -107,13 +194,18 @@ function setUsersForEditTask(taksId) {
   showOrHideContacts(event);
 }
 
+/**
+ * Renders the names of assigned users for the task.
+ *
+ * @param {string} id - ID of the task.
+ */
 function renderTaskAssignedNames(id) {
   let nameArea = document.getElementById("contactsFieldBoardFullName");
   let checkedContacts = tasks[getIndexOfElementById(id, tasks)].assignedTo;
   for (let i = 0; i < checkedContacts.length; i++) {
     if (contactExists(checkedContacts[i])) {
-      let chekedContact = checkedContacts[i].name;
-      nameArea.innerHTML += renturnTaksAssignetContactNameHtml(chekedContact);
+      let checkedContact = checkedContacts[i].name;
+      nameArea.innerHTML += returnTaskAssignedContactNameHtml(checkedContact);
     }
   }
 }
