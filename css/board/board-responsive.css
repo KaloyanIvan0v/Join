@@ -1,0 +1,153 @@
+@media (max-width: 1430px) {
+  .board-distribution {
+    top: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    box-sizing: border-box;
+    overflow-y: unset;
+  }
+
+  .statement-section {
+    width: calc(100vw - 323px);
+    margin-top: 26px;
+  }
+
+  .task-area {
+    min-height: 200px;
+    min-width: 100%;
+    flex-direction: row;
+    max-width: calc(100% - 64px);
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 12px;
+  }
+
+  .task-area::-webkit-scrollbar {
+    border: none;
+    height: 8px;
+  }
+
+  .task-area::-webkit-scrollbar-thumb {
+    background-color: rgba(168, 168, 168, 1);
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .hide1040 {
+    display: none;
+    padding: 8px;
+  }
+  .input-find-task {
+    width: 200px;
+  }
+
+  .headline-search-add {
+    justify-content: space-around;
+    left: 58px;
+  }
+
+  .statement-section {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 860px) {
+  .over-div {
+    padding-top: 60px !important;
+  }
+
+  .board-distribution {
+    left: 0px;
+    width: 100%;
+    padding-left: 16px;
+    min-height: 96%;
+  }
+
+  .headline-area-board {
+    left: 0px;
+    width: 100%;
+    justify-content: left;
+  }
+
+  body {
+    margin-bottom: 70px;
+  }
+
+  .headline-search-add {
+    justify-content: space-around;
+    left: 0px;
+  }
+}
+
+@media (max-width: 600px) {
+  .headline-search-add {
+    flex-direction: column;
+    left: 16px;
+    margin-bottom: 15px;
+  }
+
+  .board-distribution {
+    top: 330px;
+  }
+
+  .btn-add-task-board {
+    position: absolute;
+    bottom: 18px;
+    right: 0px;
+  }
+
+  .input-find-task {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .headline-board {
+    font-size: 47px;
+  }
+
+  .overlay-current-task {
+    height: max-content;
+    max-height: clac(100vh - 80px);
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 580px) {
+  .over-div {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 525px) {
+  .overlay-current-task {
+    width: 100vw;
+  }
+
+  .prio-area {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 400px) {
+  .overlay-title {
+    font-size: 36px;
+  }
+
+  .over-div {
+    padding: 1px;
+  }
+
+  .font-overlay {
+    font-size: 16px;
+  }
+
+  .task-detail-view-section-title {
+    font-size: 16px;
+  }
+
+  .description-category {
+    width: 100%;
+  }
+}

@@ -1,0 +1,412 @@
+.pop-up {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.overlay-first-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.overlay-first-row a {
+  cursor: pointer;
+}
+
+.overlay-category {
+  padding: 4px 16px 4px 16px;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 23px;
+  line-height: 27.6px;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.overlay-title {
+  width: 100%;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73.2px;
+}
+
+.overlay-description {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 73.2px;
+}
+
+.overlay-date {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.overlay-date-edit {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.overlay-prio p {
+  padding-bottom: 8px;
+  margin: 0px;
+}
+
+.prio-name-image {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 18px;
+}
+
+.font-overlay {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.overlay-subtasks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.last-section-overlay {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-edit-overlay {
+  display: flex;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 19.2px;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.font-overlay-subtasks {
+  font-size: 16px;
+  line-height: 19.2px;
+}
+
+.input-subtasks-overlay {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.overlay-assigned {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.overlay-assigned-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subline-field:hover {
+  cursor: pointer;
+}
+
+.btn-add-task-board {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background-color: #2a3647;
+  color: #ffffff;
+}
+
+.typography-create {
+  font-size: 21px;
+  line-height: 25.2px;
+  font-weight: 700;
+}
+
+.plus-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-area-empty-mgs {
+  width: 100%;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(168, 168, 168, 1);
+  background-color: rgba(231, 231, 231, 1);
+  border: 1px dashed rgba(168, 168, 168, 1);
+  border-radius: 10px;
+  position: sticky;
+  top: 60px;
+  z-index: 1;
+}
+
+.preview-element-left {
+  width: 252px;
+  height: 228px;
+  border: 1px dashed rgba(168, 168, 168, 1);
+  border-radius: 24px;
+}
+.preview-element-right {
+  width: 252px;
+  height: 228px;
+  border: 1px dashed rgba(168, 168, 168, 1);
+  border-radius: 24px;
+}
+
+.loadbar-container {
+  width: 128px;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+}
+
+.loadbar {
+  height: 8px;
+  background-color: #4589ff;
+  width: 0;
+  transition: width 0.3s ease;
+  border-radius: 16px;
+}
+
+.title-headline {
+  display: flex;
+}
+
+.title-edit-board {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-edit-title {
+  background-color: #ffff;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 12px 21px;
+  font-size: 20px;
+  font-family: "inter";
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.vs-hidden {
+  visibility: hidden;
+}
+
+.description-edit-board {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hover:hover {
+  cursor: pointer;
+}
+
+.input-contacts-edit {
+  background-color: #ffffff;
+  height: 24px;
+  width: 239px;
+}
+
+.input-contacts-edit::placeholder {
+  color: #000000;
+  font-size: 20px;
+}
+
+textarea {
+  padding: 18px 16px;
+  height: 84px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: "inter";
+}
+
+.required-field-edit {
+  font-size: 12px;
+}
+
+.prio-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.highlight-color-medium {
+  background-color: #ffa800;
+}
+
+.highlight-color-urgent {
+  background-color: #ff3d00;
+}
+
+.highlight-color-low {
+  background-color: #7ae229;
+}
+
+.selection-field {
+  width: 136px;
+  padding: 16px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  /* background-color: #FFFFFF; */
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.contacts-edit-board {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 4px;
+}
+
+.add-contacts-edit-board {
+  width: 408px;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+}
+
+.dropdown-icon {
+  display: flex;
+  align-items: center;
+}
+
+.task-msg {
+  color: rgba(168, 168, 168, 1);
+  overflow-wrap: break-word;
+}
+
+.btn-hover-trash:hover {
+  color: var(--accent-color);
+}
+
+.btn-hover-edit:hover {
+  color: var(--accent-color);
+}
+
+.img-hover-trash {
+  background-image: url("/img/trash-blue.png");
+  width: 24px;
+  height: 24px;
+}
+
+.img-hover-edit {
+  background-image: url("/img/edit-pencil.png");
+  width: 24px;
+  height: 24px;
+}
+
+.task-detail-view-section-title {
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(66, 82, 110, 1);
+}
+
+.task-assigned-to {
+  display: flex;
+  gap: 12px;
+  color: balck;
+}
+
+.task-assignet-contact-name {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.progerss-bar-container {
+  width: 128px;
+  height: 8px;
+  border-radius: 8px;
+  background-color: rgba(244, 244, 244, 1);
+}
+
+.loadbar {
+  height: 8px;
+  background-color: rgba(69, 137, 255, 1);
+  transition: width 1s;
+}
+
+.subtasks-loadstatus {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.subtasks-progress-text {
+  font-size: 12px;
+}
+
+.input-search-contacts {
+  border: none !important;
+}
+.edit-task-headlines {
+  font-size: 20px;
+  color: rgba(42, 54, 71, 1);
+}
+
+.input-find-task input {
+  border: none !important;
+}
+
+.add-task-informations {
+  padding: 0px !important;
+}
+
+.edit-assigned-contacts {
+  gap: 8px;
+}
+
+.exit-cross {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exit-cross:hover {
+  background-color: gainsboro;
+  border-radius: 50%;
+}
+
+.edit-task-description {
+  width: 100%;
+  box-sizing: border-box;
+}
