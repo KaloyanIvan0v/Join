@@ -14,7 +14,7 @@ let arrowToggleCheck = false;
 async function init_add_task() {
   await includeHTML();
   loadHtmlTaskTemplate();
-  setTimeout(loadFirstLettersFromSessionStorage, 200);
+  // setTimeout(loadFirstLettersFromSessionStorage, 300);
   loadTasks();
   loadContacts();
   loadUsers();

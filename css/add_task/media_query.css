@@ -112,10 +112,6 @@
   .test-container {
     padding: 0;
   }
-
-  .pd-bottom-80 {
-    padding-bottom: 80px;
-  }
 }
 
 @media (max-width: 860px) {
@@ -135,6 +131,7 @@
     right: 0;
     left: 0;
     bottom: 74px;
+    width: 100%;
   }
 }
 
