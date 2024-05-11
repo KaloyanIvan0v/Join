@@ -198,9 +198,9 @@ h2 {
   width: 440px;
 }
 
-.description-category {
+/* .description-category {
   height: 80px;
-}
+} */
 
 .description-textarea {
   top: 112px;
@@ -282,7 +282,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 160px;
+  /* margin-top: 160px; */
 }
 
 .color-FF8190 {
@@ -354,6 +354,7 @@ h2 {
   border: none !important;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  max-width: 52%;
 }
 
 .input-new-subtask:focus {

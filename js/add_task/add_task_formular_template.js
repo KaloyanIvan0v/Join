@@ -124,6 +124,7 @@ function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText, 
                         <img src="/img/check.png">
                     </button>
                 </div>
+            </div>
         </form>
 
         <div id="bgDialog" class="bg-dialog vs-hidden ps-fixed">
