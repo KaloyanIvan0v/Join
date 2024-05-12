@@ -213,7 +213,7 @@ function returnHtmlContactsInitialen(contactForTask, j) {
     </div>`;
 }
 
-function returnHtmlSubtasks(subTask, i, subTaskId, imgSrc, taksId) {
+function returnHtmlSubtasks(subTask, i, subTaskId, imgSrc, taksId, j) {
   return /*html*/ `
     <div class="subtasks-check-board">
       <img id="checkEmptySubtask(${j})" src="${imgSrc}" onclick="toggleCheckboxSubTask(${i},${subTaskId},${taksId})">
@@ -236,7 +236,7 @@ function taskAreaIsEmptyHtml(statement) {
   `;
 }
 
-function renturnTaksAssignetContactNameHtml(name) {
+function returnTaskAssignedContactNameHtml(name) {
   return /*html*/ `
   <div class="task-assignet-contact-name">${name}</div>
  `;

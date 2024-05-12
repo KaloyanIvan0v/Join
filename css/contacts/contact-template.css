@@ -178,13 +178,13 @@ form {
 }
 
 .img-close-contact-form {
-  background: url("../img/close.png");
+  background: url("/img/close.png");
   width: 24px;
   height: 24px;
 }
 
 .img-close-contact-form:hover {
-  background: url("../img/close-blue.png");
+  background: url("/img/close-blue.png");
   width: 24px;
   height: 24px;
 }
