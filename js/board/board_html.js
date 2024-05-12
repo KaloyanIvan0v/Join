@@ -105,7 +105,7 @@ function returnHtmlEditCurrentTask(overlayTask, i, id) {
                         </div>
                         
                     </div>
-   <div class="description-category d-flex-column-center pd-bottom-80">
+   <div class="d-flex-column-center pd-bottom-80">
                         <span class="input-description">Subtasks</span>
                         <div id="inputFieldSubtasks" class="input-field new-subtask normal-border">
                             <input min="3" onclick="changeIconsSubtask(event)" class="input-new-subtask" type="text" id="subTasks" placeholder="Add new subtask">

@@ -38,7 +38,7 @@ function resetInputFields() {
   checkChangeIcons = true;
   renderSubTasks("none");
   currentDate();
-  changeCategory("Select task category");
+  // changeCategory("Select task category");
   changePrio(1);
   changeIconsSubtask();
   clearContactsChecked();
@@ -142,35 +142,28 @@ function checkBooleanForPriority(priority) {
  * @param {string} category - The selected category.
  * @param {Event} event - The click event.
  */
-function showOrHideCategoriesField(category, event) {
+function showOrHideCategoriesField() {
   let categoriesField = document.getElementById("categories");
 
+  categoriesField.innerHTML = '';
+  
+  if(arrowToggleCheck == false) {
+    for(i = 0; i < categories.length; i++) {
+      let category = categories[i];
+      categoriesField.innerHTML += returnHtmlShowCategories(category)
+    }
+  }
   toggleDropDownArrowInputField("dropDownArrowCategory");
-
-  if (category == "none") {
-    event.stopPropagation();
-  }
-
-  if (category != "Select task category") {
-    categoriesField.classList.toggle("vs-hidden");
-  }
 }
 
-/**
- * Changes the selected category for the task.
- *
- * @param {string} category - The new category.
- */
-function changeCategory(category) {
-  let clickedCategory = category;
+function changeCategoryAndCloseDropdown(category) {
+  let showSelectedCatageory = document.getElementById('categoryDropdown');
+  showSelectedCatageory.innerHTML = '';
+  showSelectedCatageory.innerHTML = category;
 
-  let categoryDropdown = document.getElementById("categoryDropdown");
-
-  categoryDropdown.innerHTML = "";
-  categoryDropdown.innerHTML = clickedCategory;
-
-  taskCategory = clickedCategory;
-  showOrHideCategoriesField(category);
+  selectedCategory = category;
+  arrowToggleCheck = true;
+  showOrHideCategoriesField();
 }
 
 /**

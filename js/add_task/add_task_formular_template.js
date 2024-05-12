@@ -73,29 +73,22 @@ function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText, 
                         <div id="prioSelection" class="priority-selection"></div>
                     </div>
 
-                    <div class="description-category position-category d-flex-column-center">
+                    <div class="description-category position-category d-flex-column-center height-80">
                         <div class="d-flex input-description">
                             <span>Category</span>
                             <span class="color-FF8190">*</span>
                         </div>
                         <div tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover"
-                            onclick="showOrHideCategoriesField('none', event)">
+                            onclick="showOrHideCategoriesField()">
                             <span id="categoryDropdown">Select task category</span>
                             <div class="dropdown-icon">
                                 <img src="/img/arrow_drop_down.png" id="dropDownArrowCategory">
                             </div>
                         </div>
-                        <label id="categories" class="vs-hidden">
-                            <div class="categories-list">
-                                <span onclick="changeCategory('Technical Task')"
-                                    class="pd-12-16 hover-user-field">Technical Task</span>
-                                <span onclick="changeCategory('User Story')" class="pd-12-16 hover-user-field">User
-                                    Story</span>
-                            </div>
-                        </label>
+                        <label id="categories" class="categories-list"></label>
                     </div>
 
-                    <div class="description-category d-flex-column-center pd-bottom-80">
+                    <div class="d-flex-column-center pd-bottom-80 height-80">
                         <span class="input-description">Subtasks</span>
                         <div id="inputFieldSubtasks" class="input-field new-subtask normal-border">
                             <input min="3" onclick="changeIconsSubtask(event)" class="input-new-subtask" type="text" id="subTasks" placeholder="Add new subtask">

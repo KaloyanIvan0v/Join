@@ -93,3 +93,8 @@ function editSubtaskHtml(i, subTask) {
 function loadInitial(i, initial) {
   return `<div id="initialArea${i}" class="initial-area initials">${initial["nameInitials"]}</div>`;
 }
+
+function returnHtmlShowCategories(category) {
+  return `
+    <span onclick="changeCategoryAndCloseDropdown('${category}')" class="pd-12-16 hover-user-field">${category}</span>`
+}

@@ -241,3 +241,7 @@ textarea:focus-visible {
     font-size: 20px;
     line-height: 24px;
 }
+
+.height-80 {
+    height: 80px;
+}

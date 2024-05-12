@@ -1,6 +1,7 @@
 let currentPrio = ["medium"];
-let taskCategory = [];
 let idNumber = [];
+let categories = ['Technical Task', 'User Story'];
+let selectedCategory = [];
 let subTasks = [];
 let subTaskStatus = [];
 let checkedUsers = [];
@@ -51,7 +52,7 @@ async function addTask() {
     assignedTo: checkedUsers,
     dueDate: dueDate.value,
     prio: currentPrio,
-    category: taskCategory,
+    category: selectedCategory,
     subTasks: subTasks,
     finishedSubTasks: finishedSubTasks,
     checkedUsers: checkedUsersForTask,
