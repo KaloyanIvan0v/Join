@@ -296,6 +296,7 @@ input:focus {
   width: 252px;
   box-sizing: border-box;
   max-height: max-content;
+  cursor: pointer;
 }
 
 .task-card-category {
