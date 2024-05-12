@@ -103,7 +103,7 @@
     bottom: 74px;
     width: 100%;
   }
-  
+
   .rightside-add-task {
     padding-bottom: 100px;
   }
@@ -129,6 +129,10 @@
 
   .description-input {
     width: auto;
+  }
+
+  .input-new-subtask {
+    padding-left: 0;
   }
 
   .fz-20 {
