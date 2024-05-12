@@ -96,7 +96,6 @@
   }
 
   .reuired-notice-cancel-create {
-    position: sticky;
     z-index: 6;
     right: 0;
     left: 0;

@@ -48,6 +48,8 @@ input[type="date"]:hover {
   position: absolute;
   left: 328px;
   top: 206px;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 textarea {
