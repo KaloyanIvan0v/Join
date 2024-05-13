@@ -73,6 +73,7 @@ h1 {
   width: 50%;
   background-color: #2a3647;
   color: white;
+  cursor: pointer;
 }
 
 .summeryDone {
@@ -91,6 +92,7 @@ h1 {
   width: 50%;
   background-color: #2a3647;
   color: white;
+  cursor: pointer;
 }
 
 .summeryInfo2 {
@@ -107,6 +109,7 @@ h1 {
 .summeryInfo2:hover {
   background-color: #2a3647;
   color: white;
+  cursor: pointer;
 }
 
 .upcomming1 {
@@ -145,6 +148,7 @@ h1 {
   width: 35%;
   background-color: #2a3647;
   color: white;
+  cursor: pointer;
 }
 
 .summeryTasksInProgress {
@@ -165,6 +169,7 @@ h1 {
   width: 35%;
   background-color: #2a3647;
   color: white;
+  cursor: pointer;
 }
 
 .summeryAwaitingFeedback {
@@ -185,6 +190,7 @@ h1 {
   width: 35%;
   background-color: #2a3647;
   color: white;
+  cursor: pointer;
 }
 
 .greetings {

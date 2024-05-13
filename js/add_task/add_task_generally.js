@@ -224,6 +224,7 @@ function showOrHideRequiredField(idParent, idToggle) {
  * @param {Event} event - The click event.
  */
 function showOrHideContacts(event) {
+  let assignedField = document.getElementById('assignedField');
   if (event) {
     event.stopPropagation();
   }
@@ -231,6 +232,7 @@ function showOrHideContacts(event) {
 
   let contactsField = document.getElementById("contactsField");
   let inputField = document.getElementById("inputToSearchContact");
+  assignedField.classList.toggle('assigned-to');
 
   if (arrowToggleCheck == true) {
     contactsField.classList.add("contacts-assigned");
