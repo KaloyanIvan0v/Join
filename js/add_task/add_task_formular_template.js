@@ -33,7 +33,7 @@ function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText, 
                         </div>
                     </div>
 
-                    <div class="assigned-to d-flex-column-center">
+                    <div id="assignedField" class="d-flex-column-center">
                         <span class="input-description">Assigned to</span>
                         <div onclick="showOrHideContacts(event)" class="input-category new-subtask normal-border hover">
                             <input onkeydown="searchContact()" tabindex="0" class="border-none hover" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
@@ -106,7 +106,7 @@ function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText, 
                     <span class="color-FF8190">*</span>
                 </div>
                 <div class="buttons-clear-create">
-                    <button class="btn-add-task d-none-mobile join-button-empty"
+                    <button class="btn-add-task d-none-mobile join-button-empty normal-border"
                         onclick="${leftButtonFunction}(event); return false">
                         <span class="typography-clear ">${leftButtonText}</span>
                         <img src="/img/iconoir_cancel.png">

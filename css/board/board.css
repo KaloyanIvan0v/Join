@@ -104,7 +104,7 @@ body {
   gap: 4px;
   padding: 4px 16px 4px 16px;
   font-size: 16px;
-  width: max-content;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -123,6 +123,10 @@ body {
 
 .subtasks-check-board:hover img {
   background-color: rgb(209, 209, 209);
+}
+
+.subtasks-check-board span {
+  word-wrap: break-word;
 }
 
 .full-name {

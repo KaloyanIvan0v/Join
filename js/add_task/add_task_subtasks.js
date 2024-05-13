@@ -1,6 +1,6 @@
 let currentPrio = ["medium"];
 let idNumber = [];
-let categories = ['Technical Task', 'User Story'];
+let categories = ["Technical Task", "User Story"];
 let selectedCategory = [];
 let subTasks = [];
 let subTaskStatus = [];

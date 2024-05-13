@@ -87,6 +87,7 @@ function renderExitCross(elementId) {
 function closeAddTaskPopUp() {
   resetInputFields();
   setTimeout(closePopUp, 20);
+  arrowToggleCheck = false;
 }
 
 /**
