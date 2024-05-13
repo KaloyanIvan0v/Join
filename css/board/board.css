@@ -417,3 +417,7 @@ input:focus {
   border-radius: 30px;
   box-sizing: border-box;
 }
+
+.over-div {
+  overflow-y: auto;
+}

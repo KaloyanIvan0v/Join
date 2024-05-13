@@ -101,6 +101,7 @@
 
   .reuired-notice-cancel-create {
     z-index: 6;
+    position: sticky;
     right: 0;
     left: 0;
     bottom: 74px;

@@ -11,6 +11,7 @@ let checkedContactsId = [];
 let checkChangeIcons = false;
 let checkBoxContact = false;
 let arrowToggleCheck = false;
+let categoryBoolean = false;
 
 async function init_add_task() {
   await includeHTML();

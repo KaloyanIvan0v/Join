@@ -38,7 +38,6 @@ function resetInputFields() {
   checkChangeIcons = true;
   renderSubTasks("none");
   currentDate();
-  // changeCategory("Select task category");
   changePrio(1);
   changeIconsSubtask();
   clearContactsChecked();
@@ -68,6 +67,7 @@ function clearInnerHtmlInputFields() {
   let subTasksArea = document.getElementById("newSubTaskField");
   let contactsField = document.getElementById("contactsField");
   let assignedBtn = document.getElementById("inputToSearchContact");
+  let categoryField = document.getElementById('categoryDropdown');
 
   title.value = "";
   description.value = "";
@@ -75,6 +75,8 @@ function clearInnerHtmlInputFields() {
   subTasks.value = "";
   subTasksArea.innerHTML = "";
   assignedBtn.innerHTML = "";
+  categoryField.innerHTML = "";
+  categoryField.innerHTML = 'Select task category';
 }
 
 /**
@@ -147,11 +149,15 @@ function showOrHideCategoriesField() {
 
   categoriesField.innerHTML = '';
   
-  if(arrowToggleCheck == false) {
+  if(categoryBoolean == false) {
     for(i = 0; i < categories.length; i++) {
       let category = categories[i];
       categoriesField.innerHTML += returnHtmlShowCategories(category)
     }
+    categoryBoolean = true;
+    arrowToggleCheck = true;
+  } else {
+    categoryBoolean = false;
   }
   toggleDropDownArrowInputField("dropDownArrowCategory");
 }
