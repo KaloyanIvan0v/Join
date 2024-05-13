@@ -162,6 +162,12 @@ function showOrHideCategoriesField() {
   toggleDropDownArrowInputField("dropDownArrowCategory");
 }
 
+/**
+ * Changes the selected category and closes the dropdown menu.
+ * 
+ * @param {string} category - The selected category to be set.
+ * @returns {void}
+ */
 function changeCategoryAndCloseDropdown(category) {
   let showSelectedCatageory = document.getElementById('categoryDropdown');
   showSelectedCatageory.innerHTML = '';
