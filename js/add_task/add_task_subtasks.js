@@ -22,6 +22,7 @@ async function init_add_task() {
   loadUsers();
   setTimeout(selectPriority, 200);
   setTimeout(currentDate, 200);
+  handleExitImg();
 }
 
 /**
