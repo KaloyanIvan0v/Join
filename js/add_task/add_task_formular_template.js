@@ -33,7 +33,7 @@ function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText, 
                         </div>
                     </div>
 
-                    <div class="assigned-to d-flex-column-center">
+                    <div id="assignedField" class="d-flex-column-center">
                         <span class="input-description">Assigned to</span>
                         <div onclick="showOrHideContacts(event)" class="input-category new-subtask normal-border hover">
                             <input onkeydown="searchContact()" tabindex="0" class="border-none hover" id="inputToSearchContact" type="text" placeholder="Select contacts to assign">
