@@ -233,7 +233,7 @@ function removeClassListTo(targetElementId, className) {
 function handleExitImg() {
   setTimeout(function () {
     handleHoverButtonChangeImg(
-      ".btn-add-task",
+      ".cancel-add-task",
       ".clear-icon",
       "url('/img/close-dark.svg')",
       "url('/img/close-blue.png')"
