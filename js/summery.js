@@ -14,7 +14,7 @@ function writeNumberOfAllTasks() {
   document.getElementById("numberOfTasksInBoard").innerHTML = tasks.length;
 }
 
-function filterHighestPrio() {
+function filterHighestPrio() { // search for high prio Tasks.
   let count = 0;
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i]['prio'] === 'Urgent') {
@@ -22,10 +22,9 @@ function filterHighestPrio() {
     }
   }
   document.getElementById("highestPrio").innerHTML = count;
-  //console.log(count);
 }
 
-function countStatements(index) {
+function countStatements(index) { //Count all Tasks.
   let statementCounts = 0;
   tasks.forEach((task) => {
     if (task.statement === index) {
@@ -45,7 +44,7 @@ function changeImageOnUnHover(element, image) {
   document.getElementById(element).setAttribute('src', newImage);
 }
 
-function upCommingDeadline() {
+function upCommingDeadline() { //search for shortest deadline
   const options = { month: 'long', day: 'numeric', year: 'numeric' };
   if (tasks.length === 0) {
     return null;

@@ -1,6 +1,6 @@
 let x = true;
 
-function addDNone() {
+function addDNone() { //Open Popup (Head).
   if (x == true) {
     document.getElementById("popup").classList.replace("dNone", "popup");
     x = false;
@@ -30,7 +30,7 @@ function goToNextSite(name) {
   window.location.assign(`/html/${name}.html`);
 }
 
-function changeBackgroundColorOfLink() {
+function changeBackgroundColorOfLink() { //highlight hovered Links.
   let activeSite = sessionStorage.getItem("activeSite");
   if (activeSite == "privacyPolicy" || activeSite == "legalNotice") {
     document.getElementById(`${activeSite}`).classList.add("textColor");
@@ -39,7 +39,7 @@ function changeBackgroundColorOfLink() {
   }
 }
 
-function loadFirstLettersFromSessionStorage() {
+function loadFirstLettersFromSessionStorage() { //Load Names from Array and Pick first Letter. 
   //load first letters of first and last Name!
   let loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
   let activeSite = sessionStorage.getItem("activeSite");
