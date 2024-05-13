@@ -18,9 +18,11 @@ body {
   justify-content: space-between;
   background-color: #ffffff;
   margin-top: -10px;
-  z-index: 3;
+  z-index: 6;
   max-height: 236px;
   overflow-y: scroll;
+  position: relative;
+  top: 0;
 }
 
 .contacts-initialen {
