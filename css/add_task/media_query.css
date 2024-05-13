@@ -91,6 +91,10 @@
     padding-bottom: 40px;
   }
 
+  .typography-contacts-assigned {
+    font-size: 16px;
+  }
+
   .headline-area-template .add-task-informations {
     padding-left: 0;
   }
@@ -110,7 +114,7 @@
 
 @media (max-width: 500px) {
   input[type="text"] {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .headline-area-template {
@@ -123,7 +127,7 @@
 
   .leftside-add-task {
     padding-bottom: 16px;
-    width: auto;
+    /* width: auto; */
   }
 
   .description-input {
