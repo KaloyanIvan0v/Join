@@ -67,7 +67,7 @@ function clearInnerHtmlInputFields() {
   let subTasksArea = document.getElementById("newSubTaskField");
   let contactsField = document.getElementById("contactsField");
   let assignedBtn = document.getElementById("inputToSearchContact");
-  let categoryField = document.getElementById('categoryDropdown');
+  let categoryField = document.getElementById("categoryDropdown");
 
   title.value = "";
   description.value = "";
@@ -76,7 +76,7 @@ function clearInnerHtmlInputFields() {
   subTasksArea.innerHTML = "";
   assignedBtn.innerHTML = "";
   categoryField.innerHTML = "";
-  categoryField.innerHTML = 'Select task category';
+  categoryField.innerHTML = "Select task category";
 }
 
 /**
@@ -147,12 +147,12 @@ function checkBooleanForPriority(priority) {
 function showOrHideCategoriesField() {
   let categoriesField = document.getElementById("categories");
 
-  categoriesField.innerHTML = '';
-  
-  if(categoryBoolean == false) {
-    for(i = 0; i < categories.length; i++) {
+  categoriesField.innerHTML = "";
+
+  if (categoryBoolean == false) {
+    for (i = 0; i < categories.length; i++) {
       let category = categories[i];
-      categoriesField.innerHTML += returnHtmlShowCategories(category)
+      categoriesField.innerHTML += returnHtmlShowCategories(category);
     }
     categoryBoolean = true;
     arrowToggleCheck = true;
@@ -164,13 +164,13 @@ function showOrHideCategoriesField() {
 
 /**
  * Changes the selected category and closes the dropdown menu.
- * 
+ *
  * @param {string} category - The selected category to be set.
  * @returns {void}
  */
 function changeCategoryAndCloseDropdown(category) {
-  let showSelectedCatageory = document.getElementById('categoryDropdown');
-  showSelectedCatageory.innerHTML = '';
+  let showSelectedCatageory = document.getElementById("categoryDropdown");
+  showSelectedCatageory.innerHTML = "";
   showSelectedCatageory.innerHTML = category;
 
   selectedCategory = category;
