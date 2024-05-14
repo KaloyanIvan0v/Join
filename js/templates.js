@@ -1,5 +1,10 @@
 let x = true;
 
+
+/**
+ * This function is used to open and close the Popup at the header.
+ * 
+ */
 function addDNone() { //Open Popup (Head).
   if (x == true) {
     document.getElementById("popup").classList.replace("dNone", "popup");
@@ -10,36 +15,13 @@ function addDNone() { //Open Popup (Head).
   }
 }
 
-function setAbbreviationToUserIcon(firstName, lastName) {
-  if (firstName && lastName) {
-    document.getElementById("abbreviation").innerHTML =
-      firstName[0] + lastName[0];
-  }
-}
 
-function storageClear() {
-  sessionStorage.clear();
-}
-
-function setActiveSite(siteName) {
-  sessionStorage.setItem("activeSite", siteName);
-  goToNextSite(siteName);
-}
-
-function goToNextSite(name) {
-  window.location.assign(`/html/${name}.html`);
-}
-
-function changeBackgroundColorOfLink() { //highlight hovered Links.
-  let activeSite = sessionStorage.getItem("activeSite");
-  if (activeSite == "privacyPolicy" || activeSite == "legalNotice") {
-    document.getElementById(`${activeSite}`).classList.add("textColor");
-  } else {
-    document.getElementById(`${activeSite}`).classList.add("background");
-  }
-}
-
-function loadFirstLettersFromSessionStorage() { //Load Names from Array and Pick first Letter. 
+/**
+ * This function load the name of the loggedin user, executes the function setAbbreviationToUserIcon() and render the fullname 
+ * to greetingssection on summery.html.
+ * 
+ */
+function loadFirstLettersFromSessionStorage() {
   //load first letters of first and last Name!
   let loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
   let activeSite = sessionStorage.getItem("activeSite");
@@ -56,5 +38,62 @@ function loadFirstLettersFromSessionStorage() { //Load Names from Array and Pick
     }
   } else {
     document.getElementById("abbreviation").innerHTML = "G";
+  }
+}
+
+
+/**
+ * This function render the initials to Header Popupbutton. 
+ * 
+ * @param {sting} firstName - Firstname of function loadFirstLettersFromSessionStorage().
+ * @param {sting} lastName - Lastname of function loadFirstLettersFromSessionStorage().
+ */
+function setAbbreviationToUserIcon(firstName, lastName) {
+  if (firstName && lastName) {
+    document.getElementById("abbreviation").innerHTML = firstName[0] + lastName[0];
+  }
+}
+
+
+/**
+ * This function clears the sessionstorage at logout.
+ * 
+ */
+function storageClear() {
+  sessionStorage.clear();
+}
+
+
+/**
+ * This function set the actual site to sessionstorage and executes function goToNextSite().
+ * 
+ * @param {string} siteName - The name of site in sessionstorage.
+ */
+function setActiveSite(siteName) {
+  sessionStorage.setItem("activeSite", siteName);
+  goToNextSite(siteName);
+}
+
+
+/**
+ * This function passes to active site.
+ * 
+ * @param {string} sitename - The name of site in sessionstorage.
+ */
+function goToNextSite(sitename) {
+  window.location.assign(`/html/${sitename}.html`);
+}
+
+
+/**
+ * This function hightlight the active site on sidebar.
+ * 
+ */
+function changeBackgroundColorOfLink() {
+  let activeSite = sessionStorage.getItem("activeSite");
+  if (activeSite == "privacyPolicy" || activeSite == "legalNotice") {
+    document.getElementById(`${activeSite}`).classList.add("textColor");
+  } else {
+    document.getElementById(`${activeSite}`).classList.add("background");
   }
 }
