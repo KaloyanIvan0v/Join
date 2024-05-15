@@ -229,3 +229,14 @@ function addClassListTo(targetElementId, className) {
 function removeClassListTo(targetElementId, className) {
   document.getElementById(targetElementId).classList.remove(className);
 }
+
+function handleExitImg() {
+  setTimeout(function () {
+    handleHoverButtonChangeImg(
+      ".cancel-add-task",
+      ".clear-icon",
+      "url('/img/close-dark.svg')",
+      "url('/img/close-blue.png')"
+    );
+  }, 200);
+}

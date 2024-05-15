@@ -10,6 +10,7 @@ function openAddTaskTemplate(statement) {
   currentDate();
   renderExitCross("id-headline-area");
   changePrio(1);
+  handleExitImg();
 }
 
 /**

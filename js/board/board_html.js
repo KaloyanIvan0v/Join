@@ -76,7 +76,7 @@ function returnHtmlEditCurrentTask(overlayTask, i, id) {
     </div>
     <div class="overlay-prio">
       <p>Priority</p>
-       <div class="prio-area" id="prioArea(${id})">
+       <div class="prio-area hover" id="prioArea(${id})">
       <div onclick="prioSelect(${id}, 'Urgent')">
         <img id="Urgent(${id})" src="/img/urgent.png">
       </div>

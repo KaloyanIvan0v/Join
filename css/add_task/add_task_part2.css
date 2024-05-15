@@ -245,3 +245,10 @@ textarea:focus-visible {
 .assigned-to {
   height: 134px;
 }
+
+.clear-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url("/img/close-dark.svg");
+  background-position-y: center;
+}
