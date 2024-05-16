@@ -36,7 +36,11 @@ function filterHighestPrio() { // search for high prio Tasks.
   document.getElementById("highestPrio").innerHTML = count;
 }
 
-
+/**
+ * counts the number of statementtype and render it.
+ * 
+ * @param {string} index - Id of current statement.
+ */
 function countStatements(index) { //Count all Tasks.
   let statementCounts = 0;
   tasks.forEach((task) => {
