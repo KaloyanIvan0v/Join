@@ -96,6 +96,7 @@ function currentDate() {
     day = "0" + day;
   }
   let currentDate = year + "-" + month + "-" + day;
+  inputDateField.setAttribute("min", currentDate);
   inputDateField.value = currentDate;
 }
 
@@ -170,8 +171,10 @@ function showOrHideCategoriesField() {
  */
 function changeCategoryAndCloseDropdown(category) {
   let showSelectedCatageory = document.getElementById("categoryDropdown");
+  let containerCategory = document.getElementById('containerCategory');
   showSelectedCatageory.innerHTML = "";
   showSelectedCatageory.innerHTML = category;
+  containerCategory.classList.remove('error-border');
 
   selectedCategory = category;
   arrowToggleCheck = true;
@@ -224,7 +227,6 @@ function showOrHideRequiredField(idParent, idToggle) {
  * @param {Event} event - The click event.
  */
 function showOrHideContacts(event) {
-  let assignedField = document.getElementById("assignedField");
   if (event) {
     event.stopPropagation();
   }
