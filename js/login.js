@@ -151,6 +151,7 @@ function getUserIndex(user) {
 function guestLogIn() {
   loggedInUser = { name: "Guest", email: "guest@info.com", password: "guest" };
   window.location.href = "../html/summery.html";
+  sessionStorage.setItem('LoggedIn', 'true');
 }
 
 /**
