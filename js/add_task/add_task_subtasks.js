@@ -29,11 +29,16 @@ async function init_add_task() {
  * Creates a new task, adds it to the board, and redirects to the board page after a delay.
  */
 function createTask() {
-  addTask();
-  addedToBoardPopUp();
-  setTimeout(function () {
-    window.location.href = "board.html";
-  }, 900);
+  let containerCategory = document.getElementById('containerCategory');
+  if(selectedCategory.length == 0) {
+    containerCategory.classList.add('error-border');
+  } else {
+    addTask();
+    addedToBoardPopUp();
+    setTimeout(function () {
+      window.location.href = "board.html";
+    }, 900);
+  }
 }
 
 /**

@@ -78,18 +78,18 @@ function returnHtmlTaskTemplate(createTask, leftButtonFunction, leftButtonText, 
                             <span>Category</span>
                             <span class="color-FF8190">*</span>
                         </div>
-                        <select required tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover" required>
+                        <!-- <select required tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover" required>
                             <option value="" disabled selected>Select task category</option>
                             <option value="1">Technical Task</option>
                             <option value="2">User Story</option>
-                        </select>
-                        <!-- <div tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover" onclick="showOrHideCategoriesField()">
+                        </select> -->
+                        <div tabindex="0" id="containerCategory" class="input-category new-subtask normal-border hover" onclick="showOrHideCategoriesField()">
                             <span id="categoryDropdown">Select task category</span>
                             <div class="dropdown-icon">
                                 <img src="/img/arrow_drop_down.png" id="dropDownArrowCategory">
                             </div>
                         </div>
-                        <label id="categories" class="categories-list"></label> -->
+                        <label id="categories" class="categories-list"></label>
                     </div>
 
                     <div class="d-flex-column-center pd-bottom-80 height-80">

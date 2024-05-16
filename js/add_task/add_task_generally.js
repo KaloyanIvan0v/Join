@@ -171,8 +171,10 @@ function showOrHideCategoriesField() {
  */
 function changeCategoryAndCloseDropdown(category) {
   let showSelectedCatageory = document.getElementById("categoryDropdown");
+  let containerCategory = document.getElementById('containerCategory');
   showSelectedCatageory.innerHTML = "";
   showSelectedCatageory.innerHTML = category;
+  containerCategory.classList.remove('error-border');
 
   selectedCategory = category;
   arrowToggleCheck = true;
