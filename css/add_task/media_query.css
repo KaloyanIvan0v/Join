@@ -128,15 +128,10 @@
 
   .leftside-add-task {
     padding-bottom: 16px;
-    /* width: auto; */
   }
 
   .description-input {
     width: auto;
-  }
-
-  .input-new-subtask {
-    padding-left: 0;
   }
 
   .fz-20 {
@@ -161,5 +156,17 @@
 
   .headline-add-task-template {
     font-size: 47px;
+  }
+
+  .btn-add-task {
+    padding: 8px;
+  }
+
+  .typography-create {
+    font-size: 14px;
+  }
+
+  .required-field-notice {
+    font-size: 14px;
   }
 }

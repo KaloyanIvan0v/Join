@@ -96,6 +96,7 @@ function currentDate() {
     day = "0" + day;
   }
   let currentDate = year + "-" + month + "-" + day;
+  inputDateField.setAttribute("min", currentDate);
   inputDateField.value = currentDate;
 }
 
