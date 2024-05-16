@@ -38,6 +38,32 @@ p{
     margin-top: 5px;
 }
 
+.landscape-warning {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.25);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+  }
+  
+  .landscape-warning-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    height: 80%;
+    width: 80%;
+    border-radius: 30px;
+    text-align: center;
+    padding: 16px;
+  }
+  
+
 @media (max-width: 860px){
     .legalNoticeContent{
         margin-left: 5%;
@@ -48,3 +74,15 @@ p{
         display: none;
     }
 }
+
+@media screen and (orientation: portrait), (min-width: 860px) {
+    .landscape-warning {
+      visibility: hidden;
+    }
+  }
+  
+  @media screen and (orientation: landscape) and (max-width: 860px) {
+    .landscape-warning {
+      visibility: visible;
+    }
+  }
