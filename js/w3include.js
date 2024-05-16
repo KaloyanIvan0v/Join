@@ -26,4 +26,5 @@ function includeHTML() {
     }
     loadFirstLettersFromSessionStorage();
     changeBackgroundColorOfLink();
+    chechIfLoggedIn()
   }

@@ -240,3 +240,11 @@ function handleExitImg() {
     );
   }, 200);
 }
+
+function chechIfLoggedIn() {
+  let IfUser = sessionStorage.getItem('LoggedIn');
+  if (IfUser == 'false') {
+    document.getElementById('menu').classList.replace('menu', 'dNone');
+    console.log(IfUser);
+  }
+}

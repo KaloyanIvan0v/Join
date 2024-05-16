@@ -17,6 +17,7 @@ async function initLogin() {
   setSessionStorage("contacts", contacts);
   setSessionStorage("tasks", tasks);
   sessionStorage.setItem("activeSite", "summery");
+  setStatusNotLogInToSessionstorage()
   LoadLoginFromLocalStorage();
   handleInputOnFocusChangeParentElementBorderColor();
 }
@@ -65,6 +66,7 @@ function login() {
       SetLoginFeedbackMsg("Password is incorrect!", 3000);
     }
   }
+  sessionStorage.setItem('LoggedIn', 'true');
 }
 
 /**
@@ -260,4 +262,8 @@ function LoadLoginFromLocalStorage() {
 function clearUserDataFromLocalStorage() {
   localStorage.removeItem("rememberMeE-mail");
   localStorage.removeItem("rememberMePW");
+}
+
+function setStatusNotLogInToSessionstorage(){
+  sessionStorage.setItem('LoggedIn', 'false');
 }
