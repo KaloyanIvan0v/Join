@@ -41,7 +41,7 @@ function returnHtmlShowToDos(singleTask, i, id) {
 
 function returnHtmlEditCurrentTask(overlayTask, i, id) {
   return /*html*/ `
-    <div id="id-overlay-current-task" class="overlay-current-task">
+    <div id="id-overlay-current-task" class="overlay-current-task" onclick="doNotClosePopUp(event)">
       <div id="categoryArea(${i})" class="overlay-first-row">
         <div></div>
         <a class="exit-cross" onclick="closeEditTaskPopUp()">X</a>
@@ -155,7 +155,7 @@ function returnMoreContactsPreview(restAmount, j) {
 
 function openTaskDetailViewHtml(overlayTask, i, id) {
   return /*html*/ `
-  <div class="overlay-current-task">
+  <div class="overlay-current-task" onclick="doNotClosePopUp(event)">
     <div id="categoryArea(${i})" class="overlay-first-row">
         <div class="overlay-category" id="statementField${i}">${overlayTask["category"]}</div>
         <a class="exit-cross" onclick="closePopUp()">X</a>

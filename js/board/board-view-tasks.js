@@ -5,6 +5,7 @@
  * @param {string} id - Unique identifier of the task to be displayed.
  */
 function openTaskDetailView(i, id) {
+  checkWhichTaskOverlay = 'openTaskDetailView';
   openPopUp();
   let popUpDiv = document.getElementById("id-pop-up");
   popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[getIndexOfElementById(id, tasks)], i, id);

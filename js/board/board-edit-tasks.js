@@ -5,6 +5,7 @@
  * @param {string} id - ID of the task.
  */
 function editTaskOverlay(i, id) {
+  checkWhichTaskOverlay = 'editTaskOverlay';
   const overlayTask = tasks[getIndexOfElementById(id, tasks)];
   const dialogField = document.getElementById("id-pop-up");
   let currentPrio = overlayTask["prio"];

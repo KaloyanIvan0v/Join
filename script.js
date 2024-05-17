@@ -250,3 +250,7 @@ function chechIfLoggedIn() {
     document.getElementById('menu').classList.replace('menu', 'dNone');
   }
 }
+
+function doNotClosePopUp(event) {
+  event.stopPropagation();
+}

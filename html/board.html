@@ -33,8 +33,9 @@
 <body onload="init_board()">
     <div w3-include-html="/templates/header.html" class="header"></div>
     <div w3-include-html="/templates/sidebar.html" class="sidebar"></div>
-    <div id="id-shadow-layer" class="shadow-layer visibility-hidden">
-        <div id="id-pop-up" class="pop-up"></div>
+
+    <div id="id-shadow-layer" class="shadow-layer visibility-hidden" onclick="closePopUpBoard()">
+        <div id="id-pop-up" class="pop-up" onclick="doNotClosePopUp(event)"></div>
     </div>
 
     <div class="headline-area-board">
@@ -54,9 +55,6 @@
                 </button>
             </div>
         </div>
-
-        <!-- <div class="subline-board">
-        </div> -->
     </div>
 
     <div class="board-distribution">

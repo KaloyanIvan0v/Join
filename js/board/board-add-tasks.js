@@ -1,9 +1,12 @@
+let checkWhichTaskOverlay = [];
+
 /**
  * Opens the 'Add Task' template popup, initializes priority selection, sets current date, and adds an exit cross.
  *
  * @param {string} statement - The initial statement to be prefilled in the task form.
  */
 function openAddTaskTemplate(statement) {
+  checkWhichTaskOverlay = 'addTaskTemplate';
   openPopUp();
   renderAddTaskTemplate(statement);
   selectPriority();
@@ -115,4 +118,15 @@ function setErrorBorderColor(elementId, timePeriod) {
   setTimeout(() => {
     div.style.borderColor = "grey";
   }, timePeriod);
+}
+
+function closePopUpBoard() {
+  if(checkWhichTaskOverlay == 'addTaskTemplate') {
+    closeAddTaskPopUp();
+  } else if(checkWhichTaskOverlay == 'openTaskDetailView') {
+    closePopUp();
+  } else {
+    closeEditTaskPopUp();
+  }
+  checkWhichTaskOverlay = [];
 }
