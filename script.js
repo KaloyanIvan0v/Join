@@ -251,6 +251,14 @@ function chechIfLoggedIn() {
   }
 }
 
+/**
+ * Prevents the closing of a pop-up by stopping the event from propagating.
+ * 
+ * This function should be used as an event handler to stop the propagation
+ * of an event, ensuring that the pop-up does not close when the event is triggered.
+ * 
+ * @param {Event} event - The event object representing the event that was triggered.
+ */
 function doNotClosePopUp(event) {
   event.stopPropagation();
 }
