@@ -147,6 +147,10 @@ function checkBooleanForPriority(priority) {
  */
 function showOrHideCategoriesField(event) {
   event.stopPropagation();
+  if(openContacts) {
+    closeContactsField(event);
+    openContacts = false;
+  }
   let categoriesField = document.getElementById("categories");
 
   categoriesField.innerHTML = "";
@@ -196,8 +200,8 @@ function closeContactsOrCategories(event) {
   if(openContacts) {
     closeContactsField(event);
     openContacts = false;
-  } if(openCategories) {
-    showOrHideCategoriesField();
+  } else if(openCategories) {
+    showOrHideCategoriesField(event);
     openCategories = false;
   }
 }
@@ -239,8 +243,12 @@ function showOrHideRequiredField(idParent, idToggle) {
  * @param {Event} event - The click event.
  */
 function showOrHideContacts(event) {
-  if (event) {
-    event.stopPropagation();
+  event.stopPropagation();
+
+  if(openCategories) {
+    showOrHideCategoriesField(event);
+    openCategories = false;
+    arrowToggleCheck = false;
   }
   toggleDropDownArrowInputField("dropDownArrow");
 
