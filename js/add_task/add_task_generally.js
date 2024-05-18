@@ -199,9 +199,6 @@ function closeContactsOrCategories(event) {
   } if(openCategories) {
     showOrHideCategoriesField();
     openCategories = false;
-  } if(!openCategories) {
-    showOrHideCategoriesField();
-    openCategories = true;
   }
 }
 
