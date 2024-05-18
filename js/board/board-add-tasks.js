@@ -120,6 +120,17 @@ function setErrorBorderColor(elementId, timePeriod) {
   }, timePeriod);
 }
 
+/**
+ * Closes the currently open pop-up window based on the value of `checkWhichTaskOverlay`.
+ * 
+ * This function checks the value of the global variable `checkWhichTaskOverlay` and
+ * closes the corresponding pop-up window. Possible values for `checkWhichTaskOverlay` are:
+ * - 'addTaskTemplate': Closes the "Add Task" pop-up.
+ * - 'openTaskDetailView': Closes the task detail view pop-up.
+ * - Any other value: Closes the "Edit Task" pop-up.
+ * 
+ * After closing the appropriate pop-up, the function resets `checkWhichTaskOverlay` to an empty array.
+ */
 function closePopUpBoard() {
   if(checkWhichTaskOverlay == 'addTaskTemplate') {
     closeAddTaskPopUp();

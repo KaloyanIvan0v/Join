@@ -58,6 +58,11 @@
     padding-top: 60px !important;
   }
 
+  .reuired-notice-cancel-create {
+    bottom: 0;
+    background-color: #fff;
+  }
+
   .selection-field {
     width: auto;
   }
@@ -121,7 +126,9 @@
 
 @media (max-width: 580px) {
   .over-div {
-    padding: 32px;
+    /* padding: 32px; */
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 
@@ -133,6 +140,10 @@
   .prio-area {
     flex-direction: column;
   }
+
+  .typography-create {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 400px) {
@@ -141,7 +152,7 @@
   }
 
   .over-div {
-    padding: 1px;
+    padding: 8px;
   }
 
   .font-overlay {
