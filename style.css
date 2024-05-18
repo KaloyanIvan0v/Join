@@ -101,7 +101,7 @@ input:focus {
   z-index: 999;
 }
 
-.landscape-warning-box{
+.landscape-warning-box {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,6 +115,10 @@ input:focus {
 
 .d-None {
   display: none;
+}
+
+.none-clickable {
+  pointer-events: none;
 }
 
 @media screen and (orientation: portrait), (min-width: 860px) {

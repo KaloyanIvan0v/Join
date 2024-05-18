@@ -116,3 +116,53 @@ function rotateTaksCard(id) {
   const taskCard = document.getElementById(`taskCard${id}`);
   taskCard.style.transform = "rotate(5deg)";
 }
+
+//!########################################################################################
+
+function isMobileDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+}
+function handleMobileTaskMenu() {
+  const elements = document.getElementsByClassName("mobile-task-menu");
+  if (isMobileDevice()) {
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "block";
+    }
+  } else {
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "none";
+    }
+  }
+}
+
+function openTaskMenu(id) {
+  event.stopPropagation();
+  renderTaskMenu(id);
+}
+
+function renderTaskMenu(id) {
+  openPopUp();
+  let popUpDiv = document.getElementById("id-pop-up");
+  popUpDiv.innerHTML = renderTaskMenuHtml(id);
+}
+
+function renderTaskMenuHtml(id) {
+  return /*html*/ `
+  <div class="task-menu" id="task-menu-${id}">
+     <div class="task-menu-title">Move To</div>
+    <button class="join-button" onclick="moveTaskTo(${id}, 'toDo')">To do</button>
+    <button class="join-button" onclick="moveTaskTo(${id}, 'inProgress')">In progress</button>
+    <button class="join-button" onclick="moveTaskTo(${id}, 'awaitFeedback')">Await Feedback</button>
+    <button class="join-button" onclick="moveTaskTo(${id}, 'done')">Done</button>
+    <button class="join-button" onclick="closePopUp()">Cancel</button>
+  </div>
+    `;
+}
+
+function moveTaskTo(id, statement) {
+  let task = tasks[getIndexOfElementById(id, tasks)];
+  task.statement = statement;
+  renderTasks(getFilteredTasks());
+  closePopUp();
+  setItem("tasks", tasks);
+}

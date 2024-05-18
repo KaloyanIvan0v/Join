@@ -6,6 +6,7 @@ function returnHtmlShowToDos(singleTask, i, id) {
         <span id="statementField${i}" class="which-statement">
             ${singleTask["category"]}
         </span>
+        <div id="mobileTasMenu${i}" class="mobile-task-menu" onclick="openTaskMenu(${id})"></div>
     </div>
 
     <div class="header-area-card">

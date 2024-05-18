@@ -30,7 +30,7 @@ function loadAddContactTemplate(element) {
   setTimeout(function () {
     document.getElementById("id-contact-form-cancel").classList.add("d-none-mobile-1300");
     handleInputOnFocusChangeParentElementBorderColor();
-  }, 50);
+  }, 200);
 }
 
 /**
@@ -44,7 +44,7 @@ function loadEditContactTemplate(element) {
   setTimeout(function () {
     editContactFillForm();
     handleInputOnFocusChangeParentElementBorderColor();
-  }, 50);
+  }, 200);
 }
 
 /**
