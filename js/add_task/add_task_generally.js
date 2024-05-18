@@ -162,7 +162,7 @@ function showOrHideCategoriesField(event) {
       categoriesField.innerHTML += returnHtmlShowCategories(category);
     }
     categoryBoolean = true;
-    arrowToggleCheck = true;
+    arrowToggleCheck = false;
   } else {
     categoryBoolean = false;
   }
