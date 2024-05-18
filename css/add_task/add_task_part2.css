@@ -263,4 +263,5 @@ textarea:focus-visible {
   right: 0;
   left: 0;
   height: 100vh;
+  width: 100%;
 }
