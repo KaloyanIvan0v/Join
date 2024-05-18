@@ -10,7 +10,7 @@ async function init_board() {
   renderTasks(getFilteredTasks());
   filterTaskListener();
   setSearchFieldBorderListener();
-  handleMobileTaskMenu();
+  addResizeListener();
 }
 
 /**
@@ -52,6 +52,7 @@ async function renderTasks(taskList) {
     renderSingleTask(taskList, taskAreas, i);
   }
   ifTaskAreaIsEmptySetEmptyInfoBox();
+  handleMobileTaskMenu();
 }
 
 /**

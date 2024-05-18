@@ -117,11 +117,17 @@ function rotateTaksCard(id) {
   taskCard.style.transform = "rotate(5deg)";
 }
 
-//!########################################################################################
-
+/**
+ * Checks if the current device is a mobile device.
+ * @returns {boolean} True if the device is a mobile device, otherwise false.
+ */
 function isMobileDevice() {
   return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
 }
+
+/**
+ * Handles the display of mobile task menus based on the device type.
+ */
 function handleMobileTaskMenu() {
   const elements = document.getElementsByClassName("mobile-task-menu");
   if (isMobileDevice()) {
@@ -135,34 +141,48 @@ function handleMobileTaskMenu() {
   }
 }
 
+/**
+ * Opens the task menu for a specific task.
+ * @param {string} id - The ID of the task for which the menu should be opened.
+ */
 function openTaskMenu(id) {
   event.stopPropagation();
   renderTaskMenu(id);
 }
 
+/**
+ * Renders the task menu for a specific task.
+ * @param {string} id - The ID of the task for which the menu should be rendered.
+ */
 function renderTaskMenu(id) {
   openPopUp();
   let popUpDiv = document.getElementById("id-pop-up");
   popUpDiv.innerHTML = renderTaskMenuHtml(id);
 }
 
-function renderTaskMenuHtml(id) {
-  return /*html*/ `
-  <div class="task-menu" id="task-menu-${id}">
-     <div class="task-menu-title">Move To</div>
-    <button class="join-button" onclick="moveTaskTo(${id}, 'toDo')">To do</button>
-    <button class="join-button" onclick="moveTaskTo(${id}, 'inProgress')">In progress</button>
-    <button class="join-button" onclick="moveTaskTo(${id}, 'awaitFeedback')">Await Feedback</button>
-    <button class="join-button" onclick="moveTaskTo(${id}, 'done')">Done</button>
-    <button class="join-button" onclick="closePopUp()">Cancel</button>
-  </div>
-    `;
-}
-
+/**
+ * Moves a task to a new statement.
+ * @param {string} id - The ID of the task to move.
+ * @param {string} statement - The new statement for the task.
+ */
 function moveTaskTo(id, statement) {
   let task = tasks[getIndexOfElementById(id, tasks)];
   task.statement = statement;
   renderTasks(getFilteredTasks());
   closePopUp();
   setItem("tasks", tasks);
+}
+
+/**
+ * Handles the resize event to show or hide the mobile task menu.
+ */
+function onResize() {
+  handleMobileTaskMenu();
+}
+
+/**
+ * Adds an event listener for the window resize event.
+ */
+function addResizeListener() {
+  window.addEventListener("resize", onResize);
 }
