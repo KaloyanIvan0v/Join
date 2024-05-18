@@ -8,7 +8,6 @@ let checkedUsers = [];
 let findContactsAtSearch = [];
 let finishedSubTasks = [];
 let checkedContactsId = [];
-// let contactsOrcategoriesField = [];
 let openContacts = false;
 let openCategories = false;
 let checkChangeIcons = false;

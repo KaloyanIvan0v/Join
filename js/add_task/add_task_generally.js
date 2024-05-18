@@ -203,6 +203,7 @@ function closeContactsOrCategories(event) {
   } else if(openCategories) {
     showOrHideCategoriesField(event);
     openCategories = false;
+    arrowToggleCheck = false;
   }
 }
 
