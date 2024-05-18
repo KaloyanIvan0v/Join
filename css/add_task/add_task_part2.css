@@ -256,3 +256,11 @@ textarea:focus-visible {
 .height-80 {
   height: 80px;
 }
+
+.container-close-dropdowns {
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+}

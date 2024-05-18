@@ -145,12 +145,14 @@ function checkBooleanForPriority(priority) {
  * @param {string} category - The selected category.
  * @param {Event} event - The click event.
  */
-function showOrHideCategoriesField() {
+function showOrHideCategoriesField(event) {
+  event.stopPropagation();
   let categoriesField = document.getElementById("categories");
 
   categoriesField.innerHTML = "";
 
   if (categoryBoolean == false) {
+    openCategories = true;
     for (i = 0; i < categories.length; i++) {
       let category = categories[i];
       categoriesField.innerHTML += returnHtmlShowCategories(category);
@@ -187,6 +189,19 @@ function changeCategoryAndCloseDropdown(category) {
 function clearContactsChecked() {
   for (i = 0; i < contacts.length; i++) {
     contacts[i]["checkbox"] = false;
+  }
+}
+
+function closeContactsOrCategories(event) {
+  if(openContacts) {
+    closeContactsField(event);
+    openContacts = false;
+  } if(openCategories) {
+    showOrHideCategoriesField();
+    openCategories = false;
+  } if(!openCategories) {
+    showOrHideCategoriesField();
+    openCategories = true;
   }
 }
 
@@ -236,6 +251,7 @@ function showOrHideContacts(event) {
   let inputField = document.getElementById("inputToSearchContact");
 
   if (arrowToggleCheck == true) {
+    openContacts = true;
     contactsField.classList.add("contacts-assigned");
     contactsField.classList.remove("contacts-initialen");
     renderContactsToSelect(contactsField, contacts);
