@@ -64,8 +64,8 @@ textarea {
 
 .headline-area-template {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
 }
 
 .headline-add-task-template {
@@ -275,7 +275,7 @@ h2 {
 
 .reuired-notice-cancel-create {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-end;
   padding: 8px 0;
 }
