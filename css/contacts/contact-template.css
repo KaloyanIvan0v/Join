@@ -328,7 +328,7 @@ form {
   }
 }
 
-@media (max-height: 800px) {
+@media (max-height: 800px) and (max-width: 1300px) {
   .contact-form {
     position: absolute;
     top: 0px;
@@ -358,7 +358,7 @@ form {
   }
 }
 
-@media (max-height: 810px) {
+@media (max-height: 810px) and (max-width: 1300px) {
   .contact-mask-title-first {
     margin-top: 68px;
     font-size: 38px;
