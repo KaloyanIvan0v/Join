@@ -118,14 +118,6 @@ function rotateTaksCard(id) {
 }
 
 /**
- * Checks if the current device is a mobile device.
- * @returns {boolean} True if the device is a mobile device, otherwise false.
- */
-function isMobileDevice() {
-  return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
-}
-
-/**
  * Handles the display of mobile task menus based on the device type.
  */
 function handleMobileTaskMenu() {

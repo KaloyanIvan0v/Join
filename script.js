@@ -245,20 +245,28 @@ function handleExitImg() {
  * check if a User logged In or not at set to sessionstorage.
  */
 function chechIfLoggedIn() {
-  let IfUser = sessionStorage.getItem('LoggedIn');
-  if (IfUser == 'false') {
-    document.getElementById('menu').classList.replace('menu', 'dNone');
+  let IfUser = sessionStorage.getItem("LoggedIn");
+  if (IfUser == "false") {
+    document.getElementById("menu").classList.replace("menu", "dNone");
   }
 }
 
 /**
  * Prevents the closing of a pop-up by stopping the event from propagating.
- * 
+ *
  * This function should be used as an event handler to stop the propagation
  * of an event, ensuring that the pop-up does not close when the event is triggered.
- * 
+ *
  * @param {Event} event - The event object representing the event that was triggered.
  */
 function doNotClosePopUp(event) {
   event.stopPropagation();
+}
+
+/**
+ * Checks if the current device is a mobile device.
+ * @returns {boolean} True if the device is a mobile device, otherwise false.
+ */
+function isMobileDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
 }
