@@ -118,22 +118,6 @@ function rotateTaksCard(id) {
 }
 
 /**
- * Handles the display of mobile task menus based on the device type.
- */
-function handleMobileTaskMenu() {
-  const elements = document.getElementsByClassName("mobile-task-menu");
-  if (isMobileDevice()) {
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].style.display = "block";
-    }
-  } else {
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].style.display = "none";
-    }
-  }
-}
-
-/**
  * Opens the task menu for a specific task.
  * @param {string} id - The ID of the task for which the menu should be opened.
  */
@@ -163,18 +147,4 @@ function moveTaskTo(id, statement) {
   renderTasks(getFilteredTasks());
   closePopUp();
   setItem("tasks", tasks);
-}
-
-/**
- * Handles the resize event to show or hide the mobile task menu.
- */
-function onResize() {
-  handleMobileTaskMenu();
-}
-
-/**
- * Adds an event listener for the window resize event.
- */
-function addResizeListener() {
-  window.addEventListener("resize", onResize);
 }

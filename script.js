@@ -270,3 +270,44 @@ function doNotClosePopUp(event) {
 function isMobileDevice() {
   return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
 }
+
+function handleLandscapeWarning() {
+  if (isMobileDevice()) {
+    document.getElementById("landscape-warning").classList.add("landscape-warning");
+  } else {
+    document.getElementById("landscape-warning").classList.remove("landscape-warning");
+  }
+}
+
+/**
+ * Handles the display of mobile task menus based on the device type.
+ */
+function handleMobileTaskMenu() {
+  const elements = document.getElementsByClassName("mobile-task-menu");
+  if (isMobileDevice()) {
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "block";
+    }
+  } else {
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "none";
+    }
+  }
+}
+
+/**
+ * Handles the resize event to show or hide the mobile task menu.
+ */
+function onResize() {
+  handleMobileTaskMenu();
+  handleLandscapeWarning();
+}
+
+/**
+ * Adds an event listener for the window resize event.
+ */
+function addResizeListener() {
+  window.addEventListener("resize", onResize);
+}
+
+addResizeListener();

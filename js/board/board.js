@@ -10,7 +10,6 @@ async function init_board() {
   renderTasks(getFilteredTasks());
   filterTaskListener();
   setSearchFieldBorderListener();
-  addResizeListener();
 }
 
 /**

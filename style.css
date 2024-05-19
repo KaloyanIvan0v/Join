@@ -121,7 +121,7 @@ input:focus {
   pointer-events: none;
 }
 
-@media screen and (orientation: portrait), (min-width: 860px) {
+@media screen and (orientation: portrait) and (max-width: 860px) {
   .landscape-warning {
     visibility: hidden;
   }
