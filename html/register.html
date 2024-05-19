@@ -9,6 +9,8 @@
   <link rel="icon" type="image/x-icon" href="/img/logoDark.png">
   <link rel="stylesheet" type="text/css" href="/css/register.css">
   <link rel="stylesheet" type="text/css" href="/style.css">
+  <script src="/js/templates.js"></script>
+  <script src="/js/w3include.js"></script>
   <script src="/script.js"></script>
   <script src="/js/storage.js"></script>
   <script src="/js/register.js"></script>
@@ -68,11 +70,7 @@
     <a href="/html/privacyPolicy.html">Privacy Policy</a>
     <a href="/html/legalNotice.html">Legal notice</a>
   </footer>
-  <div id="landscape-warning" class="visibility-hidden">
-    <div id="landscape-warning-box">
-      <p>Diese Website wird nicht im Landscape Modus unterstützt.</p>
-    </div>
-  </div>
+  <div w3-include-html="/templates/warn-landscape.html"></div>
 </body>
 
 </html>

@@ -121,20 +121,34 @@ input:focus {
   pointer-events: none;
 }
 
-@media screen and (orientation: portrait) and (max-width: 860px) {
-  .landscape-warning {
-    display: none;
-  }
-  .landscape-warning-box {
-    display: none;
+.landscape-warn-div {
+  width: 95%;
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: rgb(255, 255, 255);
+  border-radius: 30px;
+  z-index: 999;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.warn-landscape {
+  visibility: hidden;
+}
+
+@media screen and (orientation: portrait) and (max-width: 960px) {
+  .warn-landscape {
+    visibility: hidden;
   }
 }
 
-@media screen and (orientation: landscape) and (max-width: 860px) {
-  .landscape-warning {
-    display: block;
-  }
-  .landscape-warning-box {
-    display: block;
+@media screen and (orientation: landscape) and (max-width: 960px) {
+  .warn-landscape {
+    visibility: visible;
   }
 }

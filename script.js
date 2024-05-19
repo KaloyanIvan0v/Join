@@ -28,6 +28,8 @@ let users = [];
 /** @type {Object|null} */
 let geLoggedInUser = null;
 
+addResizeListener();
+
 /**
  * Sets the currently logged-in user in local storage.
  * @param {Object} user - The user object to be stored.
@@ -273,9 +275,9 @@ function isMobileDevice() {
 
 function handleLandscapeWarning() {
   if (isMobileDevice()) {
-    document.getElementById("landscape-warning").classList.remove("visibility-hidden");
+    document.getElementById("warn-landscape").classList.remove("visibility-hidden");
   } else {
-    document.getElementById("landscape-warning").classList.add("visibility-hidden");
+    document.getElementById("warn-landscape").classList.add("visibility-hidden");
   }
 }
 
@@ -300,7 +302,6 @@ function handleMobileTaskMenu() {
  */
 function onResize() {
   handleMobileTaskMenu();
-  handleLandscapeWarning();
 }
 
 /**
@@ -309,5 +310,3 @@ function onResize() {
 function addResizeListener() {
   window.addEventListener("resize", onResize);
 }
-
-addResizeListener();

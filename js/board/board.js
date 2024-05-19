@@ -4,7 +4,6 @@
  * @returns {Promise<void>}
  */
 async function init_board() {
-  handleLandscapeWarning();
   await loadTasks();
   await loadContacts();
   await includeHTML();

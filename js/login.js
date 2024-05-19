@@ -20,6 +20,7 @@ async function initLogin() {
   setStatusNotLogInToSessionstorage();
   LoadLoginFromLocalStorage();
   handleInputOnFocusChangeParentElementBorderColor();
+  includeHTML();
 }
 
 /**

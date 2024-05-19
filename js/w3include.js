@@ -28,8 +28,15 @@ function includeHTML() {
       return;
     }
   }
-  handleLandscapeWarning();
-  loadFirstLettersFromSessionStorage();
-  changeBackgroundColorOfLink();
-  chechIfLoggedIn();
+  if (getFilenameFromURL() != "index.html" && getFilenameFromURL() != "register.html") {
+    loadFirstLettersFromSessionStorage();
+    changeBackgroundColorOfLink();
+    chechIfLoggedIn();
+  }
+}
+
+function getFilenameFromURL() {
+  var path = window.location.pathname;
+  var page = path.split("/").pop();
+  return page;
 }

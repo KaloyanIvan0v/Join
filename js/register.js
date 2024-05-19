@@ -16,6 +16,7 @@ async function initRegister() {
   await loadUsers();
   setPwdInputEventListeners();
   handleInputOnFocusChangeParentElementBorderColor();
+  includeHTML();
 }
 
 /**
