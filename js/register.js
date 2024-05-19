@@ -202,9 +202,7 @@ function togglePswVisibility(id) {
   const visibilityState = pswVisibility[index];
 
   img.src = visibilityState ? "/img/visibility_off.png" : "/img/visibility.png";
-  document.getElementById("password" + index).type = visibilityState
-    ? "password"
-    : "text";
+  document.getElementById("password" + index).type = visibilityState ? "password" : "text";
 
   pswVisibility[index] = !visibilityState;
 }

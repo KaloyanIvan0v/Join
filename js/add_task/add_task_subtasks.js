@@ -31,9 +31,9 @@ async function init_add_task() {
  * Creates a new task, adds it to the board, and redirects to the board page after a delay.
  */
 function createTask() {
-  let containerCategory = document.getElementById('containerCategory');
-  if(selectedCategory.length == 0) {
-    containerCategory.classList.add('error-border');
+  let containerCategory = document.getElementById("containerCategory");
+  if (selectedCategory.length == 0) {
+    containerCategory.classList.add("error-border");
   } else {
     addTask();
     addedToBoardPopUp();

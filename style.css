@@ -123,12 +123,18 @@ input:focus {
 
 @media screen and (orientation: portrait) and (max-width: 860px) {
   .landscape-warning {
-    visibility: hidden;
+    display: none;
+  }
+  .landscape-warning-box {
+    display: none;
   }
 }
 
 @media screen and (orientation: landscape) and (max-width: 860px) {
   .landscape-warning {
-    visibility: visible;
+    display: block;
+  }
+  .landscape-warning-box {
+    display: block;
   }
 }

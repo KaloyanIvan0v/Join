@@ -1,3 +1,3 @@
-function init(){
-    includeHTML();
+function init() {
+  includeHTML();
 }

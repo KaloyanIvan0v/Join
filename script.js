@@ -273,9 +273,9 @@ function isMobileDevice() {
 
 function handleLandscapeWarning() {
   if (isMobileDevice()) {
-    document.getElementById("landscape-warning").classList.add("landscape-warning");
+    document.getElementById("landscape-warning").classList.remove("visibility-hidden");
   } else {
-    document.getElementById("landscape-warning").classList.remove("landscape-warning");
+    document.getElementById("landscape-warning").classList.add("visibility-hidden");
   }
 }
 

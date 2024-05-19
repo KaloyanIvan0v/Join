@@ -17,7 +17,7 @@ async function initLogin() {
   setSessionStorage("contacts", contacts);
   setSessionStorage("tasks", tasks);
   sessionStorage.setItem("activeSite", "summery");
-  setStatusNotLogInToSessionstorage()
+  setStatusNotLogInToSessionstorage();
   LoadLoginFromLocalStorage();
   handleInputOnFocusChangeParentElementBorderColor();
 }
@@ -66,7 +66,7 @@ function login() {
       SetLoginFeedbackMsg("Password is incorrect!", 3000);
     }
   }
-  sessionStorage.setItem('LoggedIn', 'true');
+  sessionStorage.setItem("LoggedIn", "true");
 }
 
 /**
@@ -151,7 +151,7 @@ function getUserIndex(user) {
 function guestLogIn() {
   loggedInUser = { name: "Guest", email: "guest@info.com", password: "guest" };
   window.location.href = "../html/summery.html";
-  sessionStorage.setItem('LoggedIn', 'true');
+  sessionStorage.setItem("LoggedIn", "true");
 }
 
 /**
@@ -265,6 +265,6 @@ function clearUserDataFromLocalStorage() {
   localStorage.removeItem("rememberMePW");
 }
 
-function setStatusNotLogInToSessionstorage(){
-  sessionStorage.setItem('LoggedIn', 'false');
+function setStatusNotLogInToSessionstorage() {
+  sessionStorage.setItem("LoggedIn", "false");
 }
