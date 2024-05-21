@@ -8,7 +8,7 @@ const STORAGE_TOKEN = "XVGgAdqS3oISPZQ7RH089kSBpZO9FuR1CdKlSoExZyPjHKWZmkHEk9QXB
  * The base URL of the remote storage API.
  * @constant {string}
  */
-const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
+const STORAGE_URL = "https://join-6783b-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Stores a key-value pair in the remote storage.
@@ -17,15 +17,15 @@ const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
  * @param {any} value - The value to be stored. It can be any serializable object.
  * @returns {Promise<any>} - The JSON response from the remote storage API.
  */
-async function setItem(key, value) {
-  const payload = { key, value, token: STORAGE_TOKEN };
-  return fetch(STORAGE_URL, {
+async function setItem(path, data = {}) {
+  let response = await fetch(STORAGE_URL + path + ".json", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload),
-  }).then((res) => res.json());
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
 }
 
 /**
@@ -35,15 +35,7 @@ async function setItem(key, value) {
  * @returns {Promise<any>} - The value associated with the provided key.
  * @throws {Error} - Throws an error if the key is not found in the storage.
  */
-async function getItem(key) {
-  const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-  return fetch(url)
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.data) {
-        return res.data.value;
-      } else {
-        throw new Error(`Could not find data with key "${key}".`);
-      }
-    });
+async function getItem(path) {
+  let response = await fetch(STORAGE_URL + path + ".json");
+  return (responseToJson = await response.json());
 }
