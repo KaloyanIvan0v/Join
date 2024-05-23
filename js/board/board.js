@@ -8,8 +8,8 @@ async function init_board() {
   await loadContacts();
   await includeHTML();
   renderTasks(getFilteredTasks());
-  filterTaskListener();
   setSearchFieldBorderListener();
+  filterTaskListener();
 }
 
 /**
@@ -67,7 +67,9 @@ function renderSingleTask(taskList, taskAreas, i) {
   setCategoryColor(i, taskList);
   setPriorityTaskCard(i, id);
   renderContactsBoardInitials(false, id, `contactsFieldBoard(${id})`);
-  handleSubtasksProgressBar(id);
+  if (singleTask.subTasks !== -1) {
+    handleSubtasksProgressBar(id);
+  }
 }
 
 /**
@@ -88,8 +90,8 @@ function handleSubtasksProgressBar(id) {
  * @returns {boolean} True if no subtasks exist, otherwise false.
  */
 function noSubtasksExist(id) {
-  let subTasksLength = tasks[getIndexOfElementById(id, tasks)].subTasks.length;
-  return subTasksLength == 0;
+  let subTasksExist = tasks[getIndexOfElementById(id, tasks)].subTasks;
+  return subTasksExist === -1 ? true : false;
 }
 
 /**
@@ -203,13 +205,15 @@ function toggleBackgroundDialog() {
 function renderContactsBoardInitials(renderFull, id, targetElementId) {
   let contactsFieldBoard = document.getElementById(targetElementId);
   let contactsForTask = tasks[getIndexOfElementById(id, tasks)]["assignedTo"];
-  for (let j = 0; j < contactsForTask.length; j++) {
-    if (contactExists(contactsForTask[j])) {
-      if (j < 3 || renderFull) {
-        renderContactInitial(contactsFieldBoard, contactsForTask, id, j);
-      } else {
-        renderMoreContactsPreview(contactsFieldBoard, contactsForTask, j);
-        break;
+  if (contactsForTask !== -1) {
+    for (let j = 0; j < contactsForTask.length; j++) {
+      if (contactExists(contactsForTask[j])) {
+        if (j < 3 || renderFull) {
+          renderContactInitial(contactsFieldBoard, contactsForTask, id, j);
+        } else {
+          renderMoreContactsPreview(contactsFieldBoard, contactsForTask, j);
+          break;
+        }
       }
     }
   }

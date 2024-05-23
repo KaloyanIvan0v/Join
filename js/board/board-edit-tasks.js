@@ -5,7 +5,7 @@
  * @param {string} id - ID of the task.
  */
 function editTaskOverlay(i, id) {
-  checkWhichTaskOverlay = 'editTaskOverlay';
+  checkWhichTaskOverlay = "editTaskOverlay";
   const overlayTask = tasks[getIndexOfElementById(id, tasks)];
   const dialogField = document.getElementById("id-pop-up");
   let currentPrio = overlayTask["prio"];
@@ -105,10 +105,12 @@ function subTaskLongEnough(element) {
 function renderSubTasksBoard(i, id) {
   const subTasksField = document.getElementById(`subTasksField`);
   const subTasks = tasks[getIndexOfElementById(id, tasks)]["subTasks"];
-  subTasksField.innerHTML = "";
-  subTasks.forEach((subTask, j) => {
-    renderSubTask(i, id, subTasksField, subTask, j);
-  });
+  if (!noSubtasksExist(id)) {
+    subTasksField.innerHTML = "";
+    subTasks.forEach((subTask, j) => {
+      renderSubTask(i, id, subTasksField, subTask, j);
+    });
+  }
 }
 
 /**
@@ -164,8 +166,8 @@ function safeChangesToTasks(id) {
   task.title = title;
   task.description = description;
   task.dueDate = dueDate;
-  task.assignedTo = assignedTo;
-  task.subTasks = subTasks;
+  task.assignedTo = assignedTo.length == 0 ? -1 : assignedTo;
+  subTasks.length == 0 ? (task.subTasks = -1) : (task.subTasks = subTasks);
 }
 
 /**

@@ -8,7 +8,6 @@ let checkBoxState = false;
  * This is for multiple password fields.
  */
 let pswVisibility = [false, false];
-
 /**
  * Initializes the registration process by loading users and setting up password input event listeners.
  */
@@ -91,12 +90,12 @@ async function registerNewUser() {
   const registerBtn = document.getElementById("registerBtn");
   registerBtn.disabled = true;
   registerBtn.style.backgroundColor = "lightgrey";
-  users.push({
-    name: names.value,
-    email: email.value,
-    password: password0.value,
-  });
-  await setItem("users", JSON.stringify(users));
+  let name = document.getElementById("names").value;
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password0").value;
+  let newUser = { name, email, password };
+  users.push(newUser);
+  await setItem("users", users);
   resetForm();
   window.location.href = "/index.html?msg=You Signed Up successfully";
 }

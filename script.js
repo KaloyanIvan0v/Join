@@ -72,7 +72,7 @@ function getFromLocalStorage(key) {
  */
 async function loadUsers() {
   try {
-    users = JSON.parse(await getItem("users"));
+    users = await getItem("users");
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -83,7 +83,7 @@ async function loadUsers() {
  */
 async function loadContacts() {
   try {
-    contacts = JSON.parse(await getItem("contacts"));
+    contacts = await getItem("contacts");
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -94,7 +94,7 @@ async function loadContacts() {
  */
 async function loadTasks() {
   try {
-    tasks = JSON.parse(await getItem("/tasks"));
+    tasks = await getItem("/tasks");
   } catch (e) {
     console.error("Loading error:", e);
   }

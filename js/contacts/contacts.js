@@ -95,7 +95,7 @@ function setBadge(badge, colorId) {
  * @returns {void}
  */
 function safeContacts() {
-  setItem("contacts", contacts);
+  setItem("/contacts", contacts);
   setSessionStorage("contacts", contacts);
 }
 

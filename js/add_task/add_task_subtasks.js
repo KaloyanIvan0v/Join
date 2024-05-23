@@ -54,17 +54,16 @@ async function addTask() {
   let description = document.getElementById("description");
   let dueDate = document.getElementById("dueDate");
   let checkedUsersForTask = checkedUsers;
-
   let task = {
     title: title.value,
     description: description.value,
-    assignedTo: checkedUsers,
+    assignedTo: checkedUsers.length === 0 ? -1 : checkedUsers,
     dueDate: dueDate.value,
     prio: currentPrio,
     category: selectedCategory,
-    subTasks: subTasks,
+    subTasks: subTasks.length === 0 ? -1 : subTasks,
     finishedSubTasks: finishedSubTasks,
-    checkedUsers: checkedUsersForTask,
+    checkedUsers: checkedUsersForTask.length === 0 ? -1 : checkedUsersForTask,
     statement: "toDo",
     id: idNumber,
   };
