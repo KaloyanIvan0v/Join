@@ -5,7 +5,7 @@
  * @param {string} id - Unique identifier of the task to be displayed.
  */
 function openTaskDetailView(i, id) {
-  checkWhichTaskOverlay = 'openTaskDetailView';
+  checkWhichTaskOverlay = "openTaskDetailView";
   openPopUp();
   let popUpDiv = document.getElementById("id-pop-up");
   popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[getIndexOfElementById(id, tasks)], i, id);
@@ -77,6 +77,7 @@ function deleteTask(taskId) {
   closePopUp();
   setSessionStorage("tasks", tasks);
   renderTasks(getFilteredTasks());
+  ifLastItem(tasks);
   setItem("tasks", tasks);
 }
 

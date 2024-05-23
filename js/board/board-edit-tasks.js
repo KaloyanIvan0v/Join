@@ -262,3 +262,9 @@ function setPrioSelectDefaultState(urgent, medium, low) {
   medium.src = "/img/medium.png";
   low.src = "/img/low.png";
 }
+
+function ifLastItem(list) {
+  if (list.length == 0) {
+    list = " ";
+  }
+}

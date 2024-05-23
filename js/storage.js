@@ -32,7 +32,7 @@ async function getItem(path = "") {
   try {
     let response = await fetch(STORAGE_URL + path + ".json");
     let data = await response.json();
-    return data != "" ? data : [];
+    return data !== "" && data !== null ? data : [];
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
