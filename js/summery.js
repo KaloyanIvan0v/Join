@@ -43,11 +43,16 @@ function filterHighestPrio() {
 function countStatements(index) {
   //Count all Tasks.
   let statementCounts = 0;
-  tasks.forEach((task) => {
-    if (task.statement === index) {
-      statementCounts++;
-    }
-  });
+  try {
+    tasks.forEach((task) => {
+      if (task.statement === index) {
+        statementCounts++;
+      }
+    });
+  } 
+  catch (e) {
+    console.log(e);
+  }
   document.getElementById(`count${index}`).innerHTML = statementCounts;
 }
 

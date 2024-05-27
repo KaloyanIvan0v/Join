@@ -375,7 +375,7 @@ function filterTaskListener() {
  */
 function getFilteredTasks() {
   let inputValue = document.getElementById("id-find-task-input").value.toLowerCase();
-  let filteredTasks = tasks.filter(function (task) {
+  let filteredTasks = tasks.filter((task) => {
     return (
       task.title.toLowerCase().includes(inputValue) ||
       task.description.toLowerCase().includes(inputValue)

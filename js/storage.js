@@ -2,7 +2,7 @@
  * The base URL of the remote storage API.
  * @constant {string}
  */
-const STORAGE_URL = "https://join-6783b-default-rtdb.europe-west1.firebasedatabase.app/";
+const STORAGE_URL = "https://join-360-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Stores a key-value pair in the remote storage.
