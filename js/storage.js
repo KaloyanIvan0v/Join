@@ -2,7 +2,7 @@
  * The base URL of the remote storage API.
  * @constant {string}
  */
-const STORAGE_URL = "https://join-360-default-rtdb.europe-west1.firebasedatabase.app/";
+const STORAGE_URL = 'https://join-6783b-default-rtdb.europe-west1.firebasedatabase.app/'
 
 /**
  * Stores a key-value pair in the remote storage.
@@ -11,14 +11,14 @@ const STORAGE_URL = "https://join-360-default-rtdb.europe-west1.firebasedatabase
  * @param {any} value - The value to be stored. It can be any serializable object.
  * @returns {Promise<any>} - The JSON response from the remote storage API.
  */
-async function setItem(path = "", data = {}) {
-  await fetch(STORAGE_URL + path + ".json", {
-    method: "PUT",
+async function setItem(path = '', data = {}) {
+  await fetch(STORAGE_URL + path + '.json', {
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  });
+  })
 }
 
 /**
@@ -28,13 +28,13 @@ async function setItem(path = "", data = {}) {
  * @returns {Promise<any>} - The value associated with the provided key.
  * @throws {Error} - Throws an error if the key is not found in the storage.
  */
-async function getItem(path = "") {
+async function getItem(path = '') {
   try {
-    let response = await fetch(STORAGE_URL + path + ".json");
-    let data = await response.json();
-    return data !== "" && data !== null ? data : [];
+    let response = await fetch(STORAGE_URL + path + '.json')
+    let data = await response.json()
+    return data !== '' && data !== null ? data : []
   } catch (error) {
-    console.error("Error fetching data:", error);
-    return [];
+    console.error('Error fetching data:', error)
+    return []
   }
 }
