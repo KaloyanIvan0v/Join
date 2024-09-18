@@ -5,15 +5,16 @@
  * @param {string} id - ID of the task.
  */
 function editTaskOverlay(i, id) {
-  checkWhichTaskOverlay = "editTaskOverlay";
-  const overlayTask = tasks[getIndexOfElementById(id, tasks)];
-  const dialogField = document.getElementById("id-pop-up");
-  let currentPrio = overlayTask["prio"];
-  clearElement(dialogField);
-  renderEditTaskOverlay(dialogField, i, id, overlayTask);
-  prioSelect(id, currentPrio);
-  setUsersForEditTask(id);
-  renderSubTasksEdit(id);
+  arrowToggleCheck ? (arrowToggleCheck = false) : arrowToggleCheck
+  checkWhichTaskOverlay = 'editTaskOverlay'
+  const overlayTask = tasks[getIndexOfElementById(id, tasks)]
+  const dialogField = document.getElementById('id-pop-up')
+  let currentPrio = overlayTask['prio']
+  clearElement(dialogField)
+  renderEditTaskOverlay(dialogField, i, id, overlayTask)
+  prioSelect(id, currentPrio)
+  setUsersForEditTask(id)
+  renderSubTasksEdit(id)
 }
 
 /**
@@ -25,7 +26,7 @@ function editTaskOverlay(i, id) {
  * @param {Object} overlayTask - The task object to be edited.
  */
 function renderEditTaskOverlay(targetElement, i, id, overlayTask) {
-  targetElement.innerHTML = returnHtmlEditCurrentTask(overlayTask, i, id);
+  targetElement.innerHTML = returnHtmlEditCurrentTask(overlayTask, i, id)
 }
 
 /**
@@ -34,10 +35,10 @@ function renderEditTaskOverlay(targetElement, i, id, overlayTask) {
  * @param {string} id - ID of the task.
  */
 function renderSubTasksEdit(id) {
-  let input = document.getElementById("subTasks");
-  let subTasks = tasks[getIndexOfElementById(id, tasks)]["subTasks"];
+  let input = document.getElementById('subTasks')
+  let subTasks = tasks[getIndexOfElementById(id, tasks)]['subTasks']
   for (let j = 0; j < subTasks.length; j++) {
-    renderSubtask(input, subTasks[j]);
+    renderSubtask(input, subTasks[j])
   }
 }
 
@@ -48,10 +49,10 @@ function renderSubTasksEdit(id) {
  * @param {Object} subTask - The subtask object to be rendered.
  */
 function renderSubtask(input, subTask) {
-  input.value = subTask.subTask;
-  let subTaskState = subTask.status;
-  addNewSubTaskBoard(subTaskState);
-  input.value = "";
+  input.value = subTask.subTask
+  let subTaskState = subTask.status
+  addNewSubTaskBoard(subTaskState)
+  input.value = ''
 }
 
 /**
@@ -60,16 +61,16 @@ function renderSubtask(input, subTask) {
  * @param {string} subTaskState - The state of the subtask.
  */
 function addNewSubTaskBoard(subTaskState) {
-  let singleNewTaskValue = document.getElementById("subTasks").value;
+  let singleNewTaskValue = document.getElementById('subTasks').value
   if (subTaskLongEnough(singleNewTaskValue)) {
     subTasks.push({
       subTask: singleNewTaskValue,
       status: subTaskState,
       id: increaseId(subTasks),
-    });
+    })
   }
-  removeFocusFrom("subTasks");
-  renderSubTasks("newSubtask");
+  removeFocusFrom('subTasks')
+  renderSubTasks('newSubtask')
 }
 
 /**
@@ -78,7 +79,7 @@ function addNewSubTaskBoard(subTaskState) {
  * @param {string} elementId - ID of the element to remove focus from.
  */
 function removeFocusFrom(elementId) {
-  document.getElementById(elementId).blur();
+  document.getElementById(elementId).blur()
 }
 
 /**
@@ -89,9 +90,9 @@ function removeFocusFrom(elementId) {
  */
 function subTaskLongEnough(element) {
   if (element.length >= 3) {
-    return true;
+    return true
   } else {
-    return false;
+    return false
   }
 }
 
@@ -103,13 +104,13 @@ function subTaskLongEnough(element) {
  * @returns {void}
  */
 function renderSubTasksBoard(i, id) {
-  const subTasksField = document.getElementById(`subTasksField`);
-  const subTasks = tasks[getIndexOfElementById(id, tasks)]["subTasks"];
+  const subTasksField = document.getElementById(`subTasksField`)
+  const subTasks = tasks[getIndexOfElementById(id, tasks)]['subTasks']
   if (!noSubtasksExist(id)) {
-    subTasksField.innerHTML = "";
+    subTasksField.innerHTML = ''
     subTasks.forEach((subTask, j) => {
-      renderSubTask(i, id, subTasksField, subTask, j);
-    });
+      renderSubTask(i, id, subTasksField, subTask, j)
+    })
   }
 }
 
@@ -133,8 +134,8 @@ function renderSubTasksBoard(i, id) {
  * @param {number} j - Index of the subtask.
  */
 function renderSubTask(i, id, subTasksField, subTask, j) {
-  const imgSrc = subTask.status ? "/img/box-checked.png" : "/img/check_empty.png";
-  subTasksField.innerHTML += returnHtmlSubtasks(subTask.subTask, i, subTask.id, imgSrc, id, j);
+  const imgSrc = subTask.status ? '/img/box-checked.png' : '/img/check_empty.png'
+  subTasksField.innerHTML += returnHtmlSubtasks(subTask.subTask, i, subTask.id, imgSrc, id, j)
 }
 
 /**
@@ -143,13 +144,13 @@ function renderSubTask(i, id, subTasksField, subTask, j) {
  * @param {string} id - ID of the task.
  */
 function safeTaskChanges(id) {
-  safeChangesToTasks(id);
-  setSessionStorage("tasks", tasks);
-  setItem("tasks", tasks);
-  closeEditTaskPopUp();
-  subTasks = [];
-  tasks = JSON.parse(sessionStorage.getItem("tasks"));
-  renderTasks(getFilteredTasks());
+  safeChangesToTasks(id)
+  setSessionStorage('tasks', tasks)
+  setItem('tasks', tasks)
+  closeEditTaskPopUp()
+  subTasks = []
+  tasks = JSON.parse(sessionStorage.getItem('tasks'))
+  renderTasks(getFilteredTasks())
 }
 
 /**
@@ -158,26 +159,26 @@ function safeTaskChanges(id) {
  * @param {string} id - ID of the task.
  */
 function safeChangesToTasks(id) {
-  let title = document.getElementById("title").value;
-  let description = document.getElementById("description").value;
-  let dueDate = document.getElementById("dueDate").value;
-  let assignedTo = checkedUsers;
-  let task = tasks[getIndexOfElementById(id, tasks)];
-  task.title = title;
-  task.description = description;
-  task.dueDate = dueDate;
-  task.assignedTo = assignedTo.length == 0 ? -1 : assignedTo;
-  subTasks.length == 0 ? (task.subTasks = -1) : (task.subTasks = subTasks);
+  let title = document.getElementById('title').value
+  let description = document.getElementById('description').value
+  let dueDate = document.getElementById('dueDate').value
+  let assignedTo = checkedUsers
+  let task = tasks[getIndexOfElementById(id, tasks)]
+  task.title = title
+  task.description = description
+  task.dueDate = dueDate
+  task.assignedTo = assignedTo.length == 0 ? -1 : assignedTo
+  subTasks.length == 0 ? (task.subTasks = -1) : (task.subTasks = subTasks)
 }
 
 /**
  * Closes the edit task popup.
  */
 function closeEditTaskPopUp() {
-  clearAssignedSection();
-  setTimeout(closePopUp, 20);
-  arrowToggleCheck = false;
-  subTasks = [];
+  clearAssignedSection()
+  setTimeout(closePopUp, 20)
+  arrowToggleCheck = false
+  subTasks = []
 }
 
 /**
@@ -186,15 +187,15 @@ function closeEditTaskPopUp() {
  * @param {string} taskId - ID of the task.
  */
 function setUsersForEditTask(taskId) {
-  let assignedToIds = retrieveIdsFromTwoLevelNestedArrayById(taskId, tasks, "assignedTo");
-  showOrHideContacts(event);
+  let assignedToIds = retrieveIdsFromTwoLevelNestedArrayById(taskId, tasks, 'assignedTo')
+  showOrHideContacts(event)
   for (let i = 0; i < contacts.length; i++) {
-    contactId = contacts[i]["id"];
+    contactId = contacts[i]['id']
     if (assignedToIds.includes(contactId)) {
-      selectedUser(event, contactId);
+      selectedUser(event, contactId)
     }
   }
-  showOrHideContacts(event);
+  showOrHideContacts(event)
 }
 
 /**
@@ -203,12 +204,12 @@ function setUsersForEditTask(taskId) {
  * @param {string} id - ID of the task.
  */
 function renderTaskAssignedNames(id) {
-  let nameArea = document.getElementById("contactsFieldBoardFullName");
-  let checkedContacts = tasks[getIndexOfElementById(id, tasks)].assignedTo;
+  let nameArea = document.getElementById('contactsFieldBoardFullName')
+  let checkedContacts = tasks[getIndexOfElementById(id, tasks)].assignedTo
   for (let i = 0; i < checkedContacts.length; i++) {
     if (contactExists(checkedContacts[i])) {
-      let checkedContact = checkedContacts[i].name;
-      nameArea.innerHTML += returnTaskAssignedContactNameHtml(checkedContact);
+      let checkedContact = checkedContacts[i].name
+      nameArea.innerHTML += returnTaskAssignedContactNameHtml(checkedContact)
     }
   }
 }
@@ -218,17 +219,17 @@ function renderTaskAssignedNames(id) {
  */
 function handleHoverButtonDeleteEditTask() {
   handleHoverButtonChangeImg(
-    ".btn-hover-trash",
-    ".img-hover-trash",
+    '.btn-hover-trash',
+    '.img-hover-trash',
     "url('/img/trashbin.png')",
     "url('/img/trash-light-blue.png')"
-  );
+  )
   handleHoverButtonChangeImg(
-    ".btn-hover-edit",
-    ".img-hover-edit",
+    '.btn-hover-edit',
+    '.img-hover-edit',
     "url('/img/edit-pencil.png')",
     "url('/img/edit-pencil-light-blue.png')"
-  );
+  )
 }
 
 /**
@@ -237,18 +238,18 @@ function handleHoverButtonDeleteEditTask() {
  * @param {string} prioSelect - The priority selection.
  */
 function prioSelect(id, prioSelect) {
-  let urgent = document.getElementById(`Urgent(${id})`);
-  let medium = document.getElementById(`Medium(${id})`);
-  let low = document.getElementById(`Low(${id})`);
-  setPrioSelectDefaultState(urgent, medium, low);
-  if (prioSelect == "Urgent") {
-    urgent.src = "/img/urgent_highlight.png";
-  } else if (prioSelect == "Medium") {
-    medium.src = "/img/medium_highlight.png";
+  let urgent = document.getElementById(`Urgent(${id})`)
+  let medium = document.getElementById(`Medium(${id})`)
+  let low = document.getElementById(`Low(${id})`)
+  setPrioSelectDefaultState(urgent, medium, low)
+  if (prioSelect == 'Urgent') {
+    urgent.src = '/img/urgent_highlight.png'
+  } else if (prioSelect == 'Medium') {
+    medium.src = '/img/medium_highlight.png'
   } else {
-    low.src = "/img/low_highlight.png";
+    low.src = '/img/low_highlight.png'
   }
-  tasks[getIndexOfElementById(id, tasks)]["prio"] = prioSelect;
+  tasks[getIndexOfElementById(id, tasks)]['prio'] = prioSelect
 }
 
 /**
@@ -258,13 +259,13 @@ function prioSelect(id, prioSelect) {
  * @param {HTMLElement} low - The low priority button.
  */
 function setPrioSelectDefaultState(urgent, medium, low) {
-  urgent.src = "/img/urgent.png";
-  medium.src = "/img/medium.png";
-  low.src = "/img/low.png";
+  urgent.src = '/img/urgent.png'
+  medium.src = '/img/medium.png'
+  low.src = '/img/low.png'
 }
 
 function ifLastItem(list) {
   if (list.length == 0) {
-    list = " ";
+    list = ' '
   }
 }

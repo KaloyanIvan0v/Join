@@ -1,4 +1,4 @@
-let checkWhichTaskOverlay = [];
+let checkWhichTaskOverlay = []
 
 /**
  * Opens the 'Add Task' template popup, initializes priority selection, sets current date, and adds an exit cross.
@@ -6,14 +6,14 @@ let checkWhichTaskOverlay = [];
  * @param {string} statement - The initial statement to be prefilled in the task form.
  */
 function openAddTaskTemplate(statement) {
-  checkWhichTaskOverlay = 'addTaskTemplate';
-  openPopUp();
-  renderAddTaskTemplate(statement);
-  selectPriority();
-  currentDate();
-  renderExitCross("id-headline-area");
-  changePrio(1);
-  handleExitImg();
+  checkWhichTaskOverlay = 'addTaskTemplate'
+  openPopUp()
+  renderAddTaskTemplate(statement)
+  selectPriority()
+  currentDate()
+  renderExitCross('id-headline-area')
+  changePrio(1)
+  handleExitImg()
 }
 
 /**
@@ -22,13 +22,13 @@ function openAddTaskTemplate(statement) {
  * @param {string} statement - The statement that should be pre-filled in the task form.
  */
 function renderAddTaskTemplate(statement) {
-  let popUpElement = document.getElementById("id-pop-up");
+  let popUpElement = document.getElementById('id-pop-up')
   popUpElement.innerHTML += returnHtmlTaskTemplate(
-    "createTaskAtBoard",
-    "closeTaskFormTemplate",
-    "cancel",
+    'createTaskAtBoard',
+    'closeTaskFormTemplate',
+    'cancel',
     statement
-  );
+  )
 }
 
 /**
@@ -39,16 +39,17 @@ function renderAddTaskTemplate(statement) {
  * @returns {Promise<void>}
  */
 async function createTaskAtBoard(statement) {
+  arrowToggleCheck ? (arrowToggleCheck = false) : arrowToggleCheck
   if (categorySelected()) {
-    addTask();
-    setStatement(statement);
-    await setSessionStorage("tasks", tasks);
-    resetInputFields();
-    closePopUp();
-    tasks = JSON.parse(sessionStorage.getItem("tasks"));
-    renderTasks(getFilteredTasks());
+    addTask()
+    setStatement(statement)
+    await setSessionStorage('tasks', tasks)
+    resetInputFields()
+    closePopUp()
+    tasks = JSON.parse(sessionStorage.getItem('tasks'))
+    renderTasks(getFilteredTasks())
   } else {
-    setErrorBorderColor("containerCategory", 2000);
+    setErrorBorderColor('containerCategory', 2000)
   }
 }
 
@@ -58,9 +59,9 @@ async function createTaskAtBoard(statement) {
  * @param {string} statement - The statement to be set for the most recently added task.
  */
 function setStatement(statement) {
-  if (statement != "undefined") {
-    tasks[tasks.length - 1].statement = statement;
-    setItem("tasks", tasks);
+  if (statement != 'undefined') {
+    tasks[tasks.length - 1].statement = statement
+    setItem('tasks', tasks)
   }
 }
 
@@ -70,9 +71,9 @@ function setStatement(statement) {
  * @returns {boolean} - True if a category is selected, false otherwise.
  */
 function categorySelected() {
-  let inputCategory = document.getElementById("categoryDropdown");
-  let categoryValue = inputCategory.textContent;
-  return categoryValue !== "Select task category";
+  let inputCategory = document.getElementById('categoryDropdown')
+  let categoryValue = inputCategory.textContent
+  return categoryValue !== 'Select task category'
 }
 
 /**
@@ -81,17 +82,17 @@ function categorySelected() {
  * @param {string} elementId - The ID of the element where the exit cross will be added.
  */
 function renderExitCross(elementId) {
-  let div = document.getElementById(elementId);
-  div.innerHTML += returnExitCrossHtml();
+  let div = document.getElementById(elementId)
+  div.innerHTML += returnExitCrossHtml()
 }
 
 /**
  * Closes the 'Add Task' pop-up after resetting the input fields.
  */
 function closeAddTaskPopUp() {
-  resetInputFields();
-  setTimeout(closePopUp, 20);
-  arrowToggleCheck = false;
+  resetInputFields()
+  setTimeout(closePopUp, 20)
+  arrowToggleCheck = false
 }
 
 /**
@@ -101,10 +102,10 @@ function closeAddTaskPopUp() {
  */
 function closeTaskFormTemplate(event) {
   if (event) {
-    event.preventDefault();
+    event.preventDefault()
   }
-  clearContactsChecked();
-  closePopUp();
+  clearContactsChecked()
+  closePopUp()
 }
 
 /**
@@ -113,31 +114,31 @@ function closeTaskFormTemplate(event) {
  * @param {number} timePeriod - The time period in milliseconds.
  */
 function setErrorBorderColor(elementId, timePeriod) {
-  const div = document.getElementById(elementId);
-  div.style.borderColor = "red";
+  const div = document.getElementById(elementId)
+  div.style.borderColor = 'red'
   setTimeout(() => {
-    div.style.borderColor = "grey";
-  }, timePeriod);
+    div.style.borderColor = 'grey'
+  }, timePeriod)
 }
 
 /**
  * Closes the currently open pop-up window based on the value of `checkWhichTaskOverlay`.
- * 
+ *
  * This function checks the value of the global variable `checkWhichTaskOverlay` and
  * closes the corresponding pop-up window. Possible values for `checkWhichTaskOverlay` are:
  * - 'addTaskTemplate': Closes the "Add Task" pop-up.
  * - 'openTaskDetailView': Closes the task detail view pop-up.
  * - Any other value: Closes the "Edit Task" pop-up.
- * 
+ *
  * After closing the appropriate pop-up, the function resets `checkWhichTaskOverlay` to an empty array.
  */
 function closePopUpBoard() {
-  if(checkWhichTaskOverlay == 'addTaskTemplate') {
-    closeAddTaskPopUp();
-  } else if(checkWhichTaskOverlay == 'openTaskDetailView') {
-    closePopUp();
+  if (checkWhichTaskOverlay == 'addTaskTemplate') {
+    closeAddTaskPopUp()
+  } else if (checkWhichTaskOverlay == 'openTaskDetailView') {
+    closePopUp()
   } else {
-    closeEditTaskPopUp();
+    closeEditTaskPopUp()
   }
-  checkWhichTaskOverlay = [];
+  checkWhichTaskOverlay = []
 }

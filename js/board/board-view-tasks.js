@@ -5,16 +5,16 @@
  * @param {string} id - Unique identifier of the task to be displayed.
  */
 function openTaskDetailView(i, id) {
-  checkWhichTaskOverlay = "openTaskDetailView";
-  openPopUp();
-  let popUpDiv = document.getElementById("id-pop-up");
-  popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[getIndexOfElementById(id, tasks)], i, id);
-  setCategoryColor(i, getFilteredTasks(), id);
-  setPriorityTaskCard(i, id);
-  renderContactsBoardInitials(true, id, `contactsFieldBoard(${id})`);
-  handleHoverButtonDeleteEditTask();
-  renderTaskAssignedNames(id);
-  renderSubTasksBoard(i, id);
+  checkWhichTaskOverlay = 'openTaskDetailView'
+  openPopUp()
+  let popUpDiv = document.getElementById('id-pop-up')
+  popUpDiv.innerHTML = openTaskDetailViewHtml(tasks[getIndexOfElementById(id, tasks)], i, id)
+  setCategoryColor(i, getFilteredTasks(), id)
+  setPriorityTaskCard(i, id)
+  renderContactsBoardInitials(true, id, `contactsFieldBoard(${id})`)
+  handleHoverButtonDeleteEditTask()
+  renderTaskAssignedNames(id)
+  renderSubTasksBoard(i, id)
 }
 
 /**
@@ -25,13 +25,13 @@ function openTaskDetailView(i, id) {
  * @param {Array} contactsForTask - List of contact names to be displayed.
  */
 function renderFullName(i, contactsForTask) {
-  let backgroundDialog = document.getElementById("backgroundDialog");
-  if (backgroundDialog.classList.contains("background-dialog")) {
-    let contactsFieldBoard = document.getElementById(`contactsFieldBoardFullName(${i})`);
-    contactsFieldBoard.innerHTML = "";
+  let backgroundDialog = document.getElementById('backgroundDialog')
+  if (backgroundDialog.classList.contains('background-dialog')) {
+    let contactsFieldBoard = document.getElementById(`contactsFieldBoardFullName(${i})`)
+    contactsFieldBoard.innerHTML = ''
     for (let j = 0; j < contactsForTask.length; j++) {
-      let fullName = contactsForTask[j];
-      contactsFieldBoard.innerHTML += returnHtmlContactsFullName(fullName);
+      let fullName = contactsForTask[j]
+      contactsFieldBoard.innerHTML += returnHtmlContactsFullName(fullName)
     }
   }
 }
@@ -46,12 +46,12 @@ function renderFullName(i, contactsForTask) {
  */
 function toggleCheckboxSubTask(i, subTaskId, id) {
   if (getSubtaskStatus(i, subTaskId)) {
-    tasks[i].subTasks[getIndexOfElementById(subTaskId, tasks[i].subTasks)].status = false;
+    tasks[i].subTasks[getIndexOfElementById(subTaskId, tasks[i].subTasks)].status = false
   } else {
-    tasks[i].subTasks[getIndexOfElementById(subTaskId, tasks[i].subTasks)].status = true;
+    tasks[i].subTasks[getIndexOfElementById(subTaskId, tasks[i].subTasks)].status = true
   }
-  renderSubTasksBoard(i, id);
-  setItem("tasks", tasks);
+  renderSubTasksBoard(i, id)
+  setItem('tasks', tasks)
 }
 
 /**
@@ -62,8 +62,8 @@ function toggleCheckboxSubTask(i, subTaskId, id) {
  * @returns {boolean} - The status of the specified subtask (true if completed, false otherwise).
  */
 function getSubtaskStatus(i, subTaskId) {
-  let subTaskStatus = tasks[i].subTasks[getIndexOfElementById(subTaskId, tasks[i].subTasks)].status;
-  return subTaskStatus;
+  let subTaskStatus = tasks[i].subTasks[getIndexOfElementById(subTaskId, tasks[i].subTasks)].status
+  return subTaskStatus
 }
 
 /**
@@ -73,12 +73,12 @@ function getSubtaskStatus(i, subTaskId) {
  * @param {string} taskId - Unique identifier of the task to be deleted.
  */
 function deleteTask(taskId) {
-  tasks.splice(getIndexOfElementById(taskId, tasks), 1);
-  closePopUp();
-  setSessionStorage("tasks", tasks);
-  renderTasks(getFilteredTasks());
-  ifLastItem(tasks);
-  setItem("tasks", tasks);
+  tasks.splice(getIndexOfElementById(taskId, tasks), 1)
+  closePopUp()
+  setSessionStorage('tasks', tasks)
+  renderTasks(getFilteredTasks())
+  ifLastItem(tasks)
+  setItem('tasks', tasks)
 }
 
 /**
@@ -87,11 +87,11 @@ function deleteTask(taskId) {
  * @param {Object[]} list - The list of tasks.
  */
 function setCategoryColor(i, list) {
-  let statementField = document.getElementById(`statementField${i}`);
-  let singleTaskStatement = list[i]["category"];
-  if (singleTaskStatement == "Technical Task") {
-    statementField.classList.add("bg-color-technical-task");
+  let statementField = document.getElementById(`statementField${i}`)
+  let singleTaskStatement = list[i]['category']
+  if (singleTaskStatement == 'Technical Task') {
+    statementField.classList.add('bg-color-technical-task')
   } else {
-    statementField.classList.add("bg-color-user-story");
+    statementField.classList.add('bg-color-user-story')
   }
 }
