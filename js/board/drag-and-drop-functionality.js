@@ -1,5 +1,6 @@
 /** @type {number|string|null} */
-let currentDraggedElement = null;
+let currentDraggedElement = null
+document.addEventListener('dragend', stopDragging)
 
 /**
  * Initiates the dragging of an element by its ID.
@@ -7,9 +8,21 @@ let currentDraggedElement = null;
  * @param {number|string} id - The ID of the element being dragged.
  */
 function startDragging(id) {
-  currentDraggedElement = id;
-  rotateTaksCard(id);
-  previewDrop(id);
+  currentDraggedElement = id
+  rotateTaskCard(id)
+  previewDrop(id)
+}
+
+/**
+ * Stops dragging and resets the rotation of the task card.
+ */
+function stopDragging() {
+  if (currentDraggedElement !== null) {
+    const taskCard = document.getElementById(`taskCard${currentDraggedElement}`)
+    taskCard.style.transform = 'rotate(0deg)'
+    currentDraggedElement = null
+    renderTasks(getFilteredTasks())
+  }
 }
 
 /**
@@ -17,19 +30,20 @@ function startDragging(id) {
  * @param {Event} event - The drag event.
  */
 function allowDrop(event) {
-  event.preventDefault();
+  event.preventDefault()
 }
 
-/**
+/**x
  * Moves the currently dragged element to a new statement.
  * Updates the tasks array and stores the updated data.
  * @param {string} newstatement - The new statement to assign to the dragged element.
  */
 function moveElementTo(newstatement) {
-  tasks[getIndexOfElementById(currentDraggedElement, tasks)].statement = newstatement;
-  renderTasks(getFilteredTasks());
-  setSessionStorage("tasks", tasks);
-  setItem("tasks", JSON.stringify(tasks));
+  tasks[getIndexOfElementById(currentDraggedElement, tasks)].statement = newstatement
+  renderTasks(getFilteredTasks())
+  setSessionStorage('tasks', tasks)
+  setItem('tasks', tasks)
+  stopDragging()
 }
 
 /**
@@ -38,12 +52,12 @@ function moveElementTo(newstatement) {
  */
 function previewDrop(id) {
   if (previewElementIsNotFarLeft(id)) {
-    renderPreviewElements(id, 0, "left");
-    setPreviewElementwidthAndHeight(".preview-element-left");
+    renderPreviewElements(id, 0, 'left')
+    setPreviewElementwidthAndHeight('.preview-element-left')
   }
   if (previewElementIsNotFarRight(id)) {
-    renderPreviewElements(id, 1, "right");
-    setPreviewElementwidthAndHeight(".preview-element-right");
+    renderPreviewElements(id, 1, 'right')
+    setPreviewElementwidthAndHeight('.preview-element-right')
   }
 }
 
@@ -53,7 +67,7 @@ function previewDrop(id) {
  * @returns {boolean} True if the element isn't too far to the left, otherwise false.
  */
 function previewElementIsNotFarLeft(id) {
-  return calculatePreviewAreasPosition(id)[0] > -1;
+  return calculatePreviewAreasPosition(id)[0] > -1
 }
 
 /**
@@ -62,7 +76,7 @@ function previewElementIsNotFarLeft(id) {
  * @returns {boolean} True if the element isn't too far to the right, otherwise false.
  */
 function previewElementIsNotFarRight(id) {
-  return calculatePreviewAreasPosition(id)[1] < 4;
+  return calculatePreviewAreasPosition(id)[1] < 4
 }
 
 /**
@@ -72,9 +86,9 @@ function previewElementIsNotFarRight(id) {
  * @param {string} side - The side where the preview element should be placed ("left" or "right").
  */
 function renderPreviewElements(id, position, side) {
-  const taskAreas = initTaskAreas();
-  const previewAreasPosition = calculatePreviewAreasPosition(id);
-  taskAreas[previewAreasPosition[position]].innerHTML += previewElementHtml(side);
+  const taskAreas = initTaskAreas()
+  const previewAreasPosition = calculatePreviewAreasPosition(id)
+  taskAreas[previewAreasPosition[position]].innerHTML += previewElementHtml(side)
 }
 
 /**
@@ -83,8 +97,8 @@ function renderPreviewElements(id, position, side) {
  * @returns {number[]} An array with the index of the preview areas to the left and right.
  */
 function calculatePreviewAreasPosition(id) {
-  const taskAreaPosition = getTaskStatementIndex(id);
-  return [taskAreaPosition - 1, taskAreaPosition + 1];
+  const taskAreaPosition = getTaskStatementIndex(id)
+  return [taskAreaPosition - 1, taskAreaPosition + 1]
 }
 
 /**
@@ -92,9 +106,9 @@ function calculatePreviewAreasPosition(id) {
  * @returns {number[]} An array containing the width and height of the dragged element.
  */
 function getDragedElementWidthAndHeigth() {
-  const width = document.getElementById(`taskCard${currentDraggedElement}`).offsetWidth;
-  const height = document.getElementById(`taskCard${currentDraggedElement}`).offsetHeight;
-  return [width, height];
+  const width = document.getElementById(`taskCard${currentDraggedElement}`).offsetWidth
+  const height = document.getElementById(`taskCard${currentDraggedElement}`).offsetHeight
+  return [width, height]
 }
 
 /**
@@ -102,19 +116,19 @@ function getDragedElementWidthAndHeigth() {
  * @param {string} targerElement - A selector for the preview element to resize.
  */
 function setPreviewElementwidthAndHeight(targerElement) {
-  const [width, height] = getDragedElementWidthAndHeigth();
-  const previewElement = document.querySelector(targerElement);
-  previewElement.style.width = `${width}px`;
-  previewElement.style.height = `${height}px`;
+  const [width, height] = getDragedElementWidthAndHeigth()
+  const previewElement = document.querySelector(targerElement)
+  previewElement.style.width = `${width}px`
+  previewElement.style.height = `${height}px`
 }
 
 /**
  * Rotates the task card to visually indicate it is being dragged.
  * @param {number|string} id - The ID of the task card to rotate.
  */
-function rotateTaksCard(id) {
-  const taskCard = document.getElementById(`taskCard${id}`);
-  taskCard.style.transform = "rotate(5deg)";
+function rotateTaskCard(id) {
+  const taskCard = document.getElementById(`taskCard${id}`)
+  taskCard.style.transform = 'rotate(5deg)'
 }
 
 /**
@@ -122,8 +136,8 @@ function rotateTaksCard(id) {
  * @param {string} id - The ID of the task for which the menu should be opened.
  */
 function openTaskMenu(id) {
-  event.stopPropagation();
-  renderTaskMenu(id);
+  event.stopPropagation()
+  renderTaskMenu(id)
 }
 
 /**
@@ -131,9 +145,9 @@ function openTaskMenu(id) {
  * @param {string} id - The ID of the task for which the menu should be rendered.
  */
 function renderTaskMenu(id) {
-  openPopUp();
-  let popUpDiv = document.getElementById("id-pop-up");
-  popUpDiv.innerHTML = renderTaskMenuHtml(id);
+  openPopUp()
+  let popUpDiv = document.getElementById('id-pop-up')
+  popUpDiv.innerHTML = renderTaskMenuHtml(id)
 }
 
 /**
@@ -142,9 +156,9 @@ function renderTaskMenu(id) {
  * @param {string} statement - The new statement for the task.
  */
 function moveTaskTo(id, statement) {
-  let task = tasks[getIndexOfElementById(id, tasks)];
-  task.statement = statement;
-  renderTasks(getFilteredTasks());
-  closePopUp();
-  setItem("tasks", tasks);
+  let task = tasks[getIndexOfElementById(id, tasks)]
+  task.statement = statement
+  renderTasks(getFilteredTasks())
+  closePopUp()
+  setItem('tasks', tasks)
 }

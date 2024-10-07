@@ -1,41 +1,45 @@
-body{
-    font-family: inter;
+body {
+  font-family: inter;
 }
 
-.privacyPolicyContent{
-    margin-top: 206px;
-    margin-left: 328px;
-    margin-right: 98px;
-    padding-bottom: 50px;
+h2 {
+  position: unset !important;
 }
 
-.privacyPolicySectionBackImage{
-    position: fixed;
-    top: 225px;
-    right: 96px;
+.privacyPolicyContent {
+  margin-top: 206px;
+  margin-left: 328px;
+  margin-right: 98px;
+  padding-bottom: 50px;
 }
 
-.privacyPolicySectionBackImage:hover{
-    cursor: pointer;
-    border-radius: 50%;
-    background-color: #e2e6ec;
+.privacyPolicySectionBackImage {
+  position: fixed;
+  top: 225px;
+  right: 96px;
 }
 
-h1{
-    font-size: 61px;
+.privacyPolicySectionBackImage:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #e2e6ec;
 }
 
-h3{
-    font-size: 27px;
+h1 {
+  font-size: 61px;
 }
 
-@media (max-width: 860px){
-    .privacyPolicyContent{
-        margin-left: 5%;
-        margin-right: 5%;
-    }
+h3 {
+  font-size: 27px;
+}
 
-    .privacyPolicySectionBackImage{
-        display: none;
-    }
+@media (max-width: 860px) {
+  .privacyPolicyContent {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .privacyPolicySectionBackImage {
+    display: none;
+  }
 }

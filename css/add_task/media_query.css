@@ -114,7 +114,7 @@
 }
 
 @media (max-width: 500px) {
-  input[type="text"] {
+  input[type='text'] {
     font-size: 14px;
   }
 
